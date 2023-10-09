@@ -67,9 +67,18 @@ Permet de faire des import en chemin absolu depuis /src/
 
 ```
 
-## xxxxxxxxxxxxxxxxxxxx
+## Structure
 
-#########################################################################
+```
+mkdir src/features
+mkdir src/pages
+mkdir src/styles
+mkdir src/types
+mkdir src/ui
+mkdir src/utils
+```
+
+#########################################################
 
 ## Pas fait
 
@@ -82,4 +91,4 @@ Permet de faire des import en chemin absolu depuis /src/
 
 F1 > Peacock: Enter a color
 
-#########################################################################
+#########################################################
