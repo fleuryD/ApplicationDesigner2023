@@ -1,15 +1,14 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import 'styles/index.css';
-import App from './App';
+
+// import { Message, Partie, User } from "."
+// USE:     	import { User } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-    <App />
-);
+type User = {
+	id: number
+	email: string
+	username: string
+}
 
+export default User
