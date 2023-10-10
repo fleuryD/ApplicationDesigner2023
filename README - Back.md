@@ -15,7 +15,7 @@ npm install pg
 npm install @nestjs/jwt
 npm install -D @types/bcrypt
 npm install bcrypt
-
+npm install @nestjs/config
 
 		"@nestjs/mapped-types": "*",
 		"@nestjs/passport": "^10.0.1",

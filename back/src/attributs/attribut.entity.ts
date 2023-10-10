@@ -28,6 +28,14 @@ export class Attribut {
 	@Column()
 	name: string
 
+	// * car "type" est un mot reserve
+	@Column()
+	tipe: string
+
+	// * la "size" pour les varchar
+	@Column({ nullable: true })
+	longueur: number
+
 	@Column({ nullable: true })
 	description: string
 
@@ -41,6 +49,15 @@ export class Attribut {
 	@CreateDateColumn()
 	createdAt: Date
 
+	@Column({ default: true })
+	isWip: boolean
+
+	@Column({ default: false })
+	isNullable: boolean
+
+	@Column({ default: false })
+	isUnique: boolean
+
 	// * Un Attribut a une seule Entite. une Entite peut avoir plusieurs Attributs
 	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs, {
 		eager: true,
@@ -48,15 +65,9 @@ export class Attribut {
 	public entite: Entite
 
 	/*
-	tipe: string
-	nullable: boolean
-	longueur: string
 	help: string
-	infos: string
 	targetEntity: any
 	inversedBy: any
-	uniq: boolean
-	wip: boolean
 	removeOrphan: boolean
 	
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom

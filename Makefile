@@ -1,63 +1,104 @@
+C_NOR =	\033[0m
+C_BLA = \033[1;30m
+C_RED = \033[1;31m
+C_GRE = \033[1;32m
+C_YEL = \033[1;33m
+C_BLU = \033[1;34m
+C_MAG = \033[1;35m
+C_CYA = \033[1;36m
+C_WHI = \033[1;37m
+
+
 
 all : up
 
 
+
 up :
-	@docker compose -f ./docker-compose.yml up --build
+	@ clear
+	@ echo "\n\n$(C_CYA)===== MAKE : =====$(C_NOR)\n"
 
-up2 :
-	@docker compose -f ./docker-compose.yml up
+	@ echo "\n$(C_YEL)docker compose -f ./docker-compose.yml up --build :$(C_NOR)"
+	@ docker compose -f ./docker-compose.yml up --build
 
-down :
-	@docker compose -f ./docker-compose.yml down
 
-stop :
-	@docker compose -f ./docker-compose.yml stop
+re :
+	@ clear
+	@ echo "\n\n$(C_CYA)===== MAKE RE: =====$(C_NOR)\n"
 
-start :
-	@docker compose -f ./docker-compose.yml start
+	@ echo "\n$(C_YEL)docker compose -f ./docker-compose.yml down :$(C_NOR)"
+	@ docker compose -f ./docker-compose.yml down
 
-status :
-	@docker ps
-
-clear : down stop
-	docker system prune -f
-
-re : clear up
-
+	@ echo "\n$(C_YEL)docker compose -f ./docker-compose.yml up --build :$(C_NOR)"
+	@ docker compose -f ./docker-compose.yml up --build
 
 
 
 ps:
-	@ echo "\n\n$(C_CYA)make ps :$(C_NOR)\n\n"
-
-	@ echo "$(C_YEL)docker images ps :$(C_NOR)"
-	@ docker images ps
-
-	@ echo "$(C_YEL)docker container ps :$(C_NOR)"
-	@ docker container ps
-
-	@ echo "$(C_YEL)docker volume ls :$(C_NOR)"
-	@ docker volume ls
-
-	@ echo ""
+	@ clear
+	@ echo "\n\n$(C_CYA)===== MAKE PS : =====$(C_NOR)\n"
+	@ make x_ps
 
 
 
 
 clean:
 	clear
-	@ echo "\n\n$(C_CYA)make clean :$(C_NOR)\n\n"
+	@ echo "\n\n$(C_CYA)===== MAKE CLEAN : =====$(C_NOR)\n"
 
-	@ echo "$(C_YEL)docker-compose -f docker-compose.yml down -v :$(C_NOR)"
+	@ echo "\n$(C_YEL)docker-compose -f docker-compose.yml down -v :$(C_NOR)"
 	@ docker-compose -f docker-compose.yml down -v
 
-	@ echo "$(C_YEL)docker volume prune -f :$(C_NOR)"
+	@ echo "\n$(C_YEL)docker volume prune -f :$(C_NOR)"
 	@ docker volume prune -f
 
-	@ echo "$(C_YEL)docker system prune -a -f :$(C_NOR)"
+	@ echo "\n$(C_YEL)docker system prune -a -f :$(C_NOR)"
+	@ docker system prune -a -f
+
+	@ echo "\n\n"
+
+	@ make x_ps
+
+
+
+
+#	up2 :
+#		@docker compose -f ./docker-compose.yml up
+#	
+#	down :
+#		@docker compose -f ./docker-compose.yml down
+#	
+#	stop :
+#		@docker compose -f ./docker-compose.yml stop
+#	
+#	start :
+#		@docker compose -f ./docker-compose.yml start
+
+
+
+# PRIVATE ----------------------------------------------------------------------
+
+x_clean:
+	@ echo "\n$(C_YEL)docker-compose -f docker-compose.yml down -v :$(C_NOR)"
+	@ docker-compose -f docker-compose.yml down -v
+
+	@ echo "\n$(C_YEL)docker volume prune -f :$(C_NOR)"
+	@ docker volume prune -f
+
+	@ echo "\n$(C_YEL)docker system prune -a -f :$(C_NOR)"
 	@ docker system prune -a -f
 
 	@ echo ""
 
-	@make ps
+
+x_ps:
+	@ echo "\n$(C_YEL)=== docker images ps : ===$(C_NOR)"
+	@ docker images ps
+
+	@ echo "\n$(C_YEL)=== docker container ps : ===$(C_NOR)"
+	@ docker container ps
+
+	@ echo "\n$(C_YEL)=== docker volume ls : ===$(C_NOR)"
+	@ docker volume ls
+
+	@ echo ""	

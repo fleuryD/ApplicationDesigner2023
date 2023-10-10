@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
 	Entity,
@@ -39,19 +38,22 @@ export class Project {
 	@CreateDateColumn()
 	createdAt: Date
 
+	@Column({ default: true })
+	isWip: boolean
+
+	@Column({ default: false })
+	isFeminin: boolean
+
 	// * Un project a un seul creator (user). un user peut creer plusieurs projects
 	@ManyToOne(() => User, (user: User) => user.projects, { eager: true })
 	public createdBy: User
 
-	// *	Un project peut avoir plusieurs entites. Une entite a un seul project.
+	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
 	@OneToMany(() => Entite, (ent: Entite) => ent.project)
 	public entites: Entite[]
 
-	@Column({ default: true })
-	isActive: boolean
-
 	/*
-	urlLocal: string // TODO : OU Relation Url
+	urlLocal: string // OU Relation Url
 	urlWeb: string
 	urlGit: string
 

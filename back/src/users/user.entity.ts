@@ -16,7 +16,6 @@ import { Project } from "../projects/project.entity"
  *	* @Exclude() 	apres @Column() de password    ????
  *
  *
- *
  */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -41,7 +40,10 @@ export class User {
 	@CreateDateColumn()
 	createdAt: Date
 
-	// *	Un user peut avoir plusieurs projects. Un project a un seul user.
+	// * Un user peut avoir plusieurs projects. Un project a un seul user.
 	@OneToMany(() => Project, (proj: Project) => proj.createdBy)
 	public projects: Project[]
+
+	@CreateDateColumn()
+	lastOpenedAt: Date
 }

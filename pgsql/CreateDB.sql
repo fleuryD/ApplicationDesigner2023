@@ -1,5 +1,11 @@
-CREATE ROLE postgres WITH LOGIN PASSWORD 'root';
-ALTER ROLE postgres SUPERUSER;
+CREATE ROLE chef WITH SUPERUSER LOGIN PASSWORD 'chef_pass';
+
+/* ALTER ROLE chef SUPERUSER;  */
+
+
+CREATE ROLE postgres WITH LOGIN PASSWORD 'root'; 
+ALTER ROLE postgres SUPERUSER; 
+
 
 /*
 CREATE TABLE Users (
@@ -10,21 +16,20 @@ CREATE TABLE Users (
     jwt VARCHAR(255),
     id42 INT
 );
+*/
 
-CREATE TABLE Parties (
-    id INT PRIMARY KEY,
-    player_1 INT,
-    player_2 INT,
-    datetime_begin TIMESTAMP,
-    datetime_end TIMESTAMP,
-    ended BOOL,
-    score_player_1 INT,
-    score_player_2 INT,
-    winner INT,
-    loser INT,
-    FOREIGN KEY (player_1) REFERENCES users(id),
-    FOREIGN KEY (player_2) REFERENCES users(id),
-    FOREIGN KEY (winner) REFERENCES users(id),
-    FOREIGN KEY (loser) REFERENCES users(id)
-);
+/*
+
+pgsql  | running bootstrap script ... ok
+pgsql  | performing post-bootstrap initialization ... 2023-10-10 11:43:44.360 UTC [40] 
+
+
+FATAL:  zero-length delimited identifier at or near """" at character 12
+[40] STATEMENT:  ALTER USER ""postgres"" WITH PASSWORD E'"root"';
+
+pgsql  | 	
+pgsql  | child process exited with exit code 1
+pgsql  | initdb: removing contents of data directory "/var/lib/postgresql/data"
+
+
 */

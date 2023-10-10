@@ -39,26 +39,30 @@ export class Entite {
 	@CreateDateColumn()
 	createdAt: Date
 
+	@Column({ default: true })
+	isWip: boolean
+
+	@Column({ default: false })
+	isFeminin: boolean
+
 	// * Une Entite a un seul project. un project peut avoir plusieurs entites
 	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
 		eager: true,
 	})
 	public project: Project
 
-	// *	Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
+	// * Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
 	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite)
 	public attributs: Attribut[]
 
 	/*
+	namespace: string
 	prefix: string
-	feminin: string
-	wip: boolean
+
 	fAIcon: string
 	xxIcone: string
+	
 	templatesPath: string
-	namespace: string
-	inBdd: boolean
-	tests: string
 	openInUml: string
 
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
@@ -66,15 +70,12 @@ export class Entite {
 	nomSnake: string //  article_tag
 	nomKebab: string //  article-tag
 
-	hrefNew: string //  "{{ path('namespace_entite_new') }}"
-	hrefShow: string //  "{{ path('namespace_entite_show', {'id': entite.id}) }}"
-	hrefEdit: string //  "{{ path('namespace_entite_edit', {'id': entite.id}) }}"
-	strUseEntity: string //  "App\Entity\Agenda\Evenement" ou "App\Entity\Evenement"
+	hrefNew: string 		//  "{{ path('namespace_entite_new') }}"
+	hrefShow: string 		//  "{{ path('namespace_entite_show', {'id': entite.id}) }}"
+	hrefEdit: string 		//  "{{ path('namespace_entite_edit', {'id': entite.id}) }}"
+	strUseEntity: string 	//  "App\Entity\Agenda\Evenement" ou "App\Entity\Evenement"
 	xxTempaltesPath: string //
-	xxHrefIndex: string //  DEPRECIATED
-	xxHrefNew: string //   DEPRECIATED
-	xxHrefShow: string //    DEPRECIATED
-	xxHrefEdit: string //    DEPRECIATED
+
 	
 	*/
 }
