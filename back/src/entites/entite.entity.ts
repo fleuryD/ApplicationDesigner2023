@@ -45,7 +45,7 @@ export class Entite {
 	})
 	public project: Project
 
-	// *	Un MOI peut avoir plusieurs AUTRES. Un AUTRE a un seul MOI.
+	// *	Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
 	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite)
 	public attributs: Attribut[]
 
