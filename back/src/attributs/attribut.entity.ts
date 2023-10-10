@@ -1,7 +1,23 @@
 /* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import {
+	Entity,
+	Column,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	ManyToOne,
+} from "typeorm"
+import { Entite } from "../entites/entite.entity"
 
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+/*
+ *	// TODO:
+ *
+ *	* xxxxxxxxxxxxxxxxxxxxxxxxxx
+ *
+ *
+ *
+ */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity()
@@ -12,14 +28,26 @@ export class Attribut {
 	@Column()
 	name: string
 
+	@Column({ nullable: true })
+	description: string
+
+	@Column({ nullable: true })
+	infos: string
+
+	// * La position de l'attr dans l'entite (0 = debut)
+	@Column()
+	position: number
+
+	@CreateDateColumn()
+	createdAt: Date
+
+	// * Un Attribut a une seule Entite. une Entite peut avoir plusieurs Attributs
+	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs, {
+		eager: true,
+	})
+	public entite: Entite
+
 	/*
-	id: number
-	entityId: number // TODO : Relation
-	entite: any // TODO : Relation
-	name: string
-
-	///////////////
-
 	tipe: string
 	nullable: boolean
 	longueur: string
@@ -28,10 +56,9 @@ export class Attribut {
 	targetEntity: any
 	inversedBy: any
 	uniq: boolean
-	position: number
 	wip: boolean
-	commentaire: string
 	removeOrphan: boolean
+	
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
 	nomCamel: string //  articleTag
 	nomSnake: string //  article_tag

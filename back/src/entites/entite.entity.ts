@@ -1,7 +1,25 @@
 /* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import {
+	Entity,
+	Column,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	ManyToOne,
+	OneToMany,
+} from "typeorm"
+import { Project } from "../projects/project.entity"
+import { Attribut } from "../attributs/attribut.entity"
 
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+/*
+ *	// TODO:
+ *
+ *	* xxxxxxxxxxxxxxxxxxxxxxxxxx
+ *
+ *
+ *
+ */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity()
@@ -12,21 +30,33 @@ export class Entite {
 	@Column()
 	name: string
 
+	@Column({ nullable: true })
+	description: string
+
+	@Column({ nullable: true })
+	infos: string
+
+	@CreateDateColumn()
+	createdAt: Date
+
+	// * Une Entite a un seul project. un project peut avoir plusieurs entites
+	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
+		eager: true,
+	})
+	public project: Project
+
+	// *	Un MOI peut avoir plusieurs AUTRES. Un AUTRE a un seul MOI.
+	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite)
+	public attributs: Attribut[]
+
 	/*
-	id: number
-	projectId: number // TODO : Relation
-	projet: string // TODO : Relation
-	name: string
-	//////
 	prefix: string
-	proprietes: any
 	feminin: string
 	wip: boolean
-	description: string
 	fAIcon: string
+	xxIcone: string
 	templatesPath: string
 	namespace: string
-	commentaire: string
 	inBdd: boolean
 	tests: string
 	openInUml: string
@@ -45,6 +75,6 @@ export class Entite {
 	xxHrefNew: string //   DEPRECIATED
 	xxHrefShow: string //    DEPRECIATED
 	xxHrefEdit: string //    DEPRECIATED
-	xxIcone: string
+	
 	*/
 }
