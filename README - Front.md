@@ -67,6 +67,24 @@ Permet de faire des import en chemin absolu depuis /src/
 
 ```
 
+## Editer: `/front/package.json`
+
+Permet de faire des import en chemin absolu depuis /src/
+
+```
+{
+	"scripts": {
+		"start": "set PORT=3001 && PORT=3001 react-scripts start --max-http-header-size=64555",
+		"startback": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"proxy": "http://localhost:3001",
+}
+
+```
+
 ## Structure
 
 ```

@@ -13,19 +13,19 @@ services:
             - best_network
         ports:
             - 5432:5432
-    #    front:
-    #        build: front
-    #        container_name: front
-    #        restart: always
-    #        ports:
-    #            - 3001:3001
-    #        networks:
-    #            - best_network
-    #        depends_on:
-    #            - back
-    #        volumes:
-    #            - ./front:/app
-    #            - /app/node_modules
+    front:
+        build: front
+        container_name: front
+        restart: always
+        ports:
+            - 3001:3001
+        networks:
+            - best_network
+        depends_on:
+            - back
+        volumes:
+            - ./front:/app
+            - /app/node_modules
     back:
         build: back
         container_name: back
