@@ -10,7 +10,7 @@ import { createSlice } from "@reduxjs/toolkit"
 interface AuthState {
 	isConnected: boolean
 	id: number | null
-	jwt: string | null
+	token: string | null
 	username: string | null
 	email: string | null
 }
@@ -19,7 +19,7 @@ interface AuthState {
 const initialState: AuthState = {
 	isConnected: localStorage.getItem("jwt") !== null,
 	id: localStorage.getItem("id") ? Number(localStorage.getItem("id")) : null,
-	jwt: localStorage.getItem("jwt") || null,
+	token: localStorage.getItem("jwt") || null,
 	username: localStorage.getItem("username") || null,
 	email: localStorage.getItem("email") || null,
 }
@@ -32,7 +32,7 @@ export const authSlice = createSlice({
 		authLoginSuccess(state, action) {
 			state.isConnected = true
 			state.id = action.payload.id
-			state.jwt = action.payload.jwt
+			state.token = action.payload.jwt
 			state.username = action.payload.username
 			state.email = action.payload.email
 			//console.log("action.payload.roles", action.payload.roles)
@@ -45,7 +45,7 @@ export const authSlice = createSlice({
 		authLogoutSuccessX(state) {
 			state.isConnected = false
 			state.id = null
-			state.jwt = null
+			state.token = null
 			state.username = null
 			state.email = null
 			localStorage.removeItem("id")
