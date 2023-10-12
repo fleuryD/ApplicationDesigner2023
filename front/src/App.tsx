@@ -10,7 +10,7 @@ import PageAuthLogin from "pages/auth/PageAuthLogin"
 import PageAuthRegister from "pages/auth/PageAuthRegister"
 
 // * private routes
-//import PageHome from "pages/PageHome"
+import PageHome from "pages/PageHome"
 //import PageUsers from "pages/user/PageUsers"
 //import PageUser from "pages/user/PageUser"
 //import PageWIP from "pages/PageWIP"
@@ -19,7 +19,7 @@ import PageAuthRegister from "pages/auth/PageAuthRegister"
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
 // import "styles/global.scss"
-import "styles/App.css"
+import "styles/ReactApp.scss"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 export default function App() {
@@ -34,8 +34,8 @@ export default function App() {
 							<Route path="/users" element={<PageUsers />} />
 							<Route path="/user/:id" element={<PageUser />} />
 							<Route path="/wip" element={<PageWIP />} />
-							<Route path="*" element={<PageHome />} />
 						*/}
+						<Route path="*" element={<PageHome />} />
 					</Routes>
 				) : (
 					<Routes>
