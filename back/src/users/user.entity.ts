@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
 	Entity,
@@ -45,7 +44,4 @@ export class User {
 	@OneToMany(() => Project, (proj: Project) => proj.createdBy)
 	public projects: Project[]
 	*/
-
-	@CreateDateColumn()
-	lastOpenedAt: Date
 }

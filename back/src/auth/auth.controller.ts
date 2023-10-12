@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import {
@@ -13,13 +11,12 @@ import {
 	UnauthorizedException,
 	Param,
 } from "@nestjs/common"
-import { UsersService } from "./users.service"
+import { UsersService } from "../users/users.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
 import { Headers, Query, Redirect } from "@nestjs/common"
 import fetch from "node-fetch"
-
 import { UploadedFile, UseInterceptors } from "@nestjs/common"
 import { FileInterceptor } from "@nestjs/platform-express"
 
@@ -29,8 +26,8 @@ import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-@Controller("api")
-export class UsersController {
+@Controller("auth")
+export class AuthController {
 	constructor(
 		private readonly userService: UsersService,
 		private jwtService: JwtService
@@ -51,26 +48,43 @@ export class UsersController {
 		})
 		return user
 	}
+	*/
 
-
+	/*
+	 *	REGISTER
+	 *
+	 *	1) check UNIQUE : username, email
+	 *	2) check VALIDE : username, email, password // TODO
+	 *	3) create user (avec token_email)
+	 *	4) send email with token_email // TODO
+	 *	5) return success
+	 *
+	 */
 	@Post("register")
 	async register(
-		@Body("name") name: string,
+		@Body("username") username: string,
 		@Body("email") email: string,
 		@Body("password") password: string
 	) {
-		if (!name || !email || !password) {
+		if (!username || !email || !password) {
 			throw new BadRequestException("missing fields")
 		}
+		/*
+		let existingUser = await getUserByUsername(username)
+		if (existingUser.user)
+			return res.json({ error: "USERNAME_ALREADY_EXISTS" })
+		existingUser = await getUserByEmail(email)
+		if (existingUser.user)
+			return res.json({ error: "EMAIL_ALREADY_EXISTS" })
+		*/
+
 		const hashedPassword = await bcrypt.hash(password, 12)
 
 		try {
 			const user = await this.userService.create({
-				name: name.toLowerCase(),
+				username: username.toLowerCase(),
 				email: email.toLowerCase(),
-				doubleAuthActive: false,
 				password: hashedPassword,
-				status: "OFFLINE",
 			})
 
 			delete user.password
@@ -80,60 +94,42 @@ export class UsersController {
 		}
 	}
 
+	/*
+	 *	LOGIN
+	 *
+	 *	1) check UNIQUE : username, email
+	 *	2) check VALIDE : username, email, password // TODO
+	 *	3) create user (avec token_email)
+	 *	4) send email with token_email // TODO
+	 *	5) return success
+	 *
+	 */
 	@Post("login")
 	async login(
-		@Body("email") email: string,
+		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string,
 		@Body("code") code: string,
 		@Res({ passthrough: true }) response: Response
 	) {
-		if (!email || !password) {
+		if (!emailOrUsername || !password) {
 			throw new BadRequestException("missing fields")
 		}
-
-		const user = await this.userService.findOne({ where: { email: email } })
-
+		const user = await this.userService.findOneByEmailOrUsername(emailOrUsername)
 		if (!user) {
 			throw new BadRequestException("invalid credentials")
 		}
-
 		if (!(await bcrypt.compare(password, user.password))) {
 			throw new BadRequestException("invalid credentials")
 		}
-
-		if (user.doubleAuthActive == true) {
-			if (!code) {
-				return {
-					message: "2FA",
-					name: user.name,
-					email: user.email,
-					password: password,
-				}
-			}
-
-			const isCodeValid =
-				this.userService.isTwoFactorAuthenticationCodeValid(code, user)
-
-			if (!isCodeValid) throw new BadRequestException("invalid 2af code")
-		}
-
 		const jwt = await this.jwtService.signAsync({ id: user.id })
-
-		response.cookie("jwt", jwt, { httpOnly: true })
-
-		//user.jwt = jwt
-
-		// await this.partieRepository.save(newPartie);
-
 		await this.userService.setJwt(user, jwt)
-
 		return {
 			message: "success",
-			// jwt: jwt,
 			user: { jwt, ...user },
 		}
 	}
 
+	/*
 	@Post("profil")
 	async profil(@Body("jwt") jwt: string, @Req() request: Request) {
 		//try {

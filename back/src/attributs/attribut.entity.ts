@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
 	Entity,
@@ -69,7 +68,7 @@ export class Attribut {
 	targetEntity: any
 	inversedBy: any
 	removeOrphan: boolean
-	
+
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
 	nomCamel: string //  articleTag
 	nomSnake: string //  article_tag

@@ -103,13 +103,12 @@ export async function apiFetchRegister({
 	username,
 	email,
 	password,
+	/*
 	firstname,
 	lastname,
 	birthday,
 	gender,
-	loveM,
-	loveF,
-	loveNB,
+	*/
 }) {
 	return zFetch({
 		shortUrl: "/auth/register",
@@ -118,13 +117,12 @@ export async function apiFetchRegister({
 			username,
 			email,
 			password,
+			/*
 			firstname,
 			lastname,
 			birthday,
 			gender,
-			loveM,
-			loveF,
-			loveNB,
+			*/
 		},
 		requierdFields: [],
 	})

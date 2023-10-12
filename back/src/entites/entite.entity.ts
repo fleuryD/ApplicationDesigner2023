@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
 	Entity,
@@ -61,7 +60,7 @@ export class Entite {
 
 	fAIcon: string
 	xxIcone: string
-	
+
 	templatesPath: string
 	openInUml: string
 
@@ -76,6 +75,5 @@ export class Entite {
 	strUseEntity: string 	//  "App\Entity\Agenda\Evenement" ou "App\Entity\Evenement"
 	xxTempaltesPath: string //
 
-	
 	*/
 }

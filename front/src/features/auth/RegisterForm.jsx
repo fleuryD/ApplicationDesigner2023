@@ -185,13 +185,6 @@ export default function RegisterForm() {
 			username,
 			email,
 			password,
-			firstname,
-			lastname,
-			birthday,
-			gender,
-			loveM,
-			loveF,
-			loveNB,
 		}).then((response) => {
 			if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS")

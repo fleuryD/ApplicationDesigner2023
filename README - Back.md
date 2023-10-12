@@ -16,6 +16,8 @@ npm install @nestjs/jwt
 npm install -D @types/bcrypt
 npm install bcrypt
 npm install @nestjs/config
+npm install --save @nestjs/passport @nestjs/jwt passport passport-local passport-jwt
+npm install --save-dev @types/passport-local @types/passport-jwt
 
 		"@nestjs/mapped-types": "*",
 		"@nestjs/passport": "^10.0.1",
@@ -24,9 +26,6 @@ npm install @nestjs/config
 		"multer": "^1.4.5-lts.1",
 		"node-fetch": "^2.7.0",
 		"otplib": "^12.0.1",
-		"passport": "^0.6.0",
-		"passport-jwt": "^4.0.1",
-		"passport-local": "^1.0.0",
 
 
 
