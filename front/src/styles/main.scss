@@ -1,0 +1,175 @@
+// >>>		BOOTSTRAP THEME											   <<<
+
+/*
+ *	change Bootstrap colors
+ *	https://huemint.com/bootstrap-basic/
+ *
+ */
+$colMuted: #6c757d;
+$colLight: #f7f1b4;
+$colWhite: #ffffff;
+$colDark: #000528;
+$colPrimary: #e60074;
+$colSecondary: #593d87;
+$colInfo: #30a8e5;
+$colSuccess: #00a674;
+$colWarning: #d3d100;
+$colDanger: #e04100;
+$colCustom: #00ff00;
+
+$theme-colors: (
+	"muted": $colMuted,
+	"light": $colLight,
+	"white": $colWhite,
+	"dark": $colDark,
+	"primary": $colPrimary,
+	"secondary": $colSecondary,
+	"info": $colInfo,
+	"success": $colSuccess,
+	"warning": $colWarning,
+	"danger": $colDanger,
+	"custom": $colCustom,
+);
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: $colWhite;
+	// padding-top: 60px !important; // * pour la navbar fixe
+}
+
+#container-global {
+	background-color: $colSecondary;
+	padding: 3px;
+	min-height: 100vh;
+}
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+$sectionGap: 5px;
+
+.zPage {
+	background-color: $colLight;
+	padding: 10px;
+	min-height: 100%;
+	color: $colDark;
+
+	.zPageHeader {
+		background-color: $colWhite;
+		padding: 10px;
+		margin: $sectionGap;
+		h1 {
+			color: $colPrimary;
+		}
+	}
+	.zPageContent {
+		//background-color: $colInfo;
+		//margin: -5px;
+		padding: 0px;
+
+		.zSection {
+			//background-color: $colWarning;
+			margin: 0;
+			padding: 0px;
+
+			.zSectionInner {
+				background-color: $colWhite;
+				margin: $sectionGap;
+				padding: 5px;
+				//padding: -5px;
+
+				h2 {
+					color: $colPrimary;
+					font-size: 1.5em;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+.btn {
+	cursor: pointer;
+}
+
+.btn-xs {
+	padding: 0.1em !important;
+	font-size: 0.8em !important;
+}
+.row {
+	margin: 2px;
+	padding: 0px;
+}
+
+.table-xs {
+	td {
+		padding: 0px !important;
+	}
+}
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+.zHelp,
+.zTodo {
+	// background-color: $colWarning;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0px;
+	h2 {
+		font-size: 1.3em;
+		margin-left: 10px;
+	}
+	h3 {
+		font-size: 1.2em;
+		margin-left: 15px;
+	}
+	h4 {
+		font-size: 1.1em;
+		margin-left: 20px;
+	}
+	p {
+		margin-left: 10px;
+	}
+
+	.zHelpInner,
+	.zTodoInner {
+		padding: 5px;
+	}
+}
+
+.zHelp > .zHelpInner {
+	background-color: rgb(230, 255, 230);
+	border: 1px solid green;
+	h2,
+	h3,
+	h4 {
+		color: green;
+	}
+	p {
+	}
+}
+
+.zTodo > .zTodoInner {
+	margin: $sectionGap;
+	background-color: rgb(250, 230, 230);
+	border: 1px solid red;
+	h2,
+	h3,
+	h4 {
+		color: red;
+	}
+	p {
+	}
+}
+
+// >>>		XXXXXXXXXXXXXX											   <<<

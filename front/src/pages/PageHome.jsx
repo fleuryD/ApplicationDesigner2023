@@ -8,34 +8,79 @@ import React from "react"
 export default function PageHome() {
 	return (
 		<div className="zPage">
-			<header className="zPageHeader">
+			<header className="zPageHeader row">
 				<h1>Application Designer</h1>
 				{/* <img src={logo} className="App-logo" alt="logo" width={200} /> */}
 				<h3>Lorem Ipsum</h3>
 			</header>
-			<div className="zPageContent">
-				<div className="xxxxxxxx">
-					<div className="d-inline bg-muted text-white p-2">bg-muted</div>
-					<div className="d-inline bg-light  p-2">bg-light</div>
-					<div className="d-inline bg-white  p-2">bg-white</div>
-					<div className="d-inline bg-dark text-white p-2">bg-dark</div>
-					<div className="d-inline bg-primary text-white p-2">bg-primary</div>
-					<div className="d-inline bg-secondary text-white p-2">bg-secondary</div>
-					<div className="d-inline bg-info text-white p-2">bg-info</div>
-					<div className="d-inline bg-success text-white p-2">bg-success</div>
-					<div className="d-inline bg-warning text-white p-2">bg-warning</div>
-					<div className="d-inline bg-danger text-white p-2">bg-danger</div>
-					<div className="d-inline bg-custom text-white p-2">bg-custom</div>
+
+			<div className="zPageContent row">
+				<div className="zSection col-6">
+					<div className="zSectionInner">
+						<h2>Mes projets</h2>
+						<div className="zSectionContent">
+							<ul>
+								<li>Proj 1</li>
+								<li>Proj 1</li>
+								<li>Proj 1</li>
+								<li>Proj 1</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className="zSection col-6">
+					<div className="zSectionInner">
+						<h2>zSection 2</h2>
+						<div className="zSectionContent">
+							<ul>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className="zSection col-8">
+					<div className="zSectionInner">
+						<h2>zSection 3</h2>
+						<div className="zSectionContent">
+							<ul>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div className="zSection col-4">
+					<div className="zSectionInner">
+						<h2>zSection 4</h2>
+						<div className="zSectionContent">
+							<ul>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+								<li>Xxxxxxxxxx</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 
-				<div className="todo row col-6">
-					<h2>Todo</h2>
-					<h4>Xxxxxxxxx</h4>
-					<ul>
-						<li>xxxxxxx</li>
-						<li>xxxxxxx</li>
-						<li>xxxxxxx</li>
-					</ul>
+				<div className="zTodo col-6">
+					<div className="zTodoInner">
+						<h2>Todo</h2>
+						<h4>Xxxxxxxxx</h4>
+						<ul>
+							<li>xxxxxxx</li>
+							<li>xxxxxxx</li>
+							<li>xxxxxxx</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

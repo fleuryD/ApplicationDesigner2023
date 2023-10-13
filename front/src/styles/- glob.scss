@@ -1,0 +1,160 @@
+$primary: #0000ff;
+$primaryL1: lighten($primary, 20%);
+$primaryL2: lighten($primary, 40%);
+$primaryL3: lighten($primary, 60%);
+$primaryD1: darken($primary, 10%);
+$primaryD2: darken($primary, 20%);
+$primaryD3: darken($primary, 30%);
+
+$secondary: #777777;
+$danger: #cf0b00;
+
+// https://color.adobe.com/fr/create/color-wheel
+// change the theme
+$theme-colors: (
+	"primary": $primary,
+	"primaryD1": $primaryD1,
+	"primaryD2": $primaryD2,
+	"primaryD3": $primaryD3,
+	"primaryL1": lighten($primary, 10%),
+	"primaryL2": lighten($primary, 20%),
+	"primaryL3": lighten($primary, 30%),
+	"secondary": $secondary,
+	"secondaryD1": darken($secondary, 10%),
+	"secondaryD2": darken($secondary, 20%),
+	"secondaryD3": darken($secondary, 30%),
+	"secondaryL1": lighten($secondary, 10%),
+	"secondaryL2": lighten($secondary, 20%),
+	"secondaryL3": lighten($secondary, 30%),
+	"danger": $danger,
+	"dangerD1": darken($danger, 10%),
+	"dangerD2": darken($danger, 20%),
+	"dangerD3": darken($danger, 30%),
+	"dangerL1": lighten($danger, 10%),
+	"dangerL2": lighten($danger, 20%),
+	"dangerL3": lighten($danger, 30%),
+	"warning": #ffa900,
+	"info": #39c0ed,
+	"success": #00b74a,
+	"light": #fbfbfb,
+	"dark": #262626,
+);
+
+$input-height-border: 10;
+$input-padding-x: 10;
+$form-floating-height: add(3.5rem, $input-height-border);
+$form-floating-line-height: 3.25;
+$form-floating-padding-x: $input-padding-x;
+$form-floating-padding-y: 1rem;
+$form-floating-input-padding-t: 0.625rem;
+$form-floating-input-padding-b: 0rem;
+$form-floating-label-opacity: 0.65;
+$form-floating-label-transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+$form-floating-transition:
+	opacity 0.1s ease-in-out,
+	transform 0.1s ease-in-out;
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+
+html,
+body,
+#root {
+	//background-color: #ffaaaa;
+	height: 100%;
+	min-height: 100%;
+	max-height: 100%;
+	padding: 0px !important;
+	margin: 0px !important;
+	scrollbar-color: $primaryD1 $primaryL1;
+}
+
+h1 {
+	font-size: 1.4em;
+}
+h2 {
+	font-size: 1.3em;
+}
+h3 {
+	font-size: 1.2em;
+}
+h4 {
+	font-size: 1.1em;
+}
+h5 {
+	font-size: 1.1em;
+}
+h6 {
+	font-size: 1.1em;
+}
+
+.zzAutoScrollX {
+	overflow-x: auto;
+	// scrollbar-color: rebeccapurple green;
+	// scrollbar-color: red;
+}
+
+//*********************************
+
+.clickText {
+	color: $primary;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.clignote {
+	animation: clignote 1s linear infinite;
+}
+@keyframes clignote {
+	20% {
+		opacity: 100;
+	}
+	50% {
+		opacity: 0;
+	}
+	70% {
+		opacity: 1000;
+	}
+}
+
+@media print {
+	.no-print,
+	.no-print * {
+		display: none !important;
+	}
+}
+
+#container-md,
+#container-sm {
+	//  background-color: pink;
+}
+
+@media (max-width: 640px) {
+	#container-md,
+	#container-sm {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	#zPage {
+		//   background-color: cyan !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	.zPageSection {
+		//  background-color: green !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+}
+
+@media (min-width: 641px) {
+	#zPage {
+		//   background-color: yellow !important;
+	}
+}
+
+//*********************************

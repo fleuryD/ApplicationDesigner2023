@@ -24,7 +24,7 @@ import {
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function NavBarPrivateItems() {
-	function NavBarDropdownDev() {
+	function NavBarDropdownAdmin() {
 		return (
 			<NavDropdown
 				title={
@@ -34,11 +34,11 @@ export default function NavBarPrivateItems() {
 				}
 				id="basic-nav-dropdown-dev"
 			>
-				<NavDropdown.Item as={Link} to="/users">
-					<FaUsers /> Users
+				<NavDropdown.Item as={Link} to="/admin/users">
+					<FaUsers /> Admin: Users
 				</NavDropdown.Item>
-				<NavDropdown.Item as={Link} to="/tests">
-					<FaBan /> test
+				<NavDropdown.Item as={Link} to="/dev">
+					<FaBan /> Dev
 				</NavDropdown.Item>
 			</NavDropdown>
 		)
@@ -66,9 +66,9 @@ export default function NavBarPrivateItems() {
 				<FaQuestion /> Xxx2
 			</Nav.Link>
 
-			<NavBarDropdownConnectedUser />
+			<NavBarDropdownAdmin />
 
-			<NavBarDropdownDev />
+			<NavBarDropdownConnectedUser />
 		</>
 	)
 }
