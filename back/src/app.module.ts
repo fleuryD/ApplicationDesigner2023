@@ -20,7 +20,7 @@ import { UsersService } from "./users/users.service"
 		ConfigModule.forRoot(),
 		TypeOrmModule.forRoot({
 			type: "postgres",
-			host: "localhost", // "postgres" pour docker | "localhost" pour mon windows
+			host: "postgres", // "postgres" pour docker | "localhost" pour mon windows
 			port: 5432,
 			username: "postgres",
 			password: "root",

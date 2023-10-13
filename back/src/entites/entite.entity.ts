@@ -17,7 +17,6 @@ import { Attribut } from "../attributs/attribut.entity"
  *	* xxxxxxxxxxxxxxxxxxxxxxxxxx
  *
  *
- *
  */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

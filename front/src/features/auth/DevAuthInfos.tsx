@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { styled } from "styled-components"
+//import { styled } from "styled-components"
 import { useAppSelector } from "store/store"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -9,7 +9,7 @@ import { useAppSelector } from "store/store"
 export default function DevAuthInfos() {
 	const auth = useAppSelector((state) => state.auth)
 	return (
-		<StyledDevAuthInfos className=" col-12">
+		<div className=" col-12">
 			<div className="">
 				<b>Auth:</b>
 			</div>
@@ -28,12 +28,13 @@ export default function DevAuthInfos() {
 			<div className="keyVal">
 				<b>.token:</b> <small>{auth.token}</small>
 			</div>
-		</StyledDevAuthInfos>
+		</div>
 	)
 }
 
 // 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓	STYLED_COMPONENTS
 
+/*
 const StyledDevAuthInfos = styled.div`
 	border: 1px solid red;
 	background-color: #ffcccc;
@@ -50,3 +51,4 @@ const StyledDevAuthInfos = styled.div`
 		}
 	}
 `
+*/

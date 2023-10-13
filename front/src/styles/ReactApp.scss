@@ -1,24 +1,40 @@
+// >>>		BOOTSTRAP THEME											   <<<
+
 /*
  *	change Bootstrap colors
  *	https://huemint.com/bootstrap-basic/
  *
  */
+$colMuted: #6c757d;
+$colLight: #f7f1b4;
+$colWhite: #ffffff;
+$colDark: #000528;
+$colPrimary: #e60074;
+$colSecondary: #593d87;
+$colInfo: #30a8e5;
+$colSuccess: #00a674;
+$colWarning: #d3d100;
+$colDanger: #e04100;
+$colCustom: #00ff00;
+
 $theme-colors: (
-	// "muted": #6c757d,
-	"light": #f7f1b4,
-	"white": #ffffff,
-	"dark": #000528,
-	"primary": #e60074,
-	"secondary": #593d87,
-	"info": #30a8e5,
-	"success": #00a674,
-	"warning": #d3d100,
-	"danger": #e04100,
-	"custom": #00ff00
+	"muted": $colMuted,
+	"light": $colLight,
+	"white": $colWhite,
+	"dark": $colDark,
+	"primary": $colPrimary,
+	"secondary": $colSecondary,
+	"info": $colInfo,
+	"success": $colSuccess,
+	"warning": $colWarning,
+	"danger": $colDanger,
+	"custom": $colCustom,
 );
 
 // Import Bootstrap and its default variables
 @import "~bootstrap/scss/bootstrap.scss";
+
+// >>>		XXXXXXXXXXXXXX											   <<<
 
 body {
 	margin: 0;
@@ -33,6 +49,8 @@ body {
 	background-color: white;
 	padding: 0;
 }
+
+// >>>		XXXXXXXXXXXXXX											   <<<
 
 .zPage {
 	background-color: lime;
@@ -51,6 +69,7 @@ body {
 	}
 }
 
+// >>>		XXXXXXXXXXXXXX											   <<<
 .btn {
 	cursor: pointer;
 }
@@ -63,3 +82,5 @@ body {
 	margin: 0px;
 	// padding: 0px;
 }
+
+// >>>		XXXXXXXXXXXXXX											   <<<
