@@ -1,14 +1,24 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { set } from "date-fns"
 import React from "react"
 // import { useState } from 'react';
 // import './login.css';
+//import { set } from "date-fns"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 // ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
 
+type Props = {
+	setUsername: any
+	setEmail: any
+	setPassword: any
+	setPassword2: any
+	setEmailOrUsername: any
+	setBirthday: any
+	setFirstname: any
+	setLastname: any
+}
 export default function FormAutoFill({
 	setUsername,
 	setEmail,
@@ -18,7 +28,7 @@ export default function FormAutoFill({
 	setBirthday,
 	setFirstname,
 	setLastname,
-}) {
+}: Props) {
 	return (
 		<div className="col-12 debug mt-4">
 			<h5>Debug: Auto-fill form:</h5>
@@ -58,7 +68,7 @@ export default function FormAutoFill({
 				username="greg"
 				email="greg@42.fr"
 				password="pass_G"
-				birthday="20010-01-01"
+				birthday="2010-01-01"
 				lastname="greg"
 				firstmane="Nihaus"
 			/>
@@ -73,7 +83,16 @@ export default function FormAutoFill({
 		</div>
 	)
 
-	function LoginAutoFill(username, email, password, birthday, lastname, firstmane) {
+	type Props2 = {
+		username: string
+		email: string
+		password: string
+		birthday: string
+		lastname: string
+		firstmane: string
+	}
+
+	function LoginAutoFill({ username, email, password, birthday, lastname, firstmane }: Props2) {
 		if (setUsername) {
 			setUsername(username)
 		}
@@ -98,12 +117,11 @@ export default function FormAutoFill({
 
 		setPassword(password)
 	}
-
-	function ButtonLoginAutoFill({ username, email, password, birthday, lastname, firstmane }) {
+	function ButtonLoginAutoFill({ username, email, password, birthday, lastname, firstmane }: Props2) {
 		return (
 			<button
 				onClick={() => {
-					LoginAutoFill(username, email, password, birthday, lastname, firstmane)
+					LoginAutoFill({ username, email, password, birthday, lastname, firstmane })
 				}}
 			>
 				{username}

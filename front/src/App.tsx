@@ -19,7 +19,6 @@ import PageAdminUsers from "pages/PageAdminUsers"
 
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
-// import "styles/global.scss"
 import "styles/main.scss"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

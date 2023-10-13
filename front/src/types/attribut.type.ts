@@ -7,8 +7,8 @@
 
 type Attribut = {
 	id: number
-	entityId: number	// TODO : Relation
-	entite: any	// TODO : Relation
+	entityId: number // TODO : Relation
+	entite: any // TODO : Relation
 	name: string
 
 	///////////////
@@ -25,12 +25,10 @@ type Attribut = {
 	wip: boolean
 	commentaire: string
 	removeOrphan: boolean
-	nomPascal: string           //  ArticleTag   // normalement, cest le meme que le nom
-	nomCamel: string            //  articleTag
-	nomSnake: string            //  article_tag
-	nomKebab: string            //  article-tag
-
-
+	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
+	nomCamel: string //  articleTag
+	nomSnake: string //  article_tag
+	nomKebab: string //  article-tag
 }
 
 export default Attribut

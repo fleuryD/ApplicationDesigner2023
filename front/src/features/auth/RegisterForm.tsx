@@ -3,12 +3,12 @@
 import React, { useState } from "react"
 import Form from "react-bootstrap/Form"
 import { Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
-import { useAppDispatch } from "store/store"
+// import { useAppDispatch } from "store/store"
 import { apiFetchRegister } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
-import { FaSignInAlt } from "react-icons/fa"
-import { format, parse, isValid, parseISO, differenceInYears } from "date-fns"
+//import { FaSignInAlt } from "react-icons/fa"
+import { parse, isValid, differenceInYears /* ,format, parseISO */ } from "date-fns"
+//import { Link } from "react-router-dom"
 import ZFormInput from "ui/ZFormInput"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -16,7 +16,7 @@ import ZFormInput from "ui/ZFormInput"
 // ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
 
 export default function RegisterForm() {
-	const dispatch = useAppDispatch()
+	// const dispatch = useAppDispatch()
 
 	const [username, setUsername] = useState<string>("")
 	const [email, setEmail] = useState<string>("")
@@ -98,7 +98,7 @@ export default function RegisterForm() {
 				...errors,
 				password2: "Tu dois repeter le mot de passe.",
 			}))
-		} else if (password2 != password) {
+		} else if (password2 !== password) {
 			errorCount++
 			setErrors((errors: any) => ({
 				...errors,

@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useEffect, useState } from "react"
-import { useAppDispatch } from "store/store"
+//import { useAppDispatch } from "store/store"
 
 import { apiFetchUsers } from "utils/api"
 
@@ -12,7 +12,7 @@ import UsersTable from "features/users/UsersTable"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageAdminUsers() {
-	const dispatch = useAppDispatch()
+	//const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [users, setUsers] = useState<User[] | null>(null)

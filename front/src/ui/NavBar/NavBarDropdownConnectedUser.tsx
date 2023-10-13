@@ -7,20 +7,10 @@ import { useAppSelector, useAppDispatch } from "store/store"
 import { authLogoutSuccess } from "store/authSlice"
 
 import {
-	FaHome,
-	FaUserFriends,
 	FaUser,
-	FaCat,
 	FaAddressCard,
-	FaGamepad,
 	FaSignOutAlt,
-	FaSearch,
-	FaInfo,
-	FaUsers,
-	// FaArrowRight,
-	FaBan,
-	// FaSignInAlt,
-	FaQuestion,
+	/* 	FaBan, FaHome, FaUserFriends, FaCat, FaGamepad, FaSearch, FaInfo, FaUsers, FaArrowRight, FaSignInAlt, FaQuestion, */
 } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

@@ -4,20 +4,8 @@ import { Link } from "react-router-dom"
 import { Nav } from "react-bootstrap"
 
 import {
-	FaHome,
-	FaUserFriends,
-	FaUser,
-	FaCat,
-	FaAddressCard,
-	FaGamepad,
-	FaSignOutAlt,
-	FaSearch,
-	FaInfo,
-	FaUsers,
-	// FaArrowRight,
-	FaBan,
-	// FaSignInAlt,
 	FaQuestion,
+	/* 	FaBan, FaUsers, FaQuestion, FaUser,FaAddressCard ,FaSignOutAlt, FaHome, FaUserFriends, FaCat, FaGamepad, FaSearch, FaInfo, FaUsers, FaArrowRight, FaSignInAlt, FaQuestion, */
 } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
