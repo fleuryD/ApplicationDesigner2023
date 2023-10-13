@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { apiFetchUser } from "utils/api"
-import TodoUser from "features/users/TodoUser"
-import UserInterests from "features/users/UserInterests"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
 
 export default function PageUser() {
 	const userId = Number(useParams().id) || 0
@@ -33,68 +33,55 @@ export default function PageUser() {
 
 	return (
 		<div className="zPage">
-			<header className="zPageHeader">
+			<header className="zPageHeader row">
 				<h1>Profil {user && "de " + user.username}</h1>
 			</header>
-			<div className="zPageContent">
-				<div className="z-cadre user-profil">
-					{isLoading && <p>Loading...</p>}
-					{error && <p>{error}</p>}
-					{user && (
-						<>
-							<div className="z-cadre user-infos">
-								<div>
-									id: <b>{user.id}</b> &nbsp;&nbsp;
+			<div className="zPageContent row">
+				<div className="zSection col-12 col-md-6 user-profil">
+					<div className="zSectionInner">
+						<h2>Mes projets</h2>
+
+						{isLoading && <p>Loading...</p>}
+						{error && <p>{error}</p>}
+						{user && (
+							<>
+								<div className="z-cadre user-infos">
+									<div>
+										id: <b>{user.id}</b> &nbsp;&nbsp;
+									</div>
+									<div>
+										username: <b>{user.username}</b> &nbsp;&nbsp;
+									</div>
+									<div>
+										firstname: <b>{user.firstname}</b> &nbsp;&nbsp;
+									</div>
+									<div>
+										lastname: <b>{user.lastname}</b> &nbsp;&nbsp;
+									</div>
+									<div>
+										gender: <b>{user.gender}</b> &nbsp;&nbsp;
+									</div>
+									<div>
+										sexPref:{" "}
+										<b>
+											{user.love_m && "M "}
+											{user.love_f && "F "}
+											{user.love_nb && "NB "}
+										</b>
+									</div>
 								</div>
-								<div>
-									username: <b>{user.username}</b>{" "}
-									&nbsp;&nbsp;
+								<div className="z-cadre user-pics">
+									<img src="/img-users/06.jpg" alt="pic01" width={200} />
+									<img src="/img-users/07.jpg" alt="pic01" width={200} />
+									<img src="/img-users/08.jpg" alt="pic01" width={200} />
 								</div>
-								<div>
-									firstname: <b>{user.firstname}</b>{" "}
-									&nbsp;&nbsp;
+								<div className="z-cadre user-connected">
+									<h3>connected With</h3>
 								</div>
-								<div>
-									lastname: <b>{user.lastname}</b>{" "}
-									&nbsp;&nbsp;
-								</div>
-								<div>
-									gender: <b>{user.gender}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									sexPref:{" "}
-									<b>
-										{user.love_m && "M "}
-										{user.love_f && "F "}
-										{user.love_nb && "NB "}
-									</b>
-								</div>
-							</div>
-							<div className="z-cadre user-pics">
-								<img
-									src="/img-users/06.jpg"
-									alt="pic01"
-									width={200}
-								/>
-								<img
-									src="/img-users/07.jpg"
-									alt="pic01"
-									width={200}
-								/>
-								<img
-									src="/img-users/08.jpg"
-									alt="pic01"
-									width={200}
-								/>
-							</div>
-							<div className="z-cadre user-connected">
-								<h3>connected With</h3>
-							</div>
-						</>
-					)}
+							</>
+						)}
+					</div>
 				</div>
-				<UserInterests user={user} />
-				<TodoUser />
 			</div>
 		</div>
 	)

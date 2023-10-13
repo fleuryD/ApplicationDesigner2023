@@ -3,6 +3,8 @@ import zFetch from "./zFetch"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export async function apiFetchTest() {
 	return zFetch({ shortUrl: "/test", method: "GET", requierdFields: [] })
 }
@@ -128,7 +130,7 @@ export async function apiFetchRegister({
 	})
 }
 
-export async function apiFetchLogin({ emailOrUsername, email, password }) {
+export async function apiFetchLogin({ emailOrUsername, password }) {
 	return zFetch({
 		shortUrl: "/auth/login",
 		method: "POST",

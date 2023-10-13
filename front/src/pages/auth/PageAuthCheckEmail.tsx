@@ -7,18 +7,18 @@ import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export default function PageAuthCheckEmail() {
 	const tokenEmail = useParams().tokenEmail
 
-	const [msg, setMsg] = useState(null)
+	const [msg, setMsg] = useState<any>(null)
 
 	useEffect(() => {
 		setMsg(<>LOAAAAAAAAAADINGGGGGGGGG..........</>)
 		apiFetchCheckEmail({ tokenEmail }).then((response) => {
 			if (response.success) {
-				console.log(
-					"SUCCCCCCCCCCEEEEEEEESSSSSSSSSSSSSSSSSSS - redirect to login"
-				)
+				console.log("SUCCCCCCCCCCEEEEEEEESSSSSSSSSSSSSSSSSSS - redirect to login")
 				setMsg(
 					<>
 						email successfully checked
@@ -30,11 +30,7 @@ export default function PageAuthCheckEmail() {
 				)
 			} else {
 				console.log("response: ", response)
-				setMsg(
-					<div className="text-danger">
-						Error Inconnue: Voir la console
-					</div>
-				)
+				setMsg(<div className="text-danger">Error Inconnue: Voir la console</div>)
 			}
 		})
 	}, [tokenEmail])
@@ -51,9 +47,8 @@ export default function PageAuthCheckEmail() {
 					Todo
 					<ul>
 						<li>
-							``After registration, an email with a unique link
-							must be sent to the registered user to verify their
-							account.``
+							``After registration, an email with a unique link must be sent to the registered user to
+							verify their account.``
 						</li>
 					</ul>
 				</div>

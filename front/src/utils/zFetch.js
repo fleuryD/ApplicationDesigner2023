@@ -9,6 +9,8 @@ import { API_BASE_URL /* , getUserToken */ } from "./constants" // ?????????????
 
 // ### FUNCTIONS ################################################################
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 // 🟥🟧🟨🟩🟦🟪⬛️⬜️🟫
 
 export default async function zFetch({ shortUrl, method, requierdFields, body, publicAccess }) {

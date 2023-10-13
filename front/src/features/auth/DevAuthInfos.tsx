@@ -1,7 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-//import { styled } from "styled-components"
 import { useAppSelector } from "store/store"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -31,24 +30,3 @@ export default function DevAuthInfos() {
 		</div>
 	)
 }
-
-// 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓	STYLED_COMPONENTS
-
-/*
-const StyledDevAuthInfos = styled.div`
-	border: 1px solid red;
-	background-color: #ffcccc;
-	padding: 5px;
-	div {
-		display: inline-block;
-		margin-bottom: 2px;
-		margin-right: 15px;
-		background-color: #ffeeee;
-		padding: 2px;
-
-		small {
-			font-size: 0.7em;
-		}
-	}
-`
-*/

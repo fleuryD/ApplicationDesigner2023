@@ -12,6 +12,8 @@ import { setTags } from "store/authSlice"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export default function PageUserMe() {
 	const auth = useAppSelector((state) => state.auth)
 	const dispatch = useAppDispatch()
@@ -35,22 +37,13 @@ export default function PageUserMe() {
 	}, [])
 
 	const matchUsers = auth.usersILike.filter(
-		(userILike) =>
-			auth.usersWhoLikeMe.filter(
-				(userWhoLikeMe) => userILike.id === userWhoLikeMe.id
-			).length > 0
+		(userILike) => auth.usersWhoLikeMe.filter((userWhoLikeMe) => userILike.id === userWhoLikeMe.id).length > 0
 	)
 	const iLikeUsers = auth.usersILike.filter(
-		(userILike) =>
-			auth.usersWhoLikeMe.filter(
-				(userWhoLikeMe) => userILike.id === userWhoLikeMe.id
-			).length == 0
+		(userILike) => auth.usersWhoLikeMe.filter((userWhoLikeMe) => userILike.id === userWhoLikeMe.id).length == 0
 	)
 	const LikeMeUsers = auth.usersWhoLikeMe.filter(
-		(userILike) =>
-			auth.usersILike.filter(
-				(userWhoLikeMe) => userILike.id === userWhoLikeMe.id
-			).length == 0
+		(userILike) => auth.usersILike.filter((userWhoLikeMe) => userILike.id === userWhoLikeMe.id).length == 0
 	)
 
 	return (
@@ -69,16 +62,13 @@ export default function PageUserMe() {
 									id: <b>{user.id}</b> &nbsp;&nbsp;
 								</div>
 								<div>
-									username: <b>{user.username}</b>{" "}
-									&nbsp;&nbsp;
+									username: <b>{user.username}</b> &nbsp;&nbsp;
 								</div>
 								<div>
-									firstname: <b>{user.firstname}</b>{" "}
-									&nbsp;&nbsp;
+									firstname: <b>{user.firstname}</b> &nbsp;&nbsp;
 								</div>
 								<div>
-									lastname: <b>{user.lastname}</b>{" "}
-									&nbsp;&nbsp;
+									lastname: <b>{user.lastname}</b> &nbsp;&nbsp;
 								</div>
 								<div>
 									gender: <b>{user.gender}</b> &nbsp;&nbsp;
@@ -93,21 +83,9 @@ export default function PageUserMe() {
 								</div>
 							</div>
 							<div className="z-cadre user-pics">
-								<img
-									src="/img-users/06.jpg"
-									alt="pic01"
-									width={200}
-								/>
-								<img
-									src="/img-users/07.jpg"
-									alt="pic01"
-									width={200}
-								/>
-								<img
-									src="/img-users/08.jpg"
-									alt="pic01"
-									width={200}
-								/>
+								<img src="/img-users/06.jpg" alt="pic01" width={200} />
+								<img src="/img-users/07.jpg" alt="pic01" width={200} />
+								<img src="/img-users/08.jpg" alt="pic01" width={200} />
 							</div>
 							<div className="z-cadre user-connected row">
 								<div className="col-12 col-md-4">

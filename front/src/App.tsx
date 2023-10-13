@@ -12,7 +12,7 @@ import PageAuthRegister from "pages/auth/PageAuthRegister"
 // * private routes
 import PageHome from "pages/PageHome"
 import PageDev from "pages/PageDev"
-//import PageUsers from "pages/user/PageUsers"
+import PageAdminUsers from "pages/PageAdminUsers"
 //import PageUser from "pages/user/PageUser"
 //import PageWIP from "pages/PageWIP"
 // import DevAuthInfos from "features/auth/DevAuthInfos"
@@ -32,10 +32,10 @@ export default function App() {
 				{auth.isConnected ? (
 					<Routes>
 						{/*
-							<Route path="/users" element={<PageUsers />} />
 							<Route path="/user/:id" element={<PageUser />} />
 							<Route path="/wip" element={<PageWIP />} />
 						*/}
+						<Route path="/admin/users" element={<PageAdminUsers />} />
 						<Route path="/dev" element={<PageDev />} />
 						<Route path="*" element={<PageHome />} />
 					</Routes>

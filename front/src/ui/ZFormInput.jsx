@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export default function ZFormInput({
 	name,
 	label,
@@ -29,7 +31,7 @@ export default function ZFormInput({
 					id={"input-" + name}
 					placeholder={placeholder}
 					value={value}
-					className={ (error ? "border-danger" : "")}
+					className={error ? "border-danger" : ""}
 					onChange={(e) => {
 						resetError()
 						setValue(e.target.value)

@@ -7,6 +7,8 @@ import React from "react"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export default function FormAutoFill({
 	setUsername,
 	setEmail,
@@ -18,7 +20,7 @@ export default function FormAutoFill({
 	setLastname,
 }) {
 	return (
-		<div className="col-12 debug bg-secondary">
+		<div className="col-12 debug mt-4">
 			<h5>Debug: Auto-fill form:</h5>
 			<ButtonLoginAutoFill
 				username="dawid"
@@ -109,5 +111,3 @@ export default function FormAutoFill({
 		)
 	}
 }
-
-// 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓	STYLED_COMPONENTS

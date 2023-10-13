@@ -13,27 +13,29 @@ import ZFormInput from "ui/ZFormInput"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+
 export default function RegisterForm() {
 	const dispatch = useAppDispatch()
 
-	const [username, setUsername] = useState("")
-	const [email, setEmail] = useState("")
-	const [firstname, setFirstname] = useState("")
-	const [lastname, setLastname] = useState("")
-	const [password, setPassword] = useState("")
-	const [password2, setPassword2] = useState("")
-	const [birthday, setBirthday] = useState("")
+	const [username, setUsername] = useState<string>("")
+	const [email, setEmail] = useState<string>("")
+	const [firstname, setFirstname] = useState<string>("")
+	const [lastname, setLastname] = useState<string>("")
+	const [password, setPassword] = useState<string>("")
+	const [password2, setPassword2] = useState<string>("")
+	const [birthday, setBirthday] = useState<string>("")
 
-	const [gender, setGender] = useState(null) //  M, F, NB
+	const [gender, setGender] = useState<string | null>(null) //  M, F, NB
 	const [loveM, setLoveM] = useState(false)
 	const [loveF, setLoveF] = useState(false)
 	const [loveNB, setLoveNB] = useState(false)
 	const [cgu, setCgu] = useState(false)
 
 	const [isLoading, setIsLoading] = useState(false)
-	const [fetchError, setFetchError] = useState(null)
-	const [errors, setErrors] = useState({})
-	const [debugMsg, setDebugMsg] = useState(null)
+	const [fetchError, setFetchError] = useState<any | null>(null)
+	const [errors, setErrors] = useState<any>({})
+	const [debugMsg, setDebugMsg] = useState<any | null>(null)
 
 	//const { socketIsConnected } = useAppSelector((state) => state.app)
 
@@ -47,7 +49,7 @@ export default function RegisterForm() {
 		// ******************* Check: username
 		if (!username || username.length < 3) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				username: "Le username doit faire au moins 3 characteres.",
 			}))
@@ -56,7 +58,7 @@ export default function RegisterForm() {
 		// ******************* Check: firstname
 		if (!firstname || firstname.length < 2) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				firstname: "Le prenom doit faire au moins 2 characteres.",
 			}))
@@ -65,18 +67,17 @@ export default function RegisterForm() {
 		// ******************* Check: lastname
 		if (!lastname || lastname.length < 2) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				lastname: "Le nom doit faire au moins 2 characteres.",
 			}))
 		}
 		// ******************* Check: email
-		let validEmailRegex =
-			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+		let validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 		// TODO : better check
 		if (!email || email.length < 5 || !email.match(validEmailRegex)) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				email: "Tu dois saisir une adresse email valide.",
 			}))
@@ -86,20 +87,20 @@ export default function RegisterForm() {
 		if (!password || password.length < 5) {
 			// TODO : better check (special char...)
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				password: "Le mot de passe doit faire au moins 5 characteres.",
 			}))
 		}
 		if (!password2) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				password2: "Tu dois repeter le mot de passe.",
 			}))
 		} else if (password2 != password) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				password2: "Les 2 mots de passes sont differents.",
 			}))
@@ -109,20 +110,17 @@ export default function RegisterForm() {
 
 		console.log("birthday: ", birthday)
 		const parsedBirthday = parse(birthday, "yyyy-MM-dd", new Date())
-		const age = parsedBirthday
-			? differenceInYears(new Date(), parsedBirthday)
-			: 0
+		const age = parsedBirthday ? differenceInYears(new Date(), parsedBirthday) : 0
 
 		if (!isValid(parsedBirthday)) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				birthday: (
 					<>
 						Format invalide (dd/MM/yyyy)
 						<br />
-						Tu dois saisir ta date de naissance pour montrer que tu
-						es majeur.
+						Tu dois saisir ta date de naissance pour montrer que tu es majeur.
 					</>
 				),
 			}))
@@ -130,19 +128,17 @@ export default function RegisterForm() {
 
 		if (age < 18) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				birthday:
-					"Si mes calculs sont exacts, tu n'as que " +
-					age +
-					" ans. Tu dois etre majeur pour t'inscrire.",
+					"Si mes calculs sont exacts, tu n'as que " + age + " ans. Tu dois etre majeur pour t'inscrire.",
 			}))
 		}
 
 		// ******************* Check: gender
 		if (!gender) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				gender: "C'est un peu reducteur, mais tu dois indiquer ton genre !",
 			}))
@@ -151,7 +147,7 @@ export default function RegisterForm() {
 		// ******************* Check: love
 		if (!loveM && !loveF && !loveNB) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				love: "Tu dois en choisir au moins un !",
 			}))
@@ -160,12 +156,11 @@ export default function RegisterForm() {
 		// ******************* Check: love
 		if (!cgu) {
 			errorCount++
-			setErrors((errors) => ({
+			setErrors((errors: any) => ({
 				...errors,
 				cgu: (
 					<>
-						Tu dois <del>lire et</del> accepter les conditions
-						generales d'utilisation.
+						Tu dois <del>lire et</del> accepter les conditions generales d'utilisation.
 					</>
 				),
 			}))
@@ -187,10 +182,8 @@ export default function RegisterForm() {
 			password,
 		}).then((response) => {
 			if (response.error) {
-				if (response.error === "USERNAME_ALREADY_EXISTS")
-					setFetchError("Username deja utilise")
-				else if (response.error === "EMAIL_ALREADY_EXISTS")
-					setFetchError("email deja utilise")
+				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
+				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
 				else {
 					console.log("response: ", response)
 					setFetchError("Erreur Inconnue")
@@ -199,13 +192,9 @@ export default function RegisterForm() {
 				if (response.tokenEmail) {
 					setDebugMsg(
 						<>
-							Un email de confirmation a ete envoye a l'adresse
-							indiquee{" "}
+							Un email de confirmation a ete envoye a l'adresse indiquee{" "}
 							<a
-								href={
-									"http://localhost:3001/auth/check-email/" +
-									response.tokenEmail
-								}
+								href={"http://localhost:3001/auth/check-email/" + response.tokenEmail}
 								target="_blank"
 								rel="noreferrer"
 							>
@@ -223,8 +212,8 @@ export default function RegisterForm() {
 	}
 
 	return (
-		<div className="row col-12 bg-success">
-			<Form className="row col-8 bg-light mb-3">
+		<div className="col-12 col-md-6">
+			<Form className="row">
 				<ZFormInput
 					type="text"
 					name="username"
@@ -233,9 +222,7 @@ export default function RegisterForm() {
 					value={username}
 					setValue={setUsername}
 					error={errors?.username}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, username: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, username: null }))}
 					isLoading={isLoading}
 				/>
 				<ZFormInput
@@ -246,9 +233,7 @@ export default function RegisterForm() {
 					value={firstname}
 					setValue={setFirstname}
 					error={errors?.firstname}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, firstname: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, firstname: null }))}
 					isLoading={isLoading}
 				/>
 
@@ -260,9 +245,7 @@ export default function RegisterForm() {
 					value={lastname}
 					setValue={setLastname}
 					error={errors?.lastname}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, lastname: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, lastname: null }))}
 					isLoading={isLoading}
 				/>
 
@@ -274,9 +257,7 @@ export default function RegisterForm() {
 					value={email}
 					setValue={setEmail}
 					error={errors?.email}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, email: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, email: null }))}
 					isLoading={isLoading}
 				/>
 
@@ -288,9 +269,7 @@ export default function RegisterForm() {
 					value={password}
 					setValue={setPassword}
 					error={errors?.password}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, password: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, password: null }))}
 					isLoading={isLoading}
 				/>
 
@@ -302,9 +281,7 @@ export default function RegisterForm() {
 					value={password2}
 					setValue={setPassword2}
 					error={errors?.password2}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, password2: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, password2: null }))}
 					isLoading={isLoading}
 				/>
 
@@ -316,16 +293,12 @@ export default function RegisterForm() {
 					value={birthday}
 					setValue={setBirthday}
 					error={errors?.birthday}
-					resetError={() =>
-						setErrors((errors) => ({ ...errors, birthday: null }))
-					}
+					resetError={() => setErrors((errors: any) => ({ ...errors, birthday: null }))}
 					isLoading={isLoading}
 				/>
 
 				<Form.Group controlId="gender" className="row">
-					<Form.Label className="col-4 text-end">
-						Tu es un(e){" "}
-					</Form.Label>
+					<Form.Label className="col-4 text-end">Tu es un(e) </Form.Label>
 					<div className="col-8 ">
 						<Form.Check
 							id="radio-gender-m"
@@ -336,7 +309,7 @@ export default function RegisterForm() {
 							checked={gender === "M"}
 							onChange={(e) => {
 								setGender(e.target.value)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									gender: null,
 								}))
@@ -351,7 +324,7 @@ export default function RegisterForm() {
 							checked={gender === "F"}
 							onChange={(e) => {
 								setGender(e.target.value)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									gender: null,
 								}))
@@ -366,24 +339,18 @@ export default function RegisterForm() {
 							checked={gender === "NB"}
 							onChange={(e) => {
 								setGender(e.target.value)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									gender: null,
 								}))
 							}}
 						/>
 					</div>
-					{errors.gender && (
-						<div className="text-danger mb-3  text-end">
-							{errors.gender}
-						</div>
-					)}
+					{errors.gender && <div className="text-danger mb-3  text-end">{errors.gender}</div>}
 				</Form.Group>
 
 				<Form.Group controlId="gender" className="row">
-					<Form.Label className="col-4 text-end">
-						Tu kiffe{" "}
-					</Form.Label>
+					<Form.Label className="col-4 text-end">Tu kiffe </Form.Label>
 					<div className="col-8 ">
 						<Form.Check
 							type="switch"
@@ -392,7 +359,7 @@ export default function RegisterForm() {
 							checked={loveM}
 							onChange={() => {
 								setLoveM(!loveM)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									love: null,
 								}))
@@ -405,7 +372,7 @@ export default function RegisterForm() {
 							checked={loveF}
 							onChange={() => {
 								setLoveF(!loveF)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									love: null,
 								}))
@@ -418,7 +385,7 @@ export default function RegisterForm() {
 							checked={loveNB}
 							onChange={() => {
 								setLoveNB(!loveNB)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									love: null,
 								}))
@@ -431,17 +398,11 @@ export default function RegisterForm() {
 							disabled
 						/>
 					</div>
-					{errors.love && (
-						<div className="text-danger mb-3  text-end">
-							{errors.love}
-						</div>
-					)}
+					{errors.love && <div className="text-danger mb-3  text-end">{errors.love}</div>}
 				</Form.Group>
 
 				<Form.Group controlId="gender" className="row">
-					<Form.Label className="col-4 text-end">
-						Accepter les CGU
-					</Form.Label>
+					<Form.Label className="col-4 text-end">Accepter les CGU</Form.Label>
 					<div className="col-8 ">
 						<Form.Check
 							type="switch"
@@ -450,27 +411,19 @@ export default function RegisterForm() {
 							checked={cgu}
 							onChange={() => {
 								setCgu(!cgu)
-								setErrors((errors) => ({
+								setErrors((errors: any) => ({
 									...errors,
 									cgu: null,
 								}))
 							}}
 						/>
 					</div>
-					{errors.cgu && (
-						<div className="text-danger mb-3  text-end">
-							{errors.cgu}
-						</div>
-					)}
+					{errors.cgu && <div className="text-danger mb-3  text-end">{errors.cgu}</div>}
 				</Form.Group>
 
-				{fetchError && (
-					<div className="text-danger mb-3">{fetchError}</div>
-				)}
+				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
-				{debugMsg && (
-					<div className="text-primary mb-3">{debugMsg}</div>
-				)}
+				{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
 				<div>
 					<Button
 						variant="primary"
@@ -481,27 +434,18 @@ export default function RegisterForm() {
 						Inscription
 					</Button>
 				</div>
-
-				<div>
-					Deja inscrit ? &nbsp;
-					<Button as={Link} to="/" variant="warning">
-						<FaSignInAlt /> login
-					</Button>
-				</div>
 			</Form>
 
-			<div className="col-4">
-				<FormAutoFill
-					setUsername={setUsername}
-					setEmailOrUsername={null}
-					setEmail={setEmail}
-					setPassword={setPassword}
-					setPassword2={setPassword2}
-					setBirthday={setBirthday}
-					setFirstname={setFirstname}
-					setLastname={setLastname}
-				/>
-			</div>
+			<FormAutoFill
+				setUsername={setUsername}
+				setEmailOrUsername={null}
+				setEmail={setEmail}
+				setPassword={setPassword}
+				setPassword2={setPassword2}
+				setBirthday={setBirthday}
+				setFirstname={setFirstname}
+				setLastname={setLastname}
+			/>
 		</div>
 	)
 }
