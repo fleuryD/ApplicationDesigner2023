@@ -98,3 +98,11 @@ export async function apiFetchProjects() {
 		requierdFields: [],
 	})
 }
+
+export async function apiFetchProject(projectId) {
+	return zFetch({
+		shortUrl: "/projects/" + projectId,
+		method: "GET",
+		requierdFields: [],
+	})
+}

@@ -5,6 +5,7 @@ import { useAppSelector } from "store/store"
 import styled from "styled-components"
 import { User } from "types"
 import ZTable from "ui/zTable/ZTable"
+import UserLink from "features/users/UserLink"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function UsersTable({ users }: { users: User[] | null }) {
@@ -18,7 +19,7 @@ export default function UsersTable({ users }: { users: User[] | null }) {
 		{
 			name: "username",
 			text: "username",
-			cellHtml: (user: User) => <Link to={"/user/" + user.id}>{user.username}</Link>,
+			cellHtml: (user: User) => <UserLink user={user} />,
 			cellClassName: (user: User) => (user.id === auth.id ? "bg-light" : ""),
 		},
 		{

@@ -65,11 +65,10 @@ export class UsersController {
 		}
 	}
 
-	/*
-	@Get("user/:id")
+	@Get("/:id")
 	async userShow(@Param() params, @Headers() headers) {
-		const connectedUser = await this.getUserFromHeaders(headers)
-		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
+		//const connectedUser = await this.getUserFromHeaders(headers)
+		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
 		const user = await this.userService.findOne({
 			where: { id: params.id },
@@ -77,10 +76,11 @@ export class UsersController {
 
 		const { password, ...result } = user
 
-		return result
+		return {
+			user: user,
+		}
 		//} catch (e) {
 		//    throw new UnauthorizedException();
 		//}
 	}
-	*/
 }

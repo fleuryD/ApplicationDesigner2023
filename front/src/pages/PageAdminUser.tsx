@@ -6,15 +6,11 @@ import { apiFetchUser } from "utils/api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
 export default function PageUser() {
 	const userId = Number(useParams().id) || 0
 	const [isLoading, setIsLoading] = useState(true)
-	const [error, setError] = useState(null)
-	const [user, setUser] = useState(null)
-
-	//const { socketIsConnected } = useAppSelector((state) => state.app)
+	const [error, setError] = useState<any | null>(null)
+	const [user, setUser] = useState<any | null>(null)
 
 	useEffect(() => {
 		if (userId > 0) {
@@ -39,7 +35,7 @@ export default function PageUser() {
 			<div className="zPageContent row">
 				<div className="zSection col-12 col-md-6 user-profil">
 					<div className="zSectionInner">
-						<h2>Mes projets</h2>
+						<h2>About User</h2>
 
 						{isLoading && <p>Loading...</p>}
 						{error && <p>{error}</p>}
@@ -69,14 +65,6 @@ export default function PageUser() {
 											{user.love_nb && "NB "}
 										</b>
 									</div>
-								</div>
-								<div className="z-cadre user-pics">
-									<img src="/img-users/06.jpg" alt="pic01" width={200} />
-									<img src="/img-users/07.jpg" alt="pic01" width={200} />
-									<img src="/img-users/08.jpg" alt="pic01" width={200} />
-								</div>
-								<div className="z-cadre user-connected">
-									<h3>connected With</h3>
 								</div>
 							</>
 						)}

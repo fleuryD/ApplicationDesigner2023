@@ -6,7 +6,7 @@ import {
 	OneToMany,
 	CreateDateColumn,
 } from "typeorm"
-// import { Project } from "../projects/project.entity"
+import { Project } from "../projects/project.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 /*
@@ -19,7 +19,7 @@ import {
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 //   @Entity("users")  // ! dans transdtl
-@Entity()
+@Entity("users")
 export class User {
 	@PrimaryGeneratedColumn()
 	id: number
@@ -39,9 +39,7 @@ export class User {
 	@CreateDateColumn()
 	createdAt: Date
 
-	/*
 	// * Un user peut avoir plusieurs projects. Un project a un seul user.
 	@OneToMany(() => Project, (proj: Project) => proj.createdBy)
 	public projects: Project[]
-	*/
 }

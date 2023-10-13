@@ -17,6 +17,9 @@ import { Project } from "./projects/project.entity"
 import { ProjectsController } from "./projects/projects.controller"
 import { ProjectsService } from "./projects/projects.service"
 
+import { Entite } from "./entites/entite.entity"
+import { Attribut } from "./attributs/attribut.entity"
+
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 // ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
@@ -30,15 +33,14 @@ import { ProjectsService } from "./projects/projects.service"
 			username: "postgres",
 			password: "root",
 			database: "db_app_designer", // "db" pour docker | "db_app_designer" pour mon windows
-			entities: [User],
+			entities: [User, Project, Entite, Attribut],
 			synchronize: true, // ! false en prod
 		}),
 		JwtModule.register({
 			secret: "secret",
 			signOptions: { expiresIn: "1d" },
 		}),
-		TypeOrmModule.forFeature([User]),
-		TypeOrmModule.forFeature([Project]),
+		TypeOrmModule.forFeature([User, Project]),
 	],
 
 	controllers: [AppController, AuthController, UsersController, ProjectsController],

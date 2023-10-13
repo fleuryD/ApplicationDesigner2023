@@ -10,10 +10,12 @@ import PageAuthLogin from "pages/auth/PageAuthLogin"
 import PageAuthRegister from "pages/auth/PageAuthRegister"
 
 // * private routes
+import Page404 from "pages/Page404"
 import PageHome from "pages/PageHome"
 import PageDev from "pages/PageDev"
+import PageAdminUser from "pages/PageAdminUser"
 import PageAdminUsers from "pages/PageAdminUsers"
-//import PageUser from "pages/user/PageUser"
+import PageProject from "pages/PageProject"
 //import PageWIP from "pages/PageWIP"
 // import DevAuthInfos from "features/auth/DevAuthInfos"
 
@@ -34,9 +36,13 @@ export default function App() {
 							<Route path="/user/:id" element={<PageUser />} />
 							<Route path="/wip" element={<PageWIP />} />
 						*/}
+						<Route path="/projects/:id" element={<PageProject />} />
 						<Route path="/admin/users" element={<PageAdminUsers />} />
+						<Route path="/admin/users/:id" element={<PageAdminUser />} />
 						<Route path="/dev" element={<PageDev />} />
-						<Route path="*" element={<PageHome />} />
+						{/* <Route path="/me" element={<PageUserMe />} /> */}
+						<Route path="/" element={<PageHome />} />
+						<Route path="*" element={<Page404 />} />
 					</Routes>
 				) : (
 					<Routes>

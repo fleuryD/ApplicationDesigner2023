@@ -69,22 +69,90 @@ export class ProjectsController {
 		}
 	}
 
-	/*
-	@Get("user/:id")
-	async userShow(@Param() params, @Headers() headers) {
-		const connectedUser = await this.getUserFromHeaders(headers)
-		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
+	@Get("/:id")
+	async projectShow(@Param() params, @Headers() headers) {
+		//const connectedUser = await this.getUserFromHeaders(headers)
+		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		const user = await this.userService.findOne({
-			where: { id: params.id },
-		})
+		// const project = await this.projectsService.findOne({where: { id: params.id },})
 
-		const { password, ...result } = user
+		const project = {
+			id: params.id,
+			name: "Trsdtl fixture",
+			description: "description fixture 1",
+			infos: "infos fixture 1",
+			createdAt: "2021-01-01",
+			isWip: false,
+			isFeminin: false,
+			entites: [
+				{
+					id: 1,
+					name: "User",
+					attributs: [
+						{
+							id: 1,
+							name: "username",
+							tipe: "string",
+							isNullable: false,
+							isUnique: true,
+						},
+						{
+							id: 2,
+							name: "email",
+							tipe: "string",
+							isNullable: false,
+							isUnique: true,
+						},
+					],
+				},
+				{
+					id: 2,
+					name: "Channel",
+					attributs: [
+						{
+							id: 10,
+							name: "name",
+							tipe: "string",
+							isNullable: false,
+							isUnique: true,
+						},
+						{
+							id: 20,
+							name: "private",
+							tipe: "boolean",
+							isNullable: false,
+							isUnique: false,
+						},
+					],
+				},
+				{
+					id: 3,
+					name: "Message",
+					attributs: [
+						{
+							id: 110,
+							name: "content",
+							tipe: "string",
+							isNullable: false,
+							isUnique: false,
+						},
+						{
+							id: 120,
+							name: "createdAt",
+							tipe: "datetime",
+							isNullable: false,
+							isUnique: false,
+						},
+					],
+				},
+			],
+		}
 
-		return result
+		return {
+			project: project,
+		}
 		//} catch (e) {
 		//    throw new UnauthorizedException();
 		//}
 	}
-	*/
 }

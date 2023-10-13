@@ -18,8 +18,7 @@ type Project = {
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
 	nomCamel: string //  articleTag
 	nomSnake: string //  article_tag
-	nomKebab: string //  article-tag
-
+	usersnomKebab: string //  article-tag
 	//
 }
 

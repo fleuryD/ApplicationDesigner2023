@@ -21,7 +21,7 @@ import { Entite } from "../entites/entite.entity"
  */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-@Entity()
+@Entity("projects")
 export class Project {
 	@PrimaryGeneratedColumn()
 	id: number
@@ -44,11 +44,9 @@ export class Project {
 	@Column({ default: false })
 	isFeminin: boolean
 
-	/*
 	// * Un project a un seul creator (user). un user peut creer plusieurs projects
 	@ManyToOne(() => User, (user: User) => user.projects, { eager: true })
 	public createdBy: User
-	*/
 
 	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
 	@OneToMany(() => Entite, (ent: Entite) => ent.project)
