@@ -1,0 +1,52 @@
+@import "./theme.scss";
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+.umlContent {
+	//background-color: $colSuccess;
+	//padding: 5px;
+	//margin: 5px;
+
+	.umlEntity {
+		margin: 0;
+		padding: 5px;
+		.umlEntityInner {
+			//background-color: $colPrimary;
+			border: 1px solid $colPrimary;
+			padding: 5px;
+			margin: 0px;
+			h2 {
+				color: $colSecondary;
+			}
+
+			.umlAttribut {
+				background-color: $colWhite;
+				padding: 2px;
+				//margin: 5px;
+
+				border-top: 1px solid $colSecondary;
+				div {
+					margin-right: 2px;
+					display: inline-block;
+				}
+				.name {
+					color: $colPrimary;
+					//font-weight: bold;
+					min-width: 150px;
+				}
+				.tipe {
+					color: $colSuccess;
+					min-width: 80px;
+				}
+				.unique {
+					color: $colInfo;
+				}
+				.nullable {
+					color: $colDanger;
+				}
+			}
+		}
+	}
+}
+
+// >>>		XXXXXXXXXXXXXX											   <<<

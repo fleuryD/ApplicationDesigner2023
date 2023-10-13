@@ -24,8 +24,17 @@ export class Attribut {
 	@PrimaryGeneratedColumn()
 	id: number
 
+	// * Un Attribut a une seule Entite. une Entite peut avoir plusieurs Attributs
+	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs, {
+		eager: true,
+	})
+	public entite: Entite
+
 	@Column()
 	name: string
+
+	@CreateDateColumn()
+	createdAt: Date
 
 	// * car "type" est un mot reserve
 	@Column()
@@ -42,11 +51,8 @@ export class Attribut {
 	infos: string
 
 	// * La position de l'attr dans l'entite (0 = debut)
-	@Column()
+	@Column({ default: 42 })
 	position: number
-
-	@CreateDateColumn()
-	createdAt: Date
 
 	@Column({ default: true })
 	isWip: boolean
@@ -57,14 +63,7 @@ export class Attribut {
 	@Column({ default: false })
 	isUnique: boolean
 
-	// * Un Attribut a une seule Entite. une Entite peut avoir plusieurs Attributs
-	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs, {
-		eager: true,
-	})
-	public entite: Entite
-
 	/*
-	help: string
 	targetEntity: any
 	inversedBy: any
 	removeOrphan: boolean

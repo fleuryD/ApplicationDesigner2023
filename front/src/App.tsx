@@ -22,6 +22,7 @@ import PageProject from "pages/PageProject"
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
 import "styles/main.scss"
+import "styles/uml.scss"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 export default function App() {

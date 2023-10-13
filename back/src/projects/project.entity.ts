@@ -29,24 +29,24 @@ export class Project {
 	@Column()
 	name: string
 
+	// * Un project a un seul creator (user). un user peut creer plusieurs projects
+	@ManyToOne(() => User, (user: User) => user.projects, { eager: true })
+	public createdBy: User
+
+	@CreateDateColumn()
+	createdAt: Date
+
 	@Column({ nullable: true })
 	description: string
 
 	@Column({ nullable: true })
 	infos: string
 
-	@CreateDateColumn()
-	createdAt: Date
-
 	@Column({ default: true })
 	isWip: boolean
 
 	@Column({ default: false })
 	isFeminin: boolean
-
-	// * Un project a un seul creator (user). un user peut creer plusieurs projects
-	@ManyToOne(() => User, (user: User) => user.projects, { eager: true })
-	public createdBy: User
 
 	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
 	@OneToMany(() => Entite, (ent: Entite) => ent.project)

@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom"
 import { apiFetchProject } from "utils/api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
+import Uml from "features/uml/Uml"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -62,37 +63,14 @@ export default function PageProject() {
 									<div>
 										description: <b>{project.description}</b> &nbsp;&nbsp;
 									</div>
-									<div>
-										urlLocal: <b>{project.urlLocal}</b> &nbsp;&nbsp;
-									</div>
 								</div>
 							</>
 						)}
 					</div>
 				</div>
-				<div className="zSection col-12 col-md-6 user-profil">
-					<div className="zSectionInner">
-						<h2>Entites</h2>
 
-						{isLoading && <p>Loading...</p>}
-						{error && <p>{error}</p>}
-						{project && (
-							<>
-								<div className="z-cadre user-infos">
-									{project.entites.map((entite: any) => (
-										<div key={"entite" + entite.id}>
-											<h5>{entite.name}</h5>
-											{entite.attributs.map((attr: any) => (
-												<div key={"attr" + attr.id}>
-													<h6>-- {attr.name}</h6>
-												</div>
-											))}
-										</div>
-									))}
-								</div>
-							</>
-						)}
-					</div>
+				<div className="zSection col-12">
+					<div className="zSectionInner">{project && <Uml project={project} />}</div>
 				</div>
 
 				<div className="zTodo col-12 col-md-6">

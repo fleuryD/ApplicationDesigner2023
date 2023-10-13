@@ -1,27 +1,27 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// import { Message, Partie, User } from "."
-// USE:     	import { User } from "types"
+import { Project, Attribut } from "."
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-type Entity = {
+type Entite = {
 	id: number
-	projectId: number // TODO : Relation
-	projet: string // TODO : Relation
+	project: Project
 	name: string
-	//////
+	createdAt: string
+	description: string | null
+	infos: string | null
+	isWip: boolean
+	isFeminin: boolean
+	attributs: Attribut[]
+
+	/*
 	prefix: string
-	proprietes: any
-	feminin: string
-	wip: boolean
-	description: string
 	fAIcon: string
 	templatesPath: string
 	namespace: string
 	commentaire: string
 	inBdd: boolean
-	tests: string
 	openInUml: string
 
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
@@ -39,6 +39,7 @@ type Entity = {
 	xxHrefShow: string //    DEPRECIATED
 	xxHrefEdit: string //    DEPRECIATED
 	xxIcone: string
+	*/
 }
 
-export default Entity
+export default Entite

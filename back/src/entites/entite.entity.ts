@@ -25,8 +25,17 @@ export class Entite {
 	@PrimaryGeneratedColumn()
 	id: number
 
+	// * Une Entite a un seul project. un project peut avoir plusieurs entites
+	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
+		eager: true,
+	})
+	public project: Project
+
 	@Column()
 	name: string
+
+	@CreateDateColumn()
+	createdAt: Date
 
 	@Column({ nullable: true })
 	description: string
@@ -34,20 +43,11 @@ export class Entite {
 	@Column({ nullable: true })
 	infos: string
 
-	@CreateDateColumn()
-	createdAt: Date
-
 	@Column({ default: true })
 	isWip: boolean
 
 	@Column({ default: false })
 	isFeminin: boolean
-
-	// * Une Entite a un seul project. un project peut avoir plusieurs entites
-	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
-		eager: true,
-	})
-	public project: Project
 
 	// * Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
 	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite)
