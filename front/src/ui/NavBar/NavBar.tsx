@@ -13,18 +13,14 @@ export default function NavBar() {
 
 	return (
 		<Navbar expand="sm" bg="dark" data-bs-theme="dark">
-			<Container>
+			<Container fluid>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="me-auto">
+					<Nav className="me-0 container">
 						<Navbar.Brand href="/">
 							<FaHome /> ApplicationDesigner
 						</Navbar.Brand>
-						{auth.isConnected ? (
-							<NavBarPrivateItems />
-						) : (
-							<NavBarPublicItems />
-						)}
+						{auth.isConnected ? <NavBarPrivateItems /> : <NavBarPublicItems />}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

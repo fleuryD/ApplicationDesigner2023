@@ -46,14 +46,6 @@ export default function NavBarPrivateItems() {
 
 	return (
 		<>
-			<Nav.Link as={Link} to={"/users/me"}>
-				<FaAddressCard /> Mon Profil
-			</Nav.Link>
-
-			<Nav.Link as={Link} to="/users-xxxxxxxxxxxxxxxxx/explore">
-				<FaQuestion /> Explorer
-			</Nav.Link>
-
 			<Nav.Link as={Link} to="/xxx1">
 				<FaQuestion /> Xxx1
 			</Nav.Link>
@@ -62,8 +54,8 @@ export default function NavBarPrivateItems() {
 				<FaQuestion /> Xxx2
 			</Nav.Link>
 
-			<Nav.Link as={Link} to="/xxx2">
-				<FaQuestion /> Xxx2
+			<Nav.Link as={Link} to="/xxx3">
+				<FaQuestion /> Xxx3
 			</Nav.Link>
 
 			<NavBarDropdownAdmin />

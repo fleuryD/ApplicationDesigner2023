@@ -43,6 +43,8 @@ export default function NavBarDropdownConnectedUser() {
 				</>
 			}
 			id="basic-nav-dropdown-connected-user"
+			className="ms-auto"
+			align="end"
 		>
 			<NavDropdown.Item as={Link} to="/users/me">
 				<FaAddressCard /> Mon profil
@@ -51,7 +53,7 @@ export default function NavBarDropdownConnectedUser() {
 			<NavDropdown.Divider />
 
 			<NavDropdown.Item onClick={() => btLogoutClick()}>
-				<FaSignOutAlt /> Déconnexion ("with just one click" !!!!)
+				<FaSignOutAlt /> Déconnexion
 			</NavDropdown.Item>
 		</NavDropdown>
 	)
