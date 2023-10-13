@@ -13,7 +13,7 @@ import {
 	UnauthorizedException,
 	Param,
 } from "@nestjs/common"
-import { UsersService } from "./users.service"
+import { ProjectsService } from "./projects.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
@@ -29,12 +29,9 @@ import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-@Controller("users")
-export class UsersController {
-	constructor(
-		private readonly userService: UsersService,
-		private jwtService: JwtService
-	) {}
+@Controller("projects")
+export class ProjectsController {
+	constructor(private readonly projectsService: ProjectsService) {}
 
 	/*
 	 *
@@ -53,15 +50,22 @@ export class UsersController {
 	}
 	*/
 
-	@Get("/")
-	async users(@Headers() headers) {
+	@Get("/my")
+	async myProjects(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		const users = await this.userService.findAll()
+		//const projects = await this.projectsService.findAll() // ! by user id
 
+		const projects = [
+			{ id: 1, name: "project fixture 1" },
+			{ id: 2, name: "project fixture 2" },
+			{ id: 3, name: "project fixture 3" },
+			{ id: 4, name: "project fixture 4" },
+			{ id: 5, name: "project fixture 5" },
+		]
 		return {
-			users: users,
+			projects: projects,
 		}
 	}
 

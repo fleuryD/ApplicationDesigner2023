@@ -35,70 +35,6 @@ export async function apiFetchUserMe() {
 	})
 }
 
-// * ■■■■■■■■■■■■■■■■■■■■■ LIKES
-
-export async function apiFetchMyLikes() {
-	return zFetch({
-		shortUrl: "/likes/my-likes",
-		method: "GET",
-		requierdFields: [],
-	})
-}
-
-export async function apiLikeUser({ userId }) {
-	return zFetch({
-		shortUrl: "/likes/like-user",
-		method: "POST",
-		body: {
-			userId,
-		},
-		requierdFields: [],
-	})
-}
-export async function apiUnLikeUser({ userId }) {
-	return zFetch({
-		shortUrl: "/likes/unlike-user",
-		method: "POST",
-		body: {
-			userId,
-		},
-		requierdFields: [],
-	})
-}
-
-// * ■■■■■■■■■■■■■■■■■■■■■ TAGS
-
-export async function apiFetchTags() {
-	return zFetch({
-		shortUrl: "/tags/",
-		method: "GET",
-		requierdFields: [],
-	})
-}
-
-export async function apiFetchMyTags() {
-	return zFetch({
-		shortUrl: "/tags/my-tags",
-		method: "GET",
-		requierdFields: [],
-	})
-}
-
-export async function apiAddTag({ tagId }) {
-	return zFetch({
-		shortUrl: "/tags/add/" + tagId,
-		method: "GET",
-		requierdFields: [],
-	})
-}
-export async function apiRemoveTag({ tagId }) {
-	return zFetch({
-		shortUrl: "/tags/remove/" + tagId,
-		method: "GET",
-		requierdFields: [],
-	})
-}
-
 // * ■■■■■■■■■■■■■■■■■■■■■ AUTH
 
 export async function apiFetchRegister({
@@ -154,3 +90,11 @@ export async function apiFetchCheckEmail({ tokenEmail }) {
 }
 
 // * ■■■■■■■■■■■■■■■■■■■■■
+
+export async function apiFetchProjects() {
+	return zFetch({
+		shortUrl: "/projects/my",
+		method: "GET",
+		requierdFields: [],
+	})
+}

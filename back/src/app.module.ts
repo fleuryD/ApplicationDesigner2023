@@ -11,6 +11,11 @@ import { AuthController } from "./auth/auth.controller"
 
 import { User } from "./users/user.entity"
 import { UsersService } from "./users/users.service"
+import { UsersController } from "./users/users.controller"
+
+import { Project } from "./projects/project.entity"
+import { ProjectsController } from "./projects/projects.controller"
+import { ProjectsService } from "./projects/projects.service"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -33,9 +38,10 @@ import { UsersService } from "./users/users.service"
 			signOptions: { expiresIn: "1d" },
 		}),
 		TypeOrmModule.forFeature([User]),
+		TypeOrmModule.forFeature([Project]),
 	],
 
-	controllers: [AppController, AuthController],
-	providers: [AppService, UsersService],
+	controllers: [AppController, AuthController, UsersController, ProjectsController],
+	providers: [AppService, UsersService, ProjectsService],
 })
 export class AppModule {}

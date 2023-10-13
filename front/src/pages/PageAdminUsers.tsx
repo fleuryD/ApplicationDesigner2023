@@ -2,11 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 //import { useAppDispatch } from "store/store"
-
 import { apiFetchUsers } from "utils/api"
-
 import { User } from "types"
-
 import UsersTable from "features/users/UsersTable"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -17,14 +14,12 @@ export default function PageAdminUsers() {
 	const [error, setError] = useState<string | null>(null)
 	const [users, setUsers] = useState<User[] | null>(null)
 
-	//const { socketIsConnected } = useAppSelector((state) => state.app)
-
 	useEffect(() => {
 		setIsLoading(true)
 		setError(null)
 
 		apiFetchUsers().then((response) => {
-			if (response.users && response.likedUsers && response.likerUsers) {
+			if (response.users) {
 				setUsers(response.users)
 			} else {
 				setError("❌ Erreur Inconnue: Voir la console")
@@ -46,7 +41,7 @@ export default function PageAdminUsers() {
 						<h2>Users</h2>
 						{isLoading && <p>Loading...</p>}
 						{error && <p>{error}</p>}
-						<UsersTable users={users} /* likedUsers={likedUsersX} */ />
+						<UsersTable users={users} />
 					</div>
 				</div>
 			</div>

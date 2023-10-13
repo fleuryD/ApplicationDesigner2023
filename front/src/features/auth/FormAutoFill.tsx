@@ -7,8 +7,6 @@ import React from "react"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
 type Props = {
 	setUsername: any
 	setEmail: any

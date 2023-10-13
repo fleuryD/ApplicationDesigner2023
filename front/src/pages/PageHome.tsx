@@ -1,10 +1,34 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useEffect, useState } from "react"
+//import { useAppDispatch } from "store/store"
+import { apiFetchProjects } from "utils/api"
+import { Project } from "types"
+import ProjectLink from "features/projects/ProjectLink"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
+	const [isLoading, setIsLoading] = useState<boolean>(true)
+	const [error, setError] = useState<string | null>(null)
+	const [projects, setProjects] = useState<Project[] | null>(null)
+
+	useEffect(() => {
+		setIsLoading(true)
+		setError(null)
+
+		apiFetchProjects().then((response) => {
+			if (response.projects) {
+				setProjects(response.projects)
+			} else {
+				setError("❌ Erreur Inconnue: Voir la console")
+				console.log("❌ ERROR: response: ", response)
+				if (response.error) console.log("❌ ERROR: response.error: ", response.error)
+			}
+			setIsLoading(false)
+		})
+	}, [])
+
 	return (
 		<div className="zPage">
 			<header className="zPageHeader row">
@@ -18,10 +42,12 @@ export default function PageHome() {
 						<h2>Mes projets</h2>
 						<div className="zSectionContent">
 							<ul>
-								<li>Proj 1</li>
-								<li>Proj 1</li>
-								<li>Proj 1</li>
-								<li>Proj 1</li>
+								{projects &&
+									projects.map((project) => (
+										<li key={project.id}>
+											<ProjectLink project={project} />
+										</li>
+									))}
 							</ul>
 						</div>
 					</div>
