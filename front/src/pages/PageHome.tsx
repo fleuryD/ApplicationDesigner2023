@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react"
 import { apiFetchProjects } from "utils/api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
+import ButtonCreateProject from "features/projects/ButtonCreateProject"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -39,7 +40,9 @@ export default function PageHome() {
 			<div className="zPageContent row">
 				<div className="zSection col-12 col-md-6">
 					<div className="zSectionInner">
-						<h2>Mes projets</h2>
+						<h2>
+							Mes projets <ButtonCreateProject className="btn-sm float-end" />
+						</h2>
 						<div className="zSectionContent">
 							<ul>
 								{projects &&

@@ -1,19 +1,21 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import React from "react"
-import { Link } from "react-router-dom"
+import { Button } from "react-bootstrap"
+import { FaPlus } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	project: any | null
+	className?: string
 }
 
-export default function ProjectLink({ project }: Props) {
-	if (!project) return null
-
+export default function ButtonCreateEntite({ className }: Props) {
+	function btClick() {
+		alert("TODO: Create a new entite")
+	}
 	return (
-		<Link to={"/projects/" + project.id} title="Click to see project.">
-			{project.name + " "}
-		</Link>
+		<Button className={className} title="Add a new entity for this project" onClick={() => btClick()}>
+			<FaPlus />
+		</Button>
 	)
 }

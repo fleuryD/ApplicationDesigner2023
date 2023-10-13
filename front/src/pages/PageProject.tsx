@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
 import { Project } from "types"
-import ProjectLink from "features/projects/ProjectLink"
 import Uml from "features/uml/Uml"
+import ButtonEditProject from "features/projects/ButtonEditProject"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -37,7 +37,10 @@ export default function PageProject() {
 	return (
 		<div className="zPage">
 			<header className="zPageHeader row">
-				<h1>Project:</h1>
+				<h1>
+					Project: <b>{project && project.name}</b>
+					{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
+				</h1>
 				<h3>Lorem Ipsum</h3>
 			</header>
 

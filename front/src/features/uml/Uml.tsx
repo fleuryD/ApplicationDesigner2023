@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
 import { Project } from "types"
 import UmlEntite from "features/uml/UmlEntite"
+import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -15,7 +16,9 @@ type Props = {
 export default function Uml({ project }: Props) {
 	return (
 		<div>
-			<h2>UML</h2>
+			<h2>
+				UML <ButtonCreateEntite className="btn-sm float-end" />
+			</h2>
 
 			{project && (
 				<div className="umlContent row">

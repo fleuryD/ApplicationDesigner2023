@@ -1,19 +1,28 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import React from "react"
-import { Link } from "react-router-dom"
+import { Button } from "react-bootstrap"
+import { FaEdit } from "react-icons/fa"
+import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	project: any | null
+	className?: string
+	project: Project
 }
 
-export default function ProjectLink({ project }: Props) {
-	if (!project) return null
-
+export default function ButtonEditProject({ className, project }: Props) {
+	function btClick() {
+		alert("TODO: Edit project")
+	}
 	return (
-		<Link to={"/projects/" + project.id} title="Click to see project.">
-			{project.name + " "}
-		</Link>
+		<Button
+			variant="warning"
+			className={className}
+			title={"Edit project " + project.name}
+			onClick={() => btClick()}
+		>
+			<FaEdit />
+		</Button>
 	)
 }
