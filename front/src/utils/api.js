@@ -106,3 +106,12 @@ export async function apiFetchProject(projectId) {
 		requierdFields: [],
 	})
 }
+
+export async function apiCreateProject(project) {
+	return zFetch({
+		shortUrl: "/projects/new",
+		method: "POST",
+		body: { project },
+		requierdFields: [],
+	})
+}

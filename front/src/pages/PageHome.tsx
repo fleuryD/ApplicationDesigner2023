@@ -6,6 +6,7 @@ import { apiFetchProjects } from "utils/api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
+import FormProject from "features/projects/FormProject"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -69,34 +70,7 @@ export default function PageHome() {
 						</div>
 					</div>
 				</div>
-				<div className="zSection col-12 col-md-8">
-					<div className="zSectionInner">
-						<h2>zSection 3</h2>
-						<div className="zSectionContent">
-							<ul>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div className="zSection col-12 col-md-4">
-					<div className="zSectionInner">
-						<h2>zSection 4</h2>
-						<div className="zSectionContent">
-							<ul>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<FormProject />
 
 				<div className="zTodo col-12 col-md-6">
 					<div className="zTodoInner">

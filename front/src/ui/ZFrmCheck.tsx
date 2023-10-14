@@ -5,42 +5,48 @@ import Form from "react-bootstrap/Form"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
-export default function ZFormInput2({
+type Props = {
+	formItem: any
+	formErrors: any
+	setFormItem: any
+	setFormErrors: any
+	name: string
+	label: string
+	type: any
+	placeholder: string
+	isLoading: boolean
+	otherProps?: any
+}
+export default function ZFrmCheck({
+	formItem,
+	setFormItem,
+	formErrors,
+	setFormErrors,
 	name,
 	label,
 	type,
 	placeholder,
-	value,
-	setValue,
-	error,
-	resetError,
 	isLoading,
 	...otherProps
-}) {
-	// ■■■■■■■■■■■■■■■■■■■■■■■■ xxxxxxxxxxxxxx ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
+}: Props) {
 	return (
-		<Form.Group className="row">
+		<Form.Group className="row  bg-info">
 			{label && <Form.Label className="col-4 text-end">{label}</Form.Label>}
 			<div className="col-8 ">
-				<Form.Control
+				<Form.Check
 					type={type}
-					//data-date-format="DD MMMM YYYY"
-					id={"input-" + name}
-					placeholder={placeholder}
-					value={value}
-					className={error ? "border-danger" : ""}
-					onChange={(e) => {
-						resetError()
-						setValue(e.target.value)
+					id="cgu-switch"
+					label=""
+					checked={formItem[name]}
+					onChange={() => {
+						setFormErrors({ ...formErrors, [name]: null })
+						setFormItem({ ...formItem, [name]: !formItem[name] })
 					}}
 					disabled={isLoading}
 					{...otherProps}
 				/>
 			</div>
-			{error && <div className="text-danger mb-3  text-end">{error}</div>}
+			{formErrors[name] && <div className="text-danger mb-3  text-end">{formErrors[name]}</div>}
 		</Form.Group>
 	)
 }

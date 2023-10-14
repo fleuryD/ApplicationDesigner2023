@@ -30,30 +30,10 @@ export default function UsersTable({ users }: { users: User[] | null }) {
 	]
 
 	return (
-		<StyledUsersZTable
+		<ZTable
 			columns={tableColumns}
 			data={users}
 			className="table table-bordered table-sm table-striped table-hover bg-light "
 		/>
 	)
 }
-
-// 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓	STYLED_COMPONENTS
-
-const StyledUsersZTable = styled(ZTable)`
-	tbody {
-		tr {
-			td {
-			}
-		}
-
-		tr:not(:first-child) {
-		}
-	}
-
-	thead {
-	}
-
-	tr {
-	}
-`

@@ -7,8 +7,8 @@ import { User, Entite } from "."
 type Project = {
 	id: number
 	name: string
-	createdBy: User
-	createdAt: string
+	createdBy?: User
+	createdAt?: string
 	description: string | null
 	infos: string | null
 	isWip: boolean

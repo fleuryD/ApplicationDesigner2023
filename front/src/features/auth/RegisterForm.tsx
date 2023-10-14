@@ -13,8 +13,6 @@ import ZFormInput from "ui/ZFormInput"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
 export default function RegisterForm() {
 	// const dispatch = useAppDispatch()
 
@@ -401,7 +399,7 @@ export default function RegisterForm() {
 					{errors.love && <div className="text-danger mb-3  text-end">{errors.love}</div>}
 				</Form.Group>
 
-				<Form.Group controlId="gender" className="row">
+				<Form.Group controlId="cgu" className="row">
 					<Form.Label className="col-4 text-end">Accepter les CGU</Form.Label>
 					<div className="col-8 ">
 						<Form.Check
