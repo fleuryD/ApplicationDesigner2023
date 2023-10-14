@@ -35,6 +35,7 @@ export class Attribut {
 	createdAt: Date
 
 	// * car "type" est un mot reserve
+	// * "string" | "boolean" | ...
 	@Column()
 	tipe: string
 
@@ -48,12 +49,15 @@ export class Attribut {
 	@Column({ nullable: true })
 	infos: string
 
-	// * La position de l'attr dans l'entite (0 = debut)
+	// * La position d'affichage de l'attribut dans l'entite (0 = debut)
 	@Column({ default: 42 })
 	position: number
 
 	@Column({ default: true })
 	isWip: boolean
+
+	@Column({ default: false })
+	isFeminin: boolean
 
 	@Column({ default: false })
 	isNullable: boolean

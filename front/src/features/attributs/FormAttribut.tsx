@@ -2,20 +2,25 @@
 
 import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
-import { apiCreateProject } from "utils/api"
-import { Project } from "types"
-import FormProjectInner from "./FormProjectInner"
+import { apiCreateAttribut } from "utils/api"
+import { Attribut } from "types"
+import FormAttributInner from "./FormAttributInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormProject() {
-	const [formItem, setFormItem] = useState<Project>({
+export default function FormAttribut({ entiteId }: { entiteId: number }) {
+	const [formItem, setFormItem] = useState<Attribut>({
 		id: 0,
 		name: "",
+		tipe: "",
+		longueur: null,
 		description: "",
 		infos: "",
+		position: 42,
 		isWip: false,
-		entites: [],
+		isFeminin: false,
+		isNullable: false,
+		isUnique: false,
 	})
 
 	const [formErrors, setFormErrors] = useState<any>({})
@@ -49,9 +54,9 @@ export default function FormProject() {
 
 		if (checkErrors() > 0) return
 
-		apiCreateProject(formItem).then((response) => {
-			if (response.project) {
-				console.log("SUCCESS: response.project", response.project)
+		apiCreateAttribut(entiteId, formItem).then((response) => {
+			if (response.entite) {
+				console.log("SUCCESS: response.entite", response.entite)
 			} else if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
 				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
@@ -70,7 +75,7 @@ export default function FormProject() {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<FormProjectInner
+		<FormAttributInner
 			formItem={formItem}
 			formErrors={formErrors}
 			setFormItem={setFormItem}

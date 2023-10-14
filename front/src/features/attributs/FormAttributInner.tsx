@@ -26,7 +26,7 @@ type Props = {
 	fetchError: any | null
 }
 
-export default function FormProjectInner({
+export default function FormAttributInner({
 	formItem,
 	formErrors,
 	setFormItem,
@@ -38,10 +38,12 @@ export default function FormProjectInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="col-12 col-md-6 border border-primary">
-			<h2>Projet Form</h2>
+		<div className="col-12 border border-primary">
+			<h2>Attribut Form</h2>
 			<Form className="row">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
+				<ZFrmInput type="text" name="tipe" label="tipe" placeholder="tipe" formData={formData} />
+				<ZFrmInput type="number" name="longueur" label="longueur" placeholder="longueur" formData={formData} />
 
 				<ZFrmInput
 					type="text"
@@ -52,7 +54,19 @@ export default function FormProjectInner({
 				/>
 				<ZFrmInput type="text" name="infos" label="Infos" placeholder="Infos" formData={formData} />
 
+				<ZFrmInput type="number" name="position" label="position" placeholder="position" formData={formData} />
+
 				<ZFrmCheck type="switch" name="isWip" label="WIP" placeholder="WIP" formData={formData} />
+
+				<ZFrmCheck type="switch" name="isFeminin" label="Feminin" placeholder="Feminin" formData={formData} />
+				<ZFrmCheck
+					type="switch"
+					name="isNullable"
+					label="isNullable"
+					placeholder="isNullable"
+					formData={formData}
+				/>
+				<ZFrmCheck type="switch" name="isUnique" label="isUnique" placeholder="isUnique" formData={formData} />
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
@@ -64,7 +78,7 @@ export default function FormProjectInner({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaPlus /> Create Project
+							<FaPlus /> Create Entity
 						</Button>
 					) : (
 						<Button
@@ -73,7 +87,7 @@ export default function FormProjectInner({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaEdit /> Update Project
+							<FaEdit /> Update Entity
 						</Button>
 					)}
 				</div>

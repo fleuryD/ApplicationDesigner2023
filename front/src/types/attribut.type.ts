@@ -6,15 +6,16 @@ import { Entite } from "."
 
 type Attribut = {
 	id: number
-	entite: Entite
+	entite?: Entite // nullable pour le form
 	name: string
-	createdAt: string
+	createdAt?: string // nullable pour le form
 	tipe: string
 	longueur: string | null
 	description: string | null
 	infos: string | null
 	position: number
 	isWip: boolean
+	isFeminin: boolean
 	isNullable: boolean
 	isUnique: boolean
 	/*

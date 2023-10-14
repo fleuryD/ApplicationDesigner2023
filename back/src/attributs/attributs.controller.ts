@@ -14,6 +14,7 @@ import {
 	Param,
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
+import { EntitesService } from "../entites/entites.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
@@ -31,7 +32,10 @@ import { FileInterceptor } from "@nestjs/platform-express"
 
 @Controller("attributs")
 export class AttributsController {
-	constructor(private readonly attributsService: AttributsService) {}
+	constructor(
+		private readonly attributsService: AttributsService,
+		private readonly entitesService: EntitesService
+	) {}
 
 	/*
 	 *
@@ -63,29 +67,44 @@ export class AttributsController {
 			attributs: attributs,
 		}
 	}
-
-	@Post("/new")
-	async newAttribut(
+	@Post("/new/entite/:id")
+	async newEntite(
+		@Param() params,
 		@Headers() headers,
 		@Body("name") name: string,
+		@Body("tipe") tipe: string,
+		@Body("longueur") longueur: number,
 		@Body("description") description: string,
 		@Body("infos") infos: string,
-		@Body("isWip") isWip: boolean
+		@Body("position") position: number,
+		@Body("isWip") isWip: boolean,
+		@Body("isFeminin") isFeminin: string,
+		@Body("isNullable") isNullable: string,
+		@Body("isUnique") isUnique: string
 	) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
+		const entite = await this.entitesService.findOneById(params.id)
+
 		try {
 			const attribut = await this.attributsService.create({
+				entite,
 				name,
+				tipe,
+				longueur,
 				description,
 				infos,
+				position,
 				isWip,
+				isFeminin,
+				isNullable,
+				isUnique,
 			})
 
-			return { attribut: attribut }
+			return { entite: entite }
 		} catch (e) {
-			throw new BadRequestException("email already exists")
+			throw new BadRequestException("aosdjfla jdsfajlsdjf;alksjkjtjjtjt")
 		}
 	}
 
@@ -101,89 +120,7 @@ export class AttributsController {
 		return {
 			attribut: attribut,
 		}
-		/*
-		const attribut = {
-			id: params.id,
-			name: "Trsdtl fixture",
-			description: "description fixture 1",
-			infos: "infos fixture 1",
-			createdAt: "2021-01-01",
-			isWip: false,
-			entites: [
-				{
-					id: 1,
-					name: "User",
-					attributs: [
-						{
-							id: 1,
-							name: "username",
-							tipe: "string",
-							longueur: 128,
-							isNullable: false,
-							isUnique: true,
-						},
-						{
-							id: 2,
-							name: "email",
-							tipe: "string",
-							isNullable: false,
-							isUnique: true,
-						},
-					],
-				},
-				{
-					id: 2,
-					name: "Channel",
-					attributs: [
-						{
-							id: 10,
-							name: "name",
-							tipe: "string",
-							isNullable: false,
-							isUnique: true,
-						},
-						{
-							id: 11,
-							name: "private",
-							tipe: "boolean",
-							isNullable: false,
-							isUnique: false,
-						},
-						{
-							id: 12,
-							name: "password",
-							tipe: "string",
-							isNullable: true,
-							isUnique: false,
-						},
-					],
-				},
-				{
-					id: 3,
-					name: "Message",
-					attributs: [
-						{
-							id: 110,
-							name: "content",
-							tipe: "string",
-							isNullable: false,
-							isUnique: false,
-						},
-						{
-							id: 120,
-							name: "createdAt",
-							tipe: "datetime",
-							isNullable: false,
-							isUnique: false,
-						},
-					],
-				},
-			],
-		}
-		*/
-		return {
-			attribut: attribut,
-		}
+
 		//} catch (e) {
 		//    throw new UnauthorizedException();
 		//}

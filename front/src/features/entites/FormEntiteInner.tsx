@@ -26,7 +26,7 @@ type Props = {
 	fetchError: any | null
 }
 
-export default function FormEntite({
+export default function FormEntiteInner({
 	formItem,
 	formErrors,
 	setFormItem,
@@ -38,7 +38,8 @@ export default function FormEntite({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="col-12 col-md-6">
+		<div className="col-12 col-md-6 border border-primary">
+			<h2>Entite Form</h2>
 			<Form className="row">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
 

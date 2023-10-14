@@ -13,7 +13,7 @@ import {
 export default function NavBarPublicItems() {
 	return (
 		<>
-			<Nav.Link as={Link} to={"/auth/login"}>
+			<Nav.Link as={Link} to={"/"}>
 				<FaQuestion /> Login
 			</Nav.Link>
 			<Nav.Link as={Link} to={"/auth/register"}>
