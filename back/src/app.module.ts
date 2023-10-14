@@ -7,6 +7,7 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 import { JwtModule } from "@nestjs/jwt"
 
 import { AppController } from "./app.controller"
+
 import { AuthController } from "./auth/auth.controller"
 
 import { User } from "./users/user.entity"
@@ -14,11 +15,16 @@ import { UsersService } from "./users/users.service"
 import { UsersController } from "./users/users.controller"
 
 import { Project } from "./projects/project.entity"
-import { ProjectsController } from "./projects/projects.controller"
 import { ProjectsService } from "./projects/projects.service"
+import { ProjectsController } from "./projects/projects.controller"
 
 import { Entite } from "./entites/entite.entity"
+import { EntitesService } from "./entites/entites.service"
+import { EntitesController } from "./entites/entites.controller"
+
 import { Attribut } from "./attributs/attribut.entity"
+import { AttributsService } from "./attributs/attributs.service"
+import { AttributsController } from "./attributs/attributs.controller"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -37,13 +43,27 @@ import { Attribut } from "./attributs/attribut.entity"
 			synchronize: true, // ! false en prod
 		}),
 		JwtModule.register({
-			secret: "secret",
+			secret: "secret", // ! dans .env
 			signOptions: { expiresIn: "1d" },
 		}),
-		TypeOrmModule.forFeature([User, Project]),
+		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
 	],
 
-	controllers: [AppController, AuthController, UsersController, ProjectsController],
-	providers: [AppService, UsersService, ProjectsService],
+	providers: [
+		AppService,
+		UsersService,
+		ProjectsService,
+		EntitesService,
+		AttributsService,
+	],
+
+	controllers: [
+		AppController,
+		AuthController,
+		UsersController,
+		ProjectsController,
+		EntitesController,
+		AttributsController,
+	],
 })
 export class AppModule {}

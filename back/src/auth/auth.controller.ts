@@ -29,7 +29,7 @@ import { FileInterceptor } from "@nestjs/platform-express"
 @Controller("auth")
 export class AuthController {
 	constructor(
-		private readonly userService: UsersService,
+		private readonly usersService: UsersService,
 		private jwtService: JwtService
 	) {}
 
@@ -43,7 +43,7 @@ export class AuthController {
 	private async getUserFromHeaders(headers: any): Promise<any | null> {
 		const [type, jwtToken] = headers.authorization?.split(" ") ?? []
 		if (type !== "Bearer") return null
-		const user = await this.userService.findOne({
+		const user = await this.usersService.findOne({
 			where: { jwt: jwtToken },
 		})
 		return user
@@ -81,7 +81,7 @@ export class AuthController {
 		const hashedPassword = await bcrypt.hash(password, 12)
 
 		try {
-			const user = await this.userService.create({
+			const user = await this.usersService.create({
 				username: username.toLowerCase(),
 				email: email.toLowerCase(),
 				password: hashedPassword,
@@ -114,7 +114,7 @@ export class AuthController {
 		if (!emailOrUsername || !password) {
 			throw new BadRequestException("missing fields")
 		}
-		const user = await this.userService.findOneByEmailOrUsername(emailOrUsername)
+		const user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 		if (!user) {
 			throw new BadRequestException("invalid credentials")
 		}
@@ -122,7 +122,7 @@ export class AuthController {
 			throw new BadRequestException("invalid credentials")
 		}
 		const jwt = await this.jwtService.signAsync({ id: user.id })
-		await this.userService.setJwt(user, jwt)
+		await this.usersService.setJwt(user, jwt)
 		return {
 			message: "success",
 			user: { jwt, ...user },
@@ -143,7 +143,7 @@ export class AuthController {
 			//throw new UnauthorizedException();
 		}
 
-		const user = await this.userService.findOne({
+		const user = await this.usersService.findOne({
 			where: { id: data["id"] },
 		})
 
@@ -170,7 +170,7 @@ export class AuthController {
 		const connectedUser = await this.getUserFromHeaders(headers)
 		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		const users = await this.userService.findAll()
+		const users = await this.usersService.findAll()
 		const allRelations =
 			await this.userRelationService.getAllUserRelations()
 
@@ -186,7 +186,7 @@ export class AuthController {
 		const connectedUser = await this.getUserFromHeaders(headers)
 		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		const user = await this.userService.findOne({
+		const user = await this.usersService.findOne({
 			where: { id: params.id },
 		})
 

@@ -63,7 +63,7 @@ export default function FormProjectInner({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaPlus /> Create
+							<FaPlus /> Create Project
 						</Button>
 					) : (
 						<Button
@@ -72,7 +72,7 @@ export default function FormProjectInner({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaEdit /> Update
+							<FaEdit /> Update Project
 						</Button>
 					)}
 				</div>

@@ -13,7 +13,7 @@ import {
 	UnauthorizedException,
 	Param,
 } from "@nestjs/common"
-import { ProjectsService } from "./projects.service"
+import { AttributsService } from "./attributs.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
@@ -29,9 +29,9 @@ import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-@Controller("projects")
-export class ProjectsController {
-	constructor(private readonly projectsService: ProjectsService) {}
+@Controller("attributs")
+export class AttributsController {
+	constructor(private readonly attributsService: AttributsService) {}
 
 	/*
 	 *
@@ -51,21 +51,21 @@ export class ProjectsController {
 	*/
 
 	@Get("/my")
-	async myProjects(@Headers() headers) {
+	async myAttributs(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		//const projects = await this.projectsService.findAll() // ! by user id
+		//const attributs = await this.attributsService.findAll() // ! by user id
 
-		const projects = await this.projectsService.findAll() // TODO : by connectedUser id
+		const attributs = await this.attributsService.findAll() // TODO : by connectedUser id
 
 		return {
-			projects: projects,
+			attributs: attributs,
 		}
 	}
 
 	@Post("/new")
-	async newProject(
+	async newAttribut(
 		@Headers() headers,
 		@Body("name") name: string,
 		@Body("description") description: string,
@@ -76,33 +76,33 @@ export class ProjectsController {
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
 		try {
-			const project = await this.projectsService.create({
+			const attribut = await this.attributsService.create({
 				name,
 				description,
 				infos,
 				isWip,
 			})
 
-			return { project: project }
+			return { attribut: attribut }
 		} catch (e) {
 			throw new BadRequestException("email already exists")
 		}
 	}
 
 	@Get("/:id")
-	async projectShow(@Param() params, @Headers() headers) {
+	async attributShow(@Param() params, @Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
+		// const attribut = await this.attributsService.findOne({where: { id: params.id },})
 
-		const project = await this.projectsService.findOneById(params.id)
+		const attribut = await this.attributsService.findOneById(params.id)
 
 		return {
-			project: project,
+			attribut: attribut,
 		}
 		/*
-		const project = {
+		const attribut = {
 			id: params.id,
 			name: "Trsdtl fixture",
 			description: "description fixture 1",
@@ -182,7 +182,7 @@ export class ProjectsController {
 		}
 		*/
 		return {
-			project: project,
+			attribut: attribut,
 		}
 		//} catch (e) {
 		//    throw new UnauthorizedException();

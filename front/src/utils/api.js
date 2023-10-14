@@ -116,7 +116,21 @@ export async function apiCreateProject(project) {
 			description: project.description,
 			infos: project.infos,
 			isWip: project.isWip,
-			isFeminin: project.isFeminin,
+		},
+		requierdFields: [],
+	})
+}
+
+export async function apiCreateEntity(projectId, entity) {
+	return zFetch({
+		shortUrl: "/entites/new/project/" + projectId,
+		method: "POST",
+		body: {
+			name: entity.name,
+			description: entity.description,
+			infos: entity.infos,
+			isWip: entity.isWip,
+			isFeminin: entity.isFeminin,
 		},
 		requierdFields: [],
 	})

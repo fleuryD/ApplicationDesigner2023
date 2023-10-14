@@ -53,6 +53,8 @@ export default function FormEntite({
 
 				<ZFrmCheck type="switch" name="isWip" label="WIP" placeholder="WIP" formData={formData} />
 
+				<ZFrmCheck type="switch" name="isFeminin" label="Feminin" placeholder="Feminin" formData={formData} />
+
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
 				<div>
@@ -63,7 +65,7 @@ export default function FormEntite({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaPlus /> Create
+							<FaPlus /> Create Entity
 						</Button>
 					) : (
 						<Button
@@ -72,7 +74,7 @@ export default function FormEntite({
 							onClick={() => btValidateClick()}
 							disabled={isLoading}
 						>
-							<FaEdit /> Update
+							<FaEdit /> Update Entity
 						</Button>
 					)}
 				</div>

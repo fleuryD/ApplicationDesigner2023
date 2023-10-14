@@ -6,9 +6,9 @@ import { Project, Attribut } from "."
 
 type Entite = {
 	id: number
-	project: Project
+	project?: Project // nullable pour le form
 	name: string
-	createdAt: string
+	createdAt?: string // nullable pour le form
 	description: string | null
 	infos: string | null
 	isWip: boolean

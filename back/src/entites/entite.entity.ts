@@ -48,7 +48,9 @@ export class Entite {
 	isFeminin: boolean
 
 	// * Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
-	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite)
+	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite, {
+		eager: true,
+	})
 	public attributs: Attribut[]
 
 	/*

@@ -13,15 +13,13 @@ import {
 	UnauthorizedException,
 	Param,
 } from "@nestjs/common"
-import { ProjectsService } from "./projects.service"
+import { EntitesService } from "./entites.service"
+import { ProjectsService } from "../projects/projects.service"
+
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
 import { Headers, Query, Redirect } from "@nestjs/common"
-import fetch from "node-fetch"
-
-import { UploadedFile, UseInterceptors } from "@nestjs/common"
-import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -29,9 +27,12 @@ import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-@Controller("projects")
-export class ProjectsController {
-	constructor(private readonly projectsService: ProjectsService) {}
+@Controller("entites")
+export class EntitesController {
+	constructor(
+		private readonly entitesService: EntitesService,
+		private readonly projectsService: ProjectsService
+	) {}
 
 	/*
 	 *
@@ -43,7 +44,7 @@ export class ProjectsController {
 	private async getUserFromHeaders(headers: any): Promise<any | null> {
 		const [type, jwtToken] = headers.authorization?.split(" ") ?? []
 		if (type !== "Bearer") return null
-		const user = await this.usersService.findOne({
+		const user = await this.userService.findOne({
 			where: { jwt: jwtToken },
 		})
 		return user
@@ -51,21 +52,22 @@ export class ProjectsController {
 	*/
 
 	@Get("/my")
-	async myProjects(@Headers() headers) {
+	async myEntites(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		//const projects = await this.projectsService.findAll() // ! by user id
+		//const entites = await this.entitesService.findAll() // ! by user id
 
-		const projects = await this.projectsService.findAll() // TODO : by connectedUser id
+		const entites = await this.entitesService.findAll() // TODO : by connectedUser id
 
 		return {
-			projects: projects,
+			entites: entites,
 		}
 	}
 
-	@Post("/new")
-	async newProject(
+	@Post("/new/project/:id")
+	async newEntite(
+		@Param() params,
 		@Headers() headers,
 		@Body("name") name: string,
 		@Body("description") description: string,
@@ -75,114 +77,37 @@ export class ProjectsController {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
+		const project = await this.projectsService.findOneById(params.id)
+
 		try {
-			const project = await this.projectsService.create({
+			const entite = await this.entitesService.create({
+				project,
 				name,
 				description,
 				infos,
 				isWip,
 			})
 
-			return { project: project }
+			return { entite: entite }
 		} catch (e) {
 			throw new BadRequestException("email already exists")
 		}
 	}
 
 	@Get("/:id")
-	async projectShow(@Param() params, @Headers() headers) {
+	async entiteShow(@Param() params, @Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
+		// const entite = await this.entitesService.findOne({where: { id: params.id },})
 
-		const project = await this.projectsService.findOneById(params.id)
+		const entite = await this.entitesService.findOneById(params.id)
 
 		return {
-			project: project,
+			entite: entite,
 		}
-		/*
-		const project = {
-			id: params.id,
-			name: "Trsdtl fixture",
-			description: "description fixture 1",
-			infos: "infos fixture 1",
-			createdAt: "2021-01-01",
-			isWip: false,
-			entites: [
-				{
-					id: 1,
-					name: "User",
-					attributs: [
-						{
-							id: 1,
-							name: "username",
-							tipe: "string",
-							longueur: 128,
-							isNullable: false,
-							isUnique: true,
-						},
-						{
-							id: 2,
-							name: "email",
-							tipe: "string",
-							isNullable: false,
-							isUnique: true,
-						},
-					],
-				},
-				{
-					id: 2,
-					name: "Channel",
-					attributs: [
-						{
-							id: 10,
-							name: "name",
-							tipe: "string",
-							isNullable: false,
-							isUnique: true,
-						},
-						{
-							id: 11,
-							name: "private",
-							tipe: "boolean",
-							isNullable: false,
-							isUnique: false,
-						},
-						{
-							id: 12,
-							name: "password",
-							tipe: "string",
-							isNullable: true,
-							isUnique: false,
-						},
-					],
-				},
-				{
-					id: 3,
-					name: "Message",
-					attributs: [
-						{
-							id: 110,
-							name: "content",
-							tipe: "string",
-							isNullable: false,
-							isUnique: false,
-						},
-						{
-							id: 120,
-							name: "createdAt",
-							tipe: "datetime",
-							isNullable: false,
-							isUnique: false,
-						},
-					],
-				},
-			],
-		}
-		*/
 		return {
-			project: project,
+			entite: entite,
 		}
 		//} catch (e) {
 		//    throw new UnauthorizedException();
