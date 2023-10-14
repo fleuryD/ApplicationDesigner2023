@@ -16,8 +16,8 @@ export class ProjectsService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
-	async create(user: any): Promise<Project> {
-		return this.projectsRepository.save(user) // ????????? await
+	async create(project: any): Promise<Project> {
+		return this.projectsRepository.save(project) // ????????? await
 	}
 
 	findAll(): Promise<Project[]> {

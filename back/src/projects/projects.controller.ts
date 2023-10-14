@@ -57,15 +57,35 @@ export class ProjectsController {
 
 		//const projects = await this.projectsService.findAll() // ! by user id
 
-		const projects = [
-			{ id: 1, name: "project fixture 1" },
-			{ id: 2, name: "project fixture 2" },
-			{ id: 3, name: "project fixture 3" },
-			{ id: 4, name: "project fixture 4" },
-			{ id: 5, name: "project fixture 5" },
-		]
+		const projects = await this.projectsService.findAll() // TODO : by connectedUser id
+
 		return {
 			projects: projects,
+		}
+	}
+
+	@Post("/new")
+	async newProject(
+		@Headers() headers,
+		@Body("name") name: string,
+		@Body("description") description: string,
+		@Body("infos") infos: string,
+		@Body("isWip") isWip: boolean
+	) {
+		//const connectedUser = await this.getUserFromHeaders(headers)
+		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
+
+		try {
+			const project = await this.projectsService.create({
+				name,
+				description,
+				infos,
+				isWip,
+			})
+
+			return { project: project }
+		} catch (e) {
+			throw new BadRequestException("email already exists")
 		}
 	}
 
@@ -76,6 +96,14 @@ export class ProjectsController {
 
 		// const project = await this.projectsService.findOne({where: { id: params.id },})
 
+		const project = await this.projectsService.findOne({
+			where: { id: params.id },
+		})
+
+		return {
+			project: project,
+		}
+		/*
 		const project = {
 			id: params.id,
 			name: "Trsdtl fixture",
@@ -83,7 +111,6 @@ export class ProjectsController {
 			infos: "infos fixture 1",
 			createdAt: "2021-01-01",
 			isWip: false,
-			isFeminin: false,
 			entites: [
 				{
 					id: 1,
@@ -155,7 +182,7 @@ export class ProjectsController {
 				},
 			],
 		}
-
+		*/
 		return {
 			project: project,
 		}

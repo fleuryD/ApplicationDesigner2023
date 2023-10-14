@@ -4,11 +4,11 @@ import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
 import { apiCreateProject } from "utils/api"
 import { Project } from "types"
-import FormProjectInner from "./FormProjectInner"
+import FormEntiteInner from "./FormEntiteInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormProject() {
+export default function FormEntite() {
 	const [formItem, setFormItem] = useState<Project>({
 		id: 0,
 		name: "",
@@ -70,7 +70,7 @@ export default function FormProject() {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<FormProjectInner
+		<FormEntiteInner
 			formItem={formItem}
 			formErrors={formErrors}
 			setFormItem={setFormItem}

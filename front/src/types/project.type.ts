@@ -12,7 +12,6 @@ type Project = {
 	description: string | null
 	infos: string | null
 	isWip: boolean
-	isFeminin: boolean
 	entites: Entite[]
 
 	/*

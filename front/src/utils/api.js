@@ -111,7 +111,13 @@ export async function apiCreateProject(project) {
 	return zFetch({
 		shortUrl: "/projects/new",
 		method: "POST",
-		body: { project },
+		body: {
+			name: project.name,
+			description: project.description,
+			infos: project.infos,
+			isWip: project.isWip,
+			isFeminin: project.isFeminin,
+		},
 		requierdFields: [],
 	})
 }

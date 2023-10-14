@@ -45,11 +45,10 @@ export class Project {
 	@Column({ default: true })
 	isWip: boolean
 
-	@Column({ default: false })
-	isFeminin: boolean
-
 	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
-	@OneToMany(() => Entite, (ent: Entite) => ent.project)
+	@OneToMany(() => Entite, (ent: Entite) => ent.project, {
+		eager: true,
+	})
 	public entites: Entite[]
 
 	/*

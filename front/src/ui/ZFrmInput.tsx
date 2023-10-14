@@ -6,29 +6,16 @@ import Form from "react-bootstrap/Form"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	formItem: any
-	formErrors: any
-	setFormItem: any
-	setFormErrors: any
 	name: string
 	label: string
 	type: string
 	placeholder: string
-	isLoading: boolean
+	formData: any
 	otherProps?: any
 }
-export default function ZFrmInput({
-	formItem,
-	setFormItem,
-	formErrors,
-	setFormErrors,
-	name,
-	label,
-	type,
-	placeholder,
-	isLoading,
-	...otherProps
-}: Props) {
+export default function ZFrmInput({ formData, name, label, type, placeholder, ...otherProps }: Props) {
+	const { formItem, setFormItem, formErrors, setFormErrors, isLoading } = formData
+
 	return (
 		<Form.Group className="row  bg-info">
 			{label && <Form.Label className="col-4 text-end">{label}</Form.Label>}

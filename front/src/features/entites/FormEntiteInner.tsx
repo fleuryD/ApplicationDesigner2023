@@ -26,7 +26,7 @@ type Props = {
 	fetchError: any | null
 }
 
-export default function FormProjectInner({
+export default function FormEntite({
 	formItem,
 	formErrors,
 	setFormItem,

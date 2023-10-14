@@ -26,9 +26,7 @@ export class Entite {
 	id: number
 
 	// * Une Entite a un seul project. un project peut avoir plusieurs entites
-	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
-		eager: true,
-	})
+	@ManyToOne(() => Project, (proj: Project) => proj.entites)
 	public project: Project
 
 	@Column()
