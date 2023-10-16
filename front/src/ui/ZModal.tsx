@@ -12,7 +12,7 @@ type Props = {
 	closeForm: () => any
 }
 
-export default function ZxModal({ children, styles, closeForm }: Props) {
+export default function ZModal({ children, styles, closeForm }: Props) {
 	const rootElement = document.getElementById("root")
 
 	if (!rootElement) return <></>
@@ -74,5 +74,4 @@ const StyledModal = styled.div`
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-
 `

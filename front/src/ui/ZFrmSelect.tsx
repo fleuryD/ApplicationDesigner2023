@@ -4,24 +4,34 @@ import React from "react"
 import Form from "react-bootstrap/Form"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
+interface ISelectOption {
+	value: any
+	text: string
+}
 type Props = {
 	name: string
 	label: string
-	type: string
+	//type: string
 	placeholder: string
 	formData: any
+	selectOptions: ISelectOption[]
 	otherProps?: any
 }
-export default function ZFrmInput({ formData, name, label, type, placeholder, ...otherProps }: Props) {
+export default function ZFrmSelect({
+	formData,
+	name,
+	label,
+	/* type, */ placeholder,
+	selectOptions,
+	...otherProps
+}: Props) {
 	const { formItem, setFormItem, formErrors, setFormErrors, isLoading } = formData
 
 	return (
 		<Form.Group className="row">
 			{label && <Form.Label className="col-4 text-end">{label}</Form.Label>}
 			<div className="col-8 ">
-				<Form.Control
-					type={type}
+				<Form.Select
 					//data-date-format="DD MMMM YYYY"
 					id={"input-" + name}
 					placeholder={placeholder}
@@ -33,7 +43,13 @@ export default function ZFrmInput({ formData, name, label, type, placeholder, ..
 					}}
 					disabled={isLoading}
 					{...otherProps}
-				/>
+				>
+					{selectOptions.map((op: ISelectOption) => (
+						<option key={"option-" + name + "-" + op.text} value={op.value}>
+							{op.text}
+						</option>
+					))}
+				</Form.Select>
 			</div>
 			{formErrors[name] && <div className="text-danger mb-3  text-end">{formErrors[name]}</div>}
 		</Form.Group>

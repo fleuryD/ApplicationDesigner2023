@@ -18,7 +18,6 @@ import { Project } from "../projects/project.entity"
  */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-//   @Entity("users")  // ! dans transdtl
 @Entity("users")
 export class User {
 	@PrimaryGeneratedColumn()

@@ -11,6 +11,7 @@ import { Button } from "react-bootstrap"
 
 import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
+import ZFrmSelect from "ui/ZFrmSelect"
 import { FaPlus, FaEdit } from "react-icons/fa"
 //import { Project } from "types"
 
@@ -38,13 +39,60 @@ export default function FormAttributInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="col-12 border border-primary">
+		<div className="border border-primary">
 			<h2>
-				Attribut Form for entite <b>{formItem.entite.name}</b>
+				{formItem.id === 0
+					? "Create new attribut for " + formItem.entite.name
+					: "Edit attribut: " + formItem.name + " for " + formItem.entite.name}
 			</h2>
-			<Form className="row">
+
+			<Form className="">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
-				<ZFrmInput type="text" name="tipe" label="tipe" placeholder="tipe" formData={formData} />
+
+				<ZFrmSelect
+					name="tipe"
+					label="tipe"
+					placeholder="tipe"
+					formData={formData}
+					selectOptions={[
+						{ value: "", text: "" },
+						{ value: "string", text: "String" },
+						{ value: "boolean", text: "Boolean" },
+						{ value: "date", text: "Date" },
+						{ value: "datetime", text: "DateTime" },
+						{ value: "Decimal", text: "Decimal" },
+						{ value: "Float", text: "Float" },
+						{ value: "Integer", text: "Integer" },
+						{
+							value: "OneToMany",
+							text:
+								"OneToMany (one " +
+								formItem.entite.name +
+								" has many " +
+								(formItem.name ? formItem.name : "xxx") +
+								")",
+						},
+						{
+							value: "ManyToOne",
+							text:
+								"ManyToOne (one " +
+								formItem.entite.name +
+								" has only one " +
+								(formItem.name ? formItem.name : "xxx") +
+								")",
+						},
+						{
+							value: "ManyToMany",
+							text:
+								"OneToMany (one " +
+								formItem.entite.name +
+								" has many " +
+								(formItem.name ? formItem.name : "xxx") +
+								" and vice versa)",
+						},
+					]}
+				/>
+
 				<ZFrmInput type="number" name="longueur" label="longueur" placeholder="longueur" formData={formData} />
 
 				<ZFrmInput
@@ -72,27 +120,25 @@ export default function FormAttributInner({
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
-				<div>
-					{formItem.id === 0 ? (
-						<Button
-							variant="primary"
-							className="float-end"
-							onClick={() => btValidateClick()}
-							disabled={isLoading}
-						>
-							<FaPlus /> Create Entity
-						</Button>
-					) : (
-						<Button
-							variant="primary"
-							className="float-end"
-							onClick={() => btValidateClick()}
-							disabled={isLoading}
-						>
-							<FaEdit /> Update Entity
-						</Button>
-					)}
-				</div>
+				{formItem.id === 0 ? (
+					<Button
+						variant="primary"
+						className="float-end"
+						onClick={() => btValidateClick()}
+						disabled={isLoading}
+					>
+						<FaPlus /> Create attribut
+					</Button>
+				) : (
+					<Button
+						variant="primary"
+						className="float-end"
+						onClick={() => btValidateClick()}
+						disabled={isLoading}
+					>
+						<FaEdit /> Update attribut
+					</Button>
+				)}
 			</Form>
 		</div>
 	)

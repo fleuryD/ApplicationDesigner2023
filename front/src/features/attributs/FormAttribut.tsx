@@ -7,6 +7,7 @@ import { appSetSelectedAttribut } from "store/appSlice"
 import { apiCreateAttribut } from "utils/api"
 import { Attribut } from "types"
 import FormAttributInner from "./FormAttributInner"
+import ZModal from "ui/ZModal"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -69,14 +70,16 @@ export default function FormAttribut({ attributItem }: { attributItem: Attribut 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<FormAttributInner
-			formItem={formItem}
-			formErrors={formErrors}
-			setFormItem={setFormItem}
-			setFormErrors={setFormErrors}
-			isLoading={isLoading}
-			fetchError={fetchError}
-			btValidateClick={btCreateClick}
-		/>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedAttribut(null))}>
+			<FormAttributInner
+				formItem={formItem}
+				formErrors={formErrors}
+				setFormItem={setFormItem}
+				setFormErrors={setFormErrors}
+				isLoading={isLoading}
+				fetchError={fetchError}
+				btValidateClick={btCreateClick}
+			/>
+		</ZModal>
 	)
 }

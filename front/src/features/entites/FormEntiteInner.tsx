@@ -38,9 +38,9 @@ export default function FormEntiteInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="col-12 col-md-6 border border-primary">
-			<h2>Entite Form</h2>
-			<Form className="row">
+		<div className="border border-primary">
+			<h2>{formItem.id === 0 ? "Create new entity" : "Edit entity: " + formItem.name}</h2>
+			<Form className="">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
 
 				<ZFrmInput
@@ -58,27 +58,25 @@ export default function FormEntiteInner({
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
-				<div>
-					{formItem.id === 0 ? (
-						<Button
-							variant="primary"
-							className="float-end"
-							onClick={() => btValidateClick()}
-							disabled={isLoading}
-						>
-							<FaPlus /> Create Entity
-						</Button>
-					) : (
-						<Button
-							variant="primary"
-							className="float-end"
-							onClick={() => btValidateClick()}
-							disabled={isLoading}
-						>
-							<FaEdit /> Update Entity
-						</Button>
-					)}
-				</div>
+				{formItem.id === 0 ? (
+					<Button
+						variant="primary"
+						className="float-end"
+						onClick={() => btValidateClick()}
+						disabled={isLoading}
+					>
+						<FaPlus /> Create Entity
+					</Button>
+				) : (
+					<Button
+						variant="primary"
+						className="float-end"
+						onClick={() => btValidateClick()}
+						disabled={isLoading}
+					>
+						<FaEdit /> Update Entity
+					</Button>
+				)}
 			</Form>
 		</div>
 	)

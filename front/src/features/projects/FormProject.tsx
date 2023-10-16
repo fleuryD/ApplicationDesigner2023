@@ -7,6 +7,7 @@ import { appSetSelectedProject } from "store/appSlice"
 import { apiCreateProject } from "utils/api"
 import { Project } from "types"
 import FormProjectInner from "./FormProjectInner"
+import ZModal from "ui/ZModal"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -69,14 +70,16 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<FormProjectInner
-			formItem={formItem}
-			formErrors={formErrors}
-			setFormItem={setFormItem}
-			setFormErrors={setFormErrors}
-			isLoading={isLoading}
-			fetchError={fetchError}
-			btValidateClick={btCreateClick}
-		/>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedProject(null))}>
+			<FormProjectInner
+				formItem={formItem}
+				formErrors={formErrors}
+				setFormItem={setFormItem}
+				setFormErrors={setFormErrors}
+				isLoading={isLoading}
+				fetchError={fetchError}
+				btValidateClick={btCreateClick}
+			/>
+		</ZModal>
 	)
 }

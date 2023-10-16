@@ -6,6 +6,7 @@ import { appSetSelectedEntite } from "store/appSlice"
 import { apiCreateEntity } from "utils/api"
 import { Entite, Project } from "types"
 import FormEntiteInner from "./FormEntiteInner"
+import ZModal from "ui/ZModal"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -68,14 +69,16 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<FormEntiteInner
-			formItem={formItem}
-			formErrors={formErrors}
-			setFormItem={setFormItem}
-			setFormErrors={setFormErrors}
-			isLoading={isLoading}
-			fetchError={fetchError}
-			btValidateClick={btCreateClick}
-		/>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedEntite(null))}>
+			<FormEntiteInner
+				formItem={formItem}
+				formErrors={formErrors}
+				setFormItem={setFormItem}
+				setFormErrors={setFormErrors}
+				isLoading={isLoading}
+				fetchError={fetchError}
+				btValidateClick={btCreateClick}
+			/>
+		</ZModal>
 	)
 }

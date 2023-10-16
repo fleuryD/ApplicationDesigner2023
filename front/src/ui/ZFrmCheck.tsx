@@ -16,7 +16,7 @@ type Props = {
 export default function ZFrmCheck({ name, label, type, placeholder, formData, ...otherProps }: Props) {
 	const { formItem, setFormItem, formErrors, setFormErrors, isLoading } = formData
 	return (
-		<Form.Group className="row  bg-info">
+		<Form.Group className="row">
 			{label && <Form.Label className="col-4 text-end">{label}</Form.Label>}
 			<div className="col-8 ">
 				<Form.Check
