@@ -12,10 +12,9 @@ import ButtonCreateAttribut from "features/attributs/ButtonCreateAttribut"
 
 type Props = {
 	entite: Entite
-	setSelectedAttribut: any
 }
 
-export default function UmlEntite({ entite, setSelectedAttribut }: Props) {
+export default function UmlEntite({ entite }: Props) {
 	return (
 		<div className="umlEntity col-12 col-md-6 col-lg-4">
 			<div className="umlEntityInner">
@@ -26,7 +25,7 @@ export default function UmlEntite({ entite, setSelectedAttribut }: Props) {
 					<UmlAttribut key={"attr" + attr.id} attribut={attr} />
 				))}
 
-				<ButtonCreateAttribut className="btn-sm" setSelectedAttribut={setSelectedAttribut} entite={entite} />
+				<ButtonCreateAttribut className="btn-sm" entite={entite} />
 				{/*	<FormAttribut entiteId={entite.id} /> */}
 			</div>
 		</div>

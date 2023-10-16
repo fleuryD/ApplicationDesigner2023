@@ -5,11 +5,13 @@ import { combineReducers } from "redux"
 import { configureStore } from "@reduxjs/toolkit"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import authSlice from "./authSlice"
+import appSlice from "./appSlice"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 const reducer = combineReducers({
 	auth: authSlice,
+	app: appSlice,
 })
 
 const store = configureStore({ reducer })

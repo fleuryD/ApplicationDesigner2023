@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
+import { useAppSelector, useAppDispatch } from "store/store"
 import { Project, Attribut } from "types"
 import UmlEntite from "features/uml/UmlEntite"
 import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
@@ -16,10 +17,10 @@ type Props = {
 }
 
 export default function Uml({ project }: Props) {
-	const [selectedAttribut, setSelectedAttribut] = useState<Attribut | null>(null)
+	const app = useAppSelector((state) => state.app)
 	return (
 		<div>
-			{selectedAttribut && <FormAttribut /* entiteId={entite.id} */ attributItem={selectedAttribut} />}
+			{app.selectedAttribut && <FormAttribut /* entiteId={entite.id} */ attributItem={app.selectedAttribut} />}
 			<h2>
 				UML <ButtonCreateEntite className="btn-sm float-end" />
 			</h2>
@@ -28,11 +29,7 @@ export default function Uml({ project }: Props) {
 				<>
 					<div className="umlContent row">
 						{project.entites.map((entite: any) => (
-							<UmlEntite
-								key={"entite" + entite.id}
-								entite={entite}
-								setSelectedAttribut={setSelectedAttribut}
-							/>
+							<UmlEntite key={"entite" + entite.id} entite={entite} />
 						))}
 					</div>
 
