@@ -2,6 +2,8 @@
 
 import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
+import { useAppDispatch } from "store/store"
+import { appSetSelectedAttribut } from "store/appSlice"
 import { apiCreateAttribut } from "utils/api"
 import { Attribut } from "types"
 import FormAttributInner from "./FormAttributInner"
@@ -13,6 +15,7 @@ export default function FormAttribut({
 }: {
 	/* entiteId: number; */ attributItem: Attribut
 }) {
+	const dispatch = useAppDispatch()
 	const [formItem, setFormItem] = useState<Attribut>(attributItem)
 	/*
 	const [formItem, setFormItem] = useState<Attribut>({
@@ -64,6 +67,9 @@ export default function FormAttribut({
 		apiCreateAttribut(formItem.entite.id, formItem).then((response) => {
 			if (response.entite) {
 				console.log("SUCCESS: response.entite", response.entite)
+
+				dispatch(appSetSelectedAttribut(null))
+				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
 				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")

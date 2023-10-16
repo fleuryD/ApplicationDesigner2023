@@ -1,7 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import React from "react"
-//import { useAppSelector } from "store/store"
-import { useAppSelector, useAppDispatch } from "store/store"
+import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
@@ -16,7 +15,6 @@ type Props = {
 
 export default function ButtonCreateAttribut({ className, entite }: Props) {
 	const dispatch = useAppDispatch()
-	//const app = useAppSelector((state) => state.app)
 	function btClick() {
 		dispatch(
 			appSetSelectedAttribut({

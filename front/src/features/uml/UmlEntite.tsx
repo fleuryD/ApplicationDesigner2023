@@ -1,8 +1,8 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useEffect, useState } from "react"
+import React from "react"
 //import { useAppDispatch } from "store/store"
-import { Entite, Attribut } from "types"
+import { Entite } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
 import ButtonCreateAttribut from "features/attributs/ButtonCreateAttribut"
@@ -26,7 +26,6 @@ export default function UmlEntite({ entite }: Props) {
 				))}
 
 				<ButtonCreateAttribut className="btn-sm" entite={entite} />
-				{/*	<FormAttribut entiteId={entite.id} /> */}
 			</div>
 		</div>
 	)
