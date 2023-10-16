@@ -8,7 +8,13 @@ import FormAttributInner from "./FormAttributInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormAttribut({ entiteId }: { entiteId: number }) {
+export default function FormAttribut({
+	/* entiteId, */ attributItem,
+}: {
+	/* entiteId: number; */ attributItem: Attribut
+}) {
+	const [formItem, setFormItem] = useState<Attribut>(attributItem)
+	/*
 	const [formItem, setFormItem] = useState<Attribut>({
 		id: 0,
 		name: "",
@@ -22,6 +28,7 @@ export default function FormAttribut({ entiteId }: { entiteId: number }) {
 		isNullable: false,
 		isUnique: false,
 	})
+	*/
 
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
@@ -54,7 +61,7 @@ export default function FormAttribut({ entiteId }: { entiteId: number }) {
 
 		if (checkErrors() > 0) return
 
-		apiCreateAttribut(entiteId, formItem).then((response) => {
+		apiCreateAttribut(formItem.entite.id, formItem).then((response) => {
 			if (response.entite) {
 				console.log("SUCCESS: response.entite", response.entite)
 			} else if (response.error) {
