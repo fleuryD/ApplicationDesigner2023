@@ -26,7 +26,7 @@ export default function UmlEntite({ entite, setSelectedAttribut }: Props) {
 					<UmlAttribut key={"attr" + attr.id} attribut={attr} />
 				))}
 
-				<ButtonCreateAttribut className="btn-sm" setSelectedAttribut={setSelectedAttribut} />
+				<ButtonCreateAttribut className="btn-sm" setSelectedAttribut={setSelectedAttribut} entite={entite} />
 				{/*	<FormAttribut entiteId={entite.id} /> */}
 			</div>
 		</div>

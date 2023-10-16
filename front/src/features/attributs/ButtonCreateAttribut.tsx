@@ -2,18 +2,21 @@
 import React from "react"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
+import { Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
 	setSelectedAttribut: any
 	className?: string
+	entite: Entite
 }
 
-export default function ButtonCreateAttribut({ setSelectedAttribut, className }: Props) {
+export default function ButtonCreateAttribut({ setSelectedAttribut, className, entite }: Props) {
 	function btClick() {
 		setSelectedAttribut({
 			id: 0,
+			entite: entite,
 			name: "",
 			tipe: "",
 			longueur: null,

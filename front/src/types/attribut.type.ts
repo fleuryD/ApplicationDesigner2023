@@ -1,12 +1,12 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite } from "."
+import { Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Attribut = {
 	id: number
-	entite: Entite // nullable pour le form ????
+	entite: Entite // NONNNNNNNNNNNN   nullable pour le form ????
 	name: string
 	createdAt?: string // nullable pour le form
 	tipe: string

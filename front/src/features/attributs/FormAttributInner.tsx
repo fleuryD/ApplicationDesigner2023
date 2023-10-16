@@ -39,7 +39,9 @@ export default function FormAttributInner({
 
 	return (
 		<div className="col-12 border border-primary">
-			<h2>Attribut Form</h2>
+			<h2>
+				Attribut Form for entite <b>{formItem.entite.name}</b>
+			</h2>
 			<Form className="row">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
 				<ZFrmInput type="text" name="tipe" label="tipe" placeholder="tipe" formData={formData} />
