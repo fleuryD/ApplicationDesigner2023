@@ -18,6 +18,7 @@ type Props = {
 
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
+
 	return (
 		<div>
 			{app.selectedAttribut && <FormAttribut attributItem={app.selectedAttribut} />}
@@ -29,7 +30,7 @@ export default function Uml({ project }: Props) {
 				<>
 					<div className="umlContent row">
 						{project.entites.map((entite: any) => (
-							<UmlEntite key={"entite" + entite.id} entite={entite} />
+							<UmlEntite key={"entite" + entite.id} entite={entite} project={project} />
 						))}
 					</div>
 

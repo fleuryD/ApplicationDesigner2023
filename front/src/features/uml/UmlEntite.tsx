@@ -2,7 +2,7 @@
 
 import React from "react"
 //import { useAppDispatch } from "store/store"
-import { Entite } from "types"
+import { Entite, Project } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
 import ButtonCreateAttribut from "features/attributs/ButtonCreateAttribut"
@@ -13,9 +13,10 @@ import Generate from "features/generate/Generate"
 
 type Props = {
 	entite: Entite
+	project: Project
 }
 
-export default function UmlEntite({ entite }: Props) {
+export default function UmlEntite({ entite, project }: Props) {
 	return (
 		<div className="umlEntity col-12 col-md-6 col-lg-4">
 			<div className="umlEntityInner">
@@ -23,7 +24,7 @@ export default function UmlEntite({ entite }: Props) {
 					{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
 				</h2>
 				{entite.attributs.map((attr: any) => (
-					<UmlAttribut key={"attr" + attr.id} attribut={attr} />
+					<UmlAttribut key={"attr" + attr.id} attribut={attr} project={project} />
 				))}
 
 				<ButtonCreateAttribut className="btn-sm" entite={entite} />
