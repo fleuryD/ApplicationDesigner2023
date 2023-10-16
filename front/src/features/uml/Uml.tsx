@@ -13,16 +13,16 @@ import FormAttribut from "features/attributs/FormAttribut"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	project: Project | null
+	project: Project
 }
 
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
 	return (
 		<div>
-			{app.selectedAttribut && <FormAttribut /* entiteId={entite.id} */ attributItem={app.selectedAttribut} />}
+			{app.selectedAttribut && <FormAttribut attributItem={app.selectedAttribut} />}
 			<h2>
-				UML <ButtonCreateEntite className="btn-sm float-end" />
+				UML <ButtonCreateEntite className="btn-sm float-end" project={project} />
 			</h2>
 
 			{project && (
@@ -33,7 +33,7 @@ export default function Uml({ project }: Props) {
 						))}
 					</div>
 
-					<FormEntite projectId={project.id} />
+					{app.selectedEntite && <FormEntite projectId={project.id} EntiteItem={app.selectedEntite} />}
 				</>
 			)}
 		</div>

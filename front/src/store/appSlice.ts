@@ -3,17 +3,21 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import { createSlice } from "@reduxjs/toolkit"
-import { Attribut } from "types"
+import { Project, Entite, Attribut } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 // Type for our state
 interface AppState {
+	selectedProject: Project | null
+	selectedEntite: Entite | null
 	selectedAttribut: Attribut | null
 }
 
 // Initial state
 const initialState: AppState = {
+	selectedProject: null,
+	selectedEntite: null,
 	selectedAttribut: null,
 }
 
@@ -22,13 +26,19 @@ export const appSlice = createSlice({
 	name: "app",
 	initialState,
 	reducers: {
+		appSetSelectedProject(state, action) {
+			state.selectedProject = action.payload
+		},
+		appSetSelectedEntite(state, action) {
+			state.selectedEntite = action.payload
+		},
 		appSetSelectedAttribut(state, action) {
 			state.selectedAttribut = action.payload
 		},
 	},
 })
 
-export const { appSetSelectedAttribut } = appSlice.actions
+export const { appSetSelectedProject, appSetSelectedEntite, appSetSelectedAttribut } = appSlice.actions
 
 export default appSlice.reducer
 /*

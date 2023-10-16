@@ -2,21 +2,17 @@
 
 import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
+import { useAppDispatch } from "store/store"
+import { appSetSelectedProject } from "store/appSlice"
 import { apiCreateProject } from "utils/api"
 import { Project } from "types"
 import FormProjectInner from "./FormProjectInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormProject() {
-	const [formItem, setFormItem] = useState<Project>({
-		id: 0,
-		name: "",
-		description: "",
-		infos: "",
-		isWip: false,
-		entites: [],
-	})
+export default function FormProject({ projectItem }: { projectItem: Project }) {
+	const dispatch = useAppDispatch()
+	const [formItem, setFormItem] = useState<Project>(projectItem)
 
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
@@ -52,6 +48,9 @@ export default function FormProject() {
 		apiCreateProject(formItem).then((response) => {
 			if (response.project) {
 				console.log("SUCCESS: response.project", response.project)
+
+				dispatch(appSetSelectedProject(null))
+				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
 				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")

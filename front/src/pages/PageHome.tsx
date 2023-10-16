@@ -1,6 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useEffect, useState } from "react"
+import { useAppSelector, useAppDispatch } from "store/store"
 //import { useAppDispatch } from "store/store"
 import { apiFetchProjects } from "utils/api"
 import { Project } from "types"
@@ -11,6 +12,7 @@ import FormProject from "features/projects/FormProject"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
+	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [projects, setProjects] = useState<Project[] | null>(null)
@@ -70,7 +72,7 @@ export default function PageHome() {
 						</div>
 					</div>
 				</div>
-				<FormProject />
+				{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
 
 				<div className="zTodo col-12 col-md-6">
 					<div className="zTodoInner">

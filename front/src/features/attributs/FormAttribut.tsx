@@ -10,28 +10,9 @@ import FormAttributInner from "./FormAttributInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormAttribut({
-	/* entiteId, */ attributItem,
-}: {
-	/* entiteId: number; */ attributItem: Attribut
-}) {
+export default function FormAttribut({ attributItem }: { attributItem: Attribut }) {
 	const dispatch = useAppDispatch()
 	const [formItem, setFormItem] = useState<Attribut>(attributItem)
-	/*
-	const [formItem, setFormItem] = useState<Attribut>({
-		id: 0,
-		name: "",
-		tipe: "",
-		longueur: null,
-		description: "",
-		infos: "",
-		position: 42,
-		isWip: false,
-		isFeminin: false,
-		isNullable: false,
-		isUnique: false,
-	})
-	*/
 
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
@@ -65,7 +46,7 @@ export default function FormAttribut({
 		if (checkErrors() > 0) return
 
 		apiCreateAttribut(formItem.entite.id, formItem).then((response) => {
-			if (response.entite) {
+			if (response.attribut) {
 				console.log("SUCCESS: response.entite", response.entite)
 
 				dispatch(appSetSelectedAttribut(null))

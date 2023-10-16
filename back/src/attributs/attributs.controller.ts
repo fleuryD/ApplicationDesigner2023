@@ -102,7 +102,8 @@ export class AttributsController {
 				isUnique,
 			})
 
-			return { entite: entite }
+			//return { entite: entite }
+			return { attribut: attribut }
 		} catch (e) {
 			throw new BadRequestException("aosdjfla jdsfajlsdjf;alksjkjtjjtjt")
 		}

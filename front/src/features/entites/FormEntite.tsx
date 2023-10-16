@@ -1,23 +1,17 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-// import { useAppDispatch } from "store/store"
+import { useAppDispatch } from "store/store"
+import { appSetSelectedEntite } from "store/appSlice"
 import { apiCreateEntity } from "utils/api"
 import { Entite, Project } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormEntite({ projectId }: { projectId: number }) {
-	const [formItem, setFormItem] = useState<Entite>({
-		id: 0,
-		name: "",
-		description: "",
-		infos: "",
-		isWip: false,
-		isFeminin: false,
-		attributs: [],
-	})
+export default function FormEntite({ projectId, EntiteItem }: { projectId: number; EntiteItem: Entite }) {
+	const dispatch = useAppDispatch()
+	const [formItem, setFormItem] = useState<Entite>(EntiteItem)
 
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
@@ -51,8 +45,11 @@ export default function FormEntite({ projectId }: { projectId: number }) {
 		if (checkErrors() > 0) return
 
 		apiCreateEntity(projectId, formItem).then((response) => {
-			if (response.project) {
+			if (response.entite) {
 				console.log("SUCCESS: response.project", response.project)
+
+				dispatch(appSetSelectedEntite(null))
+				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
 				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
