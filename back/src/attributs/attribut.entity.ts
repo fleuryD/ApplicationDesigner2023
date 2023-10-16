@@ -66,8 +66,25 @@ export class Attribut {
 	isUnique: boolean
 
 	/*
-	targetEntity: any
-	inversedBy: any
+	// * Un Attribut a une seule targetEntite.
+	@ManyToOne(() => Entite, { lazy: true } /* { cascade: true } , * /)
+	public targetEntite: Entite
+
+	// * Un Attribut a une seule targetEntite.
+	@ManyToOne(() => Attribut)
+	public inverseAttribut: Attribut
+	*/
+
+	@Column({ nullable: true })
+	targetEntiteId: number
+
+	@Column({ nullable: true })
+	inverseAttributId: number
+
+	/*
+	defaut: string
+	targetEntite: any
+	inversedBy / inversedAttribut: any
 	removeOrphan: boolean
 
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom

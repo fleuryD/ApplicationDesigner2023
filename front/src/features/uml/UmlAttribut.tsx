@@ -21,6 +21,12 @@ export default function UmlAttribut({ attribut }: Props) {
 			</div>
 			{attribut.isNullable && <div className="nullable">Nullable</div>}
 			{attribut.isUnique && <div className="unique">unique</div>}
+			{attribut.targetEntite && <h1>targetEntite</h1>}
+			{attribut.targetEntite && <h1>targetEntiteId</h1>}
+			{attribut.targetEntiteId && <div className="xxxxxxxxxxx">+++targetEntiteId #{attribut.targetEntiteId}</div>}
+			{attribut.inverseAttributId && (
+				<div className="xxxxxxxxxxx">---inversed by attr #{attribut.inverseAttributId}</div>
+			)}
 		</div>
 	)
 }
