@@ -48,6 +48,18 @@ export default function UmlAttribut({ attribut, project }: Props) {
 					inversed by: <b>{inversedAttribut.name}</b>
 				</div>
 			)}
+
+			{attribut.infos && (
+				<div className="infos">
+					<b>infos:</b> {attribut.infos}
+				</div>
+			)}
+
+			{attribut.description && (
+				<div className="description">
+					<b>description:</b> {attribut.description}
+				</div>
+			)}
 		</div>
 	)
 }

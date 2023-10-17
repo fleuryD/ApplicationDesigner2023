@@ -28,7 +28,7 @@ import "styles/uml.scss"
 export default function App() {
 	const auth = useAppSelector((state) => state.auth)
 	return (
-		<div className="App container-xl appStyled " id="container-global">
+		<div className="App  appStyled container-fluid" id="container-global">
 			<Router>
 				<NavBar />
 				{auth.isConnected ? (

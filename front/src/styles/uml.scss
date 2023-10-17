@@ -44,6 +44,12 @@
 				.nullable {
 					color: $colDanger;
 				}
+				.infos {
+					background-color: $colInfo;
+				}
+				.description {
+					background-color: $colWarning;
+				}
 			}
 		}
 	}
