@@ -93,11 +93,21 @@ export default function PageProjectGenerate() {
 							<h2>Templates:</h2>
 
 							<div className="bg-info">
-								<h3>NestJs:</h3>
-								<ButtonTemplate text="Nest: Entity" name="NestEntity" />
-								<ButtonTemplate text="Nest: Controller" name="NestController" />
-								<ButtonTemplate text="Nest: Module" name="NestModule" />
-								<ButtonTemplate text="Nest: Service" name="NestService" />
+								<b>NestJs:</b>
+								<ButtonTemplate text="Entity" name="NestEntity" />
+								<ButtonTemplate text="Controller (todo)" name="NestController" />
+								<ButtonTemplate text="Module" name="NestModule" />
+								<ButtonTemplate text="Service (todo)" name="NestService" />
+							</div>
+							<div className="bg-info">
+								<b>React (ts):</b>
+								<ButtonTemplate text="type" name="ReactType" />
+								<ButtonTemplate text="Form" name="ReactForm" />
+								<ButtonTemplate text="FormInner" name="ReactFormInner" />
+							</div>
+							<div className="bg-info">
+								<b>C++:</b>
+								<ButtonTemplate text="C++: .hpp" name="CppHpp" />
 							</div>
 						</div>
 					</div>

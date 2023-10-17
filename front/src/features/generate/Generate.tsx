@@ -6,6 +6,7 @@ import { Entite } from "types"
 //import FormAttribut from "features/attributs/FormAttribut"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
+import generateTemplateCppHpp from "./templateCppHpp"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -26,6 +27,8 @@ export default function Generate({ entite, templateName }: Props) {
 			setStr(generateTemplateNestEntity({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
 		else if (templateName === "NestModule")
 			setStr(generateTemplateNestModule({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
+		else if (templateName === "CppHpp")
+			setStr(generateTemplateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
 		else setStr("- TODO: " + templateName + " -")
 	}, [entite, templateName])
 
