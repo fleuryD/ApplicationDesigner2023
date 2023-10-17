@@ -19,7 +19,7 @@ export default function PageProjectGenerate() {
 	const [error, setError] = useState<string | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
 	const [selectedEntite, setSelectedEntite] = useState<Entite | null>(null)
-	const [selectedTemplateName, setSelectedTemplateName] = useState<Entite | null>("")
+	const [selectedTemplateName, setSelectedTemplateName] = useState<string | null>("")
 
 	useEffect(() => {
 		if (projectId > 0) {
@@ -38,6 +38,18 @@ export default function PageProjectGenerate() {
 			})
 		}
 	}, [])
+
+	function ButtonTemplate({ text, name }: { text: string; name: string }) {
+		return (
+			<Button
+				className="m-1"
+				variant={selectedTemplateName === name ? "primary" : "secondary"}
+				onClick={() => setSelectedTemplateName(name)}
+			>
+				{text}
+			</Button>
+		)
+	}
 
 	return (
 		<div className="zPage">
@@ -79,25 +91,24 @@ export default function PageProjectGenerate() {
 					<div className="zSection col-12 col-md-6">
 						<div className="zSectionInner">
 							<h2>Templates:</h2>
-							{/*
-							{project && (
-								<div className="bg-info">
-									<Button
-										className="m-1"
-										variant={selectedTemplateName === "Xxx" ? "primary" : "secondary"}
-										onClick={() => setSelectedTemplateName(entite)}
-									>
-										{entite.name}
-									</Button>
-								</div>
-							)}
-							*/}
+
+							<div className="bg-info">
+								<h3>NestJs:</h3>
+								<ButtonTemplate text="Nest: Entity" name="NestEntity" />
+								<ButtonTemplate text="Nest: Controller" name="NestController" />
+								<ButtonTemplate text="Nest: Module" name="NestModule" />
+								<ButtonTemplate text="Nest: Service" name="NestService" />
+							</div>
 						</div>
 					</div>
 				)}
 
 				<div className="zSection col-12">
-					{selectedEntite ? <Generate entite={selectedEntite} /> : <h3>Select an entity</h3>}
+					{selectedEntite && selectedTemplateName ? (
+						<Generate entite={selectedEntite} templateName={selectedTemplateName} />
+					) : (
+						<h3>Select an entity</h3>
+					)}
 				</div>
 			</div>
 		</div>
