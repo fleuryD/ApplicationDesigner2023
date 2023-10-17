@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 //import { useAppDispatch } from "store/store"
 import { Entite } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
@@ -19,45 +19,55 @@ export default function Generate({ entite }: Props) {
 	const entiteCamelName = entite.name.charAt(0).toLowerCase() + entite.name.slice(1)
 	const entiteCamelNamePluriel = entiteCamelName + "s"
 
-	// ****************************************************************
-	let str = `\n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
-	str += `import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne,} from "typeorm"  \n`
-	str += `// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"     \n`
-	str += `  \n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
-	str += `\n`
-	str += `@Entity("${entiteCamelNamePluriel}")  \n`
-	str += `export class ${entitePascalName}{  \n`
-	str += `    @PrimaryGeneratedColumn()  \n`
-	str += `    id: number  \n`
+	const [str, setStr] = useState("")
 
-	entite.attributs.map((attr: any) => {
+	function getStr() {
+		let str = `\n`
+		str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
+		str += `import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne,} from "typeorm"  \n`
+		str += `// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"     \n`
+		str += `  \n`
+		str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
 		str += `\n`
-		str += `    @Column(`
+		str += `@Entity("${entiteCamelNamePluriel}")  \n`
+		str += `export class ${entitePascalName}{  \n`
+		str += `    @PrimaryGeneratedColumn()  \n`
+		str += `    id: number  \n`
 
-		// todo : default
-		if (attr.isNullable || attr.isUnique) {
-			str += `{ `
-		}
-		if (attr.isNullable) {
-			str += ` nullable: true, `
-		}
-		if (attr.isUnique) {
-			str += ` unique: true, `
-		}
+		entite.attributs.map((attr: any) => {
+			str += `\n`
+			str += `    @Column(`
 
-		if (attr.isNullable || attr.isUnique) {
-			str += ` }`
-		}
-		str += `)  \n`
-		str += `    ${attr.name}: ${attr.tipe}  \n`
+			// todo : default
+			if (attr.isNullable || attr.isUnique) {
+				str += `{ `
+			}
+			if (attr.isNullable) {
+				str += ` nullable: true, `
+			}
+			if (attr.isUnique) {
+				str += ` unique: true, `
+			}
+
+			if (attr.isNullable || attr.isUnique) {
+				str += ` }`
+			}
+			str += `)  \n`
+			str += `    ${attr.name}: ${attr.tipe}  \n`
+			return str
+		})
+		//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
+		//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
+
+		str += `}  \n`
 		return str
-	})
-	//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
-	//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
+	}
 
-	str += `}  \n`
+	useEffect(() => {
+		setStr(getStr())
+	}, [entite])
+
+	// ****************************************************************
 
 	// ****************************************************************
 	return (
@@ -66,7 +76,7 @@ export default function Generate({ entite }: Props) {
 			<textarea
 				id="w3review"
 				name="w3review"
-				rows={8}
+				rows={40}
 				className="col-12"
 				style={{ fontSize: "0.8em" }}
 				defaultValue={str}

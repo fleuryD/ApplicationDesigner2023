@@ -6,7 +6,7 @@ import { Entite, Project } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
 import ButtonCreateAttribut from "features/attributs/ButtonCreateAttribut"
-import Generate from "features/generate/Generate"
+//import Generate from "features/generate/Generate"
 //import FormAttribut from "features/attributs/FormAttribut"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -28,7 +28,9 @@ export default function UmlEntite({ entite, project }: Props) {
 				))}
 
 				<ButtonCreateAttribut className="btn-sm" entite={entite} />
+				{/*
 				<Generate entite={entite} />
+				*/}
 			</div>
 		</div>
 	)

@@ -9,11 +9,11 @@ type Props = {
 	text?: string
 }
 
-export default function ProjectLink({ project, text }: Props) {
+export default function ProjectGenerateLink({ project, text }: Props) {
 	if (!project) return null
 
 	return (
-		<Link to={"/projects/" + project.id} title="Click to see project.">
+		<Link to={"/projects/" + project.id + "/generate"} title="Click to generate project.">
 			{text ? text : <>{project.name + " "}</>}
 		</Link>
 	)

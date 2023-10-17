@@ -16,6 +16,7 @@ import PageDev from "pages/PageDev"
 import PageAdminUser from "pages/PageAdminUser"
 import PageAdminUsers from "pages/PageAdminUsers"
 import PageProject from "pages/PageProject"
+import PageProjectGenerate from "pages/PageProjectGenerate"
 //import PageWIP from "pages/PageWIP"
 // import DevAuthInfos from "features/auth/DevAuthInfos"
 
@@ -37,6 +38,7 @@ export default function App() {
 							<Route path="/user/:id" element={<PageUser />} />
 							<Route path="/wip" element={<PageWIP />} />
 						*/}
+						<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
 						<Route path="/projects/:id" element={<PageProject />} />
 						<Route path="/admin/users" element={<PageAdminUsers />} />
 						<Route path="/admin/users/:id" element={<PageAdminUser />} />

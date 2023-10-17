@@ -4,18 +4,22 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
-import { Project } from "types"
+import { Project, Entite } from "types"
 import Uml from "features/uml/Uml"
 import ButtonEditProject from "features/projects/ButtonEditProject"
-import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
+import ProjectLink from "features/projects/ProjectLink"
+import { Button } from "react-bootstrap"
+import Generate from "features/generate/Generate"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function PageProject() {
+export default function PageProjectGenerate() {
 	const projectId = Number(useParams().id) || 0
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
+	const [selectedEntite, setSelectedEntite] = useState<Entite | null>(null)
+	const [selectedTemplateName, setSelectedTemplateName] = useState<Entite | null>("")
 
 	useEffect(() => {
 		if (projectId > 0) {
@@ -39,63 +43,61 @@ export default function PageProject() {
 		<div className="zPage">
 			<header className="zPageHeader row">
 				<h1>
-					Project: <b>{project && project.name}</b>
+					Project: <b>{project && project.name}</b> : Generate
 					{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
 				</h1>
 				<h3>Lorem Ipsum</h3>
-				<ProjectGenerateLink project={project} text="Generate project" />
+				<ProjectLink project={project} text="back to UML" />
+
+				{isLoading && <p>Loading...</p>}
+				{error && <p>{error}</p>}
 			</header>
 
 			<div className="zPageContent row">
 				<div className="zSection col-12 col-md-6">
 					<div className="zSectionInner">
-						<h2>About Project</h2>
+						<h2>Entities:</h2>
 
-						{isLoading && <p>Loading...</p>}
-						{error && <p>{error}</p>}
 						{project && (
-							<div className="z-cadre user-infos">
-								<div>
-									id: <b>{project.id}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									name: <b>{project.name}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									createdAt: <b>{project.createdAt}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									description: <b>{project.description}</b> &nbsp;&nbsp;
-								</div>
+							<div className="bg-info">
+								{project.entites.map((entite: any) => (
+									<Button
+										key={"bt-entite" + entite.id}
+										className="m-1"
+										variant={selectedEntite?.id === entite.id ? "primary" : "secondary"}
+										onClick={() => setSelectedEntite(entite)}
+									>
+										{entite.name}
+									</Button>
+								))}
 							</div>
 						)}
 					</div>
 				</div>
 
+				{selectedEntite && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<h2>Templates:</h2>
+							{/*
+							{project && (
+								<div className="bg-info">
+									<Button
+										className="m-1"
+										variant={selectedTemplateName === "Xxx" ? "primary" : "secondary"}
+										onClick={() => setSelectedTemplateName(entite)}
+									>
+										{entite.name}
+									</Button>
+								</div>
+							)}
+							*/}
+						</div>
+					</div>
+				)}
+
 				<div className="zSection col-12">
-					<div className="zSectionInner">{project && <Uml project={project} />}</div>
-				</div>
-
-				<div className="zTodo col-12 col-md-6">
-					<div className="zTodoInner">
-						<h2>Todo</h2>
-						<ul>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
-				</div>
-
-				<div className="zHelp col-12 col-md-6">
-					<div className="zHelpInner">
-						<h2>Help</h2>
-						<ul>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
+					{selectedEntite ? <Generate entite={selectedEntite} /> : <h3>Select an entity</h3>}
 				</div>
 			</div>
 		</div>
