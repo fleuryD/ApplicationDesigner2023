@@ -21,7 +21,7 @@ export default function Uml({ project }: Props) {
 
 	return (
 		<div>
-			{app.selectedAttribut && <FormAttribut attributItem={app.selectedAttribut} />}
+			{app.selectedAttribut && <FormAttribut attributItem={app.selectedAttribut} project={project} />}
 			<h2>
 				UML <ButtonCreateEntite className="btn-sm float-end" project={project} />
 			</h2>

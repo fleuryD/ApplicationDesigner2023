@@ -13,9 +13,14 @@ import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
 import ZFrmSelect from "ui/ZFrmSelect"
 import { FaPlus, FaEdit } from "react-icons/fa"
-//import { Project } from "types"
+import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+interface ISelectOption {
+	value: any
+	text: string
+}
 
 type Props = {
 	formItem: any
@@ -25,6 +30,7 @@ type Props = {
 	isLoading: boolean
 	btValidateClick: any
 	fetchError: any | null
+	project: Project
 }
 
 export default function FormAttributInner({
@@ -35,8 +41,26 @@ export default function FormAttributInner({
 	isLoading,
 	btValidateClick,
 	fetchError,
+	project,
 }: Props) {
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
+
+	let selectOptionsEntitesIds: ISelectOption[] = [{ value: null, text: "" }]
+	let selectOptionsAttributsIds: ISelectOption[] = [{ value: null, text: "" }]
+
+	project.entites.map((ent) => {
+		selectOptionsEntitesIds = [...selectOptionsEntitesIds, { value: ent.id, text: ent.id + ": " + ent.name }]
+
+		ent.attributs.map((att) => {
+			selectOptionsAttributsIds = [
+				...selectOptionsAttributsIds,
+				{ value: att.id, text: "[" + ent.name + "] " + att.id + ": " + att.name },
+			]
+			return null
+		})
+
+		return null
+	})
 
 	return (
 		<div className="border border-primary">
@@ -92,6 +116,26 @@ export default function FormAttributInner({
 						},
 					]}
 				/>
+
+				{(formItem.tipe === "OneToMany" || formItem.tipe === "ManyToOne" || formItem.tipe === "ManyToMany") && (
+					<div className="bg-info p-2">
+						<h5>Relation</h5>
+						<ZFrmSelect
+							name="targetEntiteId"
+							label="targetEntiteId"
+							placeholder="targetEntiteId"
+							formData={formData}
+							selectOptions={selectOptionsEntitesIds}
+						/>
+						<ZFrmSelect
+							name="inverseAttributId"
+							label="inverseAttributId"
+							placeholder="inverseAttributId"
+							formData={formData}
+							selectOptions={selectOptionsAttributsIds}
+						/>
+					</div>
+				)}
 
 				<ZFrmInput type="number" name="longueur" label="longueur" placeholder="longueur" formData={formData} />
 

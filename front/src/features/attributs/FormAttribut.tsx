@@ -5,13 +5,13 @@ import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
 import { apiCreateAttribut } from "utils/api"
-import { Attribut } from "types"
+import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
 import ZModal from "ui/ZModal"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormAttribut({ attributItem }: { attributItem: Attribut }) {
+export default function FormAttribut({ attributItem, project }: { attributItem: Attribut; project: Project }) {
 	const dispatch = useAppDispatch()
 	const [formItem, setFormItem] = useState<Attribut>(attributItem)
 
@@ -79,6 +79,7 @@ export default function FormAttribut({ attributItem }: { attributItem: Attribut 
 				isLoading={isLoading}
 				fetchError={fetchError}
 				btValidateClick={btCreateClick}
+				project={project}
 			/>
 		</ZModal>
 	)
