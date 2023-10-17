@@ -61,7 +61,7 @@ export default function Generate({ entite }: Props) {
 
 	// ****************************************************************
 	return (
-		<div className="border boder-danger">
+		<div className="border boder-danger mt-4">
 			<h5>Generate {entiteCamelName}.entity</h5>
 			<textarea
 				id="w3review"

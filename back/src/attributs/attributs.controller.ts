@@ -80,7 +80,9 @@ export class AttributsController {
 		@Body("isWip") isWip: boolean,
 		@Body("isFeminin") isFeminin: string,
 		@Body("isNullable") isNullable: string,
-		@Body("isUnique") isUnique: string
+		@Body("isUnique") isUnique: string,
+		@Body("targetEntiteId") targetEntiteId: number,
+		@Body("inverseAttributId") inverseAttributId: number
 	) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
@@ -100,6 +102,8 @@ export class AttributsController {
 				isFeminin,
 				isNullable,
 				isUnique,
+				targetEntiteId,
+				inverseAttributId,
 			})
 
 			//return { entite: entite }

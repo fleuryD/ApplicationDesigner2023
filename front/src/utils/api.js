@@ -155,6 +155,8 @@ export async function apiCreateAttribut(entiyId, attribut) {
 			isFeminin: attribut.isFeminin,
 			isNullable: attribut.isNullable,
 			isUnique: attribut.isUnique,
+			targetEntiteId: attribut.targetEntiteId,
+			inverseAttributId: attribut.inverseAttributId,
 		},
 		requierdFields: [],
 	})

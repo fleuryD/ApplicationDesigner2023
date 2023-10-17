@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Form from "react-bootstrap/Form"
 import { Button } from "react-bootstrap"
 // import { useAppDispatch } from "store/store"
@@ -13,7 +13,7 @@ import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
 import ZFrmSelect from "ui/ZFrmSelect"
 import { FaPlus, FaEdit } from "react-icons/fa"
-import { Project } from "types"
+import { Project, Attribut } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -22,8 +22,14 @@ interface ISelectOption {
 	text: string
 }
 
+interface ISelectOption2 {
+	value: any
+	text: string
+	entiteId: number
+}
+
 type Props = {
-	formItem: any
+	formItem: Attribut
 	formErrors: any
 	setFormItem: any
 	setFormErrors: any
@@ -45,22 +51,39 @@ export default function FormAttributInner({
 }: Props) {
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
-	let selectOptionsEntitesIds: ISelectOption[] = [{ value: null, text: "" }]
-	let selectOptionsAttributsIds: ISelectOption[] = [{ value: null, text: "" }]
+	let selectOptionsEntitesIds: ISelectOption[] = [{ value: 0, text: "" }]
+	let selectOptionsAttributsIds: ISelectOption2[] = [{ value: 0, text: "", entiteId: 0 }]
 
 	project.entites.map((ent) => {
 		selectOptionsEntitesIds = [...selectOptionsEntitesIds, { value: ent.id, text: ent.id + ": " + ent.name }]
 
-		ent.attributs.map((att) => {
+		ent?.attributs.map((att) => {
 			selectOptionsAttributsIds = [
 				...selectOptionsAttributsIds,
-				{ value: att.id, text: "[" + ent.name + "] " + att.id + ": " + att.name },
+				{ value: att.id, text: "[" + ent.name + "] " + att.id + ": " + att.name, entiteId: ent.id },
 			]
 			return null
 		})
 
 		return null
 	})
+	/*
+	//useEffect(() => {
+	if (formItem.targetEntiteId) {
+		let enttt = project.entites.find((ent) => {
+			return ent.id === formItem.targetEntiteId
+		})
+
+		enttt?.attributs.map((att) => {
+			selectOptionsAttributsIds = [
+				...selectOptionsAttributsIds,
+				{ value: att.id, text: "[" + enttt?.name + "] " + att.id + ": " + att.name },
+			]
+			return null
+		})
+	}
+	//}, [formItem.targetEntiteId])
+	*/
 
 	return (
 		<div className="border border-primary">
@@ -127,13 +150,21 @@ export default function FormAttributInner({
 							formData={formData}
 							selectOptions={selectOptionsEntitesIds}
 						/>
-						<ZFrmSelect
-							name="inverseAttributId"
-							label="inverseAttributId"
-							placeholder="inverseAttributId"
-							formData={formData}
-							selectOptions={selectOptionsAttributsIds}
-						/>
+
+						{formItem.targetEntiteId && (
+							<ZFrmSelect
+								name="inverseAttributId"
+								label="inverseAttributId"
+								placeholder="inverseAttributId"
+								formData={formData}
+								selectOptions={selectOptionsAttributsIds.filter(
+									(soa) =>
+										(formItem.targetEntiteId && soa.entiteId.toString() === "0") ||
+										soa.entiteId.toString() === formItem.targetEntiteId.toString()
+									// ! pourquoi formItem.targetEntiteId est un string ???
+								)}
+							/>
+						)}
 					</div>
 				)}
 
