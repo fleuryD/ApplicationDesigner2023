@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 //import { useAppDispatch } from "store/store"
-import { Entite } from "types"
+import { Project, Entite } from "types"
 //import FormAttribut from "features/attributs/FormAttribut"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
@@ -11,11 +11,12 @@ import generateTemplateCppHpp from "./templateCppHpp"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
+	project: Project
 	entite: Entite
 	templateName: string
 }
 
-export default function Generate({ entite, templateName }: Props) {
+export default function Generate({ entite, templateName, project }: Props) {
 	const entitePascalName = entite.name // ! should be in pascal case : a verifier
 	const entiteCamelName = entite.name.charAt(0).toLowerCase() + entite.name.slice(1)
 	const entiteCamelNamePluriel = entiteCamelName + "s"
@@ -24,7 +25,15 @@ export default function Generate({ entite, templateName }: Props) {
 
 	useEffect(() => {
 		if (templateName === "NestEntity")
-			setStr(generateTemplateNestEntity({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
+			setStr(
+				generateTemplateNestEntity({
+					project,
+					entite,
+					entitePascalName,
+					entiteCamelName,
+					entiteCamelNamePluriel,
+				})
+			)
 		else if (templateName === "NestModule")
 			setStr(generateTemplateNestModule({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
 		else if (templateName === "CppHpp")

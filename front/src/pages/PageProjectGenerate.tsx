@@ -116,8 +116,8 @@ export default function PageProjectGenerate() {
 				)}
 
 				<div className="zSection col-12">
-					{selectedEntite && selectedTemplateName ? (
-						<Generate entite={selectedEntite} templateName={selectedTemplateName} />
+					{project && selectedEntite && selectedTemplateName ? (
+						<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
 					) : (
 						<h3>Select an entity</h3>
 					)}

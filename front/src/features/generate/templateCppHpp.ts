@@ -23,7 +23,7 @@ export default function generateTemplateCppHpp({
 	str += `{  \n`
 	str += `    private :  \n`
 	entite.attributs.map((attr: any) => {
-		str += `        ${attr.tipe}: ${attr.name};  \n`
+		str += `        ${attr.tipe}: _${attr.name};  \n`
 		return str
 	})
 	str += ` \n`
