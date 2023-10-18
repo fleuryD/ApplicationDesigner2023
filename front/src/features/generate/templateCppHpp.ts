@@ -28,10 +28,10 @@ export default function generateTemplateCppHpp({
 	})
 	str += ` \n`
 	str += `    public :  \n`
-	str += `        ${entitePascalName}(const int n);  \n`
+	str += `        ${entitePascalName}();  \n`
 	str += `        ${entitePascalName}(const ${entitePascalName} &other);  \n`
 	str += `        ~${entitePascalName}(void);  \n`
-	str += `        void		autoFill(void);  \n`
+	str += `        ${entitePascalName} &operator=(const ${entitePascalName} &other);  \n`
 	str += `};  \n`
 	str += `std::ostream &operator<<(std::ostream &flux, const ${entitePascalName} &bur);  \n`
 
