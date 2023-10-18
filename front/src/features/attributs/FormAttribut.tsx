@@ -53,8 +53,8 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 				dispatch(appSetSelectedAttribut(null))
 				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
-				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+				if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+				else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
 				else {
 					console.log("response: ", response)
 					setFetchError("Erreur Inconnue")

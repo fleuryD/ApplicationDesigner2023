@@ -4,15 +4,18 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
+import { useAppSelector, useAppDispatch } from "store/store"
 import { Project } from "types"
 import Uml from "features/uml/Uml"
 import ButtonEditProject from "features/projects/ButtonEditProject"
 import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
+import FormProject from "features/projects/FormProject"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageProject() {
 	const projectId = Number(useParams().id) || 0
+	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
@@ -37,6 +40,7 @@ export default function PageProject() {
 
 	return (
 		<div className="zPage">
+			{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
 			<header className="zPageHeader row">
 				<h1>
 					Project: <b>{project && project.name}</b>

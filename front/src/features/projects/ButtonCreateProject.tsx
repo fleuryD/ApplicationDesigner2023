@@ -13,6 +13,7 @@ type Props = {
 
 export default function ButtonCreateProject({ className }: Props) {
 	const dispatch = useAppDispatch()
+
 	function btClick() {
 		dispatch(
 			appSetSelectedProject({
@@ -25,6 +26,7 @@ export default function ButtonCreateProject({ className }: Props) {
 			})
 		)
 	}
+
 	return (
 		<Button className={className} title="Create a new project" onClick={() => btClick()}>
 			<FaPlus />

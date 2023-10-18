@@ -2,6 +2,8 @@
 import React from "react"
 import { Button } from "react-bootstrap"
 import { FaEdit } from "react-icons/fa"
+import { useAppDispatch } from "store/store"
+import { appSetSelectedProject } from "store/appSlice"
 import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -12,9 +14,12 @@ type Props = {
 }
 
 export default function ButtonEditProject({ className, project }: Props) {
+	const dispatch = useAppDispatch()
+
 	function btClick() {
-		alert("TODO: Edit project")
+		dispatch(appSetSelectedProject(project))
 	}
+
 	return (
 		<Button
 			variant="warning"

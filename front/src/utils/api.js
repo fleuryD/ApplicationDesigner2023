@@ -121,6 +121,20 @@ export async function apiCreateProject(project) {
 	})
 }
 
+export async function apiEditProject(project) {
+	return zFetch({
+		shortUrl: "/projects/" + project.id + "/edit",
+		method: "POST",
+		body: {
+			name: project.name,
+			description: project.description,
+			infos: project.infos,
+			isWip: project.isWip,
+		},
+		requierdFields: [],
+	})
+}
+
 // * ■■■■■■■■■■■■■■■■■■■■■	ENTITE
 
 export async function apiCreateEntity(projectId, entity) {

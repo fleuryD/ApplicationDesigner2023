@@ -4,7 +4,7 @@ import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedProject } from "store/appSlice"
-import { apiCreateProject } from "utils/api"
+import { apiCreateProject, apiEditProject } from "utils/api"
 import { Project } from "types"
 import FormProjectInner from "./FormProjectInner"
 import ZModal from "ui/ZModal"
@@ -46,25 +46,47 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 
 		if (checkErrors() > 0) return
 
-		apiCreateProject(formItem).then((response) => {
-			if (response.project) {
-				console.log("SUCCESS: response.project", response.project)
+		if (projectItem.id === 0) {
+			apiCreateProject(formItem).then((response) => {
+				if (response.project) {
+					console.log("SUCCESS: response.project", response.project)
 
-				dispatch(appSetSelectedProject(null))
-				window.location.reload() // !!!!!!!!!!!!!!
-			} else if (response.error) {
-				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
-				else {
+					dispatch(appSetSelectedProject(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
 					console.log("response: ", response)
 					setFetchError("Erreur Inconnue")
 				}
-			} else {
-				console.log("response: ", response)
-				setFetchError("Erreur Inconnue")
-			}
-			setIsLoading(false)
-		})
+				setIsLoading(false)
+			})
+		} else {
+			apiEditProject(formItem).then((response) => {
+				if (response.project) {
+					console.log("SUCCESS: response.project", response.project)
+
+					dispatch(appSetSelectedProject(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
+					else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+				setIsLoading(false)
+			})
+		}
 	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■

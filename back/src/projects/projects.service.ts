@@ -65,29 +65,30 @@ export class ProjectsService {
 		await this.projectsRepository.delete(id)
 	}
 
+	async save(project: Project): Promise<Project> {
+		return await this.projectsRepository.save(project)
+	}
+
+	/*
+	async update(id: number) {
+		return await this.projectsRepository.update(
+			{
+				id,
+			},
+			{
+				name: data.name,
+				summary: data.summary,
+				authorIntro: data.authorIntro,
+				price: data.price,
+				completionAt: data.completionAt,
+				isAllDone: data.isAllDone,
+				isAgree: data.isAgree,
+			}
+		)
+	}
+	*/
+
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 }
-
-/*
-
-
-
-en nestjs j'ai une entite Project qui a un attribut "entites" qui est un tableau d'entites
-et une entite Entite qui a un attribut "attributs" qui est un tableau d'attributs
-avec le code dsuivant, j'ai une erreur de circular reference
-
-
-@ManyToOne(() => Entite , {		eager: true,	} *)
-public targetEntite: Entite
-
-
-
-comment modifier le code suivant pour recuperer les attributs de l'entite cible ?
-
-	async findOne(condition: any): Promise<Project> {
-		return this.projectsRepository.findOne(condition)
-	}
-
-	*/

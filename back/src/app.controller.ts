@@ -430,6 +430,15 @@ export class AppController {
 				//targetEntiteId:,
 				//inverseAttributId,
 			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "defaut",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+				isWip: true,
+			})
 
 			// ************** Xxxxxxxxxxxxxxx's Attributes **************
 			return { success: 1 }

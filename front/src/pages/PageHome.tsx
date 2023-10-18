@@ -35,6 +35,7 @@ export default function PageHome() {
 
 	return (
 		<div className="zPage">
+			{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
 			<header className="zPageHeader row">
 				<h1>Application Designer</h1>
 				<h3>Lorem Ipsum</h3>
@@ -72,7 +73,6 @@ export default function PageHome() {
 						</div>
 					</div>
 				</div>
-				{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
 
 				<div className="zTodo col-12 col-md-6">
 					<div className="zTodoInner">
