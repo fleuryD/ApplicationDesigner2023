@@ -4,7 +4,7 @@ import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
-import { apiCreateAttribut } from "utils/api"
+import { apiCreateAttribut, apiEditAttribut } from "utils/api"
 import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
 import ZModal from "ui/ZModal"
@@ -19,6 +19,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
 
+	console.log("attributItem", attributItem)
 	// const dispatch = useAppDispatch()
 	//	const navigate = useNavigate()
 
@@ -46,25 +47,47 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 
 		if (checkErrors() > 0) return
 
-		apiCreateAttribut(formItem.entite.id, formItem).then((response) => {
-			if (response.attribut) {
-				console.log("SUCCESS: response.entite", response.entite)
+		if (attributItem.id === 0) {
+			apiCreateAttribut(formItem.entite.id, formItem).then((response) => {
+				if (response.attribut) {
+					console.log("SUCCESS: response.entite", response.entite)
 
-				dispatch(appSetSelectedAttribut(null))
-				window.location.reload() // !!!!!!!!!!!!!!
-			} else if (response.error) {
-				if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
-				else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
-				else {
+					dispatch(appSetSelectedAttribut(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
 					console.log("response: ", response)
 					setFetchError("Erreur Inconnue")
 				}
-			} else {
-				console.log("response: ", response)
-				setFetchError("Erreur Inconnue")
-			}
-			setIsLoading(false)
-		})
+				setIsLoading(false)
+			})
+		} else {
+			apiEditAttribut(formItem).then((response) => {
+				if (response.attribut) {
+					console.log("SUCCESS: response.entite", response.entite)
+
+					dispatch(appSetSelectedAttribut(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+				setIsLoading(false)
+			})
+		}
 	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■

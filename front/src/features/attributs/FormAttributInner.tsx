@@ -51,6 +51,8 @@ export default function FormAttributInner({
 }: Props) {
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
+	if (!formItem || formItem === undefined) return <div>formItem is null</div>
+
 	let selectOptionsEntitesIds: ISelectOption[] = [{ value: 0, text: "" }]
 	let selectOptionsAttributsIds: ISelectOption2[] = [{ value: 0, text: "", entiteId: 0 }]
 
@@ -67,30 +69,13 @@ export default function FormAttributInner({
 
 		return null
 	})
-	/*
-	//useEffect(() => {
-	if (formItem.targetEntiteId) {
-		let enttt = project.entites.find((ent) => {
-			return ent.id === formItem.targetEntiteId
-		})
-
-		enttt?.attributs.map((att) => {
-			selectOptionsAttributsIds = [
-				...selectOptionsAttributsIds,
-				{ value: att.id, text: "[" + enttt?.name + "] " + att.id + ": " + att.name },
-			]
-			return null
-		})
-	}
-	//}, [formItem.targetEntiteId])
-	*/
 
 	return (
 		<div className="border border-primary">
 			<h2>
 				{formItem.id === 0
-					? "Create new attribut for " + formItem.entite.name
-					: "Edit attribut: " + formItem.name + " for " + formItem.entite.name}
+					? "Create new attribut for " + formItem.entite?.name
+					: "Edit attribut: " + formItem.name + " for " + formItem.entite?.name}
 			</h2>
 
 			<Form className="">

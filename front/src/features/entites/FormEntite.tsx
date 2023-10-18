@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedEntite } from "store/appSlice"
-import { apiCreateEntity } from "utils/api"
+import { apiCreateEntity, apiEditEntity } from "utils/api"
 import { Entite, Project } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 import ZModal from "ui/ZModal"
@@ -45,25 +45,47 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 
 		if (checkErrors() > 0) return
 
-		apiCreateEntity(projectId, formItem).then((response) => {
-			if (response.entite) {
-				console.log("SUCCESS: response.project", response.project)
+		if (EntiteItem.id === 0) {
+			apiCreateEntity(projectId, formItem).then((response) => {
+				if (response.entite) {
+					console.log("SUCCESS: response.project", response.project)
 
-				dispatch(appSetSelectedEntite(null))
-				window.location.reload() // !!!!!!!!!!!!!!
-			} else if (response.error) {
-				if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
-				else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
-				else {
+					dispatch(appSetSelectedEntite(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
 					console.log("response: ", response)
 					setFetchError("Erreur Inconnue")
 				}
-			} else {
-				console.log("response: ", response)
-				setFetchError("Erreur Inconnue")
-			}
-			setIsLoading(false)
-		})
+				setIsLoading(false)
+			})
+		} else {
+			apiEditEntity(formItem).then((response) => {
+				if (response.entite) {
+					console.log("SUCCESS: response.project", response.project)
+
+					dispatch(appSetSelectedEntite(null))
+					window.location.reload() // !!!!!!!!!!!!!!
+				} else if (response.error) {
+					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
+					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
+					else {
+						console.log("response: ", response)
+						setFetchError("Erreur Inconnue")
+					}
+				} else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+				setIsLoading(false)
+			})
+		}
 	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■

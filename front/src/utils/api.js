@@ -151,12 +151,48 @@ export async function apiCreateEntity(projectId, entity) {
 		requierdFields: [],
 	})
 }
+export async function apiEditEntity(entity) {
+	return zFetch({
+		shortUrl: "/entites/" + entity.id + "/edit",
+		method: "POST",
+		body: {
+			name: entity.name,
+			description: entity.description,
+			infos: entity.infos,
+			isWip: entity.isWip,
+			isFeminin: entity.isFeminin,
+		},
+		requierdFields: [],
+	})
+}
 
 // * ■■■■■■■■■■■■■■■■■■■■■	ATTRIBUT
 
 export async function apiCreateAttribut(entiyId, attribut) {
 	return zFetch({
 		shortUrl: "/attributs/new/entite/" + entiyId,
+		method: "POST",
+		body: {
+			name: attribut.name,
+			tipe: attribut.tipe,
+			longueur: attribut.longueur,
+			description: attribut.description,
+			infos: attribut.infos,
+			position: attribut.position,
+			isWip: attribut.isWip,
+			isFeminin: attribut.isFeminin,
+			isNullable: attribut.isNullable,
+			isUnique: attribut.isUnique,
+			targetEntiteId: attribut.targetEntiteId,
+			inverseAttributId: attribut.inverseAttributId,
+		},
+		requierdFields: [],
+	})
+}
+
+export async function apiEditAttribut(attribut) {
+	return zFetch({
+		shortUrl: "/attributs/" + attribut.id + "/edit",
 		method: "POST",
 		body: {
 			name: attribut.name,

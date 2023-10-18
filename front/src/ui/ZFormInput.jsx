@@ -30,7 +30,7 @@ export default function ZFormInput2({
 					//data-date-format="DD MMMM YYYY"
 					id={"input-" + name}
 					placeholder={placeholder}
-					value={value}
+					value={value || ""}
 					className={error ? "border-danger" : ""}
 					onChange={(e) => {
 						resetError()

@@ -24,7 +24,7 @@ export default function UmlEntite({ entite, project }: Props) {
 					{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
 				</h2>
 				{entite.attributs.map((attr: any) => (
-					<UmlAttribut key={"attr" + attr.id} attribut={attr} project={project} />
+					<UmlAttribut key={"attr" + attr.id} attribut={attr} entite={entite} project={project} />
 				))}
 
 				<ButtonCreateAttribut className="btn-sm" entite={entite} />

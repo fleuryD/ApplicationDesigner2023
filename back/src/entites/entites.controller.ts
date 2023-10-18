@@ -94,6 +94,38 @@ export class EntitesController {
 		}
 	}
 
+	@Post("/:id/edit")
+	async entiteEdit(
+		@Body("name") name: string,
+		@Body("description") description: string,
+		@Body("infos") infos: string,
+		@Body("isWip") isWip: boolean,
+		@Param() params,
+		@Headers() headers
+	) {
+		//const connectedUser = await this.getUserFromHeaders(headers)
+		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
+
+		// const project = await this.projectsService.findOne({where: { id: params.id },})
+
+		let entite = await this.entitesService.findOneById(params.id)
+
+		entite.name = name
+		entite.description = description
+		entite.infos = infos
+		entite.isWip = isWip
+
+		entite = await this.entitesService.save(entite)
+
+		return {
+			entite: entite,
+		}
+
+		//} catch (e) {
+		//    throw new UnauthorizedException();
+		//}
+	}
+
 	@Get("/:id")
 	async entiteShow(@Param() params, @Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)

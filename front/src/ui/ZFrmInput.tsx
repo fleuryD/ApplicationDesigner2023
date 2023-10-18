@@ -25,7 +25,7 @@ export default function ZFrmInput({ formData, name, label, type, placeholder, ..
 					//data-date-format="DD MMMM YYYY"
 					id={"input-" + name}
 					placeholder={placeholder}
-					value={formItem[name]}
+					value={formItem[name] || ""}
 					className={formErrors[name] ? "border-danger" : ""}
 					onChange={(e) => {
 						setFormErrors({ ...formErrors, [name]: null })

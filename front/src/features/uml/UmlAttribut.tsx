@@ -2,17 +2,18 @@
 
 import React, { useEffect, useState } from "react"
 //import { useAppDispatch } from "store/store"
-import { Attribut, Project } from "types"
+import { Attribut, Entite, Project } from "types"
 import ButtonEditAttribut from "features/attributs/ButtonEditAttribut"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
 	attribut: Attribut
+	entite: Entite
 	project: Project
 }
 
-export default function UmlAttribut({ attribut, project }: Props) {
+export default function UmlAttribut({ attribut, entite, project }: Props) {
 	let targetEntite = null
 	let inversedAttribut = null
 
@@ -29,8 +30,10 @@ export default function UmlAttribut({ attribut, project }: Props) {
 
 	return (
 		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")}>
-			<ButtonEditAttribut attribut={attribut} className="btn-sm" />
-			<div className="name">{attribut.name}</div>
+			<ButtonEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
+			<div className="name">
+				#{attribut.id} {attribut.name}
+			</div>
 			<div className="tipe">
 				{attribut.tipe} {attribut.longueur && <div className="longueur">({attribut.longueur})</div>}
 			</div>

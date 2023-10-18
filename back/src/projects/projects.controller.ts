@@ -106,6 +106,9 @@ export class ProjectsController {
 		let project = await this.projectsService.findOneById(params.id)
 
 		project.name = name
+		project.description = description
+		project.infos = infos
+		project.isWip = isWip
 
 		project = await this.projectsService.save(project)
 
