@@ -48,6 +48,7 @@ export class Project {
 	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
 	@OneToMany(() => Entite, (ent: Entite) => ent.project, {
 		eager: true,
+		onDelete: "CASCADE",
 	})
 	public entites: Entite[]
 

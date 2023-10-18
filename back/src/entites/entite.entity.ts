@@ -50,6 +50,7 @@ export class Entite {
 	// * Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
 	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite, {
 		eager: true,
+		onDelete: "CASCADE",
 	})
 	public attributs: Attribut[]
 

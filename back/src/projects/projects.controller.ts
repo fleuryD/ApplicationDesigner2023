@@ -8,6 +8,7 @@ import {
 	Controller,
 	Get,
 	Post,
+	Delete,
 	Req,
 	Res,
 	UnauthorizedException,
@@ -121,6 +122,24 @@ export class ProjectsController {
 		//}
 	}
 
+	@Delete("/:id/delete")
+	async projectDelete(@Param() params, @Headers() headers) {
+		//const connectedUser = await this.getUserFromHeaders(headers)
+		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
+
+		// const project = await this.projectsService.findOne({where: { id: params.id },})
+
+		let project = await this.projectsService.findOneById(params.id)
+
+		return {
+			success: 1,
+		}
+
+		//} catch (e) {
+		//    throw new UnauthorizedException();
+		//}
+	}
+
 	@Get("/:id")
 	async projectShow(@Param() params, @Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
@@ -129,6 +148,8 @@ export class ProjectsController {
 		// const project = await this.projectsService.findOne({where: { id: params.id },})
 
 		const project = await this.projectsService.findOneById(params.id)
+		// TODO VERIF DROIT
+		await this.projectsService.remove(project.id)
 
 		return {
 			project: project,

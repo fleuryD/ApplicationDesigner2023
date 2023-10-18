@@ -11,7 +11,7 @@ import { Button } from "react-bootstrap"
 
 import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
-import { FaPlus, FaEdit } from "react-icons/fa"
+import { FaPlus, FaEdit, FaTrash } from "react-icons/fa"
 //import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -23,6 +23,7 @@ type Props = {
 	setFormErrors: any
 	isLoading: boolean
 	btValidateClick: any
+	btDeleteClick: any
 	fetchError: any | null
 }
 
@@ -33,13 +34,28 @@ export default function FormProjectInner({
 	setFormErrors,
 	isLoading,
 	btValidateClick,
+	btDeleteClick,
 	fetchError,
 }: Props) {
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
 		<div className="border border-primary">
-			<h2>{formItem.id === 0 ? "Create new project" : "Edit project: " + formItem.name}</h2>
+			<h2>
+				{formItem.id === 0 ? "Create new project" : "Edit project: " + formItem.name}
+				{formItem.id !== 0 && (
+					<Button
+						variant="danger"
+						className="float-end"
+						title={"Delete project " + formItem.name}
+						onClick={() => btDeleteClick()}
+						disabled={isLoading}
+					>
+						<FaTrash />
+					</Button>
+				)}
+			</h2>
+
 			<Form className="">
 				<ZFrmInput type="text" name="name" label="Name" placeholder="Name" formData={formData} />
 

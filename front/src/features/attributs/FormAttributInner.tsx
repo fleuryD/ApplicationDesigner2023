@@ -35,6 +35,7 @@ type Props = {
 	setFormErrors: any
 	isLoading: boolean
 	btValidateClick: any
+	btDeleteClick: any
 	fetchError: any | null
 	project: Project
 }
@@ -46,6 +47,7 @@ export default function FormAttributInner({
 	setFormErrors,
 	isLoading,
 	btValidateClick,
+	btDeleteClick,
 	fetchError,
 	project,
 }: Props) {

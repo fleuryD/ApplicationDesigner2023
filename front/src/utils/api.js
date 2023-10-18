@@ -134,6 +134,13 @@ export async function apiEditProject(project) {
 		requierdFields: [],
 	})
 }
+export async function apiDeleteProject(projectId) {
+	return zFetch({
+		shortUrl: "/projects/" + projectId + "/delete",
+		method: "DELETE",
+		requierdFields: [],
+	})
+}
 
 // * ■■■■■■■■■■■■■■■■■■■■■	ENTITE
 

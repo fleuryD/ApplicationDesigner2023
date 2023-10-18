@@ -4,7 +4,8 @@ import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedProject } from "store/appSlice"
-import { apiCreateProject, apiEditProject } from "utils/api"
+import { apiCreateProject, apiEditProject, apiDeleteProject } from "utils/api"
+import { useNavigate } from "react-router-dom"
 import { Project } from "types"
 import FormProjectInner from "./FormProjectInner"
 import ZModal from "ui/ZModal"
@@ -13,6 +14,7 @@ import ZModal from "ui/ZModal"
 
 export default function FormProject({ projectItem }: { projectItem: Project }) {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 	const [formItem, setFormItem] = useState<Project>(projectItem)
 
 	const [formErrors, setFormErrors] = useState<any>({})
@@ -74,8 +76,8 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 					dispatch(appSetSelectedProject(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
-					if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-					else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+					if (response.error === "XXXXXX") setFetchError("xxxxx")
+					else if (response.error === "YYYYYYYYYY") setFetchError("yyyyyyyyy")
 					else {
 						console.log("response: ", response)
 						setFetchError("Erreur Inconnue")
@@ -87,6 +89,28 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 				setIsLoading(false)
 			})
 		}
+	}
+
+	const btDeleteClick = async () => {
+		if (!window.confirm("Do you really want to delete project " + projectItem.name + " ?")) return
+
+		apiDeleteProject(projectItem.id).then((response) => {
+			if (response.success) {
+				dispatch(appSetSelectedProject(null))
+				navigate("/")
+			} else if (response.error) {
+				if (response.error === "XXXXXX") setFetchError("xxxxx")
+				else if (response.error === "YYYYYYYYYY") setFetchError("yyyyyyyyy")
+				else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+			} else {
+				console.log("response: ", response)
+				setFetchError("Erreur Inconnue")
+			}
+			setIsLoading(false)
+		})
 	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
@@ -101,6 +125,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 				isLoading={isLoading}
 				fetchError={fetchError}
 				btValidateClick={btCreateClick}
+				btDeleteClick={btDeleteClick}
 			/>
 		</ZModal>
 	)

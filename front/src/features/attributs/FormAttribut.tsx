@@ -89,6 +89,9 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 			})
 		}
 	}
+	const btDeleteClick = async () => {
+		//xxxxxxxxxxxxxxxxx
+	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
@@ -102,6 +105,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 				isLoading={isLoading}
 				fetchError={fetchError}
 				btValidateClick={btCreateClick}
+				btDeleteClick={btDeleteClick}
 				project={project}
 			/>
 		</ZModal>
