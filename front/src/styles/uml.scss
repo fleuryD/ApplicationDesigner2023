@@ -24,6 +24,10 @@
 				padding: 2px;
 				//margin: 5px;
 
+				&.wip {
+					background-color: $colMuted;
+				}
+
 				border-bottom: 1px solid $colSecondary;
 				div {
 					margin-right: 2px;

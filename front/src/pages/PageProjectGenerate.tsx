@@ -39,12 +39,13 @@ export default function PageProjectGenerate() {
 		}
 	}, [])
 
-	function ButtonTemplate({ text, name }: { text: string; name: string }) {
+	function ButtonTemplate({ text, name, disabled }: { text: string; name: string; disabled?: boolean }) {
 		return (
 			<Button
-				className="m-1"
+				className="m-1 btn-sm"
 				variant={selectedTemplateName === name ? "primary" : "secondary"}
 				onClick={() => setSelectedTemplateName(name)}
+				disabled={disabled}
 			>
 				{text}
 			</Button>
@@ -95,19 +96,20 @@ export default function PageProjectGenerate() {
 							<div className="bg-info">
 								<b>NestJs:</b>
 								<ButtonTemplate text="Entity" name="NestEntity" />
-								<ButtonTemplate text="Controller (todo)" name="NestController" />
+								<ButtonTemplate text="Controller" name="NestController" disabled />
 								<ButtonTemplate text="Module" name="NestModule" />
-								<ButtonTemplate text="Service (todo)" name="NestService" />
+								<ButtonTemplate text="Service" name="NestService" disabled />
 							</div>
 							<div className="bg-info">
 								<b>React (ts):</b>
-								<ButtonTemplate text="type" name="ReactType" />
-								<ButtonTemplate text="Form" name="ReactForm" />
-								<ButtonTemplate text="FormInner" name="ReactFormInner" />
+								<ButtonTemplate text="type" name="ReactType" disabled />
+								<ButtonTemplate text="Form" name="ReactForm" disabled />
+								<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
 							</div>
 							<div className="bg-info">
 								<b>C++:</b>
-								<ButtonTemplate text="C++: .hpp" name="CppHpp" />
+								<ButtonTemplate text=".hpp" name="CppHpp" />
+								<ButtonTemplate text=".cpp" name="CppCpp" disabled />
 							</div>
 						</div>
 					</div>

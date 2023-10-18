@@ -40,7 +40,8 @@ export class AppController {
 		return this.appService.getHello()
 	}
 
-	@Get("/admin/fixtures")
+	// *   http://localhost:3000/admin/fixtures/ad
+	@Get("/admin/fixtures/ad")
 	async newProject(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
@@ -298,6 +299,138 @@ export class AppController {
 				targetEntiteId: entiteAttribut.id,
 				//inverseAttributId,
 			})
+			// ************** Attribut's Attributes **************
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+			})
+			const attrAttributEntite = await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "entite",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteEntite.id,
+				inverseAttributId: attrEntiteAttributes.id,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "name",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "tipe",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "longueur",
+				tipe: "Int",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "description",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "infos",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "position",
+				tipe: "Int",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isWip",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isFeminin",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isNullable",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isUnique",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "targetEntiteId",
+				tipe: "number",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+				//targetEntiteId:,
+				//inverseAttributId,
+			})
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "inverseAttributId",
+				tipe: "number",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+				//targetEntiteId:,
+				//inverseAttributId,
+			})
+
 			// ************** Xxxxxxxxxxxxxxx's Attributes **************
 			return { success: 1 }
 		} catch (e) {

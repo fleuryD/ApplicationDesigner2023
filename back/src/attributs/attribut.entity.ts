@@ -53,7 +53,7 @@ export class Attribut {
 	@Column({ default: 42 })
 	position: number
 
-	@Column({ default: true })
+	@Column({ default: false })
 	isWip: boolean
 
 	@Column({ default: false })

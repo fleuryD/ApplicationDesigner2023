@@ -28,7 +28,7 @@ export default function UmlAttribut({ attribut, project }: Props) {
 	}
 
 	return (
-		<div className="umlAttribut">
+		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")}>
 			<ButtonEditAttribut attribut={attribut} className="btn-sm" />
 			<div className="name">{attribut.name}</div>
 			<div className="tipe">
