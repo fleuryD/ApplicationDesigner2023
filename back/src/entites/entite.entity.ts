@@ -26,7 +26,9 @@ export class Entite {
 	id: number
 
 	// * Une Entite a un seul project. un project peut avoir plusieurs entites
-	@ManyToOne(() => Project, (proj: Project) => proj.entites)
+	@ManyToOne(() => Project, (proj: Project) => proj.entites, {
+		onDelete: "CASCADE",
+	})
 	public project: Project
 
 	@Column()
@@ -50,7 +52,7 @@ export class Entite {
 	// * Une Entite peut avoir plusieurs attributs. Un attribut a une seule Entite.
 	@OneToMany(() => Attribut, (attribut: Attribut) => attribut.entite, {
 		eager: true,
-		onDelete: "CASCADE",
+		// onDelete: "CASCADE",
 	})
 	public attributs: Attribut[]
 

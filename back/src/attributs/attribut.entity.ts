@@ -25,7 +25,9 @@ export class Attribut {
 	id: number
 
 	// * Un Attribut a une seule Entite. une Entite peut avoir plusieurs Attributs
-	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs)
+	@ManyToOne(() => Entite, (entite: Entite) => entite.attributs, {
+		onDelete: "CASCADE",
+	})
 	public entite: Entite
 
 	@Column()

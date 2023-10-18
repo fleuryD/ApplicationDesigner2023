@@ -30,7 +30,10 @@ export class Project {
 	name: string
 
 	// * Un project a un seul creator (user). un user peut creer plusieurs projects
-	@ManyToOne(() => User, (user: User) => user.projects, { eager: true })
+	@ManyToOne(() => User, (user: User) => user.projects, {
+		eager: true,
+		onDelete: "CASCADE",
+	})
 	public createdBy: User
 
 	@CreateDateColumn()
@@ -48,7 +51,6 @@ export class Project {
 	// * Un project peut avoir plusieurs entites. Une entite a un seul project.
 	@OneToMany(() => Entite, (ent: Entite) => ent.project, {
 		eager: true,
-		onDelete: "CASCADE",
 	})
 	public entites: Entite[]
 

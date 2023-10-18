@@ -12,7 +12,7 @@ import { Button } from "react-bootstrap"
 import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
 import ZFrmSelect from "ui/ZFrmSelect"
-import { FaPlus, FaEdit } from "react-icons/fa"
+import { FaPlus, FaEdit, FaTrash } from "react-icons/fa"
 import { Project, Attribut } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -78,6 +78,17 @@ export default function FormAttributInner({
 				{formItem.id === 0
 					? "Create new attribut for " + formItem.entite?.name
 					: "Edit attribut: " + formItem.name + " for " + formItem.entite?.name}
+				{formItem.id !== 0 && (
+					<Button
+						variant="danger"
+						className="float-end"
+						title={"Delete attribut " + formItem.name}
+						onClick={() => btDeleteClick()}
+						disabled={isLoading}
+					>
+						<FaTrash />
+					</Button>
+				)}
 			</h2>
 
 			<Form className="">

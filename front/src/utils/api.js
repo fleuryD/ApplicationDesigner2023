@@ -172,6 +172,13 @@ export async function apiEditEntity(entity) {
 		requierdFields: [],
 	})
 }
+export async function apiDeleteEntity(entityId) {
+	return zFetch({
+		shortUrl: "/entites/" + entityId + "/delete",
+		method: "DELETE",
+		requierdFields: [],
+	})
+}
 
 // * ■■■■■■■■■■■■■■■■■■■■■	ATTRIBUT
 
@@ -215,6 +222,13 @@ export async function apiEditAttribut(attribut) {
 			targetEntiteId: attribut.targetEntiteId,
 			inverseAttributId: attribut.inverseAttributId,
 		},
+		requierdFields: [],
+	})
+}
+export async function apiDeleteAttribut(attrId) {
+	return zFetch({
+		shortUrl: "/attributs/" + attrId + "/delete",
+		method: "DELETE",
 		requierdFields: [],
 	})
 }

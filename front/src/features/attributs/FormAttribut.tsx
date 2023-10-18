@@ -4,7 +4,7 @@ import React, { useState } from "react"
 // import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
-import { apiCreateAttribut, apiEditAttribut } from "utils/api"
+import { apiCreateAttribut, apiEditAttribut, apiDeleteAttribut } from "utils/api"
 import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
 import ZModal from "ui/ZModal"
@@ -89,8 +89,27 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 			})
 		}
 	}
+
 	const btDeleteClick = async () => {
-		//xxxxxxxxxxxxxxxxx
+		if (!window.confirm("Do you really want to delete attribut " + attributItem.name + " ?")) return
+
+		apiDeleteAttribut(attributItem.id).then((response) => {
+			if (response.success) {
+				dispatch(appSetSelectedAttribut(null))
+				window.location.reload() // !!!!!!!!!!!!!!
+			} else if (response.error) {
+				if (response.error === "XXXXXX") setFetchError("xxxxx")
+				else if (response.error === "YYYYYYYYYY") setFetchError("yyyyyyyyy")
+				else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+			} else {
+				console.log("response: ", response)
+				setFetchError("Erreur Inconnue")
+			}
+			setIsLoading(false)
+		})
 	}
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■

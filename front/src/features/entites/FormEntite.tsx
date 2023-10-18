@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedEntite } from "store/appSlice"
-import { apiCreateEntity, apiEditEntity } from "utils/api"
+import { apiCreateEntity, apiEditEntity, apiDeleteEntity } from "utils/api"
 import { Entite, Project } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 import ZModal from "ui/ZModal"
@@ -88,6 +88,28 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 		}
 	}
 
+	const btDeleteClick = async () => {
+		if (!window.confirm("Do you really want to delete entity " + EntiteItem.name + " ?")) return
+
+		apiDeleteEntity(EntiteItem.id).then((response) => {
+			if (response.success) {
+				dispatch(appSetSelectedEntite(null))
+				window.location.reload() // !!!!!!!!!!!!!!
+			} else if (response.error) {
+				if (response.error === "XXXXXX") setFetchError("xxxxx")
+				else if (response.error === "YYYYYYYYYY") setFetchError("yyyyyyyyy")
+				else {
+					console.log("response: ", response)
+					setFetchError("Erreur Inconnue")
+				}
+			} else {
+				console.log("response: ", response)
+				setFetchError("Erreur Inconnue")
+			}
+			setIsLoading(false)
+		})
+	}
+
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
@@ -100,6 +122,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 				isLoading={isLoading}
 				fetchError={fetchError}
 				btValidateClick={btCreateClick}
+				btDeleteClick={btDeleteClick}
 			/>
 		</ZModal>
 	)

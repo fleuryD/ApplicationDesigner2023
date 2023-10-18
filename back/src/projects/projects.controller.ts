@@ -130,6 +130,7 @@ export class ProjectsController {
 		// const project = await this.projectsService.findOne({where: { id: params.id },})
 
 		let project = await this.projectsService.findOneById(params.id)
+		await this.projectsService.remove(project.id)
 
 		return {
 			success: 1,
@@ -149,7 +150,6 @@ export class ProjectsController {
 
 		const project = await this.projectsService.findOneById(params.id)
 		// TODO VERIF DROIT
-		await this.projectsService.remove(project.id)
 
 		return {
 			project: project,
