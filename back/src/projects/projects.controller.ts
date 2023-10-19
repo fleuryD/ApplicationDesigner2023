@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
 import {
 	BadRequestException,
 	Body,
@@ -13,15 +12,18 @@ import {
 	Res,
 	UnauthorizedException,
 	Param,
+	UseGuards,
+	Headers,
+	Query,
+	Redirect,
+	UploadedFile,
+	UseInterceptors,
 } from "@nestjs/common"
 import { ProjectsService } from "./projects.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
-import { Headers, Query, Redirect } from "@nestjs/common"
 import fetch from "node-fetch"
-
-import { UploadedFile, UseInterceptors } from "@nestjs/common"
 import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

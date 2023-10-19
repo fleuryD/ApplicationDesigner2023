@@ -57,6 +57,9 @@ export class Entite {
 	public attributs: Attribut[]
 
 	/*
+	private/public/static
+
+
 	namespace: string
 	prefix: string
 

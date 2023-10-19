@@ -25,6 +25,8 @@ import { EntitesController } from "./entites/entites.controller"
 import { Attribut } from "./attributs/attribut.entity"
 import { AttributsService } from "./attributs/attributs.service"
 import { AttributsController } from "./attributs/attributs.controller"
+import { AuthService } from "./auth/auth.service"
+import { LocalStrategy } from "./auth/local.strategy"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -50,6 +52,8 @@ import { AttributsController } from "./attributs/attributs.controller"
 	],
 
 	providers: [
+		LocalStrategy, // * ne pas oublier
+		AuthService,
 		AppService,
 		UsersService,
 		ProjectsService,

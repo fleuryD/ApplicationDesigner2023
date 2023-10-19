@@ -7,18 +7,25 @@ import {
 	Get,
 	Post,
 	Req,
+	Request,
 	Res,
 	UnauthorizedException,
 	Param,
+	UseGuards,
+	Headers,
+	Query,
+	Redirect,
+	UploadedFile,
+	UseInterceptors,
 } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
-import { Response, Request } from "express"
-import { Headers, Query, Redirect } from "@nestjs/common"
+import { Response } from "express"
 import fetch from "node-fetch"
-import { UploadedFile, UseInterceptors } from "@nestjs/common"
 import { FileInterceptor } from "@nestjs/platform-express"
+import { AuthGuard } from "@nestjs/passport"
+import { LocalAuthGuard } from "./local-auth.guard"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -32,6 +39,23 @@ export class AuthController {
 		private readonly usersService: UsersService,
 		private jwtService: JwtService
 	) {}
+
+	@UseGuards(LocalAuthGuard)
+	@Get("/test")
+	async test(@Request() req) {
+		return req.user
+	}
+
+	@Get("/test1")
+	test1() {
+		return "test1"
+	}
+
+	@Get("/test2")
+	@UseGuards(LocalAuthGuard)
+	test2() {
+		return "test2"
+	}
 
 	/*
 	 *
@@ -104,6 +128,7 @@ export class AuthController {
 	 *	5) return success
 	 *
 	 */
+	@UseGuards(AuthGuard("local"))
 	@Post("login")
 	async login(
 		@Body("emailOrUsername") emailOrUsername: string,

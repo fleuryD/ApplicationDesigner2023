@@ -7,7 +7,14 @@ import {
 	Req,
 	Res,
 	UnauthorizedException,
+	Request,
 	Param,
+	UseGuards,
+	Headers,
+	Query,
+	Redirect,
+	UploadedFile,
+	UseInterceptors,
 } from "@nestjs/common"
 import { AppService } from "./app.service"
 import { ProjectsService } from "./projects/projects.service"
@@ -15,12 +22,10 @@ import { EntitesService } from "./entites/entites.service"
 import { AttributsService } from "./attributs/attributs.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
-import { Response, Request } from "express"
-import { Headers, Query, Redirect } from "@nestjs/common"
 import fetch from "node-fetch"
-
-import { UploadedFile, UseInterceptors } from "@nestjs/common"
 import { FileInterceptor } from "@nestjs/platform-express"
+import { AuthGuard } from "@nestjs/passport"
+import { LocalAuthGuard } from "./auth/local-auth.guard"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -35,9 +40,16 @@ export class AppController {
 		private readonly attributsService: AttributsService
 	) {}
 
+	@UseGuards(LocalAuthGuard)
 	@Get()
 	getHello(): string {
 		return this.appService.getHello()
+	}
+
+	@UseGuards(LocalAuthGuard)
+	@Get("/test")
+	async tessssst(@Request() req) {
+		return req.user
 	}
 
 	// *   http://localhost:3000/admin/fixtures/ad

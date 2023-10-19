@@ -13,16 +13,19 @@ import {
 	Res,
 	UnauthorizedException,
 	Param,
+	UseGuards,
+	Headers,
+	Query,
+	Redirect,
+	UploadedFile,
+	UseInterceptors,
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
 import { EntitesService } from "../entites/entites.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
-import { Headers, Query, Redirect } from "@nestjs/common"
 import fetch from "node-fetch"
-
-import { UploadedFile, UseInterceptors } from "@nestjs/common"
 import { FileInterceptor } from "@nestjs/platform-express"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
