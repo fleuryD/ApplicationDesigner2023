@@ -49,6 +49,7 @@ export async function apiFetchRegister({
 	*/
 }) {
 	return zFetch({
+		publicAccess: true,
 		shortUrl: "/auth/register",
 		method: "POST",
 		body: {
@@ -68,6 +69,7 @@ export async function apiFetchRegister({
 
 export async function apiFetchLogin({ emailOrUsername, password }) {
 	return zFetch({
+		publicAccess: true,
 		shortUrl: "/auth/login",
 		method: "POST",
 		body: {
@@ -80,6 +82,7 @@ export async function apiFetchLogin({ emailOrUsername, password }) {
 
 export async function apiFetchCheckEmail({ tokenEmail }) {
 	return zFetch({
+		publicAccess: true,
 		shortUrl: "/auth/check-email",
 		method: "POST",
 		body: {

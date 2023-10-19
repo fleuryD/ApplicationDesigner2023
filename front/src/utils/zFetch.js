@@ -23,6 +23,7 @@ export default async function zFetch({ shortUrl, method, requierdFields, body, p
 		body: body ? JSON.stringify(body) : null,
 	}
 
+	console.log("requestOptions:", requestOptions)
 	try {
 		const response = await fetch(url, requestOptions)
 		const rep = await response.json()
@@ -61,7 +62,7 @@ function requestOptionsHeaders() {
 	return {
 		"Content-Type": "application/json",
 		Accept: "application/json",
-		Authorization: "Bearer " + localStorage.getItem("token"), // TODO : A modifier
+		Authorization: "Bearer " + localStorage.getItem("jwt"), // TODO : A modifier
 		//Authorization: localStorage.getItem("jwt"), // TODO : A modifier
 	}
 }

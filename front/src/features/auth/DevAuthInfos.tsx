@@ -8,7 +8,7 @@ import { useAppSelector } from "store/store"
 export default function DevAuthInfos() {
 	const auth = useAppSelector((state) => state.auth)
 	return (
-		<div className=" col-12">
+		<div className=" col-12 bg-warning">
 			<div className="">
 				<b>Auth:</b>
 			</div>

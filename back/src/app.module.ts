@@ -27,6 +27,7 @@ import { AttributsService } from "./attributs/attributs.service"
 import { AttributsController } from "./attributs/attributs.controller"
 import { AuthService } from "./auth/auth.service"
 import { LocalStrategy } from "./auth/local.strategy"
+import { JwtStrategy } from "./auth/jwt.strategy"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -53,6 +54,7 @@ import { LocalStrategy } from "./auth/local.strategy"
 
 	providers: [
 		LocalStrategy, // * ne pas oublier
+		JwtStrategy, // * ne pas oublier
 		AuthService,
 		AppService,
 		UsersService,

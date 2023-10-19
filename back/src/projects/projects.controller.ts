@@ -25,6 +25,8 @@ import { JwtService } from "@nestjs/jwt"
 import { Response, Request } from "express"
 import fetch from "node-fetch"
 import { FileInterceptor } from "@nestjs/platform-express"
+import { LocalAuthGuard } from "src/auth/local-auth.guard"
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -54,6 +56,8 @@ export class ProjectsController {
 	*/
 
 	@Get("/my")
+	//@UseGuards(LocalAuthGuard)
+	@UseGuards(JwtAuthGuard)
 	async myProjects(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }

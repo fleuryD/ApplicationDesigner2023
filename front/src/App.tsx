@@ -24,6 +24,7 @@ import PageProjectGenerate from "pages/PageProjectGenerate"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "styles/main.scss"
 import "styles/uml.scss"
+import DevAuthInfos from "features/auth/DevAuthInfos"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
 		<div className="App  appStyled container-fluid" id="container-global">
 			<Router>
 				<NavBar />
+				<DevAuthInfos />
 				{auth.isConnected ? (
 					<Routes>
 						{/*

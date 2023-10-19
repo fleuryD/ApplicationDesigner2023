@@ -26,6 +26,8 @@ import fetch from "node-fetch"
 import { FileInterceptor } from "@nestjs/platform-express"
 import { AuthGuard } from "@nestjs/passport"
 import { LocalAuthGuard } from "./local-auth.guard"
+import { AuthService } from "./auth.service"
+import { Logger } from "@nestjs/common"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -37,7 +39,8 @@ import { LocalAuthGuard } from "./local-auth.guard"
 export class AuthController {
 	constructor(
 		private readonly usersService: UsersService,
-		private jwtService: JwtService
+		private jwtService: JwtService,
+		private authService: AuthService
 	) {}
 
 	@UseGuards(LocalAuthGuard)
@@ -128,9 +131,9 @@ export class AuthController {
 	 *	5) return success
 	 *
 	 */
-	@UseGuards(AuthGuard("local"))
-	@Post("login")
-	async login(
+	@Post("login____back")
+	//@UseGuards(LocalAuthGuard)
+	async login____back(
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string,
 		@Body("code") code: string,
@@ -152,6 +155,24 @@ export class AuthController {
 			message: "success",
 			user: { jwt, ...user },
 		}
+	}
+
+	@Post("login")
+	//@UseGuards(LocalAuthGuard)
+	async login(
+		@Body("emailOrUsername") emailOrUsername: string,
+		@Body("password") password: string
+	) {
+		Logger.log("🔵 emailOrUsername", emailOrUsername)
+		Logger.log("🔵 password", password)
+		//Logger.warn("warning")
+		//Logger.error("something went wrong! ", "error")
+
+		const user = { username: emailOrUsername, password: password }
+
+		Logger.log("🔵 user", user)
+
+		return this.authService.login(user)
 	}
 
 	/*
