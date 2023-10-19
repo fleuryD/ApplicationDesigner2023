@@ -163,16 +163,26 @@ export class AuthController {
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string
 	) {
-		Logger.log("🔵 emailOrUsername", emailOrUsername)
-		Logger.log("🔵 password", password)
-		//Logger.warn("warning")
-		//Logger.error("something went wrong! ", "error")
+		Logger.log("🔵 emailOrUsername:", emailOrUsername)
+		Logger.log("🔵 password:", password)
+		if (!emailOrUsername || !password) {
+			throw new BadRequestException("MISSING_FIELDS")
+		}
+		const user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
+		if (!user) {
+			throw new BadRequestException("invalid credentials")
+		}
+		if (!(await bcrypt.compare(password, user.password))) {
+			throw new BadRequestException("invalid credentials")
+		}
+		Logger.log("🔵 user:", user)
 
-		const user = { username: emailOrUsername, password: password }
-
-		Logger.log("🔵 user", user)
-
-		return this.authService.login(user)
+		const jwt = await this.authService.getAccessToken(user) // todo if null
+		await this.usersService.setJwt(user, jwt)
+		return {
+			message: "success",
+			user: { jwt, ...user },
+		}
 	}
 
 	/*
@@ -210,38 +220,5 @@ export class AuthController {
 		}
 	}
 
-
-	@Get("users")
-	async users(@Headers() headers) {
-		const connectedUser = await this.getUserFromHeaders(headers)
-		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		const users = await this.usersService.findAll()
-		const allRelations =
-			await this.userRelationService.getAllUserRelations()
-
-		return {
-			users: users,
-			relations: connectedUser.userRelations,
-			allRelations: allRelations,
-		}
-	}
-
-	@Get("user/:id")
-	async userShow(@Param() params, @Headers() headers) {
-		const connectedUser = await this.getUserFromHeaders(headers)
-		if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		const user = await this.usersService.findOne({
-			where: { id: params.id },
-		})
-
-		const { password, ...result } = user
-
-		return result
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
-	}
 	*/
 }

@@ -16,6 +16,7 @@ export class AuthService {
 	) {}
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	/*
 	async validateUser(username: string, pass: string): Promise<any> {
 		// todo bcrypt
 		Logger.log("🟠 username", username)
@@ -26,14 +27,16 @@ export class AuthService {
 		if (user && user.password === pass) {
 			const { password, ...result } = user
 			return result
-		} */
+		} * /
 		if (user && (await bcrypt.compare(pass, user.password))) {
 			const { password, ...result } = user
 			return result
 		}
 		return null
 	}
+	*/
 
+	/*
 	async login(user: any) {
 		console.log("🟦 AuthService login")
 		const payload = { username: user.username, sub: user.userId }
@@ -41,5 +44,14 @@ export class AuthService {
 		return {
 			access_token: this.jwtService.sign(payload),
 		}
+	}
+	*/
+	async getAccessToken(user: any) {
+		//const payload = { username: user.username, sub: user.userId }
+		const payload = { username: user.username, userId: user.id }
+
+		console.log("🟦 AuthService getAccessToken:payload: ", payload)
+
+		return this.jwtService.sign(payload)
 	}
 }

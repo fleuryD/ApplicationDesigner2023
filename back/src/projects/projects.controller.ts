@@ -55,9 +55,8 @@ export class ProjectsController {
 	}
 	*/
 
-	@Get("/my")
-	//@UseGuards(LocalAuthGuard)
 	@UseGuards(JwtAuthGuard)
+	@Get("/my")
 	async myProjects(@Headers() headers) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }

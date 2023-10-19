@@ -28,6 +28,7 @@ import { AttributsController } from "./attributs/attributs.controller"
 import { AuthService } from "./auth/auth.service"
 import { LocalStrategy } from "./auth/local.strategy"
 import { JwtStrategy } from "./auth/jwt.strategy"
+import { jwtConstants } from "./auth/constants"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -46,7 +47,7 @@ import { JwtStrategy } from "./auth/jwt.strategy"
 			synchronize: true, // ! false en prod
 		}),
 		JwtModule.register({
-			secret: "secret", // ! dans .env
+			secret: jwtConstants.secret, // ! dans .env
 			signOptions: { expiresIn: "1d" },
 		}),
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),

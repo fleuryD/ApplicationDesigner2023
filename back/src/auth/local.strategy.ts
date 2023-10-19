@@ -10,6 +10,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 		super()
 	}
 
+	/*
 	async validate(username: string, password: string): Promise<any> {
 		Logger.log("🟤 username", username)
 		Logger.log("🟤 pass", password)
@@ -19,4 +20,5 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 		}
 		return user
 	}
+	*/
 }
