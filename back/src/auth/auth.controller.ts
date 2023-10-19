@@ -1,31 +1,9 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import {
-	BadRequestException,
-	Body,
-	Controller,
-	Get,
-	Post,
-	Req,
-	Request,
-	Res,
-	UnauthorizedException,
-	Param,
-	UseGuards,
-	Headers,
-	Query,
-	Redirect,
-	UploadedFile,
-	UseInterceptors,
-} from "@nestjs/common"
+import { BadRequestException, Body, Controller, Post } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
-import { Response } from "express"
-import fetch from "node-fetch"
-import { FileInterceptor } from "@nestjs/platform-express"
-import { AuthGuard } from "@nestjs/passport"
-import { LocalAuthGuard } from "./local-auth.guard"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
 import { Public } from "./jwt-auth.guard"
@@ -41,23 +19,6 @@ export class AuthController {
 	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
-	/*
-	 *
-	 * La methode qui permet de trouver un user à partir du Bearer token dans les headers
-	 * // TODO : A mettre ailleurs pour l'utiliser partout
-	 *
-	 */
-	/*
-	private async getUserFromHeaders(headers: any): Promise<any | null> {
-		const [type, jwtToken] = headers.authorization?.split(" ") ?? []
-		if (type !== "Bearer") return null
-		const user = await this.usersService.findOne({
-			where: { jwt: jwtToken },
-		})
-		return user
-	}
-	*/
 
 	/*
 	 *	REGISTER

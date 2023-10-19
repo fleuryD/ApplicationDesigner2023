@@ -1,7 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
 import {
 	BadRequestException,
 	Body,
@@ -9,28 +6,11 @@ import {
 	Get,
 	Post,
 	Delete,
-	Req,
-	Res,
-	UnauthorizedException,
 	Param,
-	UseGuards,
 	Headers,
-	Query,
-	Redirect,
-	UploadedFile,
-	UseInterceptors,
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
 import { EntitesService } from "../entites/entites.service"
-import * as bcrypt from "bcrypt"
-import { JwtService } from "@nestjs/jwt"
-import { Response, Request } from "express"
-import fetch from "node-fetch"
-import { FileInterceptor } from "@nestjs/platform-express"
-
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
-// TODO: ne pas envoyer "password" dans les réponses
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -41,32 +21,11 @@ export class AttributsController {
 		private readonly entitesService: EntitesService
 	) {}
 
-	/*
-	 *
-	 * La methode qui permet de trouver un user à partir du Bearer token dans les headers
-	 * // TODO : A mettre ailleurs pour l'utiliser partout
-	 *
-	 */
-	/*
-	private async getUserFromHeaders(headers: any): Promise<any | null> {
-		const [type, jwtToken] = headers.authorization?.split(" ") ?? []
-		if (type !== "Bearer") return null
-		const user = await this.usersService.findOne({
-			where: { jwt: jwtToken },
-		})
-		return user
-	}
-	*/
+	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	@Get("/my")
 	async myAttributs(@Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		//const attributs = await this.attributsService.findAll() // ! by user id
-
 		const attributs = await this.attributsService.findAll() // TODO : by connectedUser id
-
 		return {
 			attributs: attributs,
 		}
@@ -88,11 +47,7 @@ export class AttributsController {
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number
 	) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
 		const entite = await this.entitesService.findOneById(params.id)
-
 		try {
 			const attribut = await this.attributsService.create({
 				entite,
@@ -109,8 +64,6 @@ export class AttributsController {
 				targetEntiteId,
 				inverseAttributId,
 			})
-
-			//return { entite: entite }
 			return { attribut: attribut }
 		} catch (e) {
 			throw new BadRequestException("aosdjfla jdsfajlsdjf;alksjkjtjjtjt")
@@ -134,11 +87,6 @@ export class AttributsController {
 		@Param() params,
 		@Headers() headers
 	) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
-
 		let attribut = await this.attributsService.findOneById(params.id)
 
 		attribut.name = name
@@ -159,46 +107,24 @@ export class AttributsController {
 		return {
 			attribut: attribut,
 		}
-
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
-
 		let attribut = await this.attributsService.findOneById(params.id)
 		await this.attributsService.remove(attribut.id)
 
 		return {
 			success: 1,
 		}
-
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 
 	@Get("/:id")
 	async attributShow(@Param() params, @Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const attribut = await this.attributsService.findOne({where: { id: params.id },})
-
 		const attribut = await this.attributsService.findOneById(params.id)
 
 		return {
 			attribut: attribut,
 		}
-
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 }

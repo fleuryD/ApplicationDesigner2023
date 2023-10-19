@@ -8,27 +8,11 @@ import {
 	Get,
 	Post,
 	Delete,
-	Req,
-	Res,
-	UnauthorizedException,
 	Param,
-	UseGuards,
 	Headers,
-	Query,
-	Redirect,
-	UploadedFile,
-	UseInterceptors,
 } from "@nestjs/common"
 import { EntitesService } from "./entites.service"
 import { ProjectsService } from "../projects/projects.service"
-
-import * as bcrypt from "bcrypt"
-import { JwtService } from "@nestjs/jwt"
-import { Response, Request } from "express"
-
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
-// TODO: ne pas envoyer "password" dans les réponses
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -39,36 +23,7 @@ export class EntitesController {
 		private readonly projectsService: ProjectsService
 	) {}
 
-	/*
-	 *
-	 * La methode qui permet de trouver un user à partir du Bearer token dans les headers
-	 * // TODO : A mettre ailleurs pour l'utiliser partout
-	 *
-	 */
-	/*
-	private async getUserFromHeaders(headers: any): Promise<any | null> {
-		const [type, jwtToken] = headers.authorization?.split(" ") ?? []
-		if (type !== "Bearer") return null
-		const user = await this.userService.findOne({
-			where: { jwt: jwtToken },
-		})
-		return user
-	}
-	*/
-
-	@Get("/my")
-	async myEntites(@Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		//const entites = await this.entitesService.findAll() // ! by user id
-
-		const entites = await this.entitesService.findAll() // TODO : by connectedUser id
-
-		return {
-			entites: entites,
-		}
-	}
+	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	@Post("/new/project/:id")
 	async newEntite(
@@ -79,9 +34,6 @@ export class EntitesController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean
 	) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
 		const project = await this.projectsService.findOneById(params.id)
 
 		try {
@@ -108,11 +60,6 @@ export class EntitesController {
 		@Param() params,
 		@Headers() headers
 	) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
-
 		let entite = await this.entitesService.findOneById(params.id)
 
 		entite.name = name
@@ -125,38 +72,20 @@ export class EntitesController {
 		return {
 			entite: entite,
 		}
-
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const project = await this.projectsService.findOne({where: { id: params.id },})
-
 		let entite = await this.entitesService.findOneById(params.id)
 		await this.entitesService.remove(entite.id)
 
 		return {
 			success: 1,
 		}
-
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 
 	@Get("/:id")
 	async entiteShow(@Param() params, @Headers() headers) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// const entite = await this.entitesService.findOne({where: { id: params.id },})
-
 		const entite = await this.entitesService.findOneById(params.id)
 
 		return {
@@ -165,8 +94,5 @@ export class EntitesController {
 		return {
 			entite: entite,
 		}
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
 	}
 }
