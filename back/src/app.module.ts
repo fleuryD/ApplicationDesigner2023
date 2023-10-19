@@ -29,6 +29,8 @@ import { AuthService } from "./auth/auth.service"
 import { LocalStrategy } from "./auth/local.strategy"
 import { JwtStrategy } from "./auth/jwt.strategy"
 import { jwtConstants } from "./auth/constants"
+import { APP_GUARD } from "@nestjs/core"
+import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -56,6 +58,11 @@ import { jwtConstants } from "./auth/constants"
 	],
 
 	providers: [
+		{
+			// Enable authentication globally :
+			provide: APP_GUARD,
+			useClass: JwtAuthGuard,
+		},
 		LocalStrategy, // * ne pas oublier
 		JwtStrategy, // * ne pas oublier
 		AuthService,

@@ -1,4 +1,4 @@
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 import {
 	BadRequestException,
@@ -28,12 +28,9 @@ import { AuthGuard } from "@nestjs/passport"
 import { LocalAuthGuard } from "./local-auth.guard"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
+import { Public } from "./jwt-auth.guard"
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
-// TODO: ne pas envoyer "password" dans les réponses
-
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Controller("auth")
 export class AuthController {
@@ -43,22 +40,7 @@ export class AuthController {
 		private authService: AuthService
 	) {}
 
-	@UseGuards(LocalAuthGuard)
-	@Get("/test")
-	async test(@Request() req) {
-		return req.user
-	}
-
-	@Get("/test1")
-	test1() {
-		return "test1"
-	}
-
-	@Get("/test2")
-	@UseGuards(LocalAuthGuard)
-	test2() {
-		return "test2"
-	}
+	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	/*
 	 *
@@ -87,6 +69,8 @@ export class AuthController {
 	 *	5) return success
 	 *
 	 */
+
+	@Public()
 	@Post("register")
 	async register(
 		@Body("username") username: string,
@@ -124,93 +108,46 @@ export class AuthController {
 	/*
 	 *	LOGIN
 	 *
-	 *	1) check UNIQUE : username, email
-	 *	2) check VALIDE : username, email, password // TODO
-	 *	3) create user (avec token_email)
-	 *	4) send email with token_email // TODO
-	 *	5) return success
 	 *
 	 */
-	@Post("login____back")
-	//@UseGuards(LocalAuthGuard)
-	async login____back(
-		@Body("emailOrUsername") emailOrUsername: string,
-		@Body("password") password: string,
-		@Body("code") code: string,
-		@Res({ passthrough: true }) response: Response
-	) {
-		if (!emailOrUsername || !password) {
-			throw new BadRequestException("missing fields")
-		}
-		const user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
-		if (!user) {
-			throw new BadRequestException("invalid credentials")
-		}
-		if (!(await bcrypt.compare(password, user.password))) {
-			throw new BadRequestException("invalid credentials")
-		}
-		const jwt = await this.jwtService.signAsync({ id: user.id })
-		await this.usersService.setJwt(user, jwt)
-		return {
-			message: "success",
-			user: { jwt, ...user },
-		}
-	}
-
+	@Public()
 	@Post("login")
-	//@UseGuards(LocalAuthGuard)
 	async login(
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string
 	) {
-		Logger.log("🔵 emailOrUsername:", emailOrUsername)
-		Logger.log("🔵 password:", password)
 		if (!emailOrUsername || !password) {
+			Logger.log("⛔ login: throw : MISSING_FIELDS")
 			throw new BadRequestException("MISSING_FIELDS")
 		}
-		const user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
+		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 		if (!user) {
-			throw new BadRequestException("invalid credentials")
+			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
+			throw new BadRequestException("iINVALID_CREDENTIALS")
 		}
 		if (!(await bcrypt.compare(password, user.password))) {
-			throw new BadRequestException("invalid credentials")
+			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
+			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
-		Logger.log("🔵 user:", user)
 
-		const jwt = await this.authService.getAccessToken(user) // todo if null
-		await this.usersService.setJwt(user, jwt)
-		return {
-			message: "success",
-			user: { jwt, ...user },
+		if (user.jwt) {
+			Logger.log(`🟢 login: "${user.username}"`)
+			return {
+				message: "success",
+				user: user,
+			}
+		} else {
+			const jwt = await this.authService.getAccessToken(user)
+			user = await this.usersService.setJwt(user, jwt)
+			Logger.log(`🟢 login: "${user.username}" (with new token)`)
+			return {
+				message: "success",
+				user: user,
+			}
 		}
 	}
 
 	/*
-	@Post("profil")
-	async profil(@Body("jwt") jwt: string, @Req() request: Request) {
-		//try {
-		console.log("cookie : " + jwt)
-
-		const data = await this.jwtService.verifyAsync(jwt)
-
-		if (!data) {
-			console.log("no data for")
-			console.log(jwt)
-			//throw new UnauthorizedException();
-		}
-
-		const user = await this.usersService.findOne({
-			where: { id: data["id"] },
-		})
-
-		const { password, ...result } = user
-
-		return result
-		//} catch (e) {
-		//    throw new UnauthorizedException();
-		//}
-	}
-
 	@Post("logout")
 	async logout(@Res({ passthrough: true }) response: Response) {
 		response.clearCookie("jwt")
@@ -219,6 +156,5 @@ export class AuthController {
 			message: "success",
 		}
 	}
-
 	*/
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
 	BadRequestException,
 	Body,
@@ -26,13 +26,15 @@ import { Response, Request } from "express"
 import fetch from "node-fetch"
 import { FileInterceptor } from "@nestjs/platform-express"
 import { LocalAuthGuard } from "src/auth/local-auth.guard"
-import { JwtAuthGuard } from "src/auth/jwt-auth.guard"
+import { JwtAuthGuard, Public } from "src/auth/jwt-auth.guard"
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+import { User } from "../auth/user.decorator"
+
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 // TODO: ne pas envoyer "password" dans les réponses
 
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Controller("projects")
 export class ProjectsController {
@@ -55,14 +57,13 @@ export class ProjectsController {
 	}
 	*/
 
-	@UseGuards(JwtAuthGuard)
 	@Get("/my")
-	async myProjects(@Headers() headers) {
+	async myProjects(@Headers() headers, @User() userFromToken) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 
 		//const projects = await this.projectsService.findAll() // ! by user id
-
+		console.log("userFromToken", userFromToken)
 		const projects = await this.projectsService.findAll() // TODO : by connectedUser id
 
 		return {
