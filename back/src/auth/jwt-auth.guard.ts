@@ -5,7 +5,7 @@ import { Logger } from "@nestjs/common"
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {
 	canActivate(context: ExecutionContext) {
-		Logger.log("🟠 canActivate::context:", context)
+		Logger.log("🟠 canActivate:")
 		// Add your custom authentication logic here
 		// for example, call super.logIn(request) to establish a session.
 		return super.canActivate(context)

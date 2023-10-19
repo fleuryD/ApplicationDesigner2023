@@ -46,10 +46,12 @@ import { jwtConstants } from "./auth/constants"
 			entities: [User, Project, Entite, Attribut],
 			synchronize: true, // ! false en prod
 		}),
+
 		JwtModule.register({
 			secret: jwtConstants.secret, // ! dans .env
-			signOptions: { expiresIn: "1d" },
+			signOptions: { expiresIn: "10d" },
 		}),
+
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
 	],
 

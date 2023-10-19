@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	constructor() {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			ignoreExpiration: true, // !!!!!!!!ignoreExpiration: just to be explicit, we choose the default false setting, which delegates the responsibility of ensuring that a JWT has not expired to the Passport module. This means that if our route is supplied with an expired JWT, the request will be denied and a 401
+			ignoreExpiration: false, // !!!!!!!!ignoreExpiration: just to be explicit, we choose the default false setting, which delegates the responsibility of ensuring that a JWT has not expired to the Passport module. This means that if our route is supplied with an expired JWT, the request will be denied and a 401
 			secretOrKey: jwtConstants.secret,
 		})
 		Logger.log("⚪⚪⚪ ")

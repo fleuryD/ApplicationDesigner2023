@@ -17,18 +17,7 @@ import { JwtStrategy } from "./jwt.strategy"
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Module({
-	imports: [
-		UsersModule,
-		TypeOrmModule.forFeature([User]),
-		PassportModule,
-		JwtModule.register({
-			secret: jwtConstants.secret,
-			signOptions: { expiresIn: "10d" },
-		}),
-		//PassportModule.register({			defaultStrategy: "local",})
-		/* */
-		,
-	],
+	imports: [UsersModule, TypeOrmModule.forFeature([User]), PassportModule, ,],
 	//exports: [TypeOrmModule],
 	providers: [AuthService, LocalStrategy, UsersService, JwtService, JwtStrategy],
 	controllers: [AuthController],
