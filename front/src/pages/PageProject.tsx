@@ -77,7 +77,9 @@ export default function PageProject() {
 								<div>
 									infos: <b>{project.infos}</b> &nbsp;&nbsp;
 								</div>
-								{project.isWip && <h4>WIP</h4>}
+								<div>
+									WorkInProgress: <b>{project.isWip ? "Yes" : "No"}</b> &nbsp;&nbsp;
+								</div>
 							</div>
 						)}
 					</div>

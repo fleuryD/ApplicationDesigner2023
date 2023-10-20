@@ -31,7 +31,6 @@ export class Project {
 
 	// * Un project a un seul creator (user). un user peut creer plusieurs projects
 	@ManyToOne(() => User, (user: User) => user.projects, {
-		eager: true,
 		onDelete: "CASCADE",
 	})
 	public createdBy: User

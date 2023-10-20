@@ -235,3 +235,12 @@ export async function apiDeleteAttribut(attrId) {
 		requierdFields: [],
 	})
 }
+// * ■■■■■■■■■■■■■■■■■■■■■	FIXTURES
+
+export async function apiFixture(fixtureName) {
+	return zFetch({
+		shortUrl: "/fixtures/" + fixtureName,
+		method: "GET",
+		requierdFields: [],
+	})
+}

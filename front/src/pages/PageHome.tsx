@@ -8,6 +8,7 @@ import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
+import { ButtonFixtureProjectAd } from "features/fixtures/ButtonsFixtures"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -56,6 +57,7 @@ export default function PageHome() {
 										</li>
 									))}
 							</ul>
+							<ButtonFixtureProjectAd />
 						</div>
 					</div>
 				</div>
@@ -63,13 +65,20 @@ export default function PageHome() {
 					<div className="zSectionInner">
 						<h2>zSection 2</h2>
 						<div className="zSectionContent">
-							<ul>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-								<li>Xxxxxxxxxx</li>
-							</ul>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit, enim id
+								mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae odio. Maecenas
+								convallis lacinia fringilla. Vestibulum non tellus congue, dapibus quam ut, molestie
+								odio. Praesent malesuada gravida augue. Integer in nunc leo. Maecenas at justo at nisl
+								condimentum pharetra ac eget tellus. Aenean in urna consequat, scelerisque elit eu,
+								dignissim purus. Nullam varius consectetur ante vel auctor. In eget porttitor augue, et
+								dictum tortor. Aenean cursus, risus molestie tincidunt commodo, lectus lorem auctor
+								nulla, id mollis risus erat facilisis velit. Etiam egestas laoreet nisl, at commodo nisl
+								ullamcorper vitae. Praesent pharetra, neque et laoreet lacinia, augue erat tempor
+								lectus, in vestibulum risus orci vitae dui. Nunc in porttitor libero. Praesent consequat
+								sodales rutrum. Maecenas fermentum lorem quis iaculis vestibulum. Sed in diam ac libero
+								placerat accumsan.
+							</p>
 						</div>
 					</div>
 				</div>
@@ -78,7 +87,10 @@ export default function PageHome() {
 					<div className="zTodoInner">
 						<h2>Todo</h2>
 						<ul>
-							<li>xxxxxxx</li>
+							<li>Register: validation email</li>
+							<li>Refresh Token</li>
+							<li>Sign with google...</li>
+							<li>Use templateGEnerator</li>
 							<li>xxxxxxx</li>
 							<li>xxxxxxx</li>
 						</ul>

@@ -1,36 +1,16 @@
-import {
-	BadRequestException,
-	Body,
-	Controller,
-	Get,
-	Post,
-	Req,
-	Res,
-	UnauthorizedException,
-	Request,
-	Param,
-	UseGuards,
-	Headers,
-	Query,
-	Redirect,
-	UploadedFile,
-	UseInterceptors,
-} from "@nestjs/common"
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+import { BadRequestException, Controller, Get, Request, UseGuards } from "@nestjs/common"
 import { AppService } from "./app.service"
 import { ProjectsService } from "./projects/projects.service"
 import { EntitesService } from "./entites/entites.service"
 import { AttributsService } from "./attributs/attributs.service"
-import * as bcrypt from "bcrypt"
-import { JwtService } from "@nestjs/jwt"
-import fetch from "node-fetch"
-import { FileInterceptor } from "@nestjs/platform-express"
-import { AuthGuard } from "@nestjs/passport"
 import { LocalAuthGuard } from "./auth/local-auth.guard"
 import { Public } from "./auth/jwt-auth.guard"
+import { Logger } from "@nestjs/common"
+import { User } from "./auth/user.decorator"
+import { UsersService } from "./users/users.service"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
-// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 @Controller()
 export class AppController {
@@ -38,8 +18,11 @@ export class AppController {
 		private readonly appService: AppService,
 		private readonly projectsService: ProjectsService,
 		private readonly entitesService: EntitesService,
-		private readonly attributsService: AttributsService
+		private readonly attributsService: AttributsService,
+		private readonly usersService: UsersService
 	) {}
+
+	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	@UseGuards(LocalAuthGuard)
 	@Get()
@@ -53,22 +36,25 @@ export class AppController {
 		return req.user
 	}
 
-	// *   http://localhost:3000/admin/fixtures/ad
-	@Public()
-	@Get("/admin/fixtures/ad")
-	async newProject() {
+	@Get("/fixtures/project-ad")
+	async fixtureProjetAD(@User() userFromToken) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-
-		// TODO ; admin_password
+		Logger.log("🟠 /fixtures/projet/ad - For userFromToken:", userFromToken)
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/projet/ad - For user:", user)
 
 		try {
+			// ************** PROJECT **************
 			const projectAd = await this.projectsService.create({
 				name: "ApplicationDesigner",
 				description: null,
 				infos: null,
 				isWip: false,
+				createdBy: user,
 			})
+
+			// ************** ENTITES **************
 
 			const entiteUser = await this.entitesService.create({
 				project: projectAd,

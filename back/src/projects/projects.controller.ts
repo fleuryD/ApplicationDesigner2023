@@ -29,12 +29,10 @@ export class ProjectsController {
 
 	@Get("/my")
 	async myProjects(@User() userFromToken) {
-		console.log("XXXXXXXXXXXXXXXXXXX userFromToken", userFromToken)
 		const user = await this.usersService.findOneById(userFromToken.id)
-		console.log("XXXXXXXXXXXXXXXXXXX user", user)
 		//const projects = await this.projectsService.findAll() // TODO : by connectedUser id
-		const projects = await this.projectsService.findAllByCreator(user)
-
+		//const projects = await this.projectsService.findAllByCreator(user)
+		const projects = user.projects
 		return {
 			projects: projects,
 		}

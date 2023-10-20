@@ -39,6 +39,8 @@ export class User {
 	createdAt: Date
 
 	// * Un user peut avoir plusieurs projects. Un project a un seul user.
-	@OneToMany(() => Project, (proj: Project) => proj.createdBy)
+	@OneToMany(() => Project, (proj: Project) => proj.createdBy, {
+		eager: true,
+	})
 	public projects: Project[]
 }
