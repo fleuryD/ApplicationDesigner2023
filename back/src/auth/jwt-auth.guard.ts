@@ -24,7 +24,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 		if (isPublic) {
 			return true
 		}
-		Logger.log("🟠 canActivate:")
+		// Logger.log("🟠 canActivate:")
 		// Add your custom authentication logic here
 		// for example, call super.logIn(request) to establish a session.
 		return super.canActivate(context)

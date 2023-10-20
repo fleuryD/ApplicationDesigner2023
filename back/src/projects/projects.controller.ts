@@ -14,19 +14,26 @@ import {
 import { ProjectsService } from "./projects.service"
 
 import { User } from "../auth/user.decorator"
+import { UsersService } from "src/users/users.service"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Controller("projects")
 export class ProjectsController {
-	constructor(private readonly projectsService: ProjectsService) {}
+	constructor(
+		private readonly projectsService: ProjectsService,
+		private readonly usersService: UsersService
+	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	@Get("/my")
-	async myProjects(@Headers() headers, @User() userFromToken) {
-		console.log("userFromToken", userFromToken)
-		const projects = await this.projectsService.findAll() // TODO : by connectedUser id
+	async myProjects(@User() userFromToken) {
+		console.log("XXXXXXXXXXXXXXXXXXX userFromToken", userFromToken)
+		const user = await this.usersService.findOneById(userFromToken.id)
+		console.log("XXXXXXXXXXXXXXXXXXX user", user)
+		//const projects = await this.projectsService.findAll() // TODO : by connectedUser id
+		const projects = await this.projectsService.findAllByCreator(user)
 
 		return {
 			projects: projects,
@@ -35,18 +42,20 @@ export class ProjectsController {
 
 	@Post("/new")
 	async newProject(
-		@Headers() headers,
+		@User() userFromToken,
 		@Body("name") name: string,
 		@Body("description") description: string,
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean
 	) {
+		const user = await this.usersService.findOneById(userFromToken.id)
 		try {
 			const project = await this.projectsService.create({
 				name,
 				description,
 				infos,
 				isWip,
+				createdBy: user,
 			})
 
 			return { project: project }
@@ -61,8 +70,7 @@ export class ProjectsController {
 		@Body("description") description: string,
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
-		@Param() params,
-		@Headers() headers
+		@Param() params
 	) {
 		let project = await this.projectsService.findOneById(params.id)
 
@@ -79,7 +87,7 @@ export class ProjectsController {
 	}
 
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @Headers() headers) {
+	async projectDelete(@Param() params) {
 		let project = await this.projectsService.findOneById(params.id)
 		await this.projectsService.remove(project.id)
 
@@ -89,7 +97,7 @@ export class ProjectsController {
 	}
 
 	@Get("/:id")
-	async projectShow(@Param() params, @Headers() headers) {
+	async projectShow(@Param() params) {
 		const project = await this.projectsService.findOneById(params.id)
 		// TODO VERIF DROIT
 

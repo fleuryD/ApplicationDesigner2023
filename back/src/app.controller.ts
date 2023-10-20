@@ -26,6 +26,7 @@ import fetch from "node-fetch"
 import { FileInterceptor } from "@nestjs/platform-express"
 import { AuthGuard } from "@nestjs/passport"
 import { LocalAuthGuard } from "./auth/local-auth.guard"
+import { Public } from "./auth/jwt-auth.guard"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -53,8 +54,9 @@ export class AppController {
 	}
 
 	// *   http://localhost:3000/admin/fixtures/ad
+	@Public()
 	@Get("/admin/fixtures/ad")
-	async newProject(@Headers() headers) {
+	async newProject() {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 

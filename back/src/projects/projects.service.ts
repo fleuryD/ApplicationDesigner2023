@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { Project } from "./project.entity"
 import { Entite } from "../entites/entite.entity"
+import { User } from "src/users/user.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -25,6 +26,14 @@ export class ProjectsService {
 		return this.projectsRepository.find()
 	}
 
+	findAllByCreator(creator: User): Promise<Project[]> {
+		return this.projectsRepository.find({
+			where: {
+				createdBy: creator,
+			},
+		})
+	}
+
 	async findOne(condition: any): Promise<Project> {
 		return this.projectsRepository.findOne(condition)
 	}
@@ -42,11 +51,6 @@ export class ProjectsService {
 					"entite",
 					"entite.projectId = project.id"
 				)
-				* /
-				//.leftJoinAndSelect("project.entites", "project")
-				//.leftJoinAndSelect("project.targetEntite", "entite")
-				//.leftJoinAndSelect("entite.attributes", "attribute")
-				//.leftJoinAndSelect("attribute.targetEntite", "entite")
 				.where(condition)
 				.getOne()
 		)

@@ -33,7 +33,7 @@ export default function App() {
 		<div className="App  appStyled container-fluid" id="container-global">
 			<Router>
 				<NavBar />
-				<DevAuthInfos />
+				{/* <DevAuthInfos /> */}
 				{auth.isConnected ? (
 					<Routes>
 						{/*

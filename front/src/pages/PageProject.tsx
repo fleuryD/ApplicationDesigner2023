@@ -43,7 +43,7 @@ export default function PageProject() {
 			{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
 			<header className="zPageHeader row">
 				<h1>
-					Project: <b>{project && project.name}</b>
+					<small>Project:</small> <b>{project && project.name}</b>
 					{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
 				</h1>
 				<h3>Lorem Ipsum</h3>
@@ -60,6 +60,9 @@ export default function PageProject() {
 						{project && (
 							<div className="z-cadre user-infos">
 								<div>
+									createdBy: <b>{project.createdBy?.username}</b> &nbsp;&nbsp;
+								</div>
+								<div>
 									id: <b>{project.id}</b> &nbsp;&nbsp;
 								</div>
 								<div>
@@ -71,6 +74,10 @@ export default function PageProject() {
 								<div>
 									description: <b>{project.description}</b> &nbsp;&nbsp;
 								</div>
+								<div>
+									infos: <b>{project.infos}</b> &nbsp;&nbsp;
+								</div>
+								{project.isWip && <h4>WIP</h4>}
 							</div>
 						)}
 					</div>
