@@ -40,6 +40,12 @@ export class UsersService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	async findOneByEmailValidationToken(
+		emailValidationToken: string
+	): Promise<User | null> {
+		return this.usersRepository.findOneBy({ emailValidationToken })
+	}
+
 	async findOneByUsername(username: string): Promise<User | null> {
 		return this.usersRepository.findOneBy({ username })
 	}
@@ -73,6 +79,11 @@ export class UsersService {
 			userId: user.id,
 			username: user.username,
 		})
+		await this.usersRepository.save(user)
+		return user
+	}
+	async clearEmailValidationToken(user): Promise<User> {
+		user.emailValidationToken = null
 		await this.usersRepository.save(user)
 		return user
 	}

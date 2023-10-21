@@ -8,6 +8,8 @@ import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
 import { Public } from "./jwt-auth.guard"
 import { User } from "src/users/user.entity"
+import { MailService } from "src/mail/mail.service"
+import { error } from "console"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -16,74 +18,21 @@ export class AuthController {
 	constructor(
 		private readonly usersService: UsersService,
 		private jwtService: JwtService,
-		private authService: AuthService
+		private authService: AuthService,
+		private mailService: MailService
 	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	/*
-	async sendMail({ to, subject, html }) {
-		// ! mettre ailleurs
-		var transporter = nodemailer.createTransport({
-			service: "gmail",
-			auth: {
-				user: process.env.BK_MAIL_USERNAME,
-				pass: process.env.BK_MAIL_PASSWORD,
-			},
-		})
-
-		var mailOptions = {
-			from: process.env.BK_MAIL_USERNAME, // !!! REMPLACER PAR     BK_MAIL_EMAIL    apres rebuild
-			to: to,
-			subject: subject,
-			html: html,
-		}
-
-		transporter.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.log(error)
-			} else {
-				console.log("Email sent: " + info.response)
-			}
-		})
-	}
-
-	async sendMailRegisterValidation(user: User) {
-		// ! mettre ailleurs
-
-		const urlCheckMail =
-			"http://localhost:3001/auth/check-email/" + user.emailValidationToken
-
-		let htmlStr = "<p>Salut <b>" + user.username + "</b><br/>"
-		htmlStr +=
-			"</b>Valide ton sincription sur <b>Matcha4Geeks</b> en cliquant sur le lien suivant: "
-		htmlStr += `<a href="/${urlCheckMail}" target="_blank" rel="noreferrer"	>Verifie ton adresse email</a>`
-
-		htmlStr += "<br /><br />"
-		htmlStr += ""
-		htmlStr +=
-			"Si le lien ne s'affiche pas, t'es un geek, tu sait quoi faire avec l'URL suivante:<br />"
-		htmlStr += urlCheckMail
-		htmlStr += "<br />Bisous."
-		htmlStr += "</p>"
-
-		this.sendMail({
-			to: "fleurydavid31@gmail.com", // DEBUG		::			user.email
-			subject: "ApplicationDesigner: Validez votre inscription",
-			html: htmlStr,
-		})
-	}
-*/
-
-	/*
 	 *	REGISTER
 	 *
-	 *	1) check UNIQUE : username, email
-	 *	2) check VALIDE : username, email, password // TODO
+	 *	1) check VALIDE : username, email, password
+	 *	2) check UNIQUE : username, email
 	 *	3) hashed password
 	 *	3) create user
 	 *	3) set emailValidationToken
-	 *	4) send email with emailValidationToken // TODO
+	 *	4) send email with emailValidationToken
 	 *	5) return success
 	 *
 	 */
@@ -98,6 +47,8 @@ export class AuthController {
 		if (!username || !email || !password) {
 			throw new BadRequestException("MISSING_FIELDS")
 		}
+
+		// TODO : check VALIDE : username, email, password
 
 		let existingUser = await this.usersService.findOneByUsername(username)
 		if (existingUser) throw new BadRequestException("USERNAME_ALREADY_EXISTS")
@@ -116,9 +67,14 @@ export class AuthController {
 
 			user = await this.usersService.setNewEmailValidationToken(user)
 
+			console.debug("-------send mail")
+			await this.mailService.sendEmailValidation(user)
+			console.debug("-------mail sent ")
+
 			delete user.password
 			return { success: 1, debugEmailValidationToken: user.emailValidationToken }
 		} catch (e) {
+			console.debug("-------error", error)
 			throw new BadRequestException("INTERNAL_ERROR")
 		}
 	}
@@ -126,6 +82,12 @@ export class AuthController {
 	/*
 	 *	LOGIN
 	 *
+	 * 1) find User by emailOrUsername
+	 * 2) if user not found : throw INVALID_CREDENTIALS
+	 * 3) if user.emailValidationToken : throw EMAIL_NOT_CONFIRMED
+	 * 4) if password invalid : throw INVALID_CREDENTIALS
+	 * 5) if user.jwt not set : set jwt
+	 * 6) return user (with jwt)
 	 *
 	 */
 	@Public()
@@ -138,6 +100,9 @@ export class AuthController {
 			Logger.log("⛔ login: throw : MISSING_FIELDS")
 			throw new BadRequestException("MISSING_FIELDS")
 		}
+
+		// TODO : check VALIDE : username, email, password
+
 		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 		if (!user) {
 			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
@@ -152,51 +117,45 @@ export class AuthController {
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 
-		// !!!! TODO		if (user.token_email) return res.json({ error: "EMAIL_NOT_CONFIRMED" })
-
-		if (user.jwt) {
-			Logger.log(`🟢 login: "${user.username}"`)
-			return {
-				message: "success",
-				user: user,
-			}
-		} else {
+		if (!user.jwt) {
 			const jwt = await this.authService.getAccessToken(user)
 			user = await this.usersService.setJwt(user, jwt)
-			Logger.log(`🟢 login: "${user.username}" (with new token)`)
-			return {
-				message: "success",
-				user: user,
-			}
+		}
+
+		Logger.log(`🟢 login: "${user.username}"`)
+		return {
+			user: user,
 		}
 	}
 
 	/*
 	 *	CHECK TOKEN_EMAIL
 	 *
-	 *	1) find User by token_email
-	 *	2) set token_email to null
+	 *	1) find User by emailValidationToken
+	 *	2) set emailValidationToken to null
 	 *	3) return success
 	 *
 	 */
-	/*
-			router.post("/check-email", async function (req, res, next) {
-				logRoute(null, "POST", "/auth/check-email")
-				const tokenEmail = req.body.tokenEmail
+	@Public()
+	@Post("confirm-email")
+	async confirmEmail(@Body("tokenEmail") tokenEmail: string) {
+		if (!tokenEmail) {
+			Logger.log("⛔ login: throw : MISSING_FIELDS")
+			throw new BadRequestException("MISSING_FIELDS")
+		}
 
-				console.log("tokenEmail", tokenEmail)
+		// TODO : check VALIDE : tokenEmail
 
-				let { user, error } = await getUserAndErrorBy("token_email", tokenEmail)
-				if (error) return res.json({ error: "INTERNAL_ERROR" })
-				if (!user) return res.json({ error: "USER_NOT_FOUND" })
-
-				user = await clearUserTokenEmail(user)
-				res.json({
-					success: 1,
-					user: user, // DEBUG ONLY
-				})
-			})
-			*/
+		let user = await this.usersService.findOneByEmailValidationToken(tokenEmail)
+		if (!user) {
+			Logger.log("⛔ login: throw : INVALID_TOKEN")
+			throw new BadRequestException("INVALID_TOKEN")
+		}
+		await this.usersService.clearEmailValidationToken(user)
+		return {
+			success: 1,
+		}
+	}
 
 	/*
 	@Post("logout")

@@ -23,13 +23,6 @@ export class AttributsController {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
-	@Get("/my")
-	async myAttributs(@Headers() headers) {
-		const attributs = await this.attributsService.findAll() // TODO : by connectedUser id
-		return {
-			attributs: attributs,
-		}
-	}
 	@Post("/new/entite/:id")
 	async newEntite(
 		@Param() params,

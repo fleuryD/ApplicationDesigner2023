@@ -81,9 +81,10 @@ export async function apiFetchLogin({ emailOrUsername, password }) {
 }
 
 export async function apiFetchCheckEmail({ tokenEmail }) {
+	console.log("apiFetchCheckEmail", tokenEmail)
 	return zFetch({
 		publicAccess: true,
-		shortUrl: "/auth/check-email",
+		shortUrl: "/auth/confirm-email",
 		method: "POST",
 		body: {
 			tokenEmail,

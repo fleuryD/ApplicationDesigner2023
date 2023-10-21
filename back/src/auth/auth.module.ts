@@ -11,11 +11,18 @@ import { UsersModule } from "../users/users.module"
 import { PassportModule } from "@nestjs/passport"
 import { LocalStrategy } from "./local.strategy"
 import { JwtStrategy } from "./jwt.strategy"
+import { MailModule } from "../mail/mail.module"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Module({
-	imports: [UsersModule, TypeOrmModule.forFeature([User]), PassportModule, ,],
+	imports: [
+		MailModule,
+		UsersModule,
+		TypeOrmModule.forFeature([User]),
+		PassportModule,
+		,
+	],
 	//exports: [TypeOrmModule],
 	providers: [AuthService, LocalStrategy, UsersService, JwtService, JwtStrategy],
 	controllers: [AuthController],

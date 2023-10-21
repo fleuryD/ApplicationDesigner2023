@@ -33,13 +33,16 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 
 import { MailerModule } from "@nestjs-modules/mailer"
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handlebars.adapter"
+import { MailModule } from "./mail/mail.module"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 // ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 @Module({
 	imports: [
-		ConfigModule.forRoot(),
+		ConfigModule.forRoot({
+			isGlobal: true, // no need to import into other modules
+		}),
 		TypeOrmModule.forRoot({
 			type: process.env.DB_TYPE === "postgres" ? "postgres" : "mysql",
 			host: process.env.DB_HOST,
@@ -56,21 +59,9 @@ import { HandlebarsAdapter } from "@nestjs-modules/mailer/dist/adapters/handleba
 			signOptions: { expiresIn: "10d" },
 		}),
 
-		MailerModule.forRoot({
-			transport: "smtps://user@domain.com:pass@smtp.domain.com",
-			defaults: {
-				from: '"nest-modules" <modules@nestjs.com>',
-			},
-			template: {
-				dir: __dirname + "/templates",
-				adapter: new HandlebarsAdapter(),
-				options: {
-					strict: true,
-				},
-			},
-		}),
-
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
+
+		MailModule,
 	],
 
 	providers: [

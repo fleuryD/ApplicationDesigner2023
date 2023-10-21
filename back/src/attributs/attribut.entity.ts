@@ -10,7 +10,7 @@ import { Entite } from "../entites/entite.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 /*
- *	Une Entite peut plusieurs Attributs (ou proprietes, ou champs)
+ *	Une Entite peut avoir plusieurs Attributs (ou proprietes, ou champs)
  *
  *
  *

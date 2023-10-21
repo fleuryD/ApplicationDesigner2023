@@ -7,10 +7,8 @@ import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
-export default function PageAuthCheckEmail() {
-	const tokenEmail = useParams().tokenEmail
+export default function PageAuthConfirmEmail() {
+	const tokenEmail = useParams().token
 
 	const [msg, setMsg] = useState<any>(null)
 
@@ -43,15 +41,6 @@ export default function PageAuthCheckEmail() {
 			<div className="zPageContent">
 				<div>tokenEmail: {tokenEmail}</div>
 				{msg && <p>{msg}</p>}
-				<div className="todo row col-6">
-					Todo
-					<ul>
-						<li>
-							``After registration, an email with a unique link must be sent to the registered user to
-							verify their account.``
-						</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	)
