@@ -91,6 +91,7 @@ export class AuthController {
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 
+		/*
 		if (user.jwt) {
 			Logger.log(`🟢 login: "${user.username}"`)
 			return {
@@ -98,14 +99,15 @@ export class AuthController {
 				user: user,
 			}
 		} else {
-			const jwt = await this.authService.getAccessToken(user)
-			user = await this.usersService.setJwt(user, jwt)
-			Logger.log(`🟢 login: "${user.username}" (with new token)`)
-			return {
-				message: "success",
-				user: user,
-			}
+			*/
+		const jwt = await this.authService.getAccessToken(user)
+		user = await this.usersService.setJwt(user, jwt)
+		Logger.log(`🟢 login: "${user.username}" (with new token)`)
+		return {
+			message: "success",
+			user: user,
 		}
+		//	}
 	}
 
 	/*

@@ -28,7 +28,6 @@ import { AttributsController } from "./attributs/attributs.controller"
 import { AuthService } from "./auth/auth.service"
 import { LocalStrategy } from "./auth/local.strategy"
 import { JwtStrategy } from "./auth/jwt.strategy"
-import { jwtConstants } from "./auth/constants"
 import { APP_GUARD } from "@nestjs/core"
 import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 
@@ -39,18 +38,18 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 	imports: [
 		ConfigModule.forRoot(),
 		TypeOrmModule.forRoot({
-			type: "postgres",
-			host: "localhost", // "postgres" pour docker | "localhost" pour mon windows // ! .env
-			port: 5432, // ! .env
-			username: "postgres", // ! .env
-			password: "root", // ! .env
-			database: "db_app_designer", // "db" pour docker | "db_app_designer" pour mon windows // ! .env
+			type: process.env.DB_TYPE === "postgres" ? "postgres" : "mysql",
+			host: process.env.DB_HOST,
+			port: parseInt(process.env.DB_PORT, 10) || 5432,
+			database: process.env.DB_NAME,
+			username: process.env.DB_USERNAME,
+			password: process.env.DB_PASSWORD,
+			synchronize: process.env.DB_SYNCHRONIZE_WITH_ENTITIES === "true",
 			entities: [User, Project, Entite, Attribut],
-			synchronize: true, // ! false en prod
 		}),
 
 		JwtModule.register({
-			secret: jwtConstants.secret, // ! dans .env
+			secret: process.env.JWT_SECRET,
 			signOptions: { expiresIn: "10d" },
 		}),
 

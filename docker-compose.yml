@@ -4,10 +4,10 @@ services:
         build: pgsql
         container_name: postgres
         environment:
-            - POSTGRES_USER=${ENV_POSTGRES_USER}
-            - POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
-            - POSTGRES_DB=${ENV_POSTGRES_DB}
-            - POSTGRES_HOST_AUTH_METHOD=trust
+            - POSTGRES_DB=${DB_NAME}
+            - POSTGRES_USER=${DB_USERNAME}
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_HOST_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}
         restart: always
         networks:
             - best_network
@@ -41,11 +41,6 @@ services:
         volumes:
             - ./back:/app
             - /app/node_modules
-        #environment:
-        #    - POSTGRES_USER=chef
-        #    - POSTGRES_PASSWORD=chef_pass
-        #    - POSTGRES_DB=db
-        #    - POSTGRES_HOST_AUTH_METHOD=trust
     #pgadmin:
     #    image: dpage/pgadmin4
     #    restart: always
