@@ -33,7 +33,16 @@ export class User {
 	password: string
 
 	@Column({ unique: true, nullable: true })
-	public jwt: string
+	jwt: string
+
+	@Column({ unique: true, nullable: true })
+	emailValidationToken: string
+
+	@Column({ unique: true, nullable: true })
+	passwordResetToken: string
+
+	@CreateDateColumn({ unique: true, nullable: true })
+	passwordResetAt: Date
 
 	@CreateDateColumn()
 	createdAt: Date

@@ -47,11 +47,14 @@ export class AuthService {
 	}
 	*/
 	async getAccessToken(user: any) {
-		//const payload = { username: user.username, sub: user.userId }
 		const payload = { username: user.username, userId: user.id }
-
 		console.log("🟦 AuthService getAccessToken:payload: ", payload)
+		return this.jwtService.sign(payload)
+	}
 
+	async getEmailValidationToken(user: any) {
+		const payload = { username: user.username, userId: user.id }
+		console.log("🟦 AuthService getEmailValidationToken:payload: ", payload)
 		return this.jwtService.sign(payload)
 	}
 }

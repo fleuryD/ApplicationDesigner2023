@@ -7,6 +7,7 @@ import { JwtService } from "@nestjs/jwt"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
 import { Public } from "./jwt-auth.guard"
+import { User } from "src/users/user.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -21,12 +22,68 @@ export class AuthController {
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	/*
+	async sendMail({ to, subject, html }) {
+		// ! mettre ailleurs
+		var transporter = nodemailer.createTransport({
+			service: "gmail",
+			auth: {
+				user: process.env.BK_MAIL_USERNAME,
+				pass: process.env.BK_MAIL_PASSWORD,
+			},
+		})
+
+		var mailOptions = {
+			from: process.env.BK_MAIL_USERNAME, // !!! REMPLACER PAR     BK_MAIL_EMAIL    apres rebuild
+			to: to,
+			subject: subject,
+			html: html,
+		}
+
+		transporter.sendMail(mailOptions, function (error, info) {
+			if (error) {
+				console.log(error)
+			} else {
+				console.log("Email sent: " + info.response)
+			}
+		})
+	}
+
+	async sendMailRegisterValidation(user: User) {
+		// ! mettre ailleurs
+
+		const urlCheckMail =
+			"http://localhost:3001/auth/check-email/" + user.emailValidationToken
+
+		let htmlStr = "<p>Salut <b>" + user.username + "</b><br/>"
+		htmlStr +=
+			"</b>Valide ton sincription sur <b>Matcha4Geeks</b> en cliquant sur le lien suivant: "
+		htmlStr += `<a href="/${urlCheckMail}" target="_blank" rel="noreferrer"	>Verifie ton adresse email</a>`
+
+		htmlStr += "<br /><br />"
+		htmlStr += ""
+		htmlStr +=
+			"Si le lien ne s'affiche pas, t'es un geek, tu sait quoi faire avec l'URL suivante:<br />"
+		htmlStr += urlCheckMail
+		htmlStr += "<br />Bisous."
+		htmlStr += "</p>"
+
+		this.sendMail({
+			to: "fleurydavid31@gmail.com", // DEBUG		::			user.email
+			subject: "ApplicationDesigner: Validez votre inscription",
+			html: htmlStr,
+		})
+	}
+*/
+
+	/*
 	 *	REGISTER
 	 *
 	 *	1) check UNIQUE : username, email
 	 *	2) check VALIDE : username, email, password // TODO
-	 *	3) create user (avec token_email)
-	 *	4) send email with token_email // TODO
+	 *	3) hashed password
+	 *	3) create user
+	 *	3) set emailValidationToken
+	 *	4) send email with emailValidationToken // TODO
 	 *	5) return success
 	 *
 	 */
@@ -39,30 +96,30 @@ export class AuthController {
 		@Body("password") password: string
 	) {
 		if (!username || !email || !password) {
-			throw new BadRequestException("missing fields")
+			throw new BadRequestException("MISSING_FIELDS")
 		}
-		/*
-		let existingUser = await getUserByUsername(username)
-		if (existingUser.user)
-			return res.json({ error: "USERNAME_ALREADY_EXISTS" })
-		existingUser = await getUserByEmail(email)
-		if (existingUser.user)
-			return res.json({ error: "EMAIL_ALREADY_EXISTS" })
-		*/
+
+		let existingUser = await this.usersService.findOneByUsername(username)
+		if (existingUser) throw new BadRequestException("USERNAME_ALREADY_EXISTS")
+
+		existingUser = await this.usersService.findOneByEmail(email)
+		if (existingUser) throw new BadRequestException("EMAIL_ALREADY_EXISTS")
 
 		const hashedPassword = await bcrypt.hash(password, 12)
 
 		try {
-			const user = await this.usersService.create({
+			let user = await this.usersService.create({
 				username: username.toLowerCase(),
 				email: email.toLowerCase(),
 				password: hashedPassword,
 			})
 
+			user = await this.usersService.setNewEmailValidationToken(user)
+
 			delete user.password
-			return user
+			return { success: 1, debugEmailValidationToken: user.emailValidationToken }
 		} catch (e) {
-			throw new BadRequestException("email already exists")
+			throw new BadRequestException("INTERNAL_ERROR")
 		}
 	}
 
@@ -84,14 +141,19 @@ export class AuthController {
 		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 		if (!user) {
 			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
-			throw new BadRequestException("iINVALID_CREDENTIALS")
+			throw new BadRequestException("INVALID_CREDENTIALS")
+		}
+		if (user.emailValidationToken) {
+			Logger.log("⛔ login: throw : EMAIL_NOT_CONFIRMED")
+			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
 		if (!(await bcrypt.compare(password, user.password))) {
 			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 
-		/*
+		// !!!! TODO		if (user.token_email) return res.json({ error: "EMAIL_NOT_CONFIRMED" })
+
 		if (user.jwt) {
 			Logger.log(`🟢 login: "${user.username}"`)
 			return {
@@ -99,16 +161,42 @@ export class AuthController {
 				user: user,
 			}
 		} else {
-			*/
-		const jwt = await this.authService.getAccessToken(user)
-		user = await this.usersService.setJwt(user, jwt)
-		Logger.log(`🟢 login: "${user.username}" (with new token)`)
-		return {
-			message: "success",
-			user: user,
+			const jwt = await this.authService.getAccessToken(user)
+			user = await this.usersService.setJwt(user, jwt)
+			Logger.log(`🟢 login: "${user.username}" (with new token)`)
+			return {
+				message: "success",
+				user: user,
+			}
 		}
-		//	}
 	}
+
+	/*
+	 *	CHECK TOKEN_EMAIL
+	 *
+	 *	1) find User by token_email
+	 *	2) set token_email to null
+	 *	3) return success
+	 *
+	 */
+	/*
+			router.post("/check-email", async function (req, res, next) {
+				logRoute(null, "POST", "/auth/check-email")
+				const tokenEmail = req.body.tokenEmail
+
+				console.log("tokenEmail", tokenEmail)
+
+				let { user, error } = await getUserAndErrorBy("token_email", tokenEmail)
+				if (error) return res.json({ error: "INTERNAL_ERROR" })
+				if (!user) return res.json({ error: "USER_NOT_FOUND" })
+
+				user = await clearUserTokenEmail(user)
+				res.json({
+					success: 1,
+					user: user, // DEBUG ONLY
+				})
+			})
+			*/
 
 	/*
 	@Post("logout")

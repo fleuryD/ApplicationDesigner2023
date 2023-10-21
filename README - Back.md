@@ -19,13 +19,10 @@ npm install @nestjs/config
 npm install --save @nestjs/passport @nestjs/jwt passport passport-local passport-jwt
 npm install --save-dev @types/passport-local @types/passport-jwt
 
-		"@nestjs/mapped-types": "*",
-		"@nestjs/passport": "^10.0.1",
-		"cookie-parser": "^1.4.6",
-		"esm": "^3.2.25",
-		"multer": "^1.4.5-lts.1",
-		"node-fetch": "^2.7.0",
-		"otplib": "^12.0.1",
+
+npm install --save @nestjs-modules/mailer nodemailer
+npm install --save-dev @types/nodemailer
+npm install --save handlebars
 
 
 

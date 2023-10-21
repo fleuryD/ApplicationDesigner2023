@@ -4,12 +4,14 @@ import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { User } from "./user.entity"
+import { JwtService } from "@nestjs/jwt"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Injectable()
 export class UsersService {
 	constructor(
+		private jwtService: JwtService,
 		@InjectRepository(User)
 		private usersRepository: Repository<User>
 	) {}
@@ -20,21 +22,16 @@ export class UsersService {
 		return this.usersRepository.save(user) // ????????? await
 	}
 
-	findAll(): Promise<User[]> {
+	async findAll(): Promise<User[]> {
 		return this.usersRepository.find()
 	}
 
-	async findOne(condition: any): Promise<User> {
+	async findOne(condition: any): Promise<User | null> {
 		return this.usersRepository.findOne(condition)
 	}
 
 	async findOneById(id: number): Promise<User | null> {
-		return this.usersRepository.findOne({
-			where: {
-				id: id,
-			},
-		})
-		//return this.usersRepository.findOneBy({ id })
+		return this.usersRepository.findOneBy({ id })
 	}
 
 	async remove(id: number): Promise<void> {
@@ -43,21 +40,21 @@ export class UsersService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
-	async findOneByEmailOrUsername(emailOrUsername: string): Promise<User | undefined> {
-		let user = await this.usersRepository.findOne({
-			where: {
-				email: emailOrUsername,
-			},
-		})
-		if (user) return user
-		user = await this.usersRepository.findOne({
-			where: {
-				username: emailOrUsername,
-			},
-		})
-		if (user) return user
-		return undefined
+	async findOneByUsername(username: string): Promise<User | null> {
+		return this.usersRepository.findOneBy({ username })
 	}
+
+	async findOneByEmail(email: string): Promise<User | null> {
+		return this.usersRepository.findOneBy({ email })
+	}
+
+	async findOneByEmailOrUsername(emailOrUsername: string): Promise<User | null> {
+		const user = await this.findOneByUsername(emailOrUsername)
+		if (user) return user
+		return await this.findOneByEmail(emailOrUsername)
+	}
+
+	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	async setJwt(user, jwt): Promise<User> {
 		user.jwt = jwt
@@ -65,35 +62,18 @@ export class UsersService {
 		return user
 	}
 
-	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
+	async setNewAccessToken(user): Promise<User> {
+		user.jwt = this.jwtService.sign({ username: user.username, userId: user.id })
+		await this.usersRepository.save(user)
+		return user
+	}
 
-	/*
-	async getUserById(id: number) {
-		const message = await this.usersRepository.findOne({
-			where: {
-				id: id,
-			},
+	async setNewEmailValidationToken(user): Promise<User> {
+		user.emailValidationToken = this.jwtService.sign({
+			userId: user.id,
+			username: user.username,
 		})
-		if (message) {
-			return message
-		}
-		////throw new NotFoundException("Could not find the message")
+		await this.usersRepository.save(user)
+		return user
 	}
-	*/
-
-	/*
-	async findOneByEmailOrUsername_xxxxxxxxxxxxxxxxxxxxxxxx(emailOrUsername: string	): Promise<User | undefined> {
-		const users: Array<User> = await this.usersRepository
-			.createQueryBuilder()
-			//.select(["id", "phone", "username"])
-			.where("email = :emailOrUsername", { emailOrUsername })
-			.orWhere("username = :emailOrUsername", { emailOrUsername })
-			.limit(1)
-			.execute()
-		if (users && users.length) {
-			return users[0]
-		}
-		return undefined
-	}
-	*/
 }

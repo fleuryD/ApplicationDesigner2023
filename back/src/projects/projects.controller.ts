@@ -30,8 +30,6 @@ export class ProjectsController {
 	@Get("/my")
 	async myProjects(@User() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
-		//const projects = await this.projectsService.findAll() // TODO : by connectedUser id
-		//const projects = await this.projectsService.findAllByCreator(user)
 		const projects = user.projects
 		return {
 			projects: projects,
