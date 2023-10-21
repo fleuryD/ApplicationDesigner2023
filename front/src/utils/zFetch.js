@@ -1,21 +1,13 @@
-// ### DOCUMENTATION ############################################################
-
-// ### IMPORTS ##################################################################
-
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import { API_BASE_URL /* , getUserToken */ } from "./constants" // ?????????????????
 //import errorManager from "./errorManager"
 
-// ### TYPES ####################################################################
-
-// ### FUNCTIONS ################################################################
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 // ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
 
-// 🟥🟧🟨🟩🟦🟪⬛️⬜️🟫
-
 export default async function zFetch({ shortUrl, method, requierdFields, body, publicAccess }) {
 	const url = API_BASE_URL + shortUrl
-	console.log("🟨 zFetch ➤➤ url:", url)
 
 	const requestOptions = {
 		method,
@@ -23,7 +15,8 @@ export default async function zFetch({ shortUrl, method, requierdFields, body, p
 		body: body ? JSON.stringify(body) : null,
 	}
 
-	console.log("requestOptions:", requestOptions)
+	console.debug("🟨 zFetch ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
+
 	try {
 		const response = await fetch(url, requestOptions)
 		const rep = await response.json()
@@ -31,11 +24,9 @@ export default async function zFetch({ shortUrl, method, requierdFields, body, p
 		const missingElements = []
 
 		if (rep?.statusCode >= 400) {
-			let returnErrorMessage = "Erreur: "
-			console.log("❌ rep.statusCode:", rep.statusCode)
-			console.log("❌ rep.message:", rep.message)
-			console.log("❌ rep:", rep)
-			return { error: returnErrorMessage }
+			console.error("❌ rep:", rep)
+			let errorPublicMessage = null
+			return { ...rep, error: 1, errorPublicMessage }
 		}
 
 		requierdFields.forEach((elem) => {
@@ -63,7 +54,6 @@ function requestOptionsHeaders() {
 		"Content-Type": "application/json",
 		Accept: "application/json",
 		Authorization: "Bearer " + localStorage.getItem("jwt"), // TODO : A modifier
-		//Authorization: localStorage.getItem("jwt"), // TODO : A modifier
 	}
 }
 function requestOptionsHeadersPublic() {

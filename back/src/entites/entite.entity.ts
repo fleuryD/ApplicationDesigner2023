@@ -20,7 +20,7 @@ import { Attribut } from "../attributs/attribut.entity"
  */
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-@Entity()
+@Entity("entites")
 export class Entite {
 	@PrimaryGeneratedColumn()
 	id: number

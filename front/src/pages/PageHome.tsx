@@ -25,6 +25,8 @@ export default function PageHome() {
 		apiFetchProjects().then((response) => {
 			if (response.projects) {
 				setProjects(response.projects)
+			} else if (response.statusCode === 401) {
+				setError("❌ Erreur: Unauthorized")
 			} else {
 				setError("❌ Erreur Inconnue: Voir la console")
 				console.log("❌ ERROR: response: ", response)
@@ -49,6 +51,8 @@ export default function PageHome() {
 							Mes projets <ButtonCreateProject className="btn-sm float-end" />
 						</h2>
 						<div className="zSectionContent">
+							{isLoading && <p>Loading...</p>}
+							{error && <p>{error}</p>}
 							<ul>
 								{projects &&
 									projects.map((project) => (

@@ -40,11 +40,11 @@ import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 		ConfigModule.forRoot(),
 		TypeOrmModule.forRoot({
 			type: "postgres",
-			host: "postgres", // "postgres" pour docker | "localhost" pour mon windows
-			port: 5432,
-			username: "postgres",
-			password: "root",
-			database: "db_app_designer", // "db" pour docker | "db_app_designer" pour mon windows
+			host: "localhost", // "postgres" pour docker | "localhost" pour mon windows // ! .env
+			port: 5432, // ! .env
+			username: "postgres", // ! .env
+			password: "root", // ! .env
+			database: "db_app_designer", // "db" pour docker | "db_app_designer" pour mon windows // ! .env
 			entities: [User, Project, Entite, Attribut],
 			synchronize: true, // ! false en prod
 		}),
