@@ -1,0 +1,26 @@
+@import "../../styles/theme.scss";
+
+// >>>		XXXXXXXXXXXXXX											   <<<
+
+#debugAuthInfos {
+	background-color: #ff0000;
+	padding: 4px;
+
+	.title {
+		display: inline-block;
+		margin: 2px;
+		padding: 1px;
+	}
+
+	.keyVal {
+		display: inline-block;
+		background-color: white;
+		margin: 2px;
+		padding: 1px;
+		background-color: #ffaaaa;
+
+		small {
+			font-size: 0.8em;
+		}
+	}
+}

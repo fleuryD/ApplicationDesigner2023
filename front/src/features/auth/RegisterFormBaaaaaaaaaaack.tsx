@@ -10,47 +10,36 @@ import FormAutoFill from "./FormAutoFill"
 import { parse, isValid, differenceInYears /* ,format, parseISO */ } from "date-fns"
 //import { Link } from "react-router-dom"
 import ZFormInput from "ui/ZFormInput"
-import RegisterFormInner from "./RegisterFormInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-type RegisterUserItem = {
-	username: string
-	email: string
-	password: string
-	password2: string
-}
 export default function RegisterForm() {
 	// const dispatch = useAppDispatch()
 
-	const [formItem, setFormItem] = useState<RegisterUserItem>({
-		username: "",
-		email: "",
-		password: "",
-		password2: "",
-	})
+	const [username, setUsername] = useState<string>("")
+	const [email, setEmail] = useState<string>("")
+	const [password, setPassword] = useState<string>("")
+	const [password2, setPassword2] = useState<string>("")
 
-	const [formErrors, setFormErrors] = useState<any>({})
-	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-
-	//const [errors, setErrors] = useState<any>({})
+	const [fetchError, setFetchError] = useState<any | null>(null)
+	const [errors, setErrors] = useState<any>({})
 	const [debugMsg, setDebugMsg] = useState<any | null>(null)
 
 	//const { socketIsConnected } = useAppSelector((state) => state.app)
 
 	//	const navigate = useNavigate()
 
-	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
+	// ■■■■■■■■■■■■■■■■■■■■■■■■ xxxxxxxxxxxxxx ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 	const checkErrors = () => {
 		let errorCount = 0
 
 		// ******************* Check: username
-		if (!formItem.username || formItem.username.length < 3) {
+		if (!username || username.length < 3) {
 			errorCount++
-			setFormErrors((formErrors: any) => ({
-				...formErrors,
+			setErrors((errors: any) => ({
+				...errors,
 				username: "Le username doit faire au moins 3 characteres.",
 			}))
 		}
@@ -58,78 +47,51 @@ export default function RegisterForm() {
 		// ******************* Check: email
 		let validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 		// TODO : better check
-		if (!formItem.email || formItem.email.length < 5 || !formItem.email.match(validEmailRegex)) {
+		if (!email || email.length < 5 || !email.match(validEmailRegex)) {
 			errorCount++
-			setFormErrors((formErrors: any) => ({ ...formErrors, email: "Adresse email invalide." }))
+			setErrors((errors: any) => ({
+				...errors,
+				email: "Tu dois saisir une adresse email valide.",
+			}))
 		}
 
-		// ******************* Check: password
-		if (!formItem.password || formItem.password.length < 5) {
+		// ******************* Check: password x 2
+		if (!password || password.length < 5) {
 			// TODO : better check (special char...)
 			errorCount++
-			setFormErrors((formErrors: any) => ({
-				...formErrors,
+			setErrors((errors: any) => ({
+				...errors,
 				password: "Le mot de passe doit faire au moins 5 characteres.",
 			}))
 		}
-		if (!formItem.password2 || formItem.password2.length < 1) {
-			// TODO : better check (special char...)
-			errorCount++
-			setFormErrors((formErrors: any) => ({
-				...formErrors,
-				password2: "Vous devez repeter le mot de passe.",
-			}))
-		}
-		if (formItem.password2 !== formItem.password) {
-			errorCount++
-			setFormErrors((formErrors: any) => ({
-				...formErrors,
-				password2: "Les 2 mots de passes sont differentse.",
-			}))
-		}
-
-		/*
-
-
 		if (!password2) {
 			errorCount++
 			setErrors((errors: any) => ({
 				...errors,
 				password2: "Tu dois repeter le mot de passe.",
 			}))
-
 		} else if (password2 !== password) {
 			errorCount++
 			setErrors((errors: any) => ({
 				...errors,
 				password2: "Les 2 mots de passes sont differents.",
 			}))
-
-			console.log("errorCount", errorCount)
 		}
-		*/
+
 		return errorCount
 	}
 
-	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
-
 	const btRegisterClick = async () => {
-		console.log("formItem: ", formItem)
-		console.log("formErrors: ", formErrors)
-		setFetchError(null)
-		setFormErrors({})
-
-		/*
 		setDebugMsg(null)
+		setFetchError(null)
 		setErrors({})
-		*/
 
 		if (checkErrors() > 0) return
 
 		apiFetchRegister({
-			username: formItem.username,
-			email: formItem.email,
-			password: formItem.password,
+			username,
+			email,
+			password,
 		}).then((response) => {
 			if (response.error) {
 				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
@@ -161,20 +123,72 @@ export default function RegisterForm() {
 		})
 	}
 
-	// ■■■■■■■■■■■■■■■■■■■■■■■■ xxxxxxxxxxxxxx ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-
 	return (
 		<div className="col-12 col-md-6">
-			<RegisterFormInner
-				formItem={formItem}
-				formErrors={formErrors}
-				setFormItem={setFormItem}
-				setFormErrors={setFormErrors}
-				isLoading={isLoading}
-				fetchError={fetchError}
-				btValidateClick={btRegisterClick}
-			/>
-			{/*
+			<Form className="row">
+				<ZFormInput
+					type="text"
+					name="username"
+					label="Username"
+					placeholder="username"
+					value={username}
+					setValue={setUsername}
+					error={errors?.username}
+					resetError={() => setErrors((errors: any) => ({ ...errors, username: null }))}
+					isLoading={isLoading}
+				/>
+
+				<ZFormInput
+					type="email"
+					name="email"
+					label="e-mail"
+					placeholder="e-mail"
+					value={email}
+					setValue={setEmail}
+					error={errors?.email}
+					resetError={() => setErrors((errors: any) => ({ ...errors, email: null }))}
+					isLoading={isLoading}
+				/>
+
+				<ZFormInput
+					type="password"
+					name="password"
+					label="Mot de passe"
+					placeholder="Mot de passe"
+					value={password}
+					setValue={setPassword}
+					error={errors?.password}
+					resetError={() => setErrors((errors: any) => ({ ...errors, password: null }))}
+					isLoading={isLoading}
+				/>
+
+				<ZFormInput
+					type="password"
+					name="password2"
+					label="Repete le password"
+					placeholder="Repete le password"
+					value={password2}
+					setValue={setPassword2}
+					error={errors?.password2}
+					resetError={() => setErrors((errors: any) => ({ ...errors, password2: null }))}
+					isLoading={isLoading}
+				/>
+
+				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
+
+				{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
+				<div>
+					<Button
+						variant="primary"
+						className="float-end"
+						onClick={() => btRegisterClick()}
+						disabled={isLoading}
+					>
+						Inscription
+					</Button>
+				</div>
+			</Form>
+
 			<FormAutoFill
 				setUsername={setUsername}
 				setEmailOrUsername={null}
@@ -182,7 +196,6 @@ export default function RegisterForm() {
 				setPassword={setPassword}
 				setPassword2={setPassword2}
 			/>
-			*/}
 		</div>
 	)
 }

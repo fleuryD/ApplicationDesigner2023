@@ -19,13 +19,12 @@ import PageAdminUsers from "pages/PageAdminUsers"
 import PageProject from "pages/PageProject"
 import PageProjectGenerate from "pages/PageProjectGenerate"
 //import PageWIP from "pages/PageWIP"
-// import DevAuthInfos from "features/auth/DevAuthInfos"
 
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
 import "styles/main.scss"
 import "styles/uml.scss"
-import DevAuthInfos from "features/auth/DevAuthInfos"
+import DebugAuthInfos from "features/auth/DebugAuthInfos"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 export default function App() {
@@ -34,7 +33,6 @@ export default function App() {
 		<div className="App  appStyled container-fluid" id="container-global">
 			<Router>
 				<NavBar />
-				<DevAuthInfos />
 				{auth.isConnected ? (
 					<Routes>
 						{/*
@@ -57,6 +55,7 @@ export default function App() {
 						<Route path="*" element={<PageAuthLogin />} />
 					</Routes>
 				)}
+				<DebugAuthInfos />
 			</Router>
 		</div>
 	)

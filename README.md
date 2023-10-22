@@ -10,16 +10,15 @@ Nullam eu facilisis lacus, vel efficitur lorem. Cras vitae arcu ante. Pellentesq
 
 ## Project status
 
-| Status |           | Features                      | Notes                                 |
-| :----- | :-------- | :---------------------------- | ------------------------------------- |
-| ✅     | Auth      | Registration                  |                                       |
-| ❌     |           | Registration email validation |                                       |
-| ✅     |           | Login + access_token          |                                       |
-| ❌     |           | refresh_access_token          |                                       |
-| ❌     | Users     | CRUD User                     | A user can edit is profil             |
-| ✅     | Projects  | CRUD Project                  | A user can create and edit projects   |
-| ✅     | Enites    | CRUD Entite                   | A user can add entities to projects   |
-| ✅     | Attributs | CRUD Attribut                 | A user can add attributes to entities |
+| Status |           | Features                        | Notes                                 |
+| :----- | :-------- | :------------------------------ | ------------------------------------- |
+| ✅     | Auth      | Registration + email validation |                                       |
+| ✅     |           | Login + access_token            |                                       |
+| ❌     |           | refresh_access_token            |                                       |
+| ❌     | Users     | CRUD User                       | A user can edit is profil             |
+| ✅     | Projects  | CRUD Project                    | A user can create and edit projects   |
+| ✅     | Enites    | CRUD Entite                     | A user can add entities to projects   |
+| ✅     | Attributs | CRUD Attribut                   | A user can add attributes to entities |
 
 ## Built With
 

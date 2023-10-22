@@ -12,6 +12,7 @@ npm install -D eslint prettier eslint-config-prettier
 npm install eslint --init
 npm install @nestjs/typeorm typeorm
 npm install pg
+npm install mysql2
 npm install @nestjs/jwt
 npm install -D @types/bcrypt
 npm install bcrypt

@@ -26,20 +26,14 @@ export default function LoginForm() {
 			emailOrUsername: emailOrUsername,
 			password: password,
 		}).then((response) => {
-			if (response.error) {
-				if (response.error === "INVALID_PASSWORD") setError("Mot de passe incorrect")
-				else if (response.error === "USER_NOT_FOUND") setError("Utilisateur non trouvé")
-				else if (response.error === "EMAIL_NOT_CONFIRMED")
-					setError(
-						"email non confirmé - Check ta boite mail - TODO : lien pour renvoyer le mail de confirmation" // TODO : lien pour renvoyer le mail de confirmation
-					)
-				else {
-					console.log("response.error: ", response.error)
-					setError("Erreur Inconnue: Voir la console")
-				}
-			} else {
-				console.log("response: ", response)
+			if (response.user) {
+				console.debug("response: ", response)
 				dispatch(authLoginSuccess(response.user))
+			} else if (response.message === "INVALID_CREDENTIALS") setError("Identifiant ou mot de passe incorrect")
+			else if (response.message === "EMAIL_NOT_CONFIRMED") setError("Vous n'avez pas confirmé votre email")
+			else {
+				console.error("response: ", response)
+				setError("Erreur Inconnue")
 			}
 			setIsLoading(false)
 		})
@@ -83,9 +77,6 @@ export default function LoginForm() {
 				setEmail={null}
 				setPassword={setPassword}
 				setPassword2={null}
-				setFirstname={null}
-				setLastname={null}
-				setBirthday={null}
 			/>
 		</div>
 	)
