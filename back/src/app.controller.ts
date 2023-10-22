@@ -133,7 +133,7 @@ export class AppController {
 
 			await this.attributsService.create({
 				entite: entiteUser,
-				name: "jwt",
+				name: "accessToken",
 				tipe: "string",
 				position: 1,
 				isNullable: true,

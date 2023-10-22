@@ -28,7 +28,7 @@ export default function DebugAuthInfos() {
 			<br />
 			<div className="keyVal">
 				<b>.token: </b>
-				<small>{auth.token}</small>
+				<small>{auth.accessToken}</small>
 			</div>
 		</div>
 	)

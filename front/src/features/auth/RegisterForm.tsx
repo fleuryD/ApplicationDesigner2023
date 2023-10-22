@@ -1,15 +1,10 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-import Form from "react-bootstrap/Form"
-import { Button } from "react-bootstrap"
-// import { useAppDispatch } from "store/store"
 import { apiFetchRegister } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
-//import { FaSignInAlt } from "react-icons/fa"
-import { parse, isValid, differenceInYears /* ,format, parseISO */ } from "date-fns"
+// import { useAppDispatch } from "store/store"
 //import { Link } from "react-router-dom"
-import ZFormInput from "ui/ZFormInput"
 import RegisterFormInner from "./RegisterFormInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -22,6 +17,7 @@ type RegisterUserItem = {
 }
 export default function RegisterForm() {
 	// const dispatch = useAppDispatch()
+	//	const navigate = useNavigate()
 
 	const [formItem, setFormItem] = useState<RegisterUserItem>({
 		username: "",
@@ -34,13 +30,7 @@ export default function RegisterForm() {
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
 	const [registerSuccess, setRegisterSuccess] = useState(false)
-
-	//const [errors, setErrors] = useState<any>({})
 	const [debugMsg, setDebugMsg] = useState<any | null>(null)
-
-	//const { socketIsConnected } = useAppSelector((state) => state.app)
-
-	//	const navigate = useNavigate()
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
@@ -160,7 +150,7 @@ export default function RegisterForm() {
 	return (
 		<div className="col-12 col-md-6">
 			<h2>Success</h2>
-			<p>Un email de confirmation a ete envoye a l'adresse indiquee ({formItem.email}).</p>
+			<p>Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).</p>
 			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
 		</div>
 	)

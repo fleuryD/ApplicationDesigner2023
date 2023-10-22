@@ -40,6 +40,7 @@ export class AttributsController {
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number
 	) {
+		// TODO : check if user is authorized to create attribut for this entite
 		const entite = await this.entitesService.findOneById(params.id)
 		try {
 			const attribut = await this.attributsService.create({
@@ -80,6 +81,7 @@ export class AttributsController {
 		@Param() params,
 		@Headers() headers
 	) {
+		// TODO : check if user is authorized to edit this attribut
 		let attribut = await this.attributsService.findOneById(params.id)
 
 		attribut.name = name
@@ -104,6 +106,7 @@ export class AttributsController {
 
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @Headers() headers) {
+		// TODO : check if user is authorized to delete this attribut
 		let attribut = await this.attributsService.findOneById(params.id)
 		await this.attributsService.remove(attribut.id)
 
@@ -112,12 +115,15 @@ export class AttributsController {
 		}
 	}
 
+	/*
 	@Get("/:id")
 	async attributShow(@Param() params, @Headers() headers) {
+		// TODO : check if user is authorized to see this attribut
 		const attribut = await this.attributsService.findOneById(params.id)
 
 		return {
 			attribut: attribut,
 		}
 	}
+	*/
 }

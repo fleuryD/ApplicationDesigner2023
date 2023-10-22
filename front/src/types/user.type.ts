@@ -9,7 +9,7 @@ type User = {
 	email: string
 	username: string
 	password?: string
-	jwt?: string
+	accessToken?: string
 	createdAt: string
 	projects?: Project[] | null
 }

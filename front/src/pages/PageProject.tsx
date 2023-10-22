@@ -28,10 +28,11 @@ export default function PageProject() {
 			apiFetchProject(projectId).then((response) => {
 				if (response.project) {
 					setProject(response.project)
+				} else if (response.statusCode === 401) {
+					setError("❌ Erreur: Vous n'êtes pas autorisé à voir ce projet.")
 				} else {
-					setError("❌ Erreur Inconnue: Voir la console")
+					setError("❌ Erreur Inconnue.")
 					console.log("❌ ERROR: response: ", response)
-					if (response.error) console.log("❌ ERROR: response.error: ", response.error)
 				}
 				setIsLoading(false)
 			})

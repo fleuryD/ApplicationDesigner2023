@@ -33,7 +33,7 @@ export class User {
 	password: string
 
 	@Column({ unique: true, nullable: true })
-	jwt: string
+	accessToken: string
 
 	@Column({ unique: true, nullable: true })
 	emailValidationToken: string

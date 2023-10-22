@@ -15,6 +15,7 @@ import { ProjectsService } from "./projects.service"
 
 import { User } from "../auth/user.decorator"
 import { UsersService } from "src/users/users.service"
+import { Logger } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -66,15 +67,19 @@ export class ProjectsController {
 		@Body("description") description: string,
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
-		@Param() params
+		@Param() params,
+		@User() userFromToken
 	) {
-		let project = await this.projectsService.findOneById(params.id)
+		await this.projectsService.ensureAuthorizedAccessProject({
+			userId: userFromToken.id,
+			projectId: params.id,
+		})
 
+		let project = await this.projectsService.findOneById(params.id)
 		project.name = name
 		project.description = description
 		project.infos = infos
 		project.isWip = isWip
-
 		project = await this.projectsService.save(project)
 
 		return {
@@ -83,7 +88,12 @@ export class ProjectsController {
 	}
 
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params) {
+	async projectDelete(@Param() params, @User() userFromToken) {
+		await this.projectsService.ensureAuthorizedAccessProject({
+			userId: userFromToken.id,
+			projectId: params.id,
+		})
+
 		let project = await this.projectsService.findOneById(params.id)
 		await this.projectsService.remove(project.id)
 
@@ -93,10 +103,13 @@ export class ProjectsController {
 	}
 
 	@Get("/:id")
-	async projectShow(@Param() params) {
-		const project = await this.projectsService.findOneById(params.id)
-		// TODO VERIF DROIT
+	async projectShow(@Param() params, @User() userFromToken) {
+		await this.projectsService.ensureAuthorizedAccessProject({
+			userId: userFromToken.id,
+			projectId: params.id,
+		})
 
+		const project = await this.projectsService.findOneById(params.id)
 		return {
 			project: project,
 		}

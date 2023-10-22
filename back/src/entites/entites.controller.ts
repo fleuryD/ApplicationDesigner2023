@@ -13,6 +13,7 @@ import {
 } from "@nestjs/common"
 import { EntitesService } from "./entites.service"
 import { ProjectsService } from "../projects/projects.service"
+import { User } from "src/auth/user.decorator"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -32,8 +33,13 @@ export class EntitesController {
 		@Body("name") name: string,
 		@Body("description") description: string,
 		@Body("infos") infos: string,
-		@Body("isWip") isWip: boolean
+		@Body("isWip") isWip: boolean,
+		@User() userFromToken
 	) {
+		await this.projectsService.ensureAuthorizedAccessProject({
+			userId: userFromToken.id,
+			projectId: params.id,
+		})
 		const project = await this.projectsService.findOneById(params.id)
 
 		try {
@@ -60,6 +66,7 @@ export class EntitesController {
 		@Param() params,
 		@Headers() headers
 	) {
+		// TODO : check if user is authorized to edit this entite
 		let entite = await this.entitesService.findOneById(params.id)
 
 		entite.name = name
@@ -76,6 +83,7 @@ export class EntitesController {
 
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @Headers() headers) {
+		// TODO : check if user is authorized to delete this entite
 		let entite = await this.entitesService.findOneById(params.id)
 		await this.entitesService.remove(entite.id)
 
@@ -84,8 +92,10 @@ export class EntitesController {
 		}
 	}
 
+	/*
 	@Get("/:id")
 	async entiteShow(@Param() params, @Headers() headers) {
+		// TODO : check if user is authorized to show this entite
 		const entite = await this.entitesService.findOneById(params.id)
 
 		return {
@@ -95,4 +105,5 @@ export class EntitesController {
 			entite: entite,
 		}
 	}
+	*/
 }

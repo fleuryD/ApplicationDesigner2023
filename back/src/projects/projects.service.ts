@@ -1,11 +1,12 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { Injectable } from "@nestjs/common"
-import { InjectRepository } from "@nestjs/typeorm"
-import { Repository } from "typeorm"
+import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm"
+import { EntityManager, Repository } from "typeorm"
 import { Project } from "./project.entity"
 import { Entite } from "../entites/entite.entity"
 import { User } from "src/users/user.entity"
+import { Logger } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -13,7 +14,9 @@ import { User } from "src/users/user.entity"
 export class ProjectsService {
 	constructor(
 		@InjectRepository(Project)
-		private projectsRepository: Repository<Project>
+		private projectsRepository: Repository<Project>,
+		@InjectEntityManager()
+		private projectManager: EntityManager
 	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
@@ -93,6 +96,31 @@ export class ProjectsService {
 	*/
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
+
+	async ensureAuthorizedAccessProject({
+		userId,
+		projectId,
+	}: {
+		userId: number
+		projectId: number
+	}) {
+		const project = await this.projectsRepository
+			.createQueryBuilder("project")
+			.where("project.id= :projectId", { projectId: projectId })
+			.leftJoinAndSelect("project.createdBy", "user")
+			.getOne()
+
+		if (project?.createdBy?.id === userId) {
+			Logger.log(
+				`✅ ensureAuthorizedAccessProject :: user #${userId} can access project: ${project.name}`
+			)
+			return
+		}
+		Logger.log(
+			`⛔ ensureAuthorizedAccessProject :: user #${userId} can't access project #${projectId}`
+		)
+		throw new UnauthorizedException("UNAUTHORIZED_ACCESS_TO_PROJECT")
+	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 }

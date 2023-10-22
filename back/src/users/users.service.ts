@@ -62,14 +62,17 @@ export class UsersService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
-	async setJwt(user, jwt): Promise<User> {
-		user.jwt = jwt
+	async setAccessToken(user, accessToken): Promise<User> {
+		user.accessToken = accessToken
 		await this.usersRepository.save(user)
 		return user
 	}
 
 	async setNewAccessToken(user): Promise<User> {
-		user.jwt = this.jwtService.sign({ username: user.username, userId: user.id })
+		user.accessToken = this.jwtService.sign({
+			username: user.username,
+			userId: user.id,
+		})
 		await this.usersRepository.save(user)
 		return user
 	}

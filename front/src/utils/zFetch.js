@@ -1,5 +1,5 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-import { API_BASE_URL /* , getUserToken */ } from "./constants" // ?????????????????
+import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ?????????????????
 //import errorManager from "./errorManager"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -53,7 +53,7 @@ function requestOptionsHeaders() {
 	return {
 		"Content-Type": "application/json",
 		Accept: "application/json",
-		Authorization: "Bearer " + localStorage.getItem("jwt"), // TODO : A modifier
+		Authorization: "Bearer " + localStorage.getItem("accessToken"), // TODO : A modifier
 	}
 }
 function requestOptionsHeadersPublic() {

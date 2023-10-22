@@ -60,7 +60,7 @@ export class AuthController {
 
 		try {
 			let user = await this.usersService.create({
-				username: username.toLowerCase(),
+				username: username, //.toLowerCase(),
 				email: email.toLowerCase(),
 				password: hashedPassword,
 			})
@@ -86,8 +86,8 @@ export class AuthController {
 	 * 2) if user not found : throw INVALID_CREDENTIALS
 	 * 3) if user.emailValidationToken : throw EMAIL_NOT_CONFIRMED
 	 * 4) if password invalid : throw INVALID_CREDENTIALS
-	 * 5) if user.jwt not set : set jwt
-	 * 6) return user (with jwt)
+	 * 5) if user.accessToken not set : set accessToken
+	 * 6) return user (with accessToken)
 	 *
 	 */
 	@Public()
@@ -117,9 +117,9 @@ export class AuthController {
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 
-		if (!user.jwt) {
-			const jwt = await this.authService.getAccessToken(user)
-			user = await this.usersService.setJwt(user, jwt)
+		if (!user.accessToken) {
+			const accessToken = await this.authService.getAccessToken(user)
+			user = await this.usersService.setAccessToken(user, accessToken)
 		}
 
 		Logger.log(`🟢 login: "${user.username}"`)
@@ -160,7 +160,7 @@ export class AuthController {
 	/*
 	@Post("logout")
 	async logout(@Res({ passthrough: true }) response: Response) {
-		response.clearCookie("jwt")
+		response.clearCookie("accessToken")
 
 		return {
 			message: "success",
