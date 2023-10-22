@@ -58,6 +58,7 @@ export default function RegisterFormInner({
 					placeholder="Repetez le mot de passe"
 					formData={formData}
 				/>
+				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
 				<Button variant="primary" className="float-end" onClick={() => btValidateClick()} disabled={isLoading}>
 					<FaPlus /> Register

@@ -72,7 +72,7 @@ export class AuthController {
 			console.debug("-------mail sent ")
 
 			delete user.password
-			return { success: 1, debugEmailValidationToken: user.emailValidationToken }
+			return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
 		} catch (e) {
 			console.debug("-------error", error)
 			throw new BadRequestException("INTERNAL_ERROR")

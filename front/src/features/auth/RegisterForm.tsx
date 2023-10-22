@@ -33,6 +33,7 @@ export default function RegisterForm() {
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
+	const [registerSuccess, setRegisterSuccess] = useState(false)
 
 	//const [errors, setErrors] = useState<any>({})
 	const [debugMsg, setDebugMsg] = useState<any | null>(null)
@@ -88,26 +89,6 @@ export default function RegisterForm() {
 			}))
 		}
 
-		/*
-
-
-		if (!password2) {
-			errorCount++
-			setErrors((errors: any) => ({
-				...errors,
-				password2: "Tu dois repeter le mot de passe.",
-			}))
-
-		} else if (password2 !== password) {
-			errorCount++
-			setErrors((errors: any) => ({
-				...errors,
-				password2: "Les 2 mots de passes sont differents.",
-			}))
-
-			console.log("errorCount", errorCount)
-		}
-		*/
 		return errorCount
 	}
 
@@ -119,10 +100,7 @@ export default function RegisterForm() {
 		setFetchError(null)
 		setFormErrors({})
 
-		/*
 		setDebugMsg(null)
-		setErrors({})
-		*/
 
 		if (checkErrors() > 0) return
 
@@ -131,30 +109,23 @@ export default function RegisterForm() {
 			email: formItem.email,
 			password: formItem.password,
 		}).then((response) => {
-			if (response.error) {
-				if (response.error === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-				else if (response.error === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
-				else {
-					console.log("response: ", response)
-					setFetchError("Erreur Inconnue")
-				}
-			} else if (response.success) {
-				if (response.tokenEmail) {
+			if (response.success) {
+				if (response.debugEmailValidationToken) {
 					setDebugMsg(
-						<>
-							Un email de confirmation a ete envoye a l'adresse indiquee{" "}
-							<a
-								href={"http://localhost:3001/auth/check-email/" + response.tokenEmail}
-								target="_blank"
-								rel="noreferrer"
-							>
-								Lien-Validation-debug
-							</a>
-						</>
+						<a
+							href={"http://localhost:3001/auth/emailconfirm/" + response.debugEmailValidationToken}
+							target="_blank"
+							rel="noreferrer"
+						>
+							Lien-Validation-debug
+						</a>
 					)
 				}
-			} else {
-				console.log("response: ", response)
+				setRegisterSuccess(true)
+			} else if (response.message === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
+			else if (response.message === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+			else {
+				console.error("response: ", response)
 				setFetchError("Erreur Inconnue")
 			}
 			setIsLoading(false)
@@ -163,26 +134,34 @@ export default function RegisterForm() {
 
 	// ■■■■■■■■■■■■■■■■■■■■■■■■ xxxxxxxxxxxxxx ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+	if (!registerSuccess)
+		return (
+			<div className="col-12 col-md-6">
+				<RegisterFormInner
+					formItem={formItem}
+					formErrors={formErrors}
+					setFormItem={setFormItem}
+					setFormErrors={setFormErrors}
+					isLoading={isLoading}
+					fetchError={fetchError}
+					btValidateClick={btRegisterClick}
+				/>
+
+				<FormAutoFill
+					setUsername={(val: string) => setFormItem((formItem: any) => ({ ...formItem, username: val }))}
+					setEmailOrUsername={null}
+					setEmail={(val: string) => setFormItem((formItem: any) => ({ ...formItem, email: val }))}
+					setPassword={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password: val }))}
+					setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
+				/>
+			</div>
+		)
+
 	return (
 		<div className="col-12 col-md-6">
-			<RegisterFormInner
-				formItem={formItem}
-				formErrors={formErrors}
-				setFormItem={setFormItem}
-				setFormErrors={setFormErrors}
-				isLoading={isLoading}
-				fetchError={fetchError}
-				btValidateClick={btRegisterClick}
-			/>
-			{/*
-			<FormAutoFill
-				setUsername={setUsername}
-				setEmailOrUsername={null}
-				setEmail={setEmail}
-				setPassword={setPassword}
-				setPassword2={setPassword2}
-			/>
-			*/}
+			<h2>Success</h2>
+			<p>Un email de confirmation a ete envoye a l'adresse indiquee ({formItem.email}).</p>
+			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
 		</div>
 	)
 }
