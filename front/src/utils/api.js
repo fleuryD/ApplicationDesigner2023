@@ -37,32 +37,12 @@ export async function apiFetchUserMe() {
 
 // * ■■■■■■■■■■■■■■■■■■■■■ AUTH
 
-export async function apiFetchRegister({
-	username,
-	email,
-	password,
-	/*
-	firstname,
-	lastname,
-	birthday,
-	gender,
-	*/
-}) {
+export async function apiFetchRegister({ username, email, password }) {
 	return zFetch({
 		publicAccess: true,
 		shortUrl: "/auth/register",
 		method: "POST",
-		body: {
-			username,
-			email,
-			password,
-			/*
-			firstname,
-			lastname,
-			birthday,
-			gender,
-			*/
-		},
+		body: { username, email, password },
 		requierdFields: [],
 	})
 }
@@ -72,10 +52,7 @@ export async function apiFetchLogin({ emailOrUsername, password }) {
 		publicAccess: true,
 		shortUrl: "/auth/login",
 		method: "POST",
-		body: {
-			emailOrUsername,
-			password,
-		},
+		body: { emailOrUsername, password },
 		requierdFields: [],
 	})
 }
@@ -86,9 +63,17 @@ export async function apiFetchCheckEmail({ tokenEmail }) {
 		publicAccess: true,
 		shortUrl: "/auth/confirm-email",
 		method: "POST",
-		body: {
-			tokenEmail,
-		},
+		body: { tokenEmail },
+		requierdFields: [],
+	})
+}
+
+export async function apiFetchForgottenPassword({ email }) {
+	return zFetch({
+		publicAccess: true,
+		shortUrl: "/auth/forgotten-password",
+		method: "POST",
+		body: { email },
 		requierdFields: [],
 	})
 }

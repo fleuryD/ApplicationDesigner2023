@@ -26,6 +26,10 @@ export class ProjectsController {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	/*
+	 * get all projects of the user
+	 *
+	 */
 	@Get("/my")
 	async myProjects(@User() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
@@ -55,7 +59,7 @@ export class ProjectsController {
 
 			return { project: project }
 		} catch (e) {
-			throw new BadRequestException("ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOORRR") // TODO : change error message
+			throw new BadRequestException("INTERNAL_ERROR")
 		}
 	}
 

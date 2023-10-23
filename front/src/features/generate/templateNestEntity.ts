@@ -19,11 +19,11 @@ export default function generateTemplateNestEntity({
 	entiteCamelNamePluriel,
 }: Props) {
 	let str = `\n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
+	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n\n`
 	str += `import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany,ManyToMany} from "typeorm"  \n`
 	str += `// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"     \n`
 	str += `  \n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
+	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
 	str += `\n`
 	str += `@Entity("${entiteCamelNamePluriel}")  \n`
 	str += `export class ${entitePascalName}{  \n`
@@ -79,5 +79,7 @@ export default function generateTemplateNestEntity({
 		//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
 		return str
 	})
+
+	str += `}  \n`
 	return str
 }

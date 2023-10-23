@@ -9,6 +9,8 @@ import NavBar from "ui/NavBar/NavBar"
 import PageAuthLogin from "pages/auth/PageAuthLogin"
 import PageAuthRegister from "pages/auth/PageAuthRegister"
 import PageAuthConfirmEmail from "pages/auth/PageAuthConfirmEmail"
+import PageAuthForgottenPassword from "pages/auth/PageAuthForgottenPassword"
+import PageAuthResetPassword from "pages/auth/PageAuthResetPassword"
 
 // * private routes
 import Page404 from "pages/Page404"
@@ -47,6 +49,8 @@ export default function App() {
 					<Routes>
 						<Route path="/auth/register" element={<PageAuthRegister />} />
 						<Route path="/auth/emailconfirm/:token" element={<PageAuthConfirmEmail />} />
+						<Route path="/auth/forgotten-password" element={<PageAuthForgottenPassword />} />
+						<Route path="/auth/reset-password" element={<PageAuthResetPassword />} />
 						<Route path="*" element={<PageAuthLogin />} />
 					</Routes>
 				)}

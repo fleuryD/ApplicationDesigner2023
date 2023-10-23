@@ -16,17 +16,17 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 ## Project status
 
-| Status |           | Features                                                            | Notes |
-| :----- | :-------- | :------------------------------------------------------------------ | ----- |
-| ✅     | Auth      | Registration + email validation                                     |       |
-| ✅     |           | Login + access_token                                                |       |
-| ❌     |           | Login with google...                                                |       |
-| ❌     |           | Refresh_access_token                                                |       |
-| ❌     |           | Password forgotten                                                  |       |
-| ❌     |           | A user can edit his profil                                          |       |
-| ✅     | UML       | A user can create, update and delete projects, entities and attrtes |       |
-| ✅     | Generator | A user can generate files from entities                             |       |
-| ❌     |           | Create template engine (twig-style) instead of hard-coded template  |       |
+| Status |           | Features                                                               | Notes |
+| :----- | :-------- | :--------------------------------------------------------------------- | ----- |
+| ✅     | Auth      | Registration + email validation                                        |       |
+| ✅     |           | Login + access_token                                                   |       |
+| ❌     |           | Login with google...                                                   |       |
+| ❌     |           | Refresh_access_token                                                   |       |
+| ❌     |           | Password forgotten                                                     |       |
+| ❌     |           | A user can edit his profil                                             |       |
+| ✅     | UML       | A user can create, update and delete projects, entities and properties |       |
+| ✅     | Generator | A user can generate files from entities                                |       |
+| ❌     |           | Create template engine (twig-style) instead of hard-coded template     |       |
 
 ## Built With
 

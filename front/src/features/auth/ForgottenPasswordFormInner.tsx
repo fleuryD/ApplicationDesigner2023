@@ -4,7 +4,7 @@ import React from "react"
 import Form from "react-bootstrap/Form"
 import { Button } from "react-bootstrap"
 import ZFrmInput from "ui/ZFrmInput"
-import { FaPlus } from "react-icons/fa"
+import { FaPaperPlane } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -31,29 +31,15 @@ export default function RegisterFormInner({
 
 	return (
 		<div className="border border-primary row">
-			<h2>Register</h2>
+			<p>Un lien vous sera envoyé par mail pour re-initialiser votre mot de passe</p>
 
 			<Form className="">
-				<ZFrmInput type="text" name="username" label="Username" placeholder="Username" formData={formData} />
 				<ZFrmInput type="email" name="email" label="e-mail" placeholder="e-mail" formData={formData} />
-				<ZFrmInput
-					type="password"
-					name="password"
-					label="Mot de passe"
-					placeholder="Mot de passe"
-					formData={formData}
-				/>
-				<ZFrmInput
-					type="password"
-					name="password2"
-					label="Repetez le mot de passe"
-					placeholder="Repetez le mot de passe"
-					formData={formData}
-				/>
+
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
 				<Button variant="primary" className="float-end" onClick={() => btValidateClick()} disabled={isLoading}>
-					<FaPlus /> Register
+					<FaPaperPlane /> Envoyer
 				</Button>
 			</Form>
 		</div>

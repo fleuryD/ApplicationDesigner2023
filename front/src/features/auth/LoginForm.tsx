@@ -7,6 +7,8 @@ import { authLoginSuccess } from "store/authSlice"
 import { useAppDispatch } from "store/store"
 import { apiFetchLogin } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
+import ZLoading from "ui/ZLoading"
+import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -40,7 +42,7 @@ export default function LoginForm() {
 
 	return (
 		<div className="col-12 col-md-6">
-			<Form>
+			<Form className="row col-12">
 				<Form.Group>
 					<Form.Control
 						type="text"
@@ -65,11 +67,22 @@ export default function LoginForm() {
 				{error && <p className="text-danger">{error}</p>}
 
 				<div>
-					<Button variant="primary" className="float-end" onClick={() => btLoginClick()} disabled={isLoading}>
-						Connexion
-					</Button>
+					{isLoading ? (
+						<ZLoading showMessage={false} />
+					) : (
+						<Button
+							variant="primary"
+							className="float-end"
+							onClick={() => btLoginClick()}
+							disabled={isLoading}
+						>
+							Connexion
+						</Button>
+					)}
 				</div>
 			</Form>
+
+			<Link to="/auth/forgotten-password">Mot de passe oublié ?</Link>
 			<FormAutoFill
 				setUsername={null}
 				setEmailOrUsername={setEmailOrUsername}

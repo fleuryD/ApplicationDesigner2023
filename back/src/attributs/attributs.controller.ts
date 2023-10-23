@@ -61,7 +61,7 @@ export class AttributsController {
 			})
 			return { attribut: attribut }
 		} catch (e) {
-			throw new BadRequestException("aosdjfla jdsfajlsdjf;alksjkjtjjtjt")
+			throw new BadRequestException("INTERNAL_ERROR")
 		}
 	}
 

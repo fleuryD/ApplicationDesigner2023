@@ -14,6 +14,7 @@ import {
 import { EntitesService } from "./entites.service"
 import { ProjectsService } from "../projects/projects.service"
 import { User } from "src/auth/user.decorator"
+import { Logger } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -53,7 +54,7 @@ export class EntitesController {
 
 			return { entite: entite }
 		} catch (e) {
-			throw new BadRequestException("ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOORRR") // TODO : change error message
+			throw new BadRequestException("INTERNAL_ERROR")
 		}
 	}
 
@@ -64,11 +65,13 @@ export class EntitesController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
 		@Param() params,
-		@Headers() headers
+		@User() userFromToken
 	) {
-		// TODO : check if user is authorized to edit this entite
+		await this.entitesService.ensureAuthorizedAccessEntite({
+			userId: userFromToken,
+			entiteId: params.id,
+		})
 		let entite = await this.entitesService.findOneById(params.id)
-
 		entite.name = name
 		entite.description = description
 		entite.infos = infos
@@ -82,8 +85,11 @@ export class EntitesController {
 	}
 
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @Headers() headers) {
-		// TODO : check if user is authorized to delete this entite
+	async projectDelete(@Param() params, @User() userFromToken) {
+		await this.entitesService.ensureAuthorizedAccessEntite({
+			userId: userFromToken,
+			entiteId: params.id,
+		})
 		let entite = await this.entitesService.findOneById(params.id)
 		await this.entitesService.remove(entite.id)
 
@@ -94,8 +100,13 @@ export class EntitesController {
 
 	/*
 	@Get("/:id")
-	async entiteShow(@Param() params, @Headers() headers) {
-		// TODO : check if user is authorized to show this entite
+	async entiteShow(@Param() params,
+		@User() userFromToken
+	) {
+		await this.entitesService.ensureAuthorizedAccessEntite({
+			userId: userFromToken,
+			entiteId: params.id,
+		})
 		const entite = await this.entitesService.findOneById(params.id)
 
 		return {
