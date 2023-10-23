@@ -12,6 +12,7 @@ import {
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
 import { EntitesService } from "../entites/entites.service"
+import { User } from "src/auth/user.decorator"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -24,10 +25,13 @@ export class AttributsController {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	/*
+	 *	ajoute un attribut à l'entite ciblée par id
+	 *
+	 */
 	@Post("/new/entite/:id")
 	async newEntite(
 		@Param() params,
-		@Headers() headers,
 		@Body("name") name: string,
 		@Body("tipe") tipe: string,
 		@Body("longueur") longueur: number,
@@ -39,9 +43,13 @@ export class AttributsController {
 		@Body("isNullable") isNullable: string,
 		@Body("isUnique") isUnique: string,
 		@Body("targetEntiteId") targetEntiteId: number,
-		@Body("inverseAttributId") inverseAttributId: number
+		@Body("inverseAttributId") inverseAttributId: number,
+		@User() userFromToken
 	) {
-		// TODO : check if user is authorized to create attribut for this entite
+		await this.entitesService.ensureAuthorizedAccessEntite({
+			userId: userFromToken.id,
+			entiteId: params.id,
+		})
 		const entite = await this.entitesService.findOneById(params.id)
 		try {
 			const attribut = await this.attributsService.create({
@@ -80,9 +88,12 @@ export class AttributsController {
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number,
 		@Param() params,
-		@Headers() headers
+		@User() userFromToken
 	) {
-		// TODO : check if user is authorized to edit this attribut
+		await this.attributsService.ensureAuthorizedAccessAttribut({
+			userId: userFromToken.id,
+			attributId: params.id,
+		})
 		let attribut = await this.attributsService.findOneById(params.id)
 
 		attribut.name = name
@@ -106,8 +117,11 @@ export class AttributsController {
 	}
 
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @Headers() headers) {
-		// TODO : check if user is authorized to delete this attribut
+	async projectDelete(@Param() params, @User() userFromToken) {
+		await this.attributsService.ensureAuthorizedAccessAttribut({
+			userId: userFromToken.id,
+			attributId: params.id,
+		})
 		let attribut = await this.attributsService.findOneById(params.id)
 		await this.attributsService.remove(attribut.id)
 
@@ -118,8 +132,13 @@ export class AttributsController {
 
 	/*
 	@Get("/:id")
-	async attributShow(@Param() params, @Headers() headers) {
-		// TODO : check if user is authorized to see this attribut
+	async attributShow(@Param() params,
+		@User() userFromToken
+	) {
+		await this.attributsService.ensureAuthorizedAccessAttribut({
+			userId: userFromToken.id,
+			attributId: params.id,
+		})
 		const attribut = await this.attributsService.findOneById(params.id)
 
 		return {

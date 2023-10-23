@@ -68,7 +68,7 @@ export class EntitesController {
 		@User() userFromToken
 	) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
-			userId: userFromToken,
+			userId: userFromToken.id,
 			entiteId: params.id,
 		})
 		let entite = await this.entitesService.findOneById(params.id)
@@ -87,7 +87,7 @@ export class EntitesController {
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @User() userFromToken) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
-			userId: userFromToken,
+			userId: userFromToken.id,
 			entiteId: params.id,
 		})
 		let entite = await this.entitesService.findOneById(params.id)
@@ -104,7 +104,7 @@ export class EntitesController {
 		@User() userFromToken
 	) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
-			userId: userFromToken,
+			userId: userFromToken.id,
 			entiteId: params.id,
 		})
 		const entite = await this.entitesService.findOneById(params.id)

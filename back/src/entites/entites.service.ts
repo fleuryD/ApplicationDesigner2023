@@ -66,7 +66,7 @@ export class EntitesService {
 		Logger.log(
 			`⛔ ensureAuthorizedAccessProject :: user #${userId} can't access entite #${entiteId}`
 		)
-		throw new UnauthorizedException("UNAUTHORIZED_ACCESS_TO_PROJECT")
+		throw new UnauthorizedException("UNAUTHORIZED_ACCESS_TO_ENTITE")
 	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
