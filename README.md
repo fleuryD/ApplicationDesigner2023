@@ -26,7 +26,7 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 | ❌     |           | A user can edit his profil                                          |       |
 | ✅     | UML       | A user can create, update and delete projects, entities and attrtes |       |
 | ✅     | Generator | A user can generate files from entities                             |       |
-| ❌     |           | Use template (twig-style) instead of hard-coded template            |       |
+| ❌     |           | Create template engine (twig-style) instead of hard-coded template  |       |
 
 ## Built With
 

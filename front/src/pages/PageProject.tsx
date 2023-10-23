@@ -60,6 +60,7 @@ export default function PageProject() {
 						{error && <p>{error}</p>}
 						{project && (
 							<div className="z-cadre user-infos">
+								{/*
 								<div>
 									createdBy: <b>{project.createdBy?.username}</b> &nbsp;&nbsp;
 								</div>
@@ -69,6 +70,8 @@ export default function PageProject() {
 								<div>
 									name: <b>{project.name}</b> &nbsp;&nbsp;
 								</div>
+
+								*/}
 								<div>
 									createdAt: <b>{project.createdAt}</b> &nbsp;&nbsp;
 								</div>
