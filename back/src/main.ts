@@ -5,8 +5,6 @@ import { AppModule } from "./app.module"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, {
 		logger: console,
@@ -17,6 +15,6 @@ async function bootstrap() {
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: false,
 	})
-	await app.listen(3000) // TODO : env > PORT
+	await app.listen(parseInt(process.env.BACK_PORT, 10) || 3000)
 }
 bootstrap()

@@ -1,4 +1,5 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
 import {
 	Entity,
 	Column,
@@ -28,6 +29,7 @@ export class Attribut {
 	})
 	public entite: Entite
 
+	// * Should be in CamelCase
 	@Column()
 	name: string
 

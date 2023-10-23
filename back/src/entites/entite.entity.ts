@@ -11,14 +11,6 @@ import { Project } from "../projects/project.entity"
 import { Attribut } from "../attributs/attribut.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-/*
- *	// TODO:
- *
- *	* xxxxxxxxxxxxxxxxxxxxxxxxxx
- *
- *
- */
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity("entites")
 export class Entite {
@@ -31,6 +23,7 @@ export class Entite {
 	})
 	public project: Project
 
+	// * Should be in PascalCase
 	@Column()
 	name: string
 

@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
 import {
 	BadRequestException,
 	Body,
@@ -12,7 +11,6 @@ import {
 	Headers,
 } from "@nestjs/common"
 import { ProjectsService } from "./projects.service"
-
 import { User } from "../auth/user.decorator"
 import { UsersService } from "src/users/users.service"
 import { Logger } from "@nestjs/common"
@@ -57,7 +55,7 @@ export class ProjectsController {
 
 			return { project: project }
 		} catch (e) {
-			throw new BadRequestException("email already exists")
+			throw new BadRequestException("ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOORRR") // TODO : change error message
 		}
 	}
 

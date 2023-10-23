@@ -11,21 +11,13 @@ import { User } from "../users/user.entity"
 import { Entite } from "../entites/entite.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-/*
- *	// TODO:
- *
- *	* dans la relation createdBy, toutes les infos de user (pass, token, etc.) sont envoyees !!!!
- *	* une entity URL ???
- *
- *
- */
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity("projects")
 export class Project {
 	@PrimaryGeneratedColumn()
 	id: number
 
+	// * Should be in PascalCase
 	@Column()
 	name: string
 
@@ -57,7 +49,6 @@ export class Project {
 	urlLocal: string // OU Relation Url
 	urlWeb: string
 	urlGit: string
-
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
 	nomCamel: string //  articleTag
 	nomSnake: string //  article_tag

@@ -53,7 +53,7 @@ export class EntitesController {
 
 			return { entite: entite }
 		} catch (e) {
-			throw new BadRequestException("email already exists")
+			throw new BadRequestException("ERRRRRRRRRRRRRRRRROOOOOOOOOOOOOOORRR") // TODO : change error message
 		}
 	}
 

@@ -29,12 +29,7 @@ export class AttributsService {
 	}
 
 	async findOneById(id: number): Promise<Attribut | null> {
-		return this.attributsRepository.findOne({
-			where: {
-				id: id,
-			},
-		})
-		//return this.attributsRepository.findOneBy({ id })
+		return this.attributsRepository.findOneBy({ id })
 	}
 
 	async remove(id: number): Promise<void> {

@@ -34,14 +34,19 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 -   [nestJs](https://nestjs.com/)
 -   [TypeScript](http://typescriptlang.org)
 
-## Getting started
+## Running it locally
 
-### Running it locally
+-   create a `.env` file in `./back` folder (see `./back/.env.example` file)
 
--   create a `.env` file in `./back` folder (see `.env.example` file)
+#### With docker
 
--   Run `yarn` to install dependencies.
--   Run `yarn build:watch` to start webpack in watch mode.
--   Open `Figma` -> `Plugins` -> `Development` -> `New Plugin...` and choose `manifest.json` file from this repo.
+-   Run `docker-compose up` in the root folder to start the application.
+
+#### Without docker
+
+-   Run `npm install` in `./back` and `./front` folders to install dependencies.
+-   Configure the DB server
+-   Run `npm run start:dev` in ./back folder.
+-   Run `npm start` in ./front folder.
 
 ## Demo

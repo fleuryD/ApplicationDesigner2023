@@ -4,8 +4,6 @@ import { AppService } from "./app.service"
 import { ProjectsService } from "./projects/projects.service"
 import { EntitesService } from "./entites/entites.service"
 import { AttributsService } from "./attributs/attributs.service"
-import { LocalAuthGuard } from "./auth/local-auth.guard"
-import { Public } from "./auth/jwt-auth.guard"
 import { Logger } from "@nestjs/common"
 import { User } from "./auth/user.decorator"
 import { UsersService } from "./users/users.service"
@@ -23,18 +21,6 @@ export class AppController {
 	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
-	@UseGuards(LocalAuthGuard)
-	@Get()
-	getHello(): string {
-		return this.appService.getHello()
-	}
-
-	@UseGuards(LocalAuthGuard)
-	@Get("/test")
-	async tessssst(@Request() req) {
-		return req.user
-	}
 
 	@Get("/fixtures/project-ad")
 	async fixtureProjetAD(@User() userFromToken) {
