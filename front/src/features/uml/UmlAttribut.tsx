@@ -1,9 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useEffect, useState } from "react"
-//import { useAppDispatch } from "store/store"
+import React from "react"
 import { Attribut, Entite, Project } from "types"
-import ButtonEditAttribut from "features/attributs/ButtonEditAttribut"
 import LinkEditAttribut from "features/attributs/LinkEditAttribut"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -31,15 +29,8 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 
 	return (
 		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")}>
-			{/*
-			<ButtonEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
-			*/}
 			<div className="name">
 				<LinkEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
-				{/*
-				#{attribut.id}
-				{attribut.name}
-				 */}
 			</div>
 			<div className="tipe">
 				{attribut.tipe} {attribut.longueur && <div className="longueur">({attribut.longueur})</div>}

@@ -48,6 +48,8 @@ function ButtonFixtures({ className, fixtureName, text }: Props2) {
 		})
 	}
 
+	if (fetchError) return <div className="alert alert-danger">{fetchError}</div>
+
 	return (
 		<Button className={"btn-sm " + className} title="Add Fixture" onClick={() => btClick()} disabled={isLoading}>
 			<FaPlus /> <b>Fixture:</b> {text}

@@ -1,8 +1,8 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { apiFetchCheckEmail } from "utils/api"
-//import logo from "../logo.svg"
 import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -10,8 +10,6 @@ import { Link } from "react-router-dom"
 export default function PageAuthConfirmEmail() {
 	const tokenEmail = useParams().token
 	const [status, setStatus] = useState<"LOADING" | "SUCCESS" | "ERROR">("SUCCESS")
-
-	const [msg, setMsg] = useState<any>(null)
 
 	useEffect(() => {
 		setStatus("LOADING")

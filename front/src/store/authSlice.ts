@@ -35,7 +35,6 @@ export const authSlice = createSlice({
 			state.accessToken = action.payload.accessToken
 			state.username = action.payload.username
 			state.email = action.payload.email
-			//console.log("action.payload.roles", action.payload.roles)
 
 			localStorage.setItem("id", action.payload.id)
 			localStorage.setItem("accessToken", action.payload.accessToken)
@@ -63,6 +62,5 @@ export default authSlice.reducer
 const { authLogoutSuccessX } = authSlice.actions
 
 export const authLogoutSuccess = () => (dispatch: any) => {
-	//console.log("'aaaaaaaaaaaaaa")
 	dispatch(authLogoutSuccessX())
 }

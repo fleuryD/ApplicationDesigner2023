@@ -1,7 +1,6 @@
-/* eslint-disable no-nested-ternary */
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
 import React from "react"
-import styled from "styled-components"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -23,7 +22,7 @@ export default function ZTableRowCell({ item, col }: Props) {
 	}
 
 	return (
-		<StyledTd key={"td-" + col.name + "-" + item.id} className={className}>
+		<td key={"td-" + col.name + "-" + item.id} className={className}>
 			{col.cellHtml ? (
 				col.cellHtml(item)
 			) : (
@@ -33,13 +32,6 @@ export default function ZTableRowCell({ item, col }: Props) {
 					{item[col.name] === false && "-NON-"}
 				</>
 			)}
-		</StyledTd>
+		</td>
 	)
 }
-
-// █████████████████████████████████████████████████████████████	StyledComponents
-
-const StyledTd = styled.td`
-	// color: green;
-	// cursor: pointer;
-`

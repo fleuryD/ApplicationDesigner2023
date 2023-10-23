@@ -34,10 +34,6 @@ type Entite = {
 	hrefEdit: string //  "{{ path('namespace_entite_edit', {'id': entite.id}) }}"
 	strUseEntity: string //  "App\Entity\Agenda\Evenement" ou "App\Entity\Evenement"
 	xxTempaltesPath: string //
-	xxHrefIndex: string //  DEPRECIATED
-	xxHrefNew: string //   DEPRECIATED
-	xxHrefShow: string //    DEPRECIATED
-	xxHrefEdit: string //    DEPRECIATED
 	xxIcone: string
 	*/
 }

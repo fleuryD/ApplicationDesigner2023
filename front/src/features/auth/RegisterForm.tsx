@@ -3,8 +3,6 @@
 import React, { useState } from "react"
 import { apiFetchRegister } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
-// import { useAppDispatch } from "store/store"
-//import { Link } from "react-router-dom"
 import RegisterFormInner from "./RegisterFormInner"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

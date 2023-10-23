@@ -1,7 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-// import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
 import { apiCreateAttribut, apiEditAttribut, apiDeleteAttribut } from "utils/api"

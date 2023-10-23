@@ -18,7 +18,6 @@ import PageAdminUser from "pages/PageAdminUser"
 import PageAdminUsers from "pages/PageAdminUsers"
 import PageProject from "pages/PageProject"
 import PageProjectGenerate from "pages/PageProjectGenerate"
-//import PageWIP from "pages/PageWIP"
 
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -35,10 +34,6 @@ export default function App() {
 				<NavBar />
 				{auth.isConnected ? (
 					<Routes>
-						{/*
-							<Route path="/user/:id" element={<PageUser />} />
-							<Route path="/wip" element={<PageWIP />} />
-						*/}
 						<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
 						<Route path="/projects/:id" element={<PageProject />} />
 						<Route path="/admin/users" element={<PageAdminUsers />} />

@@ -39,7 +39,6 @@ export default function ZTable({ columns, data, funcRowClassName, className }: P
 							col={col}
 							sortBy={sortBy}
 							sortOrderAsc={sortOrderAsc}
-							// eslint-disable-next-line react/jsx-no-bind
 							handleSortByClick={handleSortByClick}
 						/>
 					))}
@@ -57,8 +56,6 @@ export default function ZTable({ columns, data, funcRowClassName, className }: P
 		const sortFactor = sortOrderAsc ? 1 : -1
 
 		const columnAssociatedToSortBy = columns.filter((col) => col.name === sortBy)[0]
-		//  //console.log("columnAssociatedToSortBy")
-		//  //console.log(columnAssociatedToSortBy)
 		const sortValue = columnAssociatedToSortBy?.sortValue || null
 		//  //console.log("sortValue")
 		//  //console.log(sortValue)

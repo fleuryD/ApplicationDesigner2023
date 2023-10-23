@@ -6,12 +6,7 @@ import { useNavigate } from "react-router-dom"
 import { useAppSelector, useAppDispatch } from "store/store"
 import { authLogoutSuccess } from "store/authSlice"
 
-import {
-	FaUser,
-	FaAddressCard,
-	FaSignOutAlt,
-	/* 	FaBan, FaHome, FaUserFriends, FaCat, FaGamepad, FaSearch, FaInfo, FaUsers, FaArrowRight, FaSignInAlt, FaQuestion, */
-} from "react-icons/fa"
+import { FaUser, FaAddressCard, FaSignOutAlt } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

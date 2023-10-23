@@ -1,7 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-// import { useAppDispatch } from "store/store"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedProject } from "store/appSlice"
 import { apiCreateProject, apiEditProject, apiDeleteProject } from "utils/api"
@@ -20,9 +19,6 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-
-	// const dispatch = useAppDispatch()
-	//	const navigate = useNavigate()
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 

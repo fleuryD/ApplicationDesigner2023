@@ -2,9 +2,8 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-//import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
-import { useAppSelector, useAppDispatch } from "store/store"
+import { useAppSelector } from "store/store"
 import { Project } from "types"
 import Uml from "features/uml/Uml"
 import ButtonEditProject from "features/projects/ButtonEditProject"
@@ -37,7 +36,7 @@ export default function PageProject() {
 				setIsLoading(false)
 			})
 		}
-	}, [])
+	}, [projectId])
 
 	return (
 		<div className="zPage">

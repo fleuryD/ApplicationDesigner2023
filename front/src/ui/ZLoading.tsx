@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/self-closing-comp */
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
 import React from "react"
 import styled from "styled-components"
+
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 /*

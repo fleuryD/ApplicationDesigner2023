@@ -11,20 +11,12 @@ interface ISelectOption {
 type Props = {
 	name: string
 	label: string
-	//type: string
 	placeholder: string
 	formData: any
 	selectOptions: ISelectOption[]
 	otherProps?: any
 }
-export default function ZFrmSelect({
-	formData,
-	name,
-	label,
-	/* type, */ placeholder,
-	selectOptions,
-	...otherProps
-}: Props) {
+export default function ZFrmSelect({ formData, name, label, placeholder, selectOptions, ...otherProps }: Props) {
 	const { formItem, setFormItem, formErrors, setFormErrors, isLoading } = formData
 
 	return (

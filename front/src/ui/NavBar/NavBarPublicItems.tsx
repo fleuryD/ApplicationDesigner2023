@@ -3,10 +3,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { Nav } from "react-bootstrap"
 
-import {
-	FaQuestion,
-	/* 	FaBan, FaUsers, FaQuestion, FaUser,FaAddressCard ,FaSignOutAlt, FaHome, FaUserFriends, FaCat, FaGamepad, FaSearch, FaInfo, FaUsers, FaArrowRight, FaSignInAlt, FaQuestion, */
-} from "react-icons/fa"
+import { FaQuestion } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

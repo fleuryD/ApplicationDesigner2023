@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom"
 //import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
 import { Project, Entite } from "types"
-import Uml from "features/uml/Uml"
 import ButtonEditProject from "features/projects/ButtonEditProject"
 import ProjectLink from "features/projects/ProjectLink"
 import { Button } from "react-bootstrap"
@@ -37,7 +36,7 @@ export default function PageProjectGenerate() {
 				setIsLoading(false)
 			})
 		}
-	}, [])
+	}, [projectId])
 
 	function ButtonTemplate({ text, name, disabled }: { text: string; name: string; disabled?: boolean }) {
 		return (

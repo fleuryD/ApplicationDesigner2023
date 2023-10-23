@@ -1,10 +1,8 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-//import { useAppDispatch } from "store/store"
-import { useAppSelector, useAppDispatch } from "store/store"
-import { Project, Attribut } from "types"
+import React from "react"
+import { useAppSelector } from "store/store"
+import { Project } from "types"
 import UmlEntite from "features/uml/UmlEntite"
 import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
 import FormEntite from "features/entites/FormEntite"

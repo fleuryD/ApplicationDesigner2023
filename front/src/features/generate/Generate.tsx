@@ -1,9 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState, useEffect } from "react"
-//import { useAppDispatch } from "store/store"
 import { Project, Entite } from "types"
-//import FormAttribut from "features/attributs/FormAttribut"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
 import generateTemplateCppHpp from "./templateCppHpp"
@@ -39,7 +37,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "CppHpp")
 			setStr(generateTemplateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
 		else setStr("- TODO: " + templateName + " -")
-	}, [entite, templateName])
+	}, [entite, entiteCamelName, entiteCamelNamePluriel, entitePascalName, project, templateName])
 
 	// ****************************************************************
 

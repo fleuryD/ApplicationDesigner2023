@@ -1,15 +1,10 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
 import React from "react"
 import { Link } from "react-router-dom"
 import { Nav, NavDropdown } from "react-bootstrap"
 import NavBarDropdownConnectedUser from "./NavBarDropdownConnectedUser"
-
-import {
-	FaBan,
-	FaUsers,
-	FaQuestion,
-	/* 	FaUser,FaAddressCard ,FaSignOutAlt, FaHome, FaUserFriends, FaCat, FaGamepad, FaSearch, FaInfo, FaUsers, FaArrowRight, FaSignInAlt, FaQuestion, */
-} from "react-icons/fa"
+import { FaBan, FaUsers, FaQuestion } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

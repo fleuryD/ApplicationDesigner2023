@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedEntite } from "store/appSlice"
 import { apiCreateEntity, apiEditEntity, apiDeleteEntity } from "utils/api"
-import { Entite, Project } from "types"
+import { Entite } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 import ZModal from "ui/ZModal"
 

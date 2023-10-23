@@ -1,8 +1,7 @@
-/* eslint-disable no-nested-ternary */
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-import { AnyARecord } from "dns"
+
 import React from "react"
-import styled from "styled-components"
+import { AnyARecord } from "dns"
 import ZTableRowCell from "./ZTableRowCell"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -24,17 +23,10 @@ interface Props {
 export default function ZTableRow({ item, columns, funcRowClassName }: Props) {
 	const className = funcRowClassName ? funcRowClassName(item) : ""
 	return (
-		<StyledTr className={className}>
+		<tr className={className}>
 			{columns.map((col) => (
 				<ZTableRowCell key={"td-" + col.name + "-" + item.id} item={item} col={col} />
 			))}
-		</StyledTr>
+		</tr>
 	)
 }
-
-// █████████████████████████████████████████████████████████████	StyledComponents
-
-const StyledTr = styled.tr`
-	// color: green;
-	// cursor: pointer;
-`
