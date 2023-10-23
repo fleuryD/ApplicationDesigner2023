@@ -2,7 +2,6 @@
 import React from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedAttribut } from "store/appSlice"
-import { Button } from "react-bootstrap"
 import { FaEdit } from "react-icons/fa"
 import { Attribut, Entite } from "types"
 import styled from "styled-components"
@@ -24,8 +23,8 @@ export default function LinkEditAttribut({ className, attribut, entite }: Props)
 		<StyledEditAttr className={className} title={"Edit attribut: " + attribut.name} onClick={() => btClick()}>
 			<span className="toggledIcon">
 				<FaEdit />
-			</span>
-			{attribut.name}{" "}
+			</span>{" "}
+			{attribut.name}
 		</StyledEditAttr>
 	)
 }

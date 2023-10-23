@@ -41,7 +41,7 @@ export class User {
 	@Column({ unique: true, nullable: true })
 	passwordResetToken: string
 
-	@CreateDateColumn({ unique: true, nullable: true })
+	@CreateDateColumn({ nullable: true })
 	passwordResetAt: Date
 
 	@CreateDateColumn()

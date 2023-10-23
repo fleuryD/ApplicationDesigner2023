@@ -139,6 +139,31 @@ export class AppController {
 				isNullable: true,
 				isUnique: true,
 			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 1,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 1,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+			})
 
 			await this.attributsService.create({
 				entite: entiteUser,
@@ -196,7 +221,7 @@ export class AppController {
 				name: "description",
 				tipe: "string",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 			await this.attributsService.create({
@@ -204,7 +229,7 @@ export class AppController {
 				name: "infos",
 				tipe: "string",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 			await this.attributsService.create({
@@ -264,7 +289,7 @@ export class AppController {
 				name: "description",
 				tipe: "string",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 			await this.attributsService.create({
@@ -272,7 +297,7 @@ export class AppController {
 				name: "infos",
 				tipe: "string",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 			await this.attributsService.create({
@@ -365,7 +390,7 @@ export class AppController {
 				name: "infos",
 				tipe: "string",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 
@@ -383,7 +408,7 @@ export class AppController {
 				name: "isWip",
 				tipe: "Boolean",
 				position: 1,
-				isNullable: false,
+				isNullable: true,
 				isUnique: false,
 			})
 			await this.attributsService.create({
