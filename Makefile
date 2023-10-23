@@ -62,20 +62,6 @@ clean:
 
 
 
-#	up2 :
-#		@docker compose -f ./docker-compose.yml up
-#	
-#	down :
-#		@docker compose -f ./docker-compose.yml down
-#	
-#	stop :
-#		@docker compose -f ./docker-compose.yml stop
-#	
-#	start :
-#		@docker compose -f ./docker-compose.yml start
-
-
-
 # PRIVATE ----------------------------------------------------------------------
 
 x_clean:
@@ -101,4 +87,4 @@ x_ps:
 	@ echo "\n$(C_YEL)=== docker volume ls : ===$(C_NOR)"
 	@ docker volume ls
 
-	@ echo ""	
+	@ echo ""

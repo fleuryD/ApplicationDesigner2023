@@ -4,22 +4,29 @@
 
 ## About the project
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis consequat erat. Cras laoreet augue eu velit laoreet, sed placerat massa sodales. Nullam eget nibh molestie, semper est id, congue nisi. Nulla sed ultrices augue. Nullam venenatis, tortor scelerisque tempor laoreet, urna sem eleifend tortor, ut malesuada libero libero eget metus. Integer vestibulum mi nec rutrum rhoncus. In aliquam justo lorem, id convallis tellus ultrices ut. Vivamus ultricies, risus vitae luctus placerat, dolor massa tincidunt erat, vel rutrum quam metus sit amet est.
+Application Designer is a powerful tool that allows you to quickly create, customize, and generate code templates for your software projects. Built with NestJS and React, this application simplifies the process of setting up a project, defining entities and properties for a database, and generating code templates in multiple programming languages.
 
-Nullam eu facilisis lacus, vel efficitur lorem. Cras vitae arcu ante. Pellentesque tincidunt porta aliquam. Maecenas eu imperdiet neque, nec rutrum lacus. Maecenas interdum auctor est eget fringilla. Etiam lacinia nunc ac mi feugiat eleifend. Nam cursus odio vitae massa mattis ornare. Duis dolor purus, euismod facilisis nunc non, lacinia elementum ex. Donec porta nec augue in faucibus. Vestibulum a ex id nunc sollicitudin iaculis et non magna.
+## Features
+
+-   **Project Creation**: Easily create new software projects with the necessary folder structure and configurations.
+
+-   **Entity and Property Management**: Define your project's entities and their properties for your database schema.
+
+-   **Multi-Language Template Generation**: Generate code templates in various programming languages, saving you time and effort.
 
 ## Project status
 
-| Status |           | Features                        | Notes                                 |
-| :----- | :-------- | :------------------------------ | ------------------------------------- |
-| ✅     | Auth      | Registration + email validation |                                       |
-| ✅     |           | Login + access_token            |                                       |
-| ❌     |           | refresh_access_token            |                                       |
-| ❌     |           | Password forgotten              |                                       |
-| ❌     | Users     | CRUD User                       | A user can edit is profil             |
-| ✅     | Projects  | CRUD Project                    | A user can create and edit projects   |
-| ✅     | Enites    | CRUD Entite                     | A user can add entities to projects   |
-| ✅     | Attributs | CRUD Attribut                   | A user can add attributes to entities |
+| Status |           | Features                                                            | Notes |
+| :----- | :-------- | :------------------------------------------------------------------ | ----- |
+| ✅     | Auth      | Registration + email validation                                     |       |
+| ✅     |           | Login + access_token                                                |       |
+| ❌     |           | Login with google...                                                |       |
+| ❌     |           | Refresh_access_token                                                |       |
+| ❌     |           | Password forgotten                                                  |       |
+| ❌     |           | A user can edit his profil                                          |       |
+| ✅     | UML       | A user can create, update and delete projects, entities and attrtes |       |
+| ✅     | Generator | A user can generate files from entities                             |       |
+| ❌     |           | Use template (twig-style) instead of hard-coded template            |       |
 
 ## Built With
 
@@ -30,6 +37,8 @@ Nullam eu facilisis lacus, vel efficitur lorem. Cras vitae arcu ante. Pellentesq
 ## Getting started
 
 ### Running it locally
+
+-   create a `.env` file in `./back` folder (see `.env.example` file)
 
 -   Run `yarn` to install dependencies.
 -   Run `yarn build:watch` to start webpack in watch mode.
