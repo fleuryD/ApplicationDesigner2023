@@ -15,6 +15,7 @@ Nullam eu facilisis lacus, vel efficitur lorem. Cras vitae arcu ante. Pellentesq
 | ✅     | Auth      | Registration + email validation |                                       |
 | ✅     |           | Login + access_token            |                                       |
 | ❌     |           | refresh_access_token            |                                       |
+| ❌     |           | Password forgotten              |                                       |
 | ❌     | Users     | CRUD User                       | A user can edit is profil             |
 | ✅     | Projects  | CRUD Project                    | A user can create and edit projects   |
 | ✅     | Enites    | CRUD Entite                     | A user can add entities to projects   |

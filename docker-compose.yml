@@ -3,11 +3,8 @@ services:
     postgres:
         build: pgsql
         container_name: postgres
-        environment:
-            - POSTGRES_DB=${DB_NAME}
-            - POSTGRES_USER=${DB_USERNAME}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
-            - POSTGRES_HOST_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}
+        env_file:
+            - ./back/.env
         restart: always
         networks:
             - best_network
