@@ -25,8 +25,12 @@ export class EntitesController {
 		private readonly projectsService: ProjectsService
 	) {}
 
-	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
+	/*
+	 * *************************************************************************
+	 *
+	 * 	ADD ENTITTE TO PROJECT TARGETED BY :id
+	 *
+	 */
 	@Post("/new/project/:id")
 	async newEntite(
 		@Param() params,
@@ -58,6 +62,12 @@ export class EntitesController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	EDITE ENTITTE TARGETED BY :id
+	 *
+	 */
 	@Post("/:id/edit")
 	async entiteEdit(
 		@Body("name") name: string,
@@ -84,6 +94,12 @@ export class EntitesController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	DELETE ENTITTE TARGETED BY :id
+	 *
+	 */
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @User() userFromToken) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
@@ -98,6 +114,12 @@ export class EntitesController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	GET ENTITTE TARGETED BY :id
+	 *
+	 */
 	/*
 	@Get("/:id")
 	async entiteShow(@Param() params,

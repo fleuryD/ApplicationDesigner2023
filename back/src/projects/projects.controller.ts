@@ -23,11 +23,10 @@ export class ProjectsController {
 		private readonly projectsService: ProjectsService,
 		private readonly usersService: UsersService
 	) {}
-
-	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
 	/*
-	 * get all projects of the user
+	 * *************************************************************************
+	 *
+	 * 	GET ALL PROJECTS OF THE USER
 	 *
 	 */
 	@Get("/my")
@@ -39,6 +38,12 @@ export class ProjectsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	CREATE A NEW PROJECT
+	 *
+	 */
 	@Post("/new")
 	async newProject(
 		@User() userFromToken,
@@ -47,14 +52,14 @@ export class ProjectsController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean
 	) {
-		const user = await this.usersService.findOneById(userFromToken.id)
+		// const user = await this.usersService.findOneById(userFromToken.id) // !!!!!!!!!!!!!
 		try {
 			const project = await this.projectsService.create({
 				name,
 				description,
 				infos,
 				isWip,
-				createdBy: user,
+				createdBy: userFromToken, // user // !!!!!!!!!!!!!
 			})
 
 			return { project: project }
@@ -63,6 +68,12 @@ export class ProjectsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	EDIT THE PROJECT TARGETED BY :id
+	 *
+	 */
 	@Post("/:id/edit")
 	async projectEdit(
 		@Body("name") name: string,
@@ -89,6 +100,12 @@ export class ProjectsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	DELETE THE PROJECT TARGETED BY :id
+	 *
+	 */
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @User() userFromToken) {
 		await this.projectsService.ensureAuthorizedAccessProject({
@@ -104,6 +121,12 @@ export class ProjectsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	GET THE PROJECT TARGETED BY :id
+	 *
+	 */
 	@Get("/:id")
 	async projectShow(@Param() params, @User() userFromToken) {
 		await this.projectsService.ensureAuthorizedAccessProject({

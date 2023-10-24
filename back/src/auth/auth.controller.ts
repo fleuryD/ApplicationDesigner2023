@@ -22,9 +22,9 @@ export class AuthController {
 		private mailService: MailService
 	) {}
 
-	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
 	/*
+	 * *************************************************************************
+	 *
 	 *	REGISTER
 	 *
 	 *	1) check VALIDE : username, email, password
@@ -36,7 +36,6 @@ export class AuthController {
 	 *	5) return success
 	 *
 	 */
-
 	@Public()
 	@Post("register")
 	async register(
@@ -57,6 +56,8 @@ export class AuthController {
 		if (existingUser) throw new BadRequestException("EMAIL_ALREADY_EXISTS")
 
 		const hashedPassword = await bcrypt.hash(password, 12)
+
+		// TODO : set : tokenEmail expire date
 
 		try {
 			let user = await this.usersService.create({
@@ -80,6 +81,8 @@ export class AuthController {
 	}
 
 	/*
+	 * *************************************************************************
+	 *
 	 *	LOGIN
 	 *
 	 * 1) find User by emailOrUsername
@@ -129,6 +132,8 @@ export class AuthController {
 	}
 
 	/*
+	 * *************************************************************************
+	 *
 	 *	CHECK TOKEN_EMAIL
 	 *
 	 *	1) find User by emailValidationToken
@@ -145,6 +150,7 @@ export class AuthController {
 		}
 
 		// TODO : check VALIDE : tokenEmail
+		// TODO : check : tokenEmail expire date
 
 		let user = await this.usersService.findOneByEmailValidationToken(tokenEmail)
 		if (!user) {
@@ -157,6 +163,12 @@ export class AuthController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	XXXXXXXXXXXXXXXXXXXXXXXXXXX
+	 *
+	 */
 	/*
 	@Post("logout")
 	async logout(@Res({ passthrough: true }) response: Response) {

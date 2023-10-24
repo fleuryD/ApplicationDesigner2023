@@ -23,10 +23,10 @@ export class AttributsController {
 		private readonly entitesService: EntitesService
 	) {}
 
-	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
-
 	/*
-	 *	ajoute un attribut à l'entite ciblée par id
+	 * *************************************************************************
+	 *
+	 * 	ADD ATTRIBUT TO ENTITE TARGETED BY :id
 	 *
 	 */
 	@Post("/new/entite/:id")
@@ -73,6 +73,12 @@ export class AttributsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	EDITE ATTRIBUT TARGETED BY :id
+	 *
+	 */
 	@Post("/:id/edit")
 	async attributEdit(
 		@Body("name") name: string,
@@ -116,6 +122,12 @@ export class AttributsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	DELETE ATTRIBUT TARGETED BY :id
+	 *
+	 */
 	@Delete("/:id/delete")
 	async projectDelete(@Param() params, @User() userFromToken) {
 		await this.attributsService.ensureAuthorizedAccessAttribut({
@@ -130,6 +142,12 @@ export class AttributsController {
 		}
 	}
 
+	/*
+	 * *************************************************************************
+	 *
+	 * 	GET ATTRIBUT TARGETED BY :id
+	 *
+	 */
 	/*
 	@Get("/:id")
 	async attributShow(@Param() params,
