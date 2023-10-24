@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap"
 import { FaEdit } from "react-icons/fa"
 import { Entite } from "types"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedEntite } from "store/appSlice"
+import { appSetSelectedFormEntite } from "store/appSlice"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -17,7 +17,7 @@ type Props = {
 export default function ButtonEditEntite({ className, entite }: Props) {
 	const dispatch = useAppDispatch()
 	function btClick() {
-		dispatch(appSetSelectedEntite(entite))
+		dispatch(appSetSelectedFormEntite(entite))
 	}
 	return (
 		<Button variant="warning" className={className} title={"Edit entity: " + entite.name} onClick={() => btClick()}>

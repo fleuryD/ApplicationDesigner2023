@@ -22,22 +22,19 @@ export default function Generate({ entite, templateName, project }: Props) {
 	const [str, setStr] = useState("")
 
 	useEffect(() => {
-		if (templateName === "NestEntity")
-			setStr(
-				generateTemplateNestEntity({
-					project,
-					entite,
-					entitePascalName,
-					entiteCamelName,
-					entiteCamelNamePluriel,
-				})
-			)
-		else if (templateName === "NestModule")
-			setStr(generateTemplateNestModule({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
-		else if (templateName === "CppHpp")
-			setStr(generateTemplateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }))
+		const data = {
+			project,
+			entite,
+			entitePascalName,
+			entiteCamelName,
+			entiteCamelNamePluriel,
+		}
+
+		if (templateName === "NestEntity") setStr(generateTemplateNestEntity(data))
+		else if (templateName === "NestModule") setStr(generateTemplateNestModule(data))
+		else if (templateName === "CppHpp") setStr(generateTemplateCppHpp(data))
 		else setStr("- TODO: " + templateName + " -")
-	}, [entite, entiteCamelName, entiteCamelNamePluriel, entitePascalName, project, templateName])
+	}, [project, entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel, templateName])
 
 	// ****************************************************************
 

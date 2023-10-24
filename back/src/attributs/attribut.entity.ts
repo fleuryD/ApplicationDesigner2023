@@ -7,7 +7,7 @@ import {
 	CreateDateColumn,
 	ManyToOne,
 } from "typeorm"
-import { Entite } from "../entites/entite.entity"
+import { Entite } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 /*

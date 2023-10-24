@@ -3,8 +3,9 @@
 import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
-import { User } from "./user.entity"
 import { JwtService } from "@nestjs/jwt"
+import { User } from "./user.entity"
+//import { User } from "./"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -40,9 +41,7 @@ export class UsersService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
-	async findOneByEmailValidationToken(
-		emailValidationToken: string
-	): Promise<User | null> {
+	async findOneByEmailValidationToken(emailValidationToken: string): Promise<User | null> {
 		return this.usersRepository.findOneBy({ emailValidationToken })
 	}
 

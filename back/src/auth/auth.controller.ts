@@ -7,7 +7,6 @@ import { JwtService } from "@nestjs/jwt"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
 import { Public } from "./jwt-auth.guard"
-import { User } from "src/users/user.entity"
 import { MailService } from "src/mail/mail.service"
 import { error } from "console"
 

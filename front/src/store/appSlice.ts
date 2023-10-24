@@ -9,16 +9,16 @@ import { Project, Entite, Attribut } from "types"
 
 // Type for our state
 interface AppState {
-	selectedProject: Project | null
-	selectedEntite: Entite | null
-	selectedAttribut: Attribut | null
+	selectedFormProject: Project | null
+	selectedFormEntite: Entite | null
+	selectedFormAttribut: Attribut | null
 }
 
 // Initial state
 const initialState: AppState = {
-	selectedProject: null,
-	selectedEntite: null,
-	selectedAttribut: null,
+	selectedFormProject: null,
+	selectedFormEntite: null,
+	selectedFormAttribut: null,
 }
 
 // Actual Slice
@@ -26,19 +26,19 @@ export const appSlice = createSlice({
 	name: "app",
 	initialState,
 	reducers: {
-		appSetSelectedProject(state, action) {
-			state.selectedProject = action.payload
+		appSetSelectedFormProject(state, action) {
+			state.selectedFormProject = action.payload
 		},
-		appSetSelectedEntite(state, action) {
-			state.selectedEntite = action.payload
+		appSetSelectedFormEntite(state, action) {
+			state.selectedFormEntite = action.payload
 		},
-		appSetSelectedAttribut(state, action) {
-			state.selectedAttribut = action.payload
+		appSetSelectedFormAttribut(state, action) {
+			state.selectedFormAttribut = action.payload
 		},
 	},
 })
 
-export const { appSetSelectedProject, appSetSelectedEntite, appSetSelectedAttribut } = appSlice.actions
+export const { appSetSelectedFormProject, appSetSelectedFormEntite, appSetSelectedFormAttribut } = appSlice.actions
 
 export default appSlice.reducer
 /*

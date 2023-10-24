@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import React from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedAttribut } from "store/appSlice"
+import { appSetSelectedFormAttribut } from "store/appSlice"
 import { FaEdit } from "react-icons/fa"
 import { Attribut, Entite } from "types"
 import styled from "styled-components"
@@ -17,7 +17,7 @@ type Props = {
 export default function LinkEditAttribut({ className, attribut, entite }: Props) {
 	const dispatch = useAppDispatch()
 	function btClick() {
-		dispatch(appSetSelectedAttribut({ ...attribut, entite: entite }))
+		dispatch(appSetSelectedFormAttribut({ ...attribut, entite: entite }))
 	}
 	return (
 		<StyledEditAttr className={className} title={"Edit attribut: " + attribut.name} onClick={() => btClick()}>

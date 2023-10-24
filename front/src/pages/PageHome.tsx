@@ -37,7 +37,7 @@ export default function PageHome() {
 
 	return (
 		<div className="zPage">
-			{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
+			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
 			<header className="zPageHeader row">
 				<h1>Application Designer</h1>
 				<h3>Lorem Ipsum</h3>

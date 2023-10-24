@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedEntite } from "store/appSlice"
+import { appSetSelectedFormEntite } from "store/appSlice"
 import { apiCreateEntity, apiEditEntity, apiDeleteEntity } from "utils/api"
 import { Entite } from "types"
 import FormEntiteInner from "./FormEntiteInner"
@@ -50,7 +50,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 				if (response.entite) {
 					console.log("SUCCESS: response.project", response.project)
 
-					dispatch(appSetSelectedEntite(null))
+					dispatch(appSetSelectedFormEntite(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
@@ -70,7 +70,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 				if (response.entite) {
 					console.log("SUCCESS: response.project", response.project)
 
-					dispatch(appSetSelectedEntite(null))
+					dispatch(appSetSelectedFormEntite(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
@@ -93,7 +93,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 
 		apiDeleteEntity(EntiteItem.id).then((response) => {
 			if (response.success) {
-				dispatch(appSetSelectedEntite(null))
+				dispatch(appSetSelectedFormEntite(null))
 				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
 				if (response.error === "XXXXXX") setFetchError("xxxxx")
@@ -113,7 +113,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedEntite(null))}>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormEntite(null))}>
 			<FormEntiteInner
 				formItem={formItem}
 				formErrors={formErrors}

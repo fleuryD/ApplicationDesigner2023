@@ -10,9 +10,11 @@ import {
 	Param,
 	Headers,
 } from "@nestjs/common"
+
+//import { ProjectsService } from "./"
 import { ProjectsService } from "./projects.service"
-import { User } from "../auth/user.decorator"
 import { UsersService } from "src/users/users.service"
+import { UserFromToken } from "../auth/user-from-token.decorator"
 import { Logger } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
@@ -30,7 +32,7 @@ export class ProjectsController {
 	 *
 	 */
 	@Get("/my")
-	async myProjects(@User() userFromToken) {
+	async myProjects(@UserFromToken() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
 		const projects = user.projects
 		return {
@@ -46,7 +48,7 @@ export class ProjectsController {
 	 */
 	@Post("/new")
 	async newProject(
-		@User() userFromToken,
+		@UserFromToken() userFromToken,
 		@Body("name") name: string,
 		@Body("description") description: string,
 		@Body("infos") infos: string,
@@ -81,7 +83,7 @@ export class ProjectsController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
 		@Param() params,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.projectsService.ensureAuthorizedAccessProject({
 			userId: userFromToken.id,
@@ -107,7 +109,7 @@ export class ProjectsController {
 	 *
 	 */
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @User() userFromToken) {
+	async projectDelete(@Param() params, @UserFromToken() userFromToken) {
 		await this.projectsService.ensureAuthorizedAccessProject({
 			userId: userFromToken.id,
 			projectId: params.id,
@@ -128,7 +130,7 @@ export class ProjectsController {
 	 *
 	 */
 	@Get("/:id")
-	async projectShow(@Param() params, @User() userFromToken) {
+	async projectShow(@Param() params, @UserFromToken() userFromToken) {
 		await this.projectsService.ensureAuthorizedAccessProject({
 			userId: userFromToken.id,
 			projectId: params.id,

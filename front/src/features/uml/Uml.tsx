@@ -19,7 +19,7 @@ export default function Uml({ project }: Props) {
 
 	return (
 		<div>
-			{app.selectedAttribut && <FormAttribut attributItem={app.selectedAttribut} project={project} />}
+			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
 			<h2>
 				UML <ButtonCreateEntite className="btn-sm float-end" project={project} />
 			</h2>
@@ -32,7 +32,9 @@ export default function Uml({ project }: Props) {
 						))}
 					</div>
 
-					{app.selectedEntite && <FormEntite projectId={project.id} EntiteItem={app.selectedEntite} />}
+					{app.selectedFormEntite && (
+						<FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />
+					)}
 				</>
 			)}
 		</div>

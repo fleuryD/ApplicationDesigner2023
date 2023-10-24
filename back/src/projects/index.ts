@@ -1,17 +1,14 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
-import { Module } from "@nestjs/common"
-import { TypeOrmModule } from "@nestjs/typeorm"
-import { LocalStrategy } from "src/auth/local.strategy"
-import { User, UsersController } from "./"
-import { UsersService } from "./users.service"
+/*
+ *	usage :
+ *
+ *	import { Project, ProjectsController, ProjectsModule, ProjectsService } from "../projects"
+ *
+ */
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-@Module({
-	imports: [TypeOrmModule.forFeature([User])],
-	exports: [TypeOrmModule, UsersService],
-	providers: [UsersService, LocalStrategy],
-	controllers: [UsersController],
-})
-export class UsersModule {}
+export { Project } from "./project.entity"
+export { ProjectsController } from "./projects.controller"
+export { ProjectsModule } from "./projects.module"
+export { ProjectsService } from "./projects.service"

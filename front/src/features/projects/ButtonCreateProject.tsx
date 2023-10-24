@@ -4,7 +4,7 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedProject } from "store/appSlice"
+import { appSetSelectedFormProject } from "store/appSlice"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -17,7 +17,7 @@ export default function ButtonCreateProject({ className }: Props) {
 
 	function btClick() {
 		dispatch(
-			appSetSelectedProject({
+			appSetSelectedFormProject({
 				id: 0,
 				name: "",
 				description: "",

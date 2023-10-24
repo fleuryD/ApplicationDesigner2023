@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedAttribut } from "store/appSlice"
+import { appSetSelectedFormAttribut } from "store/appSlice"
 import { apiCreateAttribut, apiEditAttribut, apiDeleteAttribut } from "utils/api"
 import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
@@ -51,7 +51,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 				if (response.attribut) {
 					console.log("SUCCESS: response.entite", response.entite)
 
-					dispatch(appSetSelectedAttribut(null))
+					dispatch(appSetSelectedFormAttribut(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
@@ -71,7 +71,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 				if (response.attribut) {
 					console.log("SUCCESS: response.entite", response.entite)
 
-					dispatch(appSetSelectedAttribut(null))
+					dispatch(appSetSelectedFormAttribut(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
@@ -94,7 +94,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 
 		apiDeleteAttribut(attributItem.id).then((response) => {
 			if (response.success) {
-				dispatch(appSetSelectedAttribut(null))
+				dispatch(appSetSelectedFormAttribut(null))
 				window.location.reload() // !!!!!!!!!!!!!!
 			} else if (response.error) {
 				if (response.error === "XXXXXX") setFetchError("xxxxx")
@@ -114,7 +114,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedAttribut(null))}>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormAttribut(null))}>
 			<FormAttributInner
 				formItem={formItem}
 				formErrors={formErrors}

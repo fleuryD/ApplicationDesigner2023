@@ -2,7 +2,7 @@
 
 import { MailerService } from "@nestjs-modules/mailer"
 import { Injectable } from "@nestjs/common"
-import { User } from "../users/user.entity"
+import { User } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

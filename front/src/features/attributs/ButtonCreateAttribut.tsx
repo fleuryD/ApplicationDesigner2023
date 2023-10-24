@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedAttribut } from "store/appSlice"
+import { appSetSelectedFormAttribut } from "store/appSlice"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 import { Entite } from "types"
@@ -18,7 +18,7 @@ export default function ButtonCreateAttribut({ className, entite }: Props) {
 	const dispatch = useAppDispatch()
 	function btClick() {
 		dispatch(
-			appSetSelectedAttribut({
+			appSetSelectedFormAttribut({
 				id: 0,
 				entite: entite,
 				name: "",

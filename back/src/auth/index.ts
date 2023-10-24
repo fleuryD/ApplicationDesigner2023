@@ -1,17 +1,20 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-
-import { Module } from "@nestjs/common"
-import { TypeOrmModule } from "@nestjs/typeorm"
-import { LocalStrategy } from "src/auth/local.strategy"
-import { User, UsersController } from "./"
-import { UsersService } from "./users.service"
+/*
+ *	usage :
+ *
+ *	import {xxxxxxxxxxxx } from "../xxxxxxx"
+ *
+ */
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-@Module({
-	imports: [TypeOrmModule.forFeature([User])],
-	exports: [TypeOrmModule, UsersService],
-	providers: [UsersService, LocalStrategy],
-	controllers: [UsersController],
-})
-export class UsersModule {}
+/*
+export { XXX } from "./auth.controller"
+export { XXX } from "./auth.module"
+export { XXX } from "./auth.service"
+export { XXX } from "./jwt-auth.guard"
+export { XXX } from "./jwt.strategy"
+export { XXX } from "./local-auth.guard"
+export { XXX } from "./local.strategy"
+export { XXX } from "./user-from-token.decorator"
+*/

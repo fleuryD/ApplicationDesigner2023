@@ -7,8 +7,7 @@ import {
 	ManyToOne,
 	OneToMany,
 } from "typeorm"
-import { Project } from "../projects/project.entity"
-import { Attribut } from "../attributs/attribut.entity"
+import { Project, Attribut } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

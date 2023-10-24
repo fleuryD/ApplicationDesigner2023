@@ -40,7 +40,7 @@ export default function PageProject() {
 
 	return (
 		<div className="zPage">
-			{app.selectedProject && <FormProject projectItem={app.selectedProject} />}
+			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
 			<header className="zPageHeader row">
 				<h1>
 					<small>Project:</small> <b>{project && project.name}</b>

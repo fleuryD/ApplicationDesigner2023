@@ -5,8 +5,8 @@ import { ProjectsService } from "./projects/projects.service"
 import { EntitesService } from "./entites/entites.service"
 import { AttributsService } from "./attributs/attributs.service"
 import { Logger } from "@nestjs/common"
-import { User } from "./auth/user.decorator"
-import { UsersService } from "./users/users.service"
+import { UserFromToken } from "./auth/user-from-token.decorator"
+import { UsersService } from "./users"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -23,7 +23,7 @@ export class AppController {
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	@Get("/fixtures/project-ad")
-	async fixtureProjetAD(@User() userFromToken) {
+	async fixtureProjetAD(@UserFromToken() userFromToken) {
 		//const connectedUser = await this.getUserFromHeaders(headers)
 		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
 		Logger.log("🟠 /fixtures/projet/ad - For userFromToken:", userFromToken)

@@ -1,17 +1,10 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { Module } from "@nestjs/common"
-import { TypeOrmModule } from "@nestjs/typeorm"
-import { LocalStrategy } from "src/auth/local.strategy"
-import { User, UsersController } from "./"
-import { UsersService } from "./users.service"
+import { createParamDecorator, ExecutionContext } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-@Module({
-	imports: [TypeOrmModule.forFeature([User])],
-	exports: [TypeOrmModule, UsersService],
-	providers: [UsersService, LocalStrategy],
-	controllers: [UsersController],
+export const UserFromToken = createParamDecorator((data: any, ctx: ExecutionContext) => {
+	const request = ctx.switchToHttp().getRequest()
+	return request.user
 })
-export class UsersModule {}

@@ -4,7 +4,7 @@ import React from "react"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedEntite } from "store/appSlice"
+import { appSetSelectedFormEntite } from "store/appSlice"
 import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -18,7 +18,7 @@ export default function ButtonCreateEntite({ className, project }: Props) {
 	const dispatch = useAppDispatch()
 	function btClick() {
 		dispatch(
-			appSetSelectedEntite({
+			appSetSelectedFormEntite({
 				id: 0,
 				name: "",
 				project: project,

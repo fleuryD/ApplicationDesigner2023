@@ -7,8 +7,7 @@ import {
 	ManyToOne,
 	OneToMany,
 } from "typeorm"
-import { User } from "../users/user.entity"
-import { Entite } from "../entites/entite.entity"
+import { User, Entite } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

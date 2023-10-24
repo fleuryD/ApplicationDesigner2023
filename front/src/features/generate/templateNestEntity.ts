@@ -11,6 +11,10 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
+function getEntiteByIdInProject(project: Project, entiteId: number) {
+	return project.entites.find((e) => e.id === entiteId)
+}
+
 export default function generateTemplateNestEntity({
 	project,
 	entite,
@@ -34,17 +38,23 @@ export default function generateTemplateNestEntity({
 		str += `\n`
 
 		if (attr.tipe === "OneToMany") {
-			const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
+			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
+			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
+			console.log("targetEntite", targetEntite)
 			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
 			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
 
-			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.targetAttrId)
+			console.log("*******************targetEntite?.attributs", targetEntite?.attributs)
+			console.log("*******************attr.targetAttrId", attr.targetAttrId)
+
+			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
 			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"
 
-			str += `    @OneToMany(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName})  \n`
+			str += `    @OneToMany(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName}, { eager: true, } )  \n`
 			str += `    public ${attr.name}s: ${targetEntiteName}[]  \n`
 		} else if (attr.tipe === "ManyToOne") {
-			const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
+			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
+			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
 			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
 			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
 

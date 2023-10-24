@@ -6,7 +6,7 @@ import {
 	OneToMany,
 	CreateDateColumn,
 } from "typeorm"
-import { Project } from "../projects/project.entity"
+import { Project } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

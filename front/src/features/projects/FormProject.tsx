@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedProject } from "store/appSlice"
+import { appSetSelectedFormProject } from "store/appSlice"
 import { apiCreateProject, apiEditProject, apiDeleteProject } from "utils/api"
 import { useNavigate } from "react-router-dom"
 import { Project } from "types"
@@ -49,7 +49,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 				if (response.project) {
 					console.log("SUCCESS: response.project", response.project)
 
-					dispatch(appSetSelectedProject(null))
+					dispatch(appSetSelectedFormProject(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
@@ -69,7 +69,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 				if (response.project) {
 					console.log("SUCCESS: response.project", response.project)
 
-					dispatch(appSetSelectedProject(null))
+					dispatch(appSetSelectedFormProject(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXX") setFetchError("xxxxx")
@@ -92,7 +92,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 
 		apiDeleteProject(projectItem.id).then((response) => {
 			if (response.success) {
-				dispatch(appSetSelectedProject(null))
+				dispatch(appSetSelectedFormProject(null))
 				navigate("/")
 			} else if (response.error) {
 				if (response.error === "XXXXXX") setFetchError("xxxxx")
@@ -112,7 +112,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedProject(null))}>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormProject(null))}>
 			<FormProjectInner
 				formItem={formItem}
 				formErrors={formErrors}

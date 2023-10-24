@@ -3,10 +3,10 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common"
 import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm"
 import { EntityManager, Repository } from "typeorm"
-import { Project } from "./project.entity"
-import { Entite } from "../entites/entite.entity"
-import { User } from "src/users/user.entity"
 import { Logger } from "@nestjs/common"
+
+import { Project } from "./"
+import { User } from "../users"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

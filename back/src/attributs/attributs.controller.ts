@@ -12,7 +12,7 @@ import {
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
 import { EntitesService } from "../entites/entites.service"
-import { User } from "src/auth/user.decorator"
+import { UserFromToken } from "src/auth/user-from-token.decorator"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -44,7 +44,7 @@ export class AttributsController {
 		@Body("isUnique") isUnique: string,
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
 			userId: userFromToken.id,
@@ -94,7 +94,7 @@ export class AttributsController {
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number,
 		@Param() params,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.attributsService.ensureAuthorizedAccessAttribut({
 			userId: userFromToken.id,
@@ -129,7 +129,7 @@ export class AttributsController {
 	 *
 	 */
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @User() userFromToken) {
+	async projectDelete(@Param() params, @UserFromToken() userFromToken) {
 		await this.attributsService.ensureAuthorizedAccessAttribut({
 			userId: userFromToken.id,
 			attributId: params.id,
@@ -151,7 +151,7 @@ export class AttributsController {
 	/*
 	@Get("/:id")
 	async attributShow(@Param() params,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.attributsService.ensureAuthorizedAccessAttribut({
 			userId: userFromToken.id,

@@ -17,8 +17,8 @@ export default function PageProjectGenerate() {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
-	const [selectedEntite, setSelectedEntite] = useState<Entite | null>(null)
-	const [selectedTemplateName, setSelectedTemplateName] = useState<string | null>("")
+	const [selectedFormEntite, setSelectedFormEntite] = useState<Entite | null>(null)
+	const [selectedFormTemplateName, setSelectedFormTemplateName] = useState<string | null>("")
 
 	useEffect(() => {
 		if (projectId > 0) {
@@ -42,8 +42,8 @@ export default function PageProjectGenerate() {
 		return (
 			<Button
 				className="m-1 btn-sm"
-				variant={selectedTemplateName === name ? "primary" : "secondary"}
-				onClick={() => setSelectedTemplateName(name)}
+				variant={selectedFormTemplateName === name ? "primary" : "secondary"}
+				onClick={() => setSelectedFormTemplateName(name)}
 				disabled={disabled}
 			>
 				{text}
@@ -76,8 +76,8 @@ export default function PageProjectGenerate() {
 									<Button
 										key={"bt-entite" + entite.id}
 										className="m-1"
-										variant={selectedEntite?.id === entite.id ? "primary" : "secondary"}
-										onClick={() => setSelectedEntite(entite)}
+										variant={selectedFormEntite?.id === entite.id ? "primary" : "secondary"}
+										onClick={() => setSelectedFormEntite(entite)}
 									>
 										{entite.name}
 									</Button>
@@ -87,7 +87,7 @@ export default function PageProjectGenerate() {
 					</div>
 				</div>
 
-				{selectedEntite && (
+				{selectedFormEntite && (
 					<div className="zSection col-12 col-md-6">
 						<div className="zSectionInner">
 							<h2>Templates:</h2>
@@ -115,8 +115,12 @@ export default function PageProjectGenerate() {
 				)}
 
 				<div className="zSection col-12">
-					{project && selectedEntite && selectedTemplateName ? (
-						<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
+					{project && selectedFormEntite && selectedFormTemplateName ? (
+						<Generate
+							project={project}
+							entite={selectedFormEntite}
+							templateName={selectedFormTemplateName}
+						/>
 					) : (
 						<h3>Select an entity</h3>
 					)}

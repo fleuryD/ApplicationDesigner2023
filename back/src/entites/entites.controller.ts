@@ -13,7 +13,7 @@ import {
 } from "@nestjs/common"
 import { EntitesService } from "./entites.service"
 import { ProjectsService } from "../projects/projects.service"
-import { User } from "src/auth/user.decorator"
+import { UserFromToken } from "src/auth/user-from-token.decorator"
 import { Logger } from "@nestjs/common"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
@@ -39,7 +39,7 @@ export class EntitesController {
 		@Body("description") description: string,
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.projectsService.ensureAuthorizedAccessProject({
 			userId: userFromToken.id,
@@ -75,7 +75,7 @@ export class EntitesController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean,
 		@Param() params,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
 			userId: userFromToken.id,
@@ -101,7 +101,7 @@ export class EntitesController {
 	 *
 	 */
 	@Delete("/:id/delete")
-	async projectDelete(@Param() params, @User() userFromToken) {
+	async projectDelete(@Param() params, @UserFromToken() userFromToken) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
 			userId: userFromToken.id,
 			entiteId: params.id,
@@ -123,7 +123,7 @@ export class EntitesController {
 	/*
 	@Get("/:id")
 	async entiteShow(@Param() params,
-		@User() userFromToken
+		@UserFromToken() userFromToken
 	) {
 		await this.entitesService.ensureAuthorizedAccessEntite({
 			userId: userFromToken.id,
