@@ -9,6 +9,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 export { Project } from "./project.entity"
+export { ProjectsService } from "./projects.service"
 export { ProjectsController } from "./projects.controller"
 export { ProjectsModule } from "./projects.module"
-export { ProjectsService } from "./projects.service"

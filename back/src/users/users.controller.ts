@@ -1,17 +1,14 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
 import { Controller, Get, Param, Headers } from "@nestjs/common"
-import { JwtService } from "@nestjs/jwt"
-//import { UsersService } from "./"
-import { UsersService } from "./users.service"
+
+import { UsersService } from "./"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Controller("users")
 export class UsersController {
-	constructor(
-		private readonly usersService: UsersService,
-		private jwtService: JwtService
-	) {}
+	constructor(private readonly usersService: UsersService) {}
 
 	/*
 	 * *************************************************************************

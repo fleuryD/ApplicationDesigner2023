@@ -11,11 +11,14 @@ import { APP_GUARD } from "@nestjs/core"
 import { JwtAuthGuard } from "./auth/jwt-auth.guard"
 import { MailModule } from "./mail/mail.module"
 
+import { User } from "./users"
+//import { User } from "./users/user.entity"
+import { UsersController } from "./users/users.controller"
 import { UsersService } from "./users/users.service"
-import { User, UsersController, UsersModule } from "./users"
-import { Project, ProjectsController, ProjectsModule, ProjectsService } from "./projects"
-import { Entite, EntitesController, EntitesModule, EntitesService } from "./entites"
-import { Attribut, AttributsController, AttributsModule, AttributsService } from "./attributs"
+
+import { Project, ProjectsController, ProjectsService } from "./projects"
+import { Entite, EntitesController, EntitesService } from "./entites"
+import { Attribut, AttributsController, AttributsService } from "./attributs"
 
 import { AuthService } from "./_services"
 import { AppController } from "./app.controller"
@@ -58,10 +61,10 @@ import { CustomLogger } from "./custom-logger.service"
 		JwtStrategy,
 		AuthService,
 		AppService,
-		UsersService,
 		ProjectsService,
 		EntitesService,
 		AttributsService,
+		UsersService,
 	],
 
 	controllers: [

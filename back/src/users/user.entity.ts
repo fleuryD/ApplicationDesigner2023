@@ -1,12 +1,8 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-import {
-	Entity,
-	Column,
-	PrimaryGeneratedColumn,
-	OneToMany,
-	CreateDateColumn,
-} from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn } from "typeorm"
+
 import { Project } from "../_entities"
+//import { Project } from "../projects/"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

@@ -6,7 +6,8 @@ import { EntityManager, Repository } from "typeorm"
 import { Logger } from "@nestjs/common"
 
 import { Project } from "./"
-import { User } from "../users"
+//import { User } from "../users"
+import { User } from "../users/user.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

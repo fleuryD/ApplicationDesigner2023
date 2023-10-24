@@ -6,7 +6,8 @@ import { EntitesService } from "./entites/entites.service"
 import { AttributsService } from "./attributs/attributs.service"
 import { Logger } from "@nestjs/common"
 import { UserFromToken } from "./auth/user-from-token.decorator"
-import { UsersService } from "./users"
+//import { UsersService } from "./users"
+import { UsersService } from "./users/users.service"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

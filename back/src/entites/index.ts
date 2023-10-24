@@ -9,6 +9,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 export { Entite } from "./entite.entity"
+export { EntitesService } from "./entites.service"
 export { EntitesController } from "./entites.controller"
 export { EntitesModule } from "./entites.module"
-export { EntitesService } from "./entites.service"
