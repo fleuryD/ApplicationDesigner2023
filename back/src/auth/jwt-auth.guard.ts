@@ -26,17 +26,19 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 			context.getClass(),
 		])
 		if (isPublic) {
+			Logger.debug("🟠 canActivate: isPublic::true")
 			return true
 		}
-		// Logger.log("🟠 canActivate:")
+		Logger.log("🟠 canActivate:")
 		// Add your custom authentication logic here
 		// for example, call super.logIn(request) to establish a session.
 		return super.canActivate(context)
 	}
 
 	handleRequest(err, user, info) {
-		if (err) Logger.log("🟠 JwtAuthGuard::handleRequest::err:", err)
-		if (info) Logger.log("🟠 JwtAuthGuard::handleRequest::info:", info)
+		if (err) Logger.debug("🟠 JwtAuthGuard::handleRequest::err:", err)
+		if (info) Logger.debug("🟠 JwtAuthGuard::handleRequest::info:", info)
+		if (user) Logger.debug("🟠 JwtAuthGuard::handleRequest::user:", user)
 
 		// You can throw an exception based on either "info" or "err" arguments
 		if (err || !user) {

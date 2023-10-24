@@ -99,6 +99,15 @@ export class AuthController {
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string
 	) {
+		/*
+		Logger.log("TEST Logger.log")
+		Logger.error("TEST Logger.error")
+		Logger.error("TEST Logger.error", "param1", "param2")
+		Logger.warn("TEST Logger.warn")
+		Logger.debug("TEST Logger.debug")
+		Logger.verbose("TEST Logger.verbose")
+		*/
+
 		if (!emailOrUsername || !password) {
 			Logger.log("⛔ login: throw : MISSING_FIELDS")
 			throw new BadRequestException("MISSING_FIELDS")
@@ -107,6 +116,7 @@ export class AuthController {
 		// TODO : check VALIDE : username, email, password
 
 		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
+
 		if (!user) {
 			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
 			throw new BadRequestException("INVALID_CREDENTIALS")

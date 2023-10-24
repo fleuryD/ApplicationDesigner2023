@@ -26,6 +26,7 @@ import { EntitesController } from "./entites/entites.controller"
 import { Attribut } from "./attributs/attribut.entity"
 import { AttributsService } from "./attributs/attributs.service"
 import { AttributsController } from "./attributs/attributs.controller"
+import { CustomLogger } from "./custom-logger.service"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -50,6 +51,7 @@ import { AttributsController } from "./attributs/attributs.controller"
 		}),
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
 		MailModule,
+		CustomLogger,
 	],
 
 	providers: [

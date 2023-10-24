@@ -24,7 +24,7 @@ npm install --save-dev @types/passport-local @types/passport-jwt
 npm install --save @nestjs-modules/mailer nodemailer
 npm install --save-dev @types/nodemailer
 npm install --save handlebars
-
+npm install date-fns
 
 
 ```
