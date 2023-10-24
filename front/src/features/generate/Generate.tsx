@@ -5,6 +5,7 @@ import { Project, Entite } from "types"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
 import generateTemplateCppHpp from "./templateCppHpp"
+import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -15,8 +16,8 @@ type Props = {
 }
 
 export default function Generate({ entite, templateName, project }: Props) {
-	const entitePascalName = entite.name // ! should be in pascal case : a verifier
-	const entiteCamelName = entite.name.charAt(0).toLowerCase() + entite.name.slice(1)
+	const entitePascalName = toPascalCase(entite.name)
+	const entiteCamelName = toCamelCase(entite.name)
 	const entiteCamelNamePluriel = entiteCamelName + "s"
 
 	const [str, setStr] = useState("")
