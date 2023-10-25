@@ -1,6 +1,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { Injectable, ForbiddenException } from "@nestjs/common"
 import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm"
 import { EntityManager, Repository } from "typeorm"
 import { Logger } from "@nestjs/common"
@@ -78,7 +78,7 @@ export class ProjectsService {
 		Logger.log(
 			`⛔ ensureAuthorizedAccessProject :: user #${userId} can't access project #${projectId}`
 		)
-		throw new UnauthorizedException("UNAUTHORIZED_ACCESS_TO_PROJECT")
+		throw new ForbiddenException("FORBIDDEN_ACCESS_TO_PROJECT")
 	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘

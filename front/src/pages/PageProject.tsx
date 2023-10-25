@@ -10,6 +10,7 @@ import ButtonEditProject from "features/projects/ButtonEditProject"
 import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
 import FormProject from "features/projects/FormProject"
 import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
+import ZError from "ui/ZError"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -17,27 +18,17 @@ export default function PageProject() {
 	const projectId = Number(useParams().id) || 0
 	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [error, setError] = useState<string | null>(null)
+	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
 
 	useEffect(() => {
 		if (projectId > 0) {
 			setIsLoading(true)
-			setError(null)
+			setFetchResponseError(null)
 
-			apiFetchProject(projectId).then((response) => {
-				if (response.project) {
-					setProject(response.project)
-				} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
-					setError(
-						"❌ Erreur: ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED "
-					)
-				} else if (response.statusCode === 401) {
-					setError("❌ Erreur: Vous n'êtes pas autorisé à voir ce projet.")
-				} else {
-					setError("❌ Erreur Inconnue.")
-					console.log("❌ ERROR: response: ", response)
-				}
+			apiFetchProject(projectId).then((rep) => {
+				if (rep.project) setProject(rep.project)
+				else setFetchResponseError(rep)
 				setIsLoading(false)
 			})
 		}
@@ -58,7 +49,7 @@ export default function PageProject() {
 			<div className="zPageContent row">
 				<div className="zSection col-12 col-md-6">
 					{isLoading && <p>Loading...</p>}
-					{error && <p>{error}</p>}
+					{fetchResponseError && <ZError response={fetchResponseError} />}
 					{project && <ProjectDisplayInfos project={project} />}
 				</div>
 

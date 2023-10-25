@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import zFetch from "./zFetch"
-import { zFetch2 } from "./zFetch"
+import zFetcher from "./zFetcher"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -82,29 +82,16 @@ export async function apiFetchForgottenPassword({ email }) {
 // * ■■■■■■■■■■■■■■■■■■■■■	PROJECT
 
 export async function apiFetchProjects() {
-	return zFetch({
+	return await zFetcher({
 		shortUrl: "/projects/my",
 		method: "GET",
-		requierdFields: [],
 	})
-}
-export async function apiFetchProjects2() {
-	const reponse = await zFetch2({
-		shortUrl: "/projects/my",
-		method: "GET",
-		requierdFields: [],
-	})
-	console.warn("reponse", reponse)
-	if (reponse.projects) return { projects: reponse.projects, error: null }
-	if (reponse.error) return { projects: null, error: reponse.error }
-	return { projects: null, error: null }
 }
 
 export async function apiFetchProject(projectId) {
-	return zFetch({
+	return zFetcher({
 		shortUrl: "/projects/" + projectId,
 		method: "GET",
-		requierdFields: [],
 	})
 }
 

@@ -1,12 +1,19 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ?????????????????
-//import errorManager from "./errorManager"
+
+import { API_BASE_URL } from "./constants" // TODO : A mettre dans .env
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
+// DEPRECATED : A remplacer par zFetcher
 
-export default async function zFetch({ shortUrl, method, requierdFields, body, publicAccess }) {
+type Props = {
+	shortUrl: string
+	method: string
+	body?: any
+	publicAccess?: boolean
+}
+
+export default async function zFetcher({ shortUrl, method, body, publicAccess }: Props) {
 	const url = API_BASE_URL + shortUrl
 
 	const requestOptions = {
@@ -15,39 +22,21 @@ export default async function zFetch({ shortUrl, method, requierdFields, body, p
 		body: body ? JSON.stringify(body) : null,
 	}
 
-	console.debug("🟨 zFetch ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
+	console.log("🟨 [zFetcher] ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
 
 	try {
 		const response = await fetch(url, requestOptions)
 		const rep = await response.json()
-
-		const missingElements = []
-
 		if (rep?.statusCode >= 400) {
-			console.error("❌ rep:", rep)
-			let errorPublicMessage = null
-			return { ...rep, error: 1, errorPublicMessage }
+			console.error("❌ [zFetcher] ➤➤ rep", rep)
+			return { ...rep, error: 1 }
 		}
-
-		requierdFields.forEach((elem) => {
-			if (!rep[elem]) {
-				missingElements.push(elem)
-			}
-		})
-
-		if (missingElements.length === 0) {
-			console.log("🟩 zFetch.success ➤➤ rep:", rep)
-			console.groupEnd()
-			return rep
-		}
-
-		console.log("❌ missingElements", missingElements)
-		return { error: rep }
+		console.log("🟩 [zFetcher] ➤➤ rep:", rep)
+		return rep
 	} catch (err) {
 		return { error: err }
 	}
 }
-// ### PRIVATE ################################################################
 
 function requestOptionsHeaders() {
 	return {

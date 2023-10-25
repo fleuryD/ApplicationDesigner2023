@@ -2,66 +2,31 @@
 
 import React, { useEffect, useState } from "react"
 import { useAppSelector } from "store/store"
-import { apiFetchProjects, apiFetchProjects2 } from "utils/api"
+import { apiFetchProjects } from "utils/api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
 import { ButtonFixtureProjectAd } from "features/fixtures/ButtonsFixtures"
-import ErrorSessionExpired from "ui/ErrorSessionExpired"
+import ZError from "ui/ZError"
+import ZLoading from "ui/ZLoading"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
 	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [error, setError] = useState<any | null>(null)
+	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
 	const [projects, setProjects] = useState<Project[] | null>(null)
 
-	/*
 	useEffect(() => {
 		document.title = "AD: Home"
 		setIsLoading(true)
-		setError(null)
+		setFetchResponseError(null)
 
-		apiFetchProjects().then((response) => {
-			if (response.projects) {
-				setProjects(response.projects)
-			} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
-				setError(<ErrorSessionExpired />)
-			} else if (response.statusCode === 401) {
-				setError("❌ Erreur: Unauthorized")
-			} else {
-				setError("❌ Erreur Inconnue: Voir la console")
-				console.log("❌ ERROR: response: ", response)
-				if (response.error) console.log("❌ ERROR: response.error: ", response.error)
-			}
-			setIsLoading(false)
-		})
-	}, [])
-	*/
-
-	useEffect(() => {
-		document.title = "AD: Home"
-		setIsLoading(true)
-		setError(null)
-
-		apiFetchProjects2().then((response) => {
-			setProjects(response.projects)
-			setError(response.error)
-			/*
-			if (response.projects) {
-				setProjects(response.projects)
-			} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
-				setError(<ErrorSessionExpired />)
-			} else if (response.statusCode === 401) {
-				setError("❌ Erreur: Unauthorized")
-			} else {
-				setError("❌ Erreur Inconnue: Voir la console")
-				console.log("❌ ERROR: response: ", response)
-				if (response.error) console.log("❌ ERROR: response.error: ", response.error)
-			}
-			*/
+		apiFetchProjects().then((rep) => {
+			if (rep.projects) setProjects(rep.projects)
+			else setFetchResponseError(rep)
 			setIsLoading(false)
 		})
 	}, [])
@@ -75,72 +40,58 @@ export default function PageHome() {
 			</header>
 
 			<div className="zPageContent row">
-				<div className="zSection col-12 col-md-6">
-					<div className="zSectionInner">
-						<h2>
-							Mes projets <ButtonCreateProject className="btn-sm float-end" />
-						</h2>
-						<div className="zSectionContent">
-							{isLoading && <p>Loading...</p>}
-							{error && <>{error}</>}
-							<ul>
-								{projects &&
-									projects.map((project) => (
-										<li key={project.id}>
-											<ProjectLink project={project} />
-										</li>
-									))}
-							</ul>
-							<ButtonFixtureProjectAd />
+				{isLoading && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<ZLoading />
 						</div>
 					</div>
-				</div>
-				<div className="zSection col-12 col-md-6">
-					<div className="zSectionInner">
-						<h2>zSection 2</h2>
-						<div className="zSectionContent">
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit, enim id
-								mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae odio. Maecenas
-								convallis lacinia fringilla. Vestibulum non tellus congue, dapibus quam ut, molestie
-								odio. Praesent malesuada gravida augue. Integer in nunc leo. Maecenas at justo at nisl
-								condimentum pharetra ac eget tellus. Aenean in urna consequat, scelerisque elit eu,
-								dignissim purus. Nullam varius consectetur ante vel auctor. In eget porttitor augue, et
-								dictum tortor. Aenean cursus, risus molestie tincidunt commodo, lectus lorem auctor
-								nulla, id mollis risus erat facilisis velit. Etiam egestas laoreet nisl, at commodo nisl
-								ullamcorper vitae. Praesent pharetra, neque et laoreet lacinia, augue erat tempor
-								lectus, in vestibulum risus orci vitae dui. Nunc in porttitor libero. Praesent consequat
-								sodales rutrum. Maecenas fermentum lorem quis iaculis vestibulum. Sed in diam ac libero
-								placerat accumsan.
-							</p>
+				)}
+				{fetchResponseError && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<h2>Erreur</h2>
+							<ZError response={fetchResponseError} className="" />
 						</div>
 					</div>
-				</div>
-
-				<div className="zTodo col-12 col-md-6">
-					<div className="zTodoInner">
-						<h2>Todo</h2>
-						<ul>
-							<li>Register: validation email</li>
-							<li>Refresh Token</li>
-							<li>Sign with google...</li>
-							<li>Use templateGEnerator</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
-				</div>
-
-				<div className="zHelp col-12 col-md-6">
-					<div className="zHelpInner">
-						<h2>Help</h2>
-						<ul>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
-				</div>
+				)}
+				{projects && (
+					<>
+						<div className="zSection col-12 col-md-6">
+							<div className="zSectionInner">
+								<h2>
+									Mes projets <ButtonCreateProject className="btn-sm float-end" />
+								</h2>
+								<div className="zSectionContent">
+									<ul>
+										{projects &&
+											projects.map((project) => (
+												<li key={project.id}>
+													<ProjectLink project={project} />
+												</li>
+											))}
+									</ul>
+									<ButtonFixtureProjectAd />
+								</div>
+							</div>
+						</div>
+						<div className="zSection col-12 col-md-6">
+							<div className="zSectionInner">
+								<h2>zSection 2</h2>
+								<div className="zSectionContent">
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit,
+										enim id mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae
+										odio. Maecenas convallis lacinia fringilla. Vestibulum non tellus congue,
+										dapibus quam ut, molestie odio. Praesent malesuada gravida augue. Integer in
+										nunc leo. Maecenas at justo at nisl condimentum pharetra ac eget tellus. Aenean
+										in urna consequat, scelerisque elit eu, dignissim purus.
+									</p>
+								</div>
+							</div>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	)

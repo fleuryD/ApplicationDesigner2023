@@ -1,6 +1,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { Injectable, ForbiddenException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { User, Project, Entite, Attribut } from "../_entities"
@@ -67,7 +67,7 @@ export class AttributsService {
 		Logger.log(
 			`⛔ ensureAuthorizedAccessAttribut :: user #${userId} can't access attribut #${attributId}`
 		)
-		throw new UnauthorizedException("UNAUTHORIZED_ACCESS_TO_ATTRIBUT")
+		throw new ForbiddenException("FORBIDDEN_ACCESS_TO_ATTRIBUT")
 	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
