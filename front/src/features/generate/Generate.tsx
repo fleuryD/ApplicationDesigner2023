@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import { Project, Entite } from "types"
-import generateTemplateNestEntity from "./templateNestEntity"
-import generateTemplateNestModule from "./templateNestModule"
-import generateTemplateReactDisplayInfos from "./generateTemplateReactDisplayInfos"
-import generateTemplateCppHpp from "./templateCppHpp"
+import templateNestEntity from "./templateNestEntity"
+import templateNestModule from "./templateNestModule"
+import templateReactDisplayInfos from "./templateReactDisplayInfos"
+import templateCppHpp from "./templateCppHpp"
+import templateCppCpp from "./templateCppCpp"
 import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
@@ -34,10 +35,11 @@ export default function Generate({ entite, templateName, project }: Props) {
 			entiteCamelNamePluriel,
 		}
 
-		if (templateName === "NestEntity") setStr(generateTemplateNestEntity(data))
-		else if (templateName === "NestModule") setStr(generateTemplateNestModule(data))
-		else if (templateName === "CppHpp") setStr(generateTemplateCppHpp(data))
-		else if (templateName === "ReactDisplayInfos") setStr(generateTemplateReactDisplayInfos(data))
+		if (templateName === "NestEntity") setStr(templateNestEntity(data))
+		else if (templateName === "NestModule") setStr(templateNestModule(data))
+		else if (templateName === "CppHpp") setStr(templateCppHpp(data))
+		else if (templateName === "CppCpp") setStr(templateCppCpp(data))
+		else if (templateName === "ReactDisplayInfos") setStr(templateReactDisplayInfos(data))
 		else setStr("- TODO: " + templateName + " -")
 	}, [project, entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel, templateName])
 

@@ -1,0 +1,97 @@
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+import { Entite } from "types"
+import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
+
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+type Props = {
+	entite: Entite
+	entitePascalName: string
+	entiteCamelName: string
+	entiteCamelNamePluriel: string
+}
+
+export default function templateReactDisplayInfos({
+	entite,
+	entitePascalName,
+	entiteCamelName,
+	entiteCamelNamePluriel,
+}: Props) {
+	let constructorArgs = ""
+
+	entite.attributs.map((attr: any) => {
+		if (constructorArgs.length > 0) constructorArgs += ", "
+		constructorArgs += ` ${attr.tipe}: ${attr.name}`
+		return constructorArgs
+	})
+
+	let constructorArgsInit = ""
+	entite.attributs.map((attr: any) => {
+		if (constructorArgsInit.length > 0) constructorArgsInit += ", "
+		constructorArgsInit += ` _${attr.name}(${attr.name})`
+		return constructorArgsInit
+	})
+
+	let constructorCopyVals = "\n"
+	entite.attributs.map((attr: any) => {
+		constructorCopyVals += `        this->_${attr.name} = other.get${toPascalCase(attr.name)}();\n`
+		return constructorCopyVals
+	})
+
+	let getterSetters = ""
+	entite.attributs.map((attr: any) => {
+		getterSetters += `
+std::string	Xentite::get${toPascalCase(attr.name)}( void ) const			{	return (this->_${attr.name});	}
+void		Xentite::set${toPascalCase(attr.name)}( std::string ${attr.name} )	{	this->_${attr.name} = ${attr.name};	}\n`
+		return getterSetters
+	})
+
+	let str = `
+#include "Xentite.hpp"
+
+// *******************************************	CONSTRUCTORS / DELETE :
+
+Xentite::Xentite(void){}
+
+Xentite::Xentite(${constructorArgs})
+	: ${constructorArgsInit}
+{
+	std::cout << "Xentite::Constructor called\\n";
+}
+
+Xentite::Xentite( Xentite const &other )
+{
+	*this = other;
+	${constructorCopyVals}
+	std::cout "Xentite::Constructor Copy Called\\n";
+}
+
+Xentite &Xentite::operator=(Xentite const &other)
+{
+	std::cout << "Xentite::Copy assignment called\\n";
+	return *this;
+}
+
+Xentite::~Xentite()
+{
+	std::cout <<  "Xentite:: Destructor called\\n";
+}
+
+// **********************	PUBLIC GET / SET:
+
+${getterSetters}
+
+
+// ********************** FLUX
+
+std::ostream &operator<<( std::ostream &flux, Xentite const &xentite)
+{
+	flux << xentite._name();
+	return flux;
+}`
+
+	str = str.replaceAll("Xentite", entitePascalName)
+	str = str.replaceAll("xentite", entiteCamelName)
+
+	return str
+}

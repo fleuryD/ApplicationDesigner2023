@@ -10,7 +10,7 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
-export default function generateTemplateNestModule({
+export default function templateNestModule({
 	entite,
 	entitePascalName,
 	entiteCamelName,

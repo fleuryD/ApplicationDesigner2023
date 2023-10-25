@@ -15,7 +15,7 @@ function getEntiteByIdInProject(project: Project, entiteId: number) {
 	return project.entites.find((e) => e.id === entiteId)
 }
 
-export default function generateTemplateNestEntity({
+export default function templateNestEntity({
 	project,
 	entite,
 	entitePascalName,

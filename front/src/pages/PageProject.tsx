@@ -11,6 +11,7 @@ import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
 import FormProject from "features/projects/FormProject"
 import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
 import ZError from "ui/ZError"
+import ZLoading from "ui/ZLoading"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -47,38 +48,30 @@ export default function PageProject() {
 			</header>
 
 			<div className="zPageContent row">
-				<div className="zSection col-12 col-md-6">
-					{isLoading && <p>Loading...</p>}
-					{fetchResponseError && <ZError response={fetchResponseError} />}
-					{project && <ProjectDisplayInfos project={project} />}
-				</div>
+				{isLoading && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<ZLoading />
+						</div>
+					</div>
+				)}
+				{fetchResponseError && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<h2>Erreur</h2>
+							<ZError response={fetchResponseError} className="" />
+						</div>
+					</div>
+				)}
+				{project && (
+					<div className="zSection col-12 col-md-6">
+						<ProjectDisplayInfos project={project} />
+					</div>
+				)}
 
 				<div className="zSection col-12">
 					<div className="zSectionInner">{project && <Uml project={project} />}</div>
 				</div>
-				{/*
-				<div className="zTodo col-12 col-md-6">
-					<div className="zTodoInner">
-						<h2>Todo</h2>
-						<ul>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
-				</div>
-
-				<div className="zHelp col-12 col-md-6">
-					<div className="zHelpInner">
-						<h2>Help</h2>
-						<ul>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-							<li>xxxxxxx</li>
-						</ul>
-					</div>
-				</div>
-				*/}
 			</div>
 		</div>
 	)

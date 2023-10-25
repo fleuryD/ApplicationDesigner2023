@@ -10,7 +10,7 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
-export default function generateTemplateReactDisplayInfos({
+export default function templateReactDisplayInfos({
 	entite,
 	entitePascalName,
 	entiteCamelName,

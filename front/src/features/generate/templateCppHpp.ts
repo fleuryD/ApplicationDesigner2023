@@ -10,12 +10,7 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
-export default function generateTemplateCppHpp({
-	entite,
-	entitePascalName,
-	entiteCamelName,
-	entiteCamelNamePluriel,
-}: Props) {
+export default function templateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }: Props) {
 	let str = `\n`
 	str += `#pragma once  \n`
 	str += `\n`

@@ -11,13 +11,15 @@ import ProjectLink from "features/projects/ProjectLink"
 import { Button } from "react-bootstrap"
 import Generate from "features/generate/Generate"
 import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
+import ZError from "ui/ZError"
+import ZLoading from "ui/ZLoading"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageProjectGenerate() {
 	const projectId = Number(useParams().id) || 0
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [error, setError] = useState<string | null>(null)
+	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
 	const [selectedFormEntite, setSelectedFormEntite] = useState<Entite | null>(null)
 	const [selectedFormTemplateName, setSelectedFormTemplateName] = useState<string | null>("")
@@ -25,16 +27,11 @@ export default function PageProjectGenerate() {
 	useEffect(() => {
 		if (projectId > 0) {
 			setIsLoading(true)
-			setError(null)
+			setFetchResponseError(null)
 
-			apiFetchProject(projectId).then((response) => {
-				if (response.project) {
-					setProject(response.project)
-				} else {
-					setError("❌ Erreur Inconnue: Voir la console")
-					console.log("❌ ERROR: response: ", response)
-					if (response.error) console.log("❌ ERROR: response.error: ", response.error)
-				}
+			apiFetchProject(projectId).then((rep) => {
+				if (rep.project) setProject(rep.project)
+				else setFetchResponseError(rep)
 				setIsLoading(false)
 			})
 		}
@@ -62,78 +59,92 @@ export default function PageProjectGenerate() {
 				</h1>
 				<h3>Lorem Ipsum</h3>
 				<ProjectLink project={project} text="back to UML" />
-
-				{isLoading && <p>Loading...</p>}
-				{error && <p>{error}</p>}
 			</header>
 
 			<div className="zPageContent row">
-				<div className="zSection col-12 col-md-6">
-					{isLoading && <p>Loading...</p>}
-					{error && <p>{error}</p>}
-					{project && <ProjectDisplayInfos project={project} />}
-				</div>
-
-				<div className="zSection col-12 col-md-6">
-					<div className="zSectionInner">
-						<h2>Entities:</h2>
-
-						{project && (
-							<div className="bg-info">
-								{project.entites.map((entite: any) => (
-									<Button
-										key={"bt-entite" + entite.id}
-										className="m-1"
-										variant={selectedFormEntite?.id === entite.id ? "primary" : "secondary"}
-										onClick={() => setSelectedFormEntite(entite)}
-									>
-										{entite.name}
-									</Button>
-								))}
-							</div>
-						)}
-					</div>
-				</div>
-
-				{selectedFormEntite && (
+				{isLoading && (
 					<div className="zSection col-12 col-md-6">
 						<div className="zSectionInner">
-							<h2>Templates:</h2>
-
-							<div className="bg-info">
-								<b>NestJs:</b>
-								<ButtonTemplate text="Entity" name="NestEntity" />
-								<ButtonTemplate text="Controller" name="NestController" disabled />
-								<ButtonTemplate text="Module" name="NestModule" />
-								<ButtonTemplate text="Service" name="NestService" disabled />
-							</div>
-							<div className="bg-info">
-								<b>React (ts):</b>
-								<ButtonTemplate text="DisplayInfos" name="ReactDisplayInfos" />
-								<ButtonTemplate text="type" name="ReactType" disabled />
-								<ButtonTemplate text="Form" name="ReactForm" disabled />
-								<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
-							</div>
-							<div className="bg-info">
-								<b>C++:</b>
-								<ButtonTemplate text=".hpp" name="CppHpp" />
-								<ButtonTemplate text=".cpp" name="CppCpp" disabled />
-							</div>
+							<ZLoading />
 						</div>
 					</div>
 				)}
+				{fetchResponseError && (
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<h2>Erreur</h2>
+							<ZError response={fetchResponseError} className="" />
+						</div>
+					</div>
+				)}
+				{project && (
+					<>
+						<div className="zSection col-12 col-md-4">
+							{project && <ProjectDisplayInfos project={project} />}
+						</div>
 
-				<div className="zSection col-12">
-					{project && selectedFormEntite && selectedFormTemplateName ? (
-						<Generate
-							project={project}
-							entite={selectedFormEntite}
-							templateName={selectedFormTemplateName}
-						/>
-					) : (
-						<h3>Select an entity</h3>
-					)}
-				</div>
+						<div className="zSection col-12 col-md-4">
+							<div className="zSectionInner">
+								<h2>Entities:</h2>
+
+								{project && (
+									<div className="bg-info">
+										{project.entites.map((entite: any) => (
+											<Button
+												key={"bt-entite" + entite.id}
+												className="m-1"
+												variant={selectedFormEntite?.id === entite.id ? "primary" : "secondary"}
+												onClick={() => setSelectedFormEntite(entite)}
+											>
+												{entite.name}
+											</Button>
+										))}
+									</div>
+								)}
+							</div>
+						</div>
+
+						{selectedFormEntite && (
+							<div className="zSection col-12 col-md-4">
+								<div className="zSectionInner">
+									<h2>Templates:</h2>
+
+									<div className="bg-info">
+										<b>NestJs:</b>
+										<ButtonTemplate text="Entity" name="NestEntity" />
+										<ButtonTemplate text="Controller" name="NestController" disabled />
+										<ButtonTemplate text="Module" name="NestModule" />
+										<ButtonTemplate text="Service" name="NestService" disabled />
+									</div>
+									<div className="bg-info">
+										<b>React (ts):</b>
+										<ButtonTemplate text="DisplayInfos" name="ReactDisplayInfos" />
+										<ButtonTemplate text="type" name="ReactType" disabled />
+										<ButtonTemplate text="Form" name="ReactForm" disabled />
+										<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
+									</div>
+									<div className="bg-info">
+										<b>C++:</b>
+										<ButtonTemplate text=".hpp" name="CppHpp" />
+										<ButtonTemplate text=".cpp" name="CppCpp" />
+									</div>
+								</div>
+							</div>
+						)}
+
+						<div className="zSection col-12">
+							{project && selectedFormEntite && selectedFormTemplateName ? (
+								<Generate
+									project={project}
+									entite={selectedFormEntite}
+									templateName={selectedFormTemplateName}
+								/>
+							) : (
+								<h3>Select an entity</h3>
+							)}
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	)
