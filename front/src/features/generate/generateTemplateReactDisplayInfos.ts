@@ -16,30 +16,37 @@ export default function generateTemplateReactDisplayInfos({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
-	let str = `
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	let str = `// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { Project } from "types"
+import { Xentite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	project: Project
+	xentite: Xentite
 	className?: string
 }
 
-export default function ProjectDisplayInfos({ project, className }: Props) {
+export default function XentiteDisplayInfos({ xentite, className }: Props) {
 	return (
 		<div className={"zSectionInner " + className}>
-			<h2>About Project {project.name}</h2>
-			<div className="z-cadre project-display-infos">
-`
+			<h2>About Xentite <b>{xentite.name}</b></h2>
+			<div className="xentite-display-infos">`
 
 	entite.attributs.map((attr: any) => {
+		let strValue
+		if (attr.tipe === "Boolean") strValue = `{ xentite.${attr.name} ? "Yes" : "No" }`
+		else if (attr.tipe === "ManyToOne") strValue = `#{ xentite.${attr.name}?.id }`
+		else if (attr.tipe === "OneToMany") strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
+		else if (attr.tipe === "ManyToMany") strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
+		else if (attr.tipe === "Date" || attr.tipe === "DateTime")
+			strValue = `{new Date(xentite.${attr.name} || "").toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}`
+		else strValue = `{ xentite.${attr.name} }`
+
 		str += `
 				<div>
-					${attr.name}: <b>{project.${attr.name} ${attr.tipe === "Boolean" ? ' ? "Yes" : "no" ' : ""}}</b>
+					${attr.name}: <b>${strValue}</b>
 				</div>`
 		return str
 	})
@@ -52,8 +59,8 @@ export default function ProjectDisplayInfos({ project, className }: Props) {
 
 `
 
-	str = str.replaceAll("Project", entitePascalName)
-	str = str.replaceAll("project", entiteCamelName)
+	str = str.replaceAll("Xentite", entitePascalName)
+	str = str.replaceAll("xentite", entiteCamelName)
 
 	return str
 }

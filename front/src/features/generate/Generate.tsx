@@ -1,12 +1,13 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Project, Entite } from "types"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
 import generateTemplateReactDisplayInfos from "./generateTemplateReactDisplayInfos"
 import generateTemplateCppHpp from "./templateCppHpp"
 import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
+import { Button } from "react-bootstrap"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -22,6 +23,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 	const entiteCamelNamePluriel = entiteCamelName + "s"
 
 	const [str, setStr] = useState("")
+	const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
 	useEffect(() => {
 		const data = {
@@ -39,7 +41,20 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else setStr("- TODO: " + templateName + " -")
 	}, [project, entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel, templateName])
 
-	// ****************************************************************
+	const handleCopyToClipboard = () => {
+		if (textAreaRef.current) {
+			textAreaRef.current.select()
+
+			try {
+				document.execCommand("copy")
+				console.log("Texte copié dans le presse-papiers : " + textAreaRef.current.value)
+			} catch (err) {
+				console.error("Erreur lors de la copie dans le presse-papiers : ", err)
+			}
+
+			textAreaRef.current.blur()
+		}
+	}
 
 	// ****************************************************************
 	return (
@@ -47,6 +62,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 			<h5>
 				Generate {entiteCamelName}.{templateName}
 			</h5>
+			<Button onClick={handleCopyToClipboard}>Copier dans le presse-papiers</Button>
 			<textarea
 				id="w3review"
 				name="w3review"
@@ -54,6 +70,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 				className="col-12"
 				style={{ fontSize: "0.8em" }}
 				defaultValue={str}
+				ref={textAreaRef}
 			/>
 		</div>
 	)

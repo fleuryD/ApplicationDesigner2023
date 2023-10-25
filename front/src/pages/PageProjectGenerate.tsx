@@ -10,6 +10,7 @@ import ButtonEditProject from "features/projects/ButtonEditProject"
 import ProjectLink from "features/projects/ProjectLink"
 import { Button } from "react-bootstrap"
 import Generate from "features/generate/Generate"
+import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -67,6 +68,12 @@ export default function PageProjectGenerate() {
 			</header>
 
 			<div className="zPageContent row">
+				<div className="zSection col-12 col-md-6">
+					{isLoading && <p>Loading...</p>}
+					{error && <p>{error}</p>}
+					{project && <ProjectDisplayInfos project={project} />}
+				</div>
+
 				<div className="zSection col-12 col-md-6">
 					<div className="zSectionInner">
 						<h2>Entities:</h2>

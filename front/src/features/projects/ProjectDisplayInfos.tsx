@@ -13,29 +13,34 @@ type Props = {
 export default function ProjectDisplayInfos({ project, className }: Props) {
 	return (
 		<div className={"zSectionInner " + className}>
-			<h2>About Project</h2>
-
-			<div className="z-cadre user-infos">
+			<h2>
+				About Project <b>{project.name}</b>
+			</h2>
+			<div className="project-display-infos">
 				<div>
-					createdBy: <b>{project.createdBy?.username}</b> &nbsp;&nbsp;
+					id: <b>{project.id}</b>
 				</div>
 				<div>
-					id: <b>{project.id}</b> &nbsp;&nbsp;
+					name: <b>{project.name}</b>
 				</div>
 				<div>
-					name: <b>{project.name}</b> &nbsp;&nbsp;
+					createdBy: <b>#{project.createdBy?.id}</b>
 				</div>
 				<div>
-					createdAt: <b>{project.createdAt}</b> &nbsp;&nbsp;
+					createdAt:{" "}
+					<b>{new Date(project.createdAt || "").toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}</b>
 				</div>
 				<div>
-					description: <b>{project.description}</b> &nbsp;&nbsp;
+					description: <b>{project.description}</b>
 				</div>
 				<div>
-					infos: <b>{project.infos}</b> &nbsp;&nbsp;
+					infos: <b>{project.infos}</b>
 				</div>
 				<div>
-					WorkInProgress: <b>{project.isWip ? "Yes" : "No"}</b> &nbsp;&nbsp;
+					isWip: <b>{project.isWip ? "Yes" : "No"}</b>
+				</div>
+				<div>
+					entites: <b>{project.entites.length} entites(s)</b>
 				</div>
 			</div>
 		</div>

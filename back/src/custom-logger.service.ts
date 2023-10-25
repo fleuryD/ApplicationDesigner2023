@@ -37,7 +37,7 @@ const BGRA = "\x1b[100m"
 
 export class CustomLogger implements LoggerService {
 	private getFormatedDate() {
-		return new Date().toLocaleString("en-US", { timeZone: "Europe/Paris" })
+		return new Date().toLocaleString("fr-FR", { timeZone: "Europe/Paris" })
 	}
 	private getFormatedMessage(message: string, color: string, name: string) {
 		let mess = `${color}${this.getFormatedDate()}`
@@ -45,12 +45,7 @@ export class CustomLogger implements LoggerService {
 		mess += `${SRESET}${color}${message}`
 		return mess
 	}
-	private cutomLogMess(
-		message: string,
-		optionalParams: any[],
-		color: string,
-		name: string
-	) {
+	private cutomLogMess(message: string, optionalParams: any[], color: string, name: string) {
 		const mess = this.getFormatedMessage(message, color, name)
 		if (optionalParams.length > 0) console.error(mess, optionalParams, SRESET)
 		else console.error(mess, SRESET)

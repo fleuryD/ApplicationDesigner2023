@@ -53,13 +53,9 @@ export default function PageProject() {
 
 			<div className="zPageContent row">
 				<div className="zSection col-12 col-md-6">
-					<div className="zSectionInner">
-						<h2>About Project</h2>
-
-						{isLoading && <p>Loading...</p>}
-						{error && <p>{error}</p>}
-						{project && <ProjectDisplayInfos project={project} />}
-					</div>
+					{isLoading && <p>Loading...</p>}
+					{error && <p>{error}</p>}
+					{project && <ProjectDisplayInfos project={project} />}
 				</div>
 
 				<div className="zSection col-12">
