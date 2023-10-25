@@ -46,7 +46,10 @@ export default function PageHome() {
 		setIsLoading(true)
 		setError(null)
 
-		apiFetchProjects().then((response) => {
+		apiFetchProjects2().then((response) => {
+			setProjects(response.projects)
+			setError(response.error)
+			/*
 			if (response.projects) {
 				setProjects(response.projects)
 			} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
@@ -58,6 +61,7 @@ export default function PageHome() {
 				console.log("❌ ERROR: response: ", response)
 				if (response.error) console.log("❌ ERROR: response.error: ", response.error)
 			}
+			*/
 			setIsLoading(false)
 		})
 	}, [])
@@ -78,7 +82,7 @@ export default function PageHome() {
 						</h2>
 						<div className="zSectionContent">
 							{isLoading && <p>Loading...</p>}
-							{error && <p>{error}</p>}
+							{error && <>{error}</>}
 							<ul>
 								{projects &&
 									projects.map((project) => (

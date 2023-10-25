@@ -1,6 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ?????????????????
 //import errorManager from "./errorManager"
+import ErrorSessionExpired from "../ui/ErrorSessionExpired"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -43,6 +44,38 @@ export default async function zFetch({ shortUrl, method, requierdFields, body, p
 
 		console.log("❌ missingElements", missingElements)
 		return { error: rep }
+	} catch (err) {
+		return { error: err }
+	}
+}
+
+export async function zFetch2({ shortUrl, method, body, publicAccess }) {
+	const url = API_BASE_URL + shortUrl
+
+	const requestOptions = {
+		method,
+		headers: publicAccess ? requestOptionsHeadersPublic() : requestOptionsHeaders(),
+		body: body ? JSON.stringify(body) : null,
+	}
+
+	console.debug("🟨 zFetch ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
+
+	try {
+		const response = await fetch(url, requestOptions)
+		const rep = await response.json()
+
+		if (rep?.statusCode >= 400) {
+			console.error("❌ zFetch2::rep.statusCode >= 400:", rep)
+			if (rep.message === "ERROR_ACCESS_TOKEN_EXPIRED") return { error: <ErrorSessionExpired /> }
+
+			console.error("❌ ERROR_ACCESS_TOKEN_EXPIRED")
+			let errorPublicMessage = null
+			return { ...rep, error: 1, errorPublicMessage }
+		}
+
+		console.log("🟩 zFetch.success ➤➤ rep:", rep)
+		console.groupEnd()
+		return rep
 	} catch (err) {
 		return { error: err }
 	}
