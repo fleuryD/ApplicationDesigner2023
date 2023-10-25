@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useAppSelector } from "store/store"
-import { apiFetchProjects } from "utils/api"
+import { apiFetchProjects, apiFetchProjects2 } from "utils/api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
@@ -18,7 +18,31 @@ export default function PageHome() {
 	const [error, setError] = useState<any | null>(null)
 	const [projects, setProjects] = useState<Project[] | null>(null)
 
+	/*
 	useEffect(() => {
+		document.title = "AD: Home"
+		setIsLoading(true)
+		setError(null)
+
+		apiFetchProjects().then((response) => {
+			if (response.projects) {
+				setProjects(response.projects)
+			} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
+				setError(<ErrorSessionExpired />)
+			} else if (response.statusCode === 401) {
+				setError("❌ Erreur: Unauthorized")
+			} else {
+				setError("❌ Erreur Inconnue: Voir la console")
+				console.log("❌ ERROR: response: ", response)
+				if (response.error) console.log("❌ ERROR: response.error: ", response.error)
+			}
+			setIsLoading(false)
+		})
+	}, [])
+	*/
+
+	useEffect(() => {
+		document.title = "AD: Home"
 		setIsLoading(true)
 		setError(null)
 

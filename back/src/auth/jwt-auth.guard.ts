@@ -26,10 +26,11 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 			context.getClass(),
 		])
 		if (isPublic) {
-			Logger.debug("🟠 canActivate: isPublic::true")
+			Logger.debug("[canActivate] isPublic::true")
 			return true
 		}
-		Logger.log("🟠 canActivate")
+		//Logger.log("[canActivate]")
+
 		// Add your custom authentication logic here
 		// for example, call super.logIn(request) to establish a session.
 		return super.canActivate(context)
@@ -37,13 +38,14 @@ export class JwtAuthGuard extends AuthGuard("jwt") {
 
 	handleRequest(err, user, info) {
 		if (info?.name === "TokenExpiredError") {
+			Logger.warn("[JwtAuthGuard::handleRequest] ⛔ ERROR_ACCESS_TOKEN_EXPIRED")
 			throw new UnauthorizedException("ERROR_ACCESS_TOKEN_EXPIRED")
 		}
 
-		//	console.table(info)
-		if (err) Logger.debug("🟠 JwtAuthGuard::handleRequest::err:", err)
-		if (info) Logger.debug("🟠 JwtAuthGuard::handleRequest::info:", info)
-		if (user) Logger.debug("🟠 JwtAuthGuard::handleRequest::user:", user)
+		// console.table(info)
+		// if (err)  Logger.debug("[JwtAuthGuard::handleRequest] err:", err)
+		// if (info) Logger.debug("[JwtAuthGuard::handleRequest] info:", info)
+		// if (user) Logger.debug("[JwtAuthGuard::handleRequest] user:", user)
 
 		// You can throw an exception based on either "info" or "err" arguments
 		if (err || !user) {

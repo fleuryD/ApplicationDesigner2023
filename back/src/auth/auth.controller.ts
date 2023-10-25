@@ -98,17 +98,8 @@ export class AuthController {
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string
 	) {
-		/*
-		Logger.log("TEST Logger.log")
-		Logger.error("TEST Logger.error")
-		Logger.error("TEST Logger.error", "param1", "param2")
-		Logger.warn("TEST Logger.warn")
-		Logger.debug("TEST Logger.debug")
-		Logger.verbose("TEST Logger.verbose")
-		*/
-
 		if (!emailOrUsername || !password) {
-			Logger.log("⛔ login: throw : MISSING_FIELDS")
+			Logger.error("[login] ❌ MISSING_FIELDS")
 			throw new BadRequestException("MISSING_FIELDS")
 		}
 
@@ -117,24 +108,26 @@ export class AuthController {
 		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 
 		if (!user) {
-			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
+			Logger.warn("[login] ⛔ INVALID_CREDENTIALS")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 		if (user.emailValidationToken) {
-			Logger.log("⛔ login: throw : EMAIL_NOT_CONFIRMED")
+			Logger.warn("[login] ⛔ EMAIL_NOT_CONFIRMED")
 			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
 		if (!(await bcrypt.compare(password, user.password))) {
-			Logger.log("⛔ login: throw : INVALID_CREDENTIALS")
+			Logger.warn("[login] ⛔ INVALID_CREDENTIALS")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 
-		if (!user.accessToken) {
+		Logger.log(`[login] 🟢 "${user.username}"`)
+
+		if (!user.accessToken || this.authService.accessTokenHasExpired(user.accessToken)) {
 			const accessToken = await this.authService.getAccessToken(user)
 			user = await this.usersService.setAccessToken(user, accessToken)
+			Logger.log("[login] set new accessToken for user:", user.username)
 		}
 
-		Logger.log(`🟢 login: "${user.username}"`)
 		return {
 			user: user,
 		}
