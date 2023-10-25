@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { Project, Entite } from "types"
 import generateTemplateNestEntity from "./templateNestEntity"
 import generateTemplateNestModule from "./templateNestModule"
+import generateTemplateReactDisplayInfos from "./generateTemplateReactDisplayInfos"
 import generateTemplateCppHpp from "./templateCppHpp"
 import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
 
@@ -34,6 +35,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		if (templateName === "NestEntity") setStr(generateTemplateNestEntity(data))
 		else if (templateName === "NestModule") setStr(generateTemplateNestModule(data))
 		else if (templateName === "CppHpp") setStr(generateTemplateCppHpp(data))
+		else if (templateName === "ReactDisplayInfos") setStr(generateTemplateReactDisplayInfos(data))
 		else setStr("- TODO: " + templateName + " -")
 	}, [project, entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel, templateName])
 

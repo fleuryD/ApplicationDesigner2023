@@ -1,4 +1,5 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -101,6 +102,7 @@ export default function PageProjectGenerate() {
 							</div>
 							<div className="bg-info">
 								<b>React (ts):</b>
+								<ButtonTemplate text="DisplayInfos" name="ReactDisplayInfos" />
 								<ButtonTemplate text="type" name="ReactType" disabled />
 								<ButtonTemplate text="Form" name="ReactForm" disabled />
 								<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />

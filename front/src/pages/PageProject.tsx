@@ -9,6 +9,7 @@ import Uml from "features/uml/Uml"
 import ButtonEditProject from "features/projects/ButtonEditProject"
 import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
 import FormProject from "features/projects/FormProject"
+import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -57,41 +58,14 @@ export default function PageProject() {
 
 						{isLoading && <p>Loading...</p>}
 						{error && <p>{error}</p>}
-						{project && (
-							<div className="z-cadre user-infos">
-								{/*
-								<div>
-									createdBy: <b>{project.createdBy?.username}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									id: <b>{project.id}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									name: <b>{project.name}</b> &nbsp;&nbsp;
-								</div>
-
-								*/}
-								<div>
-									createdAt: <b>{project.createdAt}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									description: <b>{project.description}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									infos: <b>{project.infos}</b> &nbsp;&nbsp;
-								</div>
-								<div>
-									WorkInProgress: <b>{project.isWip ? "Yes" : "No"}</b> &nbsp;&nbsp;
-								</div>
-							</div>
-						)}
+						{project && <ProjectDisplayInfos project={project} />}
 					</div>
 				</div>
 
 				<div className="zSection col-12">
 					<div className="zSectionInner">{project && <Uml project={project} />}</div>
 				</div>
-
+				{/*
 				<div className="zTodo col-12 col-md-6">
 					<div className="zTodoInner">
 						<h2>Todo</h2>
@@ -113,6 +87,7 @@ export default function PageProject() {
 						</ul>
 					</div>
 				</div>
+				*/}
 			</div>
 		</div>
 	)
