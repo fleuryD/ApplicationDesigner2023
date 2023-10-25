@@ -1,9 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-//import { useAppDispatch } from "store/store"
 import { apiFetchProject } from "utils/api"
 import { Project, Entite } from "types"
 import ButtonEditProject from "features/projects/ButtonEditProject"

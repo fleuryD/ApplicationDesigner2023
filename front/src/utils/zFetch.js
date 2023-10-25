@@ -6,6 +6,8 @@ import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ????????????
 
 // ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
 
+// DEPRECATED : A remplacer par zFetcher
+
 export default async function zFetch({ shortUrl, method, requierdFields, body, publicAccess }) {
 	const url = API_BASE_URL + shortUrl
 

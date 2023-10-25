@@ -17,7 +17,7 @@ interface AuthState {
 
 // Initial state
 const initialState: AuthState = {
-	isConnected: localStorage.getItem("accessToken") !== null, // ** Le meme nom aue dans "zFetch > requestOptionsHeaders"
+	isConnected: localStorage.getItem("accessToken") !== null, // ** Le meme nom que dans "zFetch > requestOptionsHeaders"
 	id: localStorage.getItem("id") ? Number(localStorage.getItem("id")) : null,
 	accessToken: localStorage.getItem("accessToken") || null,
 	username: localStorage.getItem("username") || null,

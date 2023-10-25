@@ -4,8 +4,6 @@ import { API_BASE_URL } from "./constants" // TODO : A mettre dans .env
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-// DEPRECATED : A remplacer par zFetcher
-
 type Props = {
 	shortUrl: string
 	method: string
