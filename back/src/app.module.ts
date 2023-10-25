@@ -44,7 +44,7 @@ import { CustomLogger } from "./custom-logger.service"
 		}),
 		JwtModule.register({
 			secret: process.env.JWT_SECRET,
-			signOptions: { expiresIn: "10d" },
+			signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
 		}),
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
 		MailModule,

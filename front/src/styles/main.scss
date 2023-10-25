@@ -84,6 +84,14 @@ $sectionGap: 5px;
 	}
 }
 
+.clickText {
+	color: $primary;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 // >>>		XXXXXXXXXXXXXX											   <<<
 
 .zHelp,

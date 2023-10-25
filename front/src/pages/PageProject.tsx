@@ -28,6 +28,10 @@ export default function PageProject() {
 			apiFetchProject(projectId).then((response) => {
 				if (response.project) {
 					setProject(response.project)
+				} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
+					setError(
+						"❌ Erreur: ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED ERROR_ACCESS_TOKEN_EXPIRED "
+					)
 				} else if (response.statusCode === 401) {
 					setError("❌ Erreur: Vous n'êtes pas autorisé à voir ce projet.")
 				} else {

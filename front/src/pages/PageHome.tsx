@@ -8,13 +8,14 @@ import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
 import { ButtonFixtureProjectAd } from "features/fixtures/ButtonsFixtures"
+import ErrorSessionExpired from "ui/ErrorSessionExpired"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
 	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [error, setError] = useState<string | null>(null)
+	const [error, setError] = useState<any | null>(null)
 	const [projects, setProjects] = useState<Project[] | null>(null)
 
 	useEffect(() => {
@@ -24,6 +25,8 @@ export default function PageHome() {
 		apiFetchProjects().then((response) => {
 			if (response.projects) {
 				setProjects(response.projects)
+			} else if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED") {
+				setError(<ErrorSessionExpired />)
 			} else if (response.statusCode === 401) {
 				setError("❌ Erreur: Unauthorized")
 			} else {

@@ -96,14 +96,6 @@ h6 {
 
 //*********************************
 
-.clickText {
-	color: $primary;
-	cursor: pointer;
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
 .clignote {
 	animation: clignote 1s linear infinite;
 }
