@@ -66,16 +66,34 @@ export default function PageHome() {
 
 				<div className="zSection col-12 col-md-6">
 					<div className="zSectionInner">
-						<h2>zSection 2</h2>
+						<h2>About ApplicationDesigner</h2>
 						<div className="zSectionContent">
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit, enim id
-								mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae odio. Maecenas
-								convallis lacinia fringilla. Vestibulum non tellus congue, dapibus quam ut, molestie
-								odio. Praesent malesuada gravida augue. Integer in nunc leo. Maecenas at justo at nisl
-								condimentum pharetra ac eget tellus. Aenean in urna consequat, scelerisque elit eu,
-								dignissim purus.
+								Application Designer is a powerful tool that allows you to quickly create, customize,
+								and generate code templates for your software projects. Built with NestJS and React,
+								this application simplifies the process of setting up a project, defining entities and
+								properties for a database, and generating code templates in multiple programming
+								languages.
 							</p>
+						</div>
+					</div>
+					<div className="zSectionInner">
+						<h2>Features</h2>
+						<div className="zSectionContent">
+							<ul>
+								<li>
+									Project Creation: Easily create new software projects with the necessary folder
+									structure and configurations.
+								</li>
+								<li>
+									Entity and Property Management: Define your project's entities and their properties
+									for your database schema.
+								</li>
+								<li>
+									Multi-Language Template Generation: Generate code templates in various programming
+									languages, saving you time and effort.
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
