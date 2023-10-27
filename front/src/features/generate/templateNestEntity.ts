@@ -22,17 +22,19 @@ export default function templateNestEntity({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
-	let str = `\n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n\n`
-	str += `import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany,ManyToMany} from "typeorm"  \n`
-	str += `// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"     \n`
-	str += `  \n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
-	str += `\n`
-	str += `@Entity("${entiteCamelNamePluriel}")  \n`
-	str += `export class ${entitePascalName}{  \n`
-	str += `    @PrimaryGeneratedColumn()  \n`
-	str += `    id: number  \n`
+	let str = `
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
+import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany,ManyToMany} from "typeorm"
+// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"
+
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
+@Entity("${entiteCamelNamePluriel}")
+export class ${entitePascalName}{
+    @PrimaryGeneratedColumn()
+    id: number
+`
 
 	entite.attributs.map((attr: any) => {
 		str += `\n`
@@ -91,5 +93,11 @@ export default function templateNestEntity({
 	})
 
 	str += `}  \n`
-	return str
+
+	return {
+		code: str,
+		filePath: `./back/src/${entiteCamelNamePluriel}/`,
+		fileName: `${entiteCamelName}.entity.ts`,
+		description: ``,
+	}
 }

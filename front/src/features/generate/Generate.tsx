@@ -24,6 +24,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 	const entiteCamelNamePluriel = entiteCamelName + "s"
 
 	const [str, setStr] = useState("")
+	const [template, setTemplate] = useState<any>(null)
 	const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
 	useEffect(() => {
@@ -35,11 +36,12 @@ export default function Generate({ entite, templateName, project }: Props) {
 			entiteCamelNamePluriel,
 		}
 
-		if (templateName === "NestEntity") setStr(templateNestEntity(data))
-		else if (templateName === "NestModule") setStr(templateNestModule(data))
-		else if (templateName === "CppHpp") setStr(templateCppHpp(data))
-		else if (templateName === "CppCpp") setStr(templateCppCpp(data))
-		else if (templateName === "ReactDisplayInfos") setStr(templateReactDisplayInfos(data))
+		if (templateName === "NestEntity") setTemplate(templateNestEntity(data))
+		else if (templateName === "NestModule") setTemplate(templateNestModule(data))
+		else if (templateName === "CppHpp") setTemplate(templateCppHpp(data))
+		else if (templateName === "CppHpp") setTemplate(templateCppHpp(data))
+		else if (templateName === "CppCpp") setTemplate(templateCppCpp(data))
+		else if (templateName === "ReactDisplayInfos") setTemplate(templateReactDisplayInfos(data))
 		else setStr("- TODO: " + templateName + " -")
 	}, [project, entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel, templateName])
 
@@ -60,18 +62,25 @@ export default function Generate({ entite, templateName, project }: Props) {
 
 	// ****************************************************************
 	return (
-		<div className="border boder-danger mt-4">
-			<h5>
-				Generate {entiteCamelName}.{templateName}
-			</h5>
-			<Button onClick={handleCopyToClipboard}>Copier dans le presse-papiers</Button>
+		<div className="mt-4">
+			<div id="templateHeader" className="row col-12 bg-light">
+				<h5>
+					<span className="text-primary">{template?.filePath}</span>
+					<span className="text-success">{template?.fileName}</span>
+					<Button onClick={handleCopyToClipboard} className="float-end">
+						Copier dans le presse-papiers
+					</Button>
+				</h5>
+				{template?.description && <div className="text-info">{template?.description}</div>}
+			</div>
+
 			<textarea
 				id="w3review"
 				name="w3review"
 				rows={40}
 				className="col-12"
 				style={{ fontSize: "0.8em" }}
-				defaultValue={str}
+				defaultValue={template?.code}
 				ref={textAreaRef}
 			/>
 		</div>

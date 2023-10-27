@@ -46,7 +46,7 @@ void		Xentite::set${toPascalCase(attr.name)}( std::string ${attr.name} )	{	this-
 		return getterSetters
 	})
 
-	let str = `
+	let code = `
 #include "Xentite.hpp"
 
 // *******************************************	CONSTRUCTORS / DELETE :
@@ -90,8 +90,13 @@ std::ostream &operator<<( std::ostream &flux, Xentite const &xentite)
 	return flux;
 }`
 
-	str = str.replaceAll("Xentite", entitePascalName)
-	str = str.replaceAll("xentite", entiteCamelName)
+	code = code.replaceAll("Xentite", entitePascalName)
+	code = code.replaceAll("xentite", entiteCamelName)
 
-	return str
+	return {
+		code,
+		filePath: `./`,
+		fileName: `${entitePascalName}.cpp`,
+		description: ``,
+	}
 }

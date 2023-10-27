@@ -16,23 +16,30 @@ export default function templateNestModule({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
-	let str = `\n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
-	str += `import { Module } from "@nestjs/common"  \n`
-	str += `import { TypeOrmModule } from "@nestjs/typeorm"  \n`
-	str += `import { ${entitePascalName}sService } from "./${entiteCamelName}s.service"  \n`
-	str += `import { ${entitePascalName}sController } from "./${entiteCamelName}s.controller"  \n`
-	str += `import { ${entitePascalName} } from "./${entiteCamelName}.entity"  \n`
-	str += `  \n`
-	str += `// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘\n`
-	str += `@Module({  \n`
-	str += `    imports: [TypeOrmModule.forFeature([${entitePascalName}])],  \n`
-	str += `    exports: [TypeOrmModule],  \n`
-	str += `    providers: [${entitePascalName}sService],  \n`
-	str += `    controllers: [${entitePascalName}sController],  \n`
-	str += `})  \n`
-	str += `export class ${entitePascalName}sModule {}  \n`
-	str += `\n`
+	let code = `
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-	return str
+import { Module } from "@nestjs/common"
+import { TypeOrmModule } from "@nestjs/typeorm"
+import { ${entiteCamelNamePluriel}Service } from "./${entiteCamelNamePluriel}.service"
+import { ${entiteCamelNamePluriel}Controller } from "./${entiteCamelNamePluriel}.controller"
+import { ${entitePascalName} } from "./${entiteCamelName}.entity"
+
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
+@Module({
+    imports: [TypeOrmModule.forFeature([${entitePascalName}])],
+    exports: [TypeOrmModule],
+    providers: [${entiteCamelNamePluriel}Service],
+    controllers: [${entiteCamelNamePluriel}Controller],
+})
+
+export class ${entiteCamelNamePluriel}Module {}`
+
+	return {
+		code,
+		filePath: `./back/src/${entiteCamelNamePluriel}/`,
+		fileName: `${entiteCamelNamePluriel}.module.ts`,
+		description: ``,
+	}
 }

@@ -12,32 +12,37 @@ type Props = {
 }
 
 export default function templateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }: Props) {
-	let str = `\n`
-	str += `#pragma once  \n`
-	str += `\n`
-	str += `class ${entitePascalName}  \n`
-	str += `{  \n`
-	str += `    private :  \n`
+	let code = `\n`
+	code += `#pragma once  \n`
+	code += `\n`
+	code += `class ${entitePascalName}  \n`
+	code += `{  \n`
+	code += `    private :  \n`
 	entite.attributs.map((attr: any) => {
-		str += `        ${attr.tipe}: _${attr.name};  \n`
-		return str
+		code += `        ${attr.tipe}: _${attr.name};  \n`
+		return code
 	})
-	str += ` \n`
-	str += `    public :  \n`
-	str += `        ${entitePascalName}();  \n`
-	str += `        ${entitePascalName}(const ${entitePascalName} &other);  \n`
-	str += `        ~${entitePascalName}(void);  \n`
-	str += `        ${entitePascalName} &operator=(const ${entitePascalName} &other);  \n`
+	code += ` \n`
+	code += `    public :  \n`
+	code += `        ${entitePascalName}();  \n`
+	code += `        ${entitePascalName}(const ${entitePascalName} &other);  \n`
+	code += `        ~${entitePascalName}(void);  \n`
+	code += `        ${entitePascalName} &operator=(const ${entitePascalName} &other);  \n`
 
-	str += ` \n`
-	str += `    // get/set :  \n`
+	code += ` \n`
+	code += `    // get/set :  \n`
 	entite.attributs.map((attr: any) => {
-		str += `        ${attr.tipe}	get${toPascalCase(attr.name)}(void) const;  \n`
-		str += `        void	set${toPascalCase(attr.name)}(${attr.tipe} val) const;  \n\n`
-		return str
+		code += `        ${attr.tipe}	get${toPascalCase(attr.name)}(void) const;  \n`
+		code += `        void	set${toPascalCase(attr.name)}(${attr.tipe} val) const;  \n\n`
+		return code
 	})
-	str += `};  \n`
-	str += `std::ostream &operator<<(std::ostream &flux, const ${entitePascalName} &${entiteCamelName});  \n`
+	code += `};  \n`
+	code += `std::ostream &operator<<(std::ostream &flux, const ${entitePascalName} &${entiteCamelName});  \n`
 
-	return str
+	return {
+		code,
+		filePath: `./`,
+		fileName: `${entitePascalName}.hpp`,
+		description: ``,
+	}
 }

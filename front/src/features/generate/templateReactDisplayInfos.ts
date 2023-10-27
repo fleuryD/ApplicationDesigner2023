@@ -62,5 +62,10 @@ export default function XentiteDisplayInfos({ xentite, className }: Props) {
 	str = str.replaceAll("Xentite", entitePascalName)
 	str = str.replaceAll("xentite", entiteCamelName)
 
-	return str
+	return {
+		code: str,
+		filePath: `./front/src/features/${entiteCamelNamePluriel}/`,
+		fileName: `${entitePascalName}DisplayInfos.tsx`,
+		description: `Composant React pour afficher les infos d'un(e) ${entiteCamelName}.`,
+	}
 }
