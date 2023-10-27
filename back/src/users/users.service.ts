@@ -47,7 +47,11 @@ export class UsersService {
 	}
 
 	async findOneByUsername(username: string): Promise<User | null> {
-		return this.usersRepository.findOneBy({ username })
+		return await this.usersRepository
+			.createQueryBuilder()
+			.where("LOWER(username) = LOWER(:username)", { username })
+			.getOne()
+		//return this.usersRepository.findOneBy({ username })
 	}
 
 	async findOneByEmail(email: string): Promise<User | null> {
