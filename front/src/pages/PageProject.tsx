@@ -6,12 +6,10 @@ import { apiFetchProject } from "utils/api"
 import { useAppSelector } from "store/store"
 import { Project } from "types"
 import Uml from "features/uml/Uml"
-import ButtonEditProject from "features/projects/ButtonEditProject"
-import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
 import FormProject from "features/projects/FormProject"
-import ProjectDisplayInfos from "features/projects/ProjectDisplayInfos"
-import ZError from "ui/ZError"
-import ZLoading from "ui/ZLoading"
+import ZErrorSection from "ui/ZErrorSection"
+import ZLoadingSection from "ui/ZLoadingSection"
+import PageProjectHeader from "features/projects/PageProjectHeader"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -26,7 +24,6 @@ export default function PageProject() {
 		if (projectId > 0) {
 			setIsLoading(true)
 			setFetchResponseError(null)
-
 			apiFetchProject(projectId).then((rep) => {
 				if (rep.project) setProject(rep.project)
 				else setFetchResponseError(rep)
@@ -38,40 +35,19 @@ export default function PageProject() {
 	return (
 		<div className="zPage">
 			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
-			<header className="zPageHeader row">
-				<h1>
-					<small>Project:</small> <b>{project && project.name}</b>
-					{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
-				</h1>
-				<h3>Lorem Ipsum</h3>
-				<ProjectGenerateLink project={project} text="Generate project" />
-			</header>
+
+			<PageProjectHeader project={project} mode="UML" />
 
 			<div className="zPageContent row">
-				{isLoading && (
-					<div className="zSection col-12 col-md-6">
-						<div className="zSectionInner">
-							<ZLoading />
-						</div>
-					</div>
-				)}
-				{fetchResponseError && (
-					<div className="zSection col-12 col-md-6">
-						<div className="zSectionInner">
-							<h2>Erreur</h2>
-							<ZError response={fetchResponseError} className="" />
-						</div>
-					</div>
-				)}
+				<ZLoadingSection isLoading={isLoading} className="col-12" />
+				<ZErrorSection fetchResponseError={fetchResponseError} className="col-12" />
 				{project && (
-					<div className="zSection col-12 col-md-6">
-						<ProjectDisplayInfos project={project} />
+					<div className="zSection col-12">
+						<div className="zSectionInner">
+							<Uml project={project} />
+						</div>
 					</div>
 				)}
-
-				<div className="zSection col-12">
-					<div className="zSectionInner">{project && <Uml project={project} />}</div>
-				</div>
 			</div>
 		</div>
 	)

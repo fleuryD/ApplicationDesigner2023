@@ -48,23 +48,6 @@ export default function PageUser() {
 									<div>
 										username: <b>{user.username}</b> &nbsp;&nbsp;
 									</div>
-									<div>
-										firstname: <b>{user.firstname}</b> &nbsp;&nbsp;
-									</div>
-									<div>
-										lastname: <b>{user.lastname}</b> &nbsp;&nbsp;
-									</div>
-									<div>
-										gender: <b>{user.gender}</b> &nbsp;&nbsp;
-									</div>
-									<div>
-										sexPref:{" "}
-										<b>
-											{user.love_m && "M "}
-											{user.love_f && "F "}
-											{user.love_nb && "NB "}
-										</b>
-									</div>
 								</div>
 							</>
 						)}

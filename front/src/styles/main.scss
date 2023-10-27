@@ -34,6 +34,9 @@ $sectionGap: 5px;
 		margin: $sectionGap;
 		h1 {
 			color: $colPrimary;
+			small {
+				font-size: 0.7em;
+			}
 		}
 	}
 	.zPageContent {

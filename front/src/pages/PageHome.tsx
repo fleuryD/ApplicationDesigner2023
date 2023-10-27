@@ -8,8 +8,8 @@ import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
 import { ButtonFixtureProjectAd } from "features/fixtures/ButtonsFixtures"
-import ZError from "ui/ZError"
-import ZLoading from "ui/ZLoading"
+import ZLoadingSection from "ui/ZLoadingSection"
+import ZErrorSection from "ui/ZErrorSection"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -40,58 +40,45 @@ export default function PageHome() {
 			</header>
 
 			<div className="zPageContent row">
-				{isLoading && (
-					<div className="zSection col-12 col-md-6">
-						<div className="zSectionInner">
-							<ZLoading />
-						</div>
-					</div>
-				)}
-				{fetchResponseError && (
-					<div className="zSection col-12 col-md-6">
-						<div className="zSectionInner">
-							<h2>Erreur</h2>
-							<ZError response={fetchResponseError} className="" />
-						</div>
-					</div>
-				)}
+				<ZLoadingSection isLoading={isLoading} className="col-12 col-md-6" />
+				<ZErrorSection fetchResponseError={fetchResponseError} className="col-12 col-md-6" />
+
 				{projects && (
-					<>
-						<div className="zSection col-12 col-md-6">
-							<div className="zSectionInner">
-								<h2>
-									Mes projets <ButtonCreateProject className="btn-sm float-end" />
-								</h2>
-								<div className="zSectionContent">
-									<ul>
-										{projects &&
-											projects.map((project) => (
-												<li key={project.id}>
-													<ProjectLink project={project} />
-												</li>
-											))}
-									</ul>
-									<ButtonFixtureProjectAd />
-								</div>
+					<div className="zSection col-12 col-md-6">
+						<div className="zSectionInner">
+							<h2>
+								Mes projets <ButtonCreateProject className="btn-sm float-end" />
+							</h2>
+							<div className="zSectionContent">
+								<ul>
+									{projects &&
+										projects.map((project) => (
+											<li key={project.id}>
+												<ProjectLink project={project} />
+											</li>
+										))}
+								</ul>
+								<ButtonFixtureProjectAd />
 							</div>
 						</div>
-						<div className="zSection col-12 col-md-6">
-							<div className="zSectionInner">
-								<h2>zSection 2</h2>
-								<div className="zSectionContent">
-									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit,
-										enim id mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae
-										odio. Maecenas convallis lacinia fringilla. Vestibulum non tellus congue,
-										dapibus quam ut, molestie odio. Praesent malesuada gravida augue. Integer in
-										nunc leo. Maecenas at justo at nisl condimentum pharetra ac eget tellus. Aenean
-										in urna consequat, scelerisque elit eu, dignissim purus.
-									</p>
-								</div>
-							</div>
-						</div>
-					</>
+					</div>
 				)}
+
+				<div className="zSection col-12 col-md-6">
+					<div className="zSectionInner">
+						<h2>zSection 2</h2>
+						<div className="zSectionContent">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit, enim id
+								mollis pharetra, neque nisl mattis velit, quis laoreet justo nisi vitae odio. Maecenas
+								convallis lacinia fringilla. Vestibulum non tellus congue, dapibus quam ut, molestie
+								odio. Praesent malesuada gravida augue. Integer in nunc leo. Maecenas at justo at nisl
+								condimentum pharetra ac eget tellus. Aenean in urna consequat, scelerisque elit eu,
+								dignissim purus.
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
