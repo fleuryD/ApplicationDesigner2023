@@ -20,17 +20,8 @@ npm install date-fns
 npm install styled-system styled-components @types/styled-components
 npm install -D eslint prettier eslint-config-prettier
 npm install eslint --init
+npm install react-xarrows
 
-#	npm install react-hook-form
-#	npm install socket.io-client
-#	npm install socket.io @nestjs/websockets @nestjs/platform-socket.io
-#	npm install react-game-engine
-#	yarn add react-color
-#	yarn add react-ga4
-#	yarn add react-charts@beta  // not used yet
-#	yarn add react-to-print
-#	yarn add axios
-#	yarn add eslint-config-react-app -D    // pour corriger : "Failed to load config "react-app" to extend from."
 
 ```
 

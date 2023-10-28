@@ -187,7 +187,7 @@ export class AppController {
 				isNullable: false,
 				isUnique: false,
 			})
-			await this.attributsService.create({
+			const attProjectCreatedBy = await this.attributsService.create({
 				entite: entiteProject,
 				name: "createdBy",
 				tipe: "ManyToOne",
@@ -232,9 +232,12 @@ export class AppController {
 				name: "entites",
 				tipe: "OneToMany",
 				position: 1,
-				targetEntiteId: entiteProject.id,
-				//inverseAttributId,
+				targetEntiteId: entiteEntite.id,
+				//inverseAttributId: attrUserProjects.id,
 			})
+
+			attrUserProjects.inverseAttributId = attProjectCreatedBy.id
+			await this.attributsService.save(attrUserProjects)
 
 			// ************** Entite's Attributes **************
 			const attEntiteId = await this.attributsService.create({
@@ -253,6 +256,9 @@ export class AppController {
 				targetEntiteId: entiteProject.id,
 				inverseAttributId: attrProjectEntites.id,
 			})
+
+			attrProjectEntites.inverseAttributId = attrEntiteProject.id
+			await this.attributsService.save(attrProjectEntites)
 
 			await this.attributsService.create({
 				entite: entiteEntite,
@@ -328,6 +334,9 @@ export class AppController {
 				targetEntiteId: entiteEntite.id,
 				inverseAttributId: attrEntiteAttributes.id,
 			})
+
+			attrEntiteAttributes.inverseAttributId = attrAttributEntite.id
+			await this.attributsService.save(attrEntiteAttributes)
 
 			await this.attributsService.create({
 				entite: entiteAttribut,

@@ -4,6 +4,8 @@ import React from "react"
 import { Attribut, Entite, Project } from "types"
 import LinkEditAttribut from "features/attributs/LinkEditAttribut"
 
+import Xarrow from "react-xarrows"
+
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
@@ -28,7 +30,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 	}
 
 	return (
-		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")}>
+		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")} id={"uml-attr-" + attribut.id}>
 			<div className="name">
 				<LinkEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
 			</div>
@@ -38,16 +40,28 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 			{attribut.isNullable && <div className="nullable">Nullable</div>}
 			{attribut.isUnique && <div className="unique">unique</div>}
 
-			{targetEntite && (
+			{targetEntite && !inversedAttribut && (
 				<div className="targetEntite">
 					targetEntite: <b>{targetEntite.name}</b>
 				</div>
 			)}
 			{inversedAttribut && (
-				<div className="inversedAttribut">
-					{" "}
-					inversed by: <b>{inversedAttribut.name}</b>
-				</div>
+				<>
+					<div className="inversedAttribut">
+						inversed by:{" "}
+						<b>
+							{targetEntite?.name}.{inversedAttribut.name}
+						</b>
+					</div>
+					{inversedAttribut.tipe === "ManyToOne" && (
+						<Xarrow
+							start={"uml-attr-" + attribut.id}
+							end={"uml-attr-" + inversedAttribut.id}
+							showHead
+							showTail
+						/>
+					)}
+				</>
 			)}
 
 			{attribut.infos && (

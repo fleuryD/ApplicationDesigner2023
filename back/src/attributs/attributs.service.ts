@@ -37,8 +37,8 @@ export class AttributsService {
 		await this.attributsRepository.delete(id)
 	}
 
-	async save(project: Attribut): Promise<Attribut> {
-		return await this.attributsRepository.save(project)
+	async save(attr: Attribut): Promise<Attribut> {
+		return await this.attributsRepository.save(attr)
 	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
