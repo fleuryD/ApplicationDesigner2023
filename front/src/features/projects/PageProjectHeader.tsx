@@ -22,9 +22,11 @@ export default function PageProjectHeader({ project, mode }: Props) {
 				{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
 				{mode === "UML" ? <small> [UML]</small> : <small> [Generate]</small>}
 			</h1>
-			<div className="text-danger">
-				<FaPersonDigging /> Work In Progress
-			</div>
+			{project?.isWip && (
+				<div className="text-danger">
+					<FaPersonDigging /> Work In Progress
+				</div>
+			)}
 			{project?.description && (
 				<div title="Description du projet">
 					Description: <b>{project.description}</b>

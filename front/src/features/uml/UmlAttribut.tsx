@@ -59,6 +59,10 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 							end={"uml-attr-" + inversedAttribut.id}
 							showHead
 							showTail
+							tailShape="circle"
+							//strokeWidth={3}
+							//headSize={3}
+							tailSize={3}
 						/>
 					)}
 				</>

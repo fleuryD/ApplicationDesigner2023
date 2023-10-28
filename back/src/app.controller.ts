@@ -25,11 +25,8 @@ export class AppController {
 
 	@Get("/fixtures/project-ad")
 	async fixtureProjetAD(@UserFromToken() userFromToken) {
-		//const connectedUser = await this.getUserFromHeaders(headers)
-		//	if (!connectedUser) return { error: "ERROR_JWT_USER_NOT_FOUND" }
-		Logger.log("🟠 /fixtures/projet/ad - For userFromToken:", userFromToken)
 		const user = await this.usersService.findOneById(userFromToken.id)
-		Logger.log("🟠 /fixtures/projet/ad - For user:", user)
+		Logger.log("🟠 /fixtures/projet/ad - For user:", user.username)
 
 		try {
 			// ************** PROJECT **************
