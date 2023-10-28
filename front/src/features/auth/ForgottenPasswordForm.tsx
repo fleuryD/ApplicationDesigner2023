@@ -19,7 +19,7 @@ export default function ForgottenPasswordForm() {
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-	const [registerSuccess, setRegisterSuccess] = useState(false)
+	const [success, seSuccess] = useState(false)
 	const [debugMsg, setDebugMsg] = useState<any | null>(null)
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
@@ -52,10 +52,10 @@ export default function ForgottenPasswordForm() {
 
 		apiFetchForgottenPassword({ email: formItem.email }).then((response) => {
 			if (response.success) {
-				if (response.debugEmailValidationToken) {
+				if (response.debugPasswordResetToken) {
 					setDebugMsg(
 						<a
-							href={"http://localhost:3001/auth/emailconfirm/" + response.debugEmailValidationToken}
+							href={"http://localhost:3001/auth/reset-password/" + response.debugPasswordResetToken}
 							target="_blank"
 							rel="noreferrer"
 						>
@@ -63,9 +63,8 @@ export default function ForgottenPasswordForm() {
 						</a>
 					)
 				}
-				setRegisterSuccess(true)
-			} else if (response.message === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-			else if (response.message === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+				seSuccess(true)
+			} else if (response.message === "INVALID_CREDENTIALS") setFetchError("Adresse email inconnue")
 			else {
 				console.error("response: ", response)
 				setFetchError("Erreur Inconnue")
@@ -76,7 +75,7 @@ export default function ForgottenPasswordForm() {
 
 	// ■■■■■■■■■■■■■■■■■■■■■■■■ xxxxxxxxxxxxxx ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-	if (!registerSuccess)
+	if (!success)
 		return (
 			<div className="col-12 col-md-6">
 				<ForgottenPasswordFormInner

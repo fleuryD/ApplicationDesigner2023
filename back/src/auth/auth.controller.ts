@@ -1,6 +1,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { BadRequestException, Body, Controller, Post } from "@nestjs/common"
+import { BadRequestException, UnauthorizedException, Body, Controller, Post } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"
@@ -192,17 +192,7 @@ export class AuthController {
 
 		await this.mailService.sendPasswordReset(user)
 
-		/*
-		if (!user.accessToken || this.authService.accessTokenHasExpired(user.accessToken)) {
-			const accessToken = await this.authService.getAccessToken(user)
-			user = await this.usersService.setAccessToken(user, accessToken)
-			Logger.log("[login] set new accessToken for user:", user.username)
-		}
-		*/
-
-		return {
-			user: user,
-		}
+		return { success: 1, debugPasswordResetToken: user.passwordResetToken } // !!!  debugPasswordResetToken ::  debug only
 	}
 
 	/*
@@ -241,23 +231,12 @@ export class AuthController {
 		}
 
 		// TODO : check date reset token
-		/*
 
-		user = await this.usersService.setNewPasswordResetToken(user)
+		user = await this.usersService.resetPassword({ user, plainPassword: password })
 
-		await this.mailService.sendPasswordReset(user)
-		*/
-		/*
-		if (!user.accessToken || this.authService.accessTokenHasExpired(user.accessToken)) {
-			const accessToken = await this.authService.getAccessToken(user)
-			user = await this.usersService.setAccessToken(user, accessToken)
-			Logger.log("[login] set new accessToken for user:", user.username)
-		}
-		*/
+		Logger.log("[resetPassword]  new password set for user:", user.username)
 
-		return {
-			user: user,
-		}
+		return { success: 1 }
 	}
 
 	/*
@@ -271,9 +250,7 @@ export class AuthController {
 	async logout(@Res({ passthrough: true }) response: Response) {
 		response.clearCookie("accessToken")
 
-		return {
-			message: "success",
-		}
+		return { success: 1 }
 	}
 	*/
 }

@@ -28,7 +28,7 @@ export class EntitesController {
 	/*
 	 * *************************************************************************
 	 *
-	 * 	ADD ENTITTE TO PROJECT TARGETED BY :id
+	 * 	ADD ENTITE TO PROJECT TARGETED BY :id
 	 *
 	 */
 	@Post("/new/project/:id")
@@ -65,7 +65,7 @@ export class EntitesController {
 	/*
 	 * *************************************************************************
 	 *
-	 * 	EDITE ENTITTE TARGETED BY :id
+	 * 	EDIT ENTITE TARGETED BY :id
 	 *
 	 */
 	@Post("/:id/edit")
@@ -97,7 +97,7 @@ export class EntitesController {
 	/*
 	 * *************************************************************************
 	 *
-	 * 	DELETE ENTITTE TARGETED BY :id
+	 * 	DELETE ENTITE TARGETED BY :id
 	 *
 	 */
 	@Delete("/:id/delete")
@@ -117,7 +117,7 @@ export class EntitesController {
 	/*
 	 * *************************************************************************
 	 *
-	 * 	GET ENTITTE TARGETED BY :id
+	 * 	GET ENTITE TARGETED BY :id
 	 *
 	 */
 	/*

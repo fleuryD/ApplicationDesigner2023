@@ -38,8 +38,8 @@ export default function ResetPasswordFormInner({
 				<ZFrmInput
 					type="password"
 					name="password"
-					label="Mot de passe"
-					placeholder="Mot de passe"
+					label="Nouveau mot de passe"
+					placeholder="Nouveau mot de passe"
 					formData={formData}
 				/>
 				<ZFrmInput

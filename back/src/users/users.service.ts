@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { JwtService } from "@nestjs/jwt"
+import * as bcrypt from "bcrypt"
 
 import { User } from "./user.entity"
 //import { User } from "./"	// !! NON
@@ -51,11 +52,13 @@ export class UsersService {
 			.createQueryBuilder()
 			.where("LOWER(username) = LOWER(:username)", { username })
 			.getOne()
-		//return this.usersRepository.findOneBy({ username })
 	}
 
 	async findOneByEmail(email: string): Promise<User | null> {
-		return this.usersRepository.findOneBy({ email })
+		return await this.usersRepository
+			.createQueryBuilder()
+			.where("LOWER(email) = LOWER(:email)", { email })
+			.getOne()
 	}
 
 	async findOneByEmailOrUsername(emailOrUsername: string): Promise<User | null> {
@@ -103,8 +106,27 @@ export class UsersService {
 		await this.usersRepository.save(user)
 		return user
 	}
-	async clearPasswordResetToke(user): Promise<User> {
+	async clearPasswordResetToken(user: User): Promise<User> {
 		user.passwordResetToken = null
+		await this.usersRepository.save(user)
+		return user
+	}
+	async setHashedPassword(user: User, hashedPassword: string): Promise<User> {
+		user.password = hashedPassword
+		await this.usersRepository.save(user)
+		return user
+	}
+	async resetPassword({
+		user,
+		plainPassword,
+	}: {
+		user: User
+		plainPassword: string
+	}): Promise<User> {
+		user.password = await bcrypt.hash(plainPassword, 12)
+		user.passwordResetToken = null
+		user.passwordResetAt = null
+
 		await this.usersRepository.save(user)
 		return user
 	}

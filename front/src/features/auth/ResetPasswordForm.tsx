@@ -99,8 +99,8 @@ export default function ResetPasswordForm({ tokenResetPassword }: { tokenResetPa
 					)
 				}
 				setRegisterSuccess(true)
-			} else if (response.message === "USERNAME_ALREADY_EXISTS") setFetchError("Username deja utilise")
-			else if (response.message === "EMAIL_ALREADY_EXISTS") setFetchError("email deja utilise")
+			} else if (response.message === "INVALID_CREDENTIALS") setFetchError("Adresse email inconnue")
+			else if (response.message === "INVALID_TOKEN") setFetchError("Le code de vérification est invalide")
 			else {
 				console.error("response: ", response)
 				setFetchError("Erreur Inconnue")
