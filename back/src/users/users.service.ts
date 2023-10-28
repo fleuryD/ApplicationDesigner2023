@@ -94,4 +94,18 @@ export class UsersService {
 		await this.usersRepository.save(user)
 		return user
 	}
+
+	async setNewPasswordResetToken(user): Promise<User> {
+		user.passwordResetToken = this.jwtService.sign({
+			userId: user.id,
+			username: user.username,
+		})
+		await this.usersRepository.save(user)
+		return user
+	}
+	async clearPasswordResetToke(user): Promise<User> {
+		user.passwordResetToken = null
+		await this.usersRepository.save(user)
+		return user
+	}
 }

@@ -50,7 +50,7 @@ export default function App() {
 						<Route path="/auth/register" element={<PageAuthRegister />} />
 						<Route path="/auth/emailconfirm/:token" element={<PageAuthConfirmEmail />} />
 						<Route path="/auth/forgotten-password" element={<PageAuthForgottenPassword />} />
-						<Route path="/auth/reset-password" element={<PageAuthResetPassword />} />
+						<Route path="/auth/reset-password/:token" element={<PageAuthResetPassword />} />
 						<Route path="*" element={<PageAuthLogin />} />
 					</Routes>
 				)}

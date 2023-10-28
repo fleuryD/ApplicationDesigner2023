@@ -67,9 +67,7 @@ export class AuthController {
 
 			user = await this.usersService.setNewEmailValidationToken(user)
 
-			console.debug("-------send mail")
 			await this.mailService.sendEmailValidation(user)
-			console.debug("-------mail sent ")
 
 			delete user.password
 			return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
@@ -162,6 +160,103 @@ export class AuthController {
 		await this.usersService.clearEmailValidationToken(user)
 		return {
 			success: 1,
+		}
+	}
+
+	/*
+	 * *************************************************************************
+	 *
+	 *	FORGOTTEN PASSWORD
+	 *
+	 *
+	 */
+	@Public()
+	@Post("forgotten-password")
+	async forgottenPassword(@Body("email") email: string) {
+		if (!email) {
+			Logger.error("[forgottenPassword] ❌ MISSING_FIELDS")
+			throw new BadRequestException("MISSING_FIELDS")
+		}
+
+		// TODO : check VALIDE : email
+
+		let user = await this.usersService.findOneByEmail(email)
+
+		if (!user) {
+			Logger.warn("[forgottenPassword] ⛔ INVALID_CREDENTIALS")
+			throw new BadRequestException("INVALID_CREDENTIALS")
+		}
+		Logger.log(`[forgottenPassword] 🔵 "${user.username}"`)
+
+		user = await this.usersService.setNewPasswordResetToken(user)
+
+		await this.mailService.sendPasswordReset(user)
+
+		/*
+		if (!user.accessToken || this.authService.accessTokenHasExpired(user.accessToken)) {
+			const accessToken = await this.authService.getAccessToken(user)
+			user = await this.usersService.setAccessToken(user, accessToken)
+			Logger.log("[login] set new accessToken for user:", user.username)
+		}
+		*/
+
+		return {
+			user: user,
+		}
+	}
+
+	/*
+	 * *************************************************************************
+	 *
+	 *	FORGOTTEN PASSWORD
+	 *
+	 *
+	 */
+	@Public()
+	@Post("reset-password")
+	async resetPassword(
+		@Body("email") email: string,
+		@Body("password") password: string,
+		@Body("tokenResetPassword") tokenResetPassword: string
+	) {
+		if (!email) {
+			Logger.error("[resetPassword] ❌ MISSING_FIELDS")
+			throw new BadRequestException("MISSING_FIELDS")
+		}
+
+		// TODO : check VALIDE : email
+
+		let user = await this.usersService.findOneByEmail(email)
+
+		if (!user) {
+			Logger.warn("[resetPassword] ⛔ INVALID_CREDENTIALS")
+			throw new BadRequestException("INVALID_CREDENTIALS")
+		}
+
+		Logger.log(`[resetPassword] 🔵 "${user.username}"`)
+
+		if (user.passwordResetToken !== tokenResetPassword) {
+			Logger.warn("[resetPassword] ⛔ INVALID_TOKEN")
+			throw new BadRequestException("INVALID_TOKEN")
+		}
+
+		// TODO : check date reset token
+		/*
+
+		user = await this.usersService.setNewPasswordResetToken(user)
+
+		await this.mailService.sendPasswordReset(user)
+		*/
+		/*
+		if (!user.accessToken || this.authService.accessTokenHasExpired(user.accessToken)) {
+			const accessToken = await this.authService.getAccessToken(user)
+			user = await this.usersService.setAccessToken(user, accessToken)
+			Logger.log("[login] set new accessToken for user:", user.username)
+		}
+		*/
+
+		return {
+			user: user,
 		}
 	}
 

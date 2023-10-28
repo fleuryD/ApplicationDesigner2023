@@ -17,8 +17,22 @@ export class MailService {
 		await this.mailerService.sendMail({
 			to: user.email,
 			// from: '"Support Team" <support@example.com>', // override default from
-			subject: "Welcome to ApplicationDesigner! Confirm your Email",
-			template: "./confirmation",
+			subject: "ApplicationDesigner: Confirm your Email",
+			template: "./email-confirmation",
+			context: {
+				username: user.username,
+				url,
+			},
+		})
+	}
+
+	async sendPasswordReset(user: User) {
+		const url = process.env.FRONT_RESET_PASSWORD_URL + user.passwordResetToken
+		await this.mailerService.sendMail({
+			to: user.email,
+			// from: '"Support Team" <support@example.com>', // override default from
+			subject: "ApplicationDesigner: Reset your password",
+			template: "./password-reset",
 			context: {
 				username: user.username,
 				url,

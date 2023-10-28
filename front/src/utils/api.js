@@ -79,6 +79,15 @@ export async function apiFetchForgottenPassword({ email }) {
 	})
 }
 
+export async function apiFetchResetPassword({ email, password, tokenResetPassword }) {
+	return zFetcher({
+		publicAccess: true,
+		shortUrl: "/auth/reset-password",
+		method: "POST",
+		body: { email, password, tokenResetPassword },
+	})
+}
+
 // * ■■■■■■■■■■■■■■■■■■■■■	PROJECT
 
 export async function apiFetchProjects() {
