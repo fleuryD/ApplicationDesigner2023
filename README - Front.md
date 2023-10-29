@@ -21,7 +21,8 @@ npm install styled-system styled-components @types/styled-components
 npm install -D eslint prettier eslint-config-prettier
 npm install eslint --init
 npm install react-xarrows
-
+### npm install --save-dev dotenv
+npm install react-dotenv
 
 ```
 

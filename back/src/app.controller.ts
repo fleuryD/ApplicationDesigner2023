@@ -8,6 +8,7 @@ import { Logger } from "@nestjs/common"
 import { UserFromToken } from "./auth/user-from-token.decorator"
 //import { UsersService } from "./users"
 import { UsersService } from "./users/users.service"
+import { Public } from "./auth/jwt-auth.guard"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -22,6 +23,12 @@ export class AppController {
 	) {}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
+
+	@Get("")
+	@Public()
+	async home() {
+		return "Hello"
+	}
 
 	@Get("/fixtures/project-ad")
 	async fixtureProjetAD(@UserFromToken() userFromToken) {

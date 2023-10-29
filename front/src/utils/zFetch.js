@@ -1,6 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ?????????????????
 //import errorManager from "./errorManager"
+import env from "react-dotenv"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -9,7 +10,7 @@ import { API_BASE_URL /* , geAccessToken */ } from "./constants" // ????????????
 // DEPRECATED : A remplacer par zFetcher
 
 export default async function zFetch({ shortUrl, method, requierdFields, body, publicAccess }) {
-	const url = API_BASE_URL + shortUrl
+	const url = env.BACk_BASE_URL + shortUrl
 
 	const requestOptions = {
 		method,
