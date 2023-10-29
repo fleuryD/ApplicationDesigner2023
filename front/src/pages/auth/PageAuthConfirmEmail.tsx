@@ -12,6 +12,7 @@ export default function PageAuthConfirmEmail() {
 	const [status, setStatus] = useState<"LOADING" | "SUCCESS" | "ERROR">("SUCCESS")
 
 	useEffect(() => {
+		document.title = "AD: Validation de votre inscription"
 		setStatus("LOADING")
 		apiFetchCheckEmail({ tokenEmail }).then((response) => {
 			if (response.success) {
@@ -24,15 +25,17 @@ export default function PageAuthConfirmEmail() {
 	}, [tokenEmail])
 
 	return (
-		<div className="zPage">
-			<header className="zPageHeader">
+		<div className="zPage page-auth">
+			<header id="page-header">
+				<h2>Application Designer</h2>
+				<img src="/img/app-logo/app-logo-192.png" alt="ApplicationDesigner" id="page-auth-app-logo" />
 				<h1>Validation de votre inscription</h1>
 			</header>
 			<div className="zPageContent row">
-				<div className="zSection col-12 col-md-6">
+				<div className="zSection col-12">
 					{status === "SUCCESS" && (
 						<div className="zSectionInner">
-							<h2>Votre inscription a été validée avec succès !</h2>
+							<p className="text-success">Votre inscription a été validée avec succès !</p>
 							<div className="zSectionContent">
 								Vous pouvez vous{" "}
 								<Link to="/" title="Connexion.">

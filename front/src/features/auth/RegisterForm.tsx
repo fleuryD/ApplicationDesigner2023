@@ -4,8 +4,18 @@ import React, { useState } from "react"
 import { apiFetchRegister } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
 import RegisterFormInner from "./RegisterFormInner"
+import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+/*
+ *	REGISTER FORM
+ *
+ *
+ *	// TODO : xxx
+ *	// TODO : xxxxxx
+ *
+ */
 
 type RegisterUserItem = {
 	username: string
@@ -148,9 +158,15 @@ export default function RegisterForm() {
 
 	return (
 		<div className="col-12">
-			<h2>Success</h2>
-			<p>Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).</p>
-			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
+			<p className="text-success">
+				Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).
+			</p>
+			<div className="">
+				<Link to="/" title="Connexion.">
+					Retour
+				</Link>
+			</div>
+			{debugMsg && <div className="text-primary m-3">{debugMsg}</div>}
 		</div>
 	)
 }

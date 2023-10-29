@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { apiFetchForgottenPassword } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
 import ForgottenPasswordFormInner from "./ForgottenPasswordFormInner"
+import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -77,7 +78,7 @@ export default function ForgottenPasswordForm() {
 
 	if (!success)
 		return (
-			<div className="col-12 col-md-6">
+			<div className="col-12 p-0">
 				<ForgottenPasswordFormInner
 					formItem={formItem}
 					formErrors={formErrors}
@@ -87,7 +88,7 @@ export default function ForgottenPasswordForm() {
 					fetchError={fetchError}
 					btValidateClick={btRegisterClick}
 				/>
-
+				{/*
 				<FormAutoFill
 					setUsername={(val: string) => setFormItem((formItem: any) => ({ ...formItem, username: val }))}
 					setEmailOrUsername={null}
@@ -95,13 +96,20 @@ export default function ForgottenPasswordForm() {
 					setPassword={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password: val }))}
 					setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
 				/>
+				*/}
 			</div>
 		)
 
 	return (
-		<div className="col-12 col-md-6">
-			<h2>Success</h2>
-			<p>Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).</p>
+		<div className="col-12">
+			<p className="text-success">
+				Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).
+			</p>
+			<div className="">
+				<Link to="/" title="Connexion.">
+					Retour
+				</Link>
+			</div>
 			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
 		</div>
 	)

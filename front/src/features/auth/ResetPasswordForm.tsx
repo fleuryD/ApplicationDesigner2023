@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { apiFetchResetPassword } from "utils/api"
 import FormAutoFill from "./FormAutoFill"
 import ResetPasswordFormInner from "./ResetPasswordFormInner"
+import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -113,7 +114,7 @@ export default function ResetPasswordForm({ tokenResetPassword }: { tokenResetPa
 
 	if (!registerSuccess)
 		return (
-			<div className="col-12 col-md-6">
+			<div className="col-12 p-0">
 				<ResetPasswordFormInner
 					formItem={formItem}
 					formErrors={formErrors}
@@ -127,9 +128,15 @@ export default function ResetPasswordForm({ tokenResetPassword }: { tokenResetPa
 		)
 
 	return (
-		<div className="col-12 col-md-6">
-			<h2>Success</h2>
-			<p>Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.</p>
+		<div className="col-12">
+			<p className="text-success">Votre mot de passe a ete modifié.</p>
+			<p>
+				Vous pouvez vous{" "}
+				<Link to="/" title="Connexion.">
+					connecter
+				</Link>
+				.
+			</p>
 			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}
 		</div>
 	)

@@ -1,11 +1,14 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useEffect } from "react"
 import LoginForm from "features/auth/LoginForm"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageAuthLogin() {
+	useEffect(() => {
+		document.title = "AD: Connexion"
+	}, [])
 	return (
 		<div className="zPage page-auth">
 			<header id="page-header">

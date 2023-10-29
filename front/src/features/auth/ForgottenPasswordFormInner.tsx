@@ -30,15 +30,15 @@ export default function RegisterFormInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="border border-primary row">
+		<div className="p-0">
 			<p>Un lien vous sera envoyé par mail pour re-initialiser votre mot de passe</p>
 
 			<Form className="">
-				<ZFrmInput type="email" name="email" label="e-mail" placeholder="e-mail" formData={formData} />
+				<ZFrmInput type="email" name="email" label={null} placeholder="e-mail" formData={formData} />
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
-				<Button variant="primary" className="float-end" onClick={() => btValidateClick()} disabled={isLoading}>
+				<Button variant="primary" className="mt-2" onClick={() => btValidateClick()} disabled={isLoading}>
 					<FaPaperPlane /> Envoyer
 				</Button>
 			</Form>

@@ -30,28 +30,26 @@ export default function ResetPasswordFormInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="border border-primary row">
-			<h2>Reset password</h2>
-
+		<div className="p-0">
 			<Form className="">
-				<ZFrmInput type="email" name="email" label="e-mail" placeholder="e-mail" formData={formData} />
+				<ZFrmInput type="email" name="email" label={null} placeholder="e-mail" formData={formData} />
 				<ZFrmInput
 					type="password"
 					name="password"
-					label="Nouveau mot de passe"
+					label={null}
 					placeholder="Nouveau mot de passe"
 					formData={formData}
 				/>
 				<ZFrmInput
 					type="password"
 					name="password2"
-					label="Repetez le mot de passe"
+					label={null}
 					placeholder="Repetez le mot de passe"
 					formData={formData}
 				/>
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
-				<Button variant="primary" className="float-end" onClick={() => btValidateClick()} disabled={isLoading}>
+				<Button variant="primary" className="mt-2" onClick={() => btValidateClick()} disabled={isLoading}>
 					<FaEdit /> Modifier le mot de passe
 				</Button>
 			</Form>

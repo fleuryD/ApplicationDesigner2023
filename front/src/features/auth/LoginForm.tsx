@@ -12,6 +12,15 @@ import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+/*
+ *	LOGIN FORM
+ *
+ *
+ *	// TODO : put form in a component with ZFrmInput
+ *	// TODO : add "remember me" checkbox
+ *
+ */
+
 export default function LoginForm() {
 	const dispatch = useAppDispatch()
 	const [emailOrUsername, setEmailOrUsername] = useState<string>("")
