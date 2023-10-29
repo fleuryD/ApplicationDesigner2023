@@ -41,13 +41,13 @@ export default function LoginForm() {
 	}
 
 	return (
-		<div className="col-12 col-md-6">
-			<Form className="row col-12">
+		<div className="col-12 p-0">
+			<Form className="col-12 ">
 				<Form.Group>
 					<Form.Control
 						type="text"
 						id="input-username"
-						placeholder="Username or Email"
+						placeholder="Nom d'utilisateur ou email"
 						value={emailOrUsername}
 						onChange={(e) => setEmailOrUsername(e.target.value)}
 						disabled={isLoading}
@@ -58,7 +58,7 @@ export default function LoginForm() {
 					<Form.Control
 						type="password"
 						id="input-password"
-						placeholder="password"
+						placeholder="Mot de passe"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						disabled={isLoading}
@@ -72,17 +72,23 @@ export default function LoginForm() {
 					) : (
 						<Button
 							variant="primary"
-							className="float-end"
+							//className="float-end"
 							onClick={() => btLoginClick()}
 							disabled={isLoading}
+							className="mt-2"
 						>
 							Connexion
 						</Button>
 					)}
 				</div>
 			</Form>
-
-			<Link to="/auth/forgotten-password">Mot de passe oublié ?</Link>
+			<div className="pt-2">
+				<Link to="/auth/register">Inscription</Link>
+			</div>
+			<div className="pt-2">
+				<Link to="/auth/forgotten-password">Mot de passe oublié ?</Link>
+			</div>
+			{/*
 			<FormAutoFill
 				setUsername={null}
 				setEmailOrUsername={setEmailOrUsername}
@@ -90,6 +96,7 @@ export default function LoginForm() {
 				setPassword={setPassword}
 				setPassword2={null}
 			/>
+			*/}
 		</div>
 	)
 }

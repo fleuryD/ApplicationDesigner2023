@@ -151,3 +151,55 @@ $sectionGap: 5px;
 }
 
 // >>>		XXXXXXXXXXXXXX											   <<<
+
+.page-auth {
+	margin: auto;
+	margin-top: 50vh;
+	transform: translateY(-50%);
+	//background-color: green;
+	background-color: $colWhite !important;
+	text-align: center;
+	padding: 0 !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
+
+	#page-header {
+		//background-color: cyan;
+		padding: 10px;
+		h1,
+		h2 {
+			color: $colPrimary;
+		}
+	}
+
+	form {
+		padding: 0 !important;
+		input {
+			margin-top: 5px;
+			width: 100% !important;
+		}
+	}
+
+	@media all and (min-width: 320px) {
+		padding: 0;
+		max-width: 320px;
+		h1,
+		h2 {
+			font-size: 1.5em;
+		}
+		#page-auth-app-logo {
+			width: 150px;
+		}
+	}
+
+	@media all and (max-width: 319px) {
+		padding: 10px 0;
+		h1,
+		h2 {
+			font-size: 1.1em;
+		}
+		#page-auth-app-logo {
+			width: 60%;
+		}
+	}
+}

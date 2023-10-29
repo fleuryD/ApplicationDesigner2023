@@ -124,7 +124,7 @@ export default function RegisterForm() {
 
 	if (!registerSuccess)
 		return (
-			<div className="col-12 col-md-6">
+			<div className="col-12 p-0">
 				<RegisterFormInner
 					formItem={formItem}
 					formErrors={formErrors}
@@ -134,7 +134,7 @@ export default function RegisterForm() {
 					fetchError={fetchError}
 					btValidateClick={btRegisterClick}
 				/>
-
+				{/*
 				<FormAutoFill
 					setUsername={(val: string) => setFormItem((formItem: any) => ({ ...formItem, username: val }))}
 					setEmailOrUsername={null}
@@ -142,11 +142,12 @@ export default function RegisterForm() {
 					setPassword={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password: val }))}
 					setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
 				/>
+				*/}
 			</div>
 		)
 
 	return (
-		<div className="col-12 col-md-6">
+		<div className="col-12">
 			<h2>Success</h2>
 			<p>Un email de confirmation a été envoyé à l'adresse indiquée ({formItem.email}).</p>
 			{debugMsg && <div className="text-primary mb-3">{debugMsg}</div>}

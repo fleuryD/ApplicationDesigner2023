@@ -33,18 +33,20 @@ export default function App() {
 	return (
 		<div className="App  appStyled container-fluid" id="container-global">
 			<Router>
-				<NavBar />
 				{auth.isConnected ? (
-					<Routes>
-						<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
-						<Route path="/projects/:id" element={<PageProject />} />
-						<Route path="/admin/users" element={<PageAdminUsers />} />
-						<Route path="/admin/users/:id" element={<PageAdminUser />} />
-						<Route path="/dev" element={<PageDev />} />
-						{/* <Route path="/me" element={<PageUserMe />} /> */}
-						<Route path="/" element={<PageHome />} />
-						<Route path="*" element={<Page404 />} />
-					</Routes>
+					<>
+						<NavBar />
+						<Routes>
+							<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
+							<Route path="/projects/:id" element={<PageProject />} />
+							<Route path="/admin/users" element={<PageAdminUsers />} />
+							<Route path="/admin/users/:id" element={<PageAdminUser />} />
+							<Route path="/dev" element={<PageDev />} />
+							{/* <Route path="/me" element={<PageUserMe />} /> */}
+							<Route path="/" element={<PageHome />} />
+							<Route path="*" element={<Page404 />} />
+						</Routes>
+					</>
 				) : (
 					<Routes>
 						<Route path="/auth/register" element={<PageAuthRegister />} />
