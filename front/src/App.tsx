@@ -25,7 +25,7 @@ import PageProjectGenerate from "pages/PageProjectGenerate"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "styles/main.scss"
 import "styles/uml.scss"
-import DebugAuthInfos from "features/auth/DebugAuthInfos"
+// import DebugAuthInfos from "features/auth/DebugAuthInfos"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 export default function App() {

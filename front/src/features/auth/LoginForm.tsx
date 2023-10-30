@@ -1,15 +1,11 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-import Form from "react-bootstrap/Form"
-import { Button } from "react-bootstrap"
 import { authLoginSuccess } from "store/authSlice"
 import { useAppDispatch } from "store/store"
-import { apiFetchLogin } from "utils/api"
-import FormAutoFill from "./FormAutoFill"
-import ZLoading from "ui/ZLoading"
-import { Link } from "react-router-dom"
+import { apiFetchLogin } from "api"
 import LoginFormInner from "./LoginFormInner"
+// import FormAutoFill from "./FormAutoFill"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -36,7 +32,6 @@ export default function LoginForm() {
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
-	const [debugMsg, setDebugMsg] = useState<any | null>(null)
 	const [success, setSuccess] = useState(false)
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
@@ -74,7 +69,6 @@ export default function LoginForm() {
 		console.log("formErrors: ", formErrors)
 		setFetchError(null)
 		setFormErrors({})
-		setDebugMsg(null)
 
 		if (checkErrors() > 0) return
 
@@ -84,6 +78,7 @@ export default function LoginForm() {
 		}).then((response) => {
 			if (response.user) {
 				console.debug("response: ", response)
+                setSuccess(true)
 				dispatch(authLoginSuccess(response.user))
 			} else if (response.message === "INVALID_CREDENTIALS")
 				setFetchError("Identifiant ou mot de passe incorrect")

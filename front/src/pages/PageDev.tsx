@@ -1,12 +1,15 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useEffect } from "react"
 import DevTheme from "features/dev/DevTheme"
 import DevCase from "features/dev/DevCase"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageDev() {
+	useEffect(() => {
+		document.title = "AD: Dev"
+	}, [])
 	return (
 		<div className="zPage">
 			<header className="zPageHeader">

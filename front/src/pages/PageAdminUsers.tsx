@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useEffect, useState } from "react"
-import { apiFetchUsers } from "utils/api"
+import { apiFetchUsers } from "api"
 import { User } from "types"
 import UsersTable from "features/users/UsersTable"
 
@@ -13,6 +13,7 @@ export default function PageAdminUsers() {
 	const [users, setUsers] = useState<User[] | null>(null)
 
 	useEffect(() => {
+		document.title = "AD: Admin Users"
 		setIsLoading(true)
 		setError(null)
 

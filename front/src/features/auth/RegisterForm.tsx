@@ -1,10 +1,10 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-import { apiFetchRegister } from "utils/api"
-import FormAutoFill from "./FormAutoFill"
+import { apiFetchRegister } from "api"
 import RegisterFormInner from "./RegisterFormInner"
 import { Link } from "react-router-dom"
+//import FormAutoFill from "./FormAutoFill"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

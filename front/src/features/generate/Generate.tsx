@@ -7,7 +7,7 @@ import templateNestModule from "./templateNestModule"
 import templateReactDisplayInfos from "./templateReactDisplayInfos"
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
-import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
+import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

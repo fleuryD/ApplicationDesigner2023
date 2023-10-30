@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { apiFetchUser } from "utils/api"
+import { apiFetchUser } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -13,6 +13,7 @@ export default function PageUser() {
 	const [user, setUser] = useState<any | null>(null)
 
 	useEffect(() => {
+		document.title = "AD: Admin Users"
 		if (userId > 0) {
 			apiFetchUser(userId).then((response) => {
 				if (response.error) {

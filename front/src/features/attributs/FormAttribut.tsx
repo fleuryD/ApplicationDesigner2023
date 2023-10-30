@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedFormAttribut } from "store/appSlice"
-import { apiCreateAttribut, apiEditAttribut, apiDeleteAttribut } from "utils/api"
+import { apiCreateAttribut, apiEditAttribut, apiDeleteAttributById } from "api"
 import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
 import ZModal from "ui/ZModal"
@@ -92,7 +92,7 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 	const btDeleteClick = async () => {
 		if (!window.confirm("Do you really want to delete attribut " + attributItem.name + " ?")) return
 
-		apiDeleteAttribut(attributItem.id).then((response) => {
+		apiDeleteAttributById(attributItem.id).then((response) => {
 			if (response.success) {
 				dispatch(appSetSelectedFormAttribut(null))
 				window.location.reload() // !!!!!!!!!!!!!!

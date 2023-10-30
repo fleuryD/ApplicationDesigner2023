@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useAppSelector } from "store/store"
-import { apiFetchProjects } from "utils/api"
+import { apiFetchMyProjects } from "api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
@@ -24,7 +24,7 @@ export default function PageHome() {
 		setIsLoading(true)
 		setFetchResponseError(null)
 
-		apiFetchProjects().then((rep) => {
+		apiFetchMyProjects().then((rep) => {
 			if (rep.projects) setProjects(rep.projects)
 			else setFetchResponseError(rep)
 			setIsLoading(false)

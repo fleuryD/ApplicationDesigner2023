@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { Button } from "react-bootstrap"
 import { FaPlus } from "react-icons/fa"
-import { apiFixture } from "utils/api"
+import { apiFixture } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

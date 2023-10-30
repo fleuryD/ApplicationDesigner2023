@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { apiFetchCheckEmail } from "utils/api"
+import { apiFetchCheckEmail } from "api"
 import { Link } from "react-router-dom"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -13,6 +13,11 @@ export default function PageAuthConfirmEmail() {
 
 	useEffect(() => {
 		document.title = "AD: Validation de votre inscription"
+        if (!tokenEmail)
+        {
+            console.log("tokenEmail is empty") // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            return
+        }
 		setStatus("LOADING")
 		apiFetchCheckEmail({ tokenEmail }).then((response) => {
 			if (response.success) {

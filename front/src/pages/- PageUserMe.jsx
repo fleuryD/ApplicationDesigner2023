@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 //import { useParams } from "react-router-dom"
-import { apiFetchUserMe } from "utils/api"
+import { apiFetchUserMe } from "api"
 import TodoUser from "features/users/TodoUser"
 import UserInterestsForm from "features/users/UserInterestsForm"
 import { useAppSelector, useAppDispatch } from "store/store"
@@ -24,6 +24,7 @@ export default function PageUserMe() {
 	//const { socketIsConnected } = useAppSelector((state) => state.app)
 
 	useEffect(() => {
+		document.title = "AD: Mon Profil"
 		apiFetchUserMe().then((response) => {
 			if (response.user && response.myTags) {
 				setUser(response.user)

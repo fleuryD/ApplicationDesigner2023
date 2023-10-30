@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedFormEntite } from "store/appSlice"
-import { apiCreateEntity, apiEditEntity, apiDeleteEntity } from "utils/api"
+import { apiCreateEntity, apiEditEntity, apiDeleteEntityById } from "api"
 import { Entite } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 import ZModal from "ui/ZModal"
@@ -91,7 +91,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 	const btDeleteClick = async () => {
 		if (!window.confirm("Do you really want to delete entity " + EntiteItem.name + " ?")) return
 
-		apiDeleteEntity(EntiteItem.id).then((response) => {
+		apiDeleteEntityById(EntiteItem.id).then((response) => {
 			if (response.success) {
 				dispatch(appSetSelectedFormEntite(null))
 				window.location.reload() // !!!!!!!!!!!!!!

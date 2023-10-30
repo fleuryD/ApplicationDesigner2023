@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { apiFetchProject } from "utils/api"
+import { apiFetchProjectById } from "api"
 import { useAppSelector } from "store/store"
 import { Project } from "types"
 import Uml from "features/uml/Uml"
@@ -21,11 +21,16 @@ export default function PageProject() {
 	const [project, setProject] = useState<Project | null>(null)
 
 	useEffect(() => {
+		document.title = "AD: Project"
 		if (projectId > 0) {
 			setIsLoading(true)
 			setFetchResponseError(null)
-			apiFetchProject(projectId).then((rep) => {
-				if (rep.project) setProject(rep.project)
+			apiFetchProjectById(projectId).then((rep) => {
+				if (rep.project)
+                {
+                    setProject(rep.project)
+		            document.title = "AD: Project " + rep.project.name
+                }
 				else setFetchResponseError(rep)
 				setIsLoading(false)
 			})

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { useAppSelector } from "store/store"
 import { useParams } from "react-router-dom"
-import { apiFetchProject } from "utils/api"
+import { apiFetchProjectById } from "api"
 import { Project, Entite } from "types"
 import Generate from "features/generate/Generate"
 import ZLoadingSection from "ui/ZLoadingSection"
@@ -24,11 +24,16 @@ export default function PageProjectGenerate() {
 	const [selectedFormTemplateName, setSelectedFormTemplateName] = useState<string | null>("")
 
 	useEffect(() => {
+		document.title = "AD: Generate"
 		if (projectId > 0) {
 			setIsLoading(true)
 			setFetchResponseError(null)
-			apiFetchProject(projectId).then((rep) => {
-				if (rep.project) setProject(rep.project)
+			apiFetchProjectById(projectId).then((rep) => {
+				if (rep.project)
+                {
+                    setProject(rep.project)
+		            document.title = "AD: Generate " + rep.project.name
+                }
 				else setFetchResponseError(rep)
 				setIsLoading(false)
 			})

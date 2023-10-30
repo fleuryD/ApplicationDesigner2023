@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedFormProject } from "store/appSlice"
-import { apiCreateProject, apiEditProject, apiDeleteProject } from "utils/api"
+import { apiCreateProject, apiEditProject, apiDeleteProjectById } from "api"
 import { useNavigate } from "react-router-dom"
 import { Project } from "types"
 import FormProjectInner from "./FormProjectInner"
@@ -90,7 +90,7 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 	const btDeleteClick = async () => {
 		if (!window.confirm("Do you really want to delete project " + projectItem.name + " ?")) return
 
-		apiDeleteProject(projectItem.id).then((response) => {
+		apiDeleteProjectById(projectItem.id).then((response) => {
 			if (response.success) {
 				dispatch(appSetSelectedFormProject(null))
 				navigate("/")

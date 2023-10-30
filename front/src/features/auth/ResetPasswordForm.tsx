@@ -1,10 +1,10 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-import { apiFetchResetPassword } from "utils/api"
-import FormAutoFill from "./FormAutoFill"
+import { apiFetchResetPassword } from "api"
 import ResetPasswordFormInner from "./ResetPasswordFormInner"
 import { Link } from "react-router-dom"
+// import FormAutoFill from "./FormAutoFill"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

@@ -1,10 +1,10 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
-import { apiFetchForgottenPassword } from "utils/api"
-import FormAutoFill from "./FormAutoFill"
+import { apiFetchForgottenPassword } from "api"
 import ForgottenPasswordFormInner from "./ForgottenPasswordFormInner"
 import { Link } from "react-router-dom"
+//import FormAutoFill from "./FormAutoFill"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
