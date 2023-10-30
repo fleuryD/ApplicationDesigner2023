@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 // ! a mettre en TSX !!!!!!!!!!!!!!!!!!!!
-
+//import env from "react-dotenv"
 /*
 export function getAccessToken() {
 	return localStorage.getItem("accessToken") // ?????????????????????????????????????????
@@ -11,3 +11,6 @@ export function getAccessToken() {
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export const API_BASE_URL = "http://localhost:3000"
+//export const API_BASE_URL = env.BACK_BASE_URL
+
+

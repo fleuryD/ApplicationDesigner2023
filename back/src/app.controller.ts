@@ -18,7 +18,7 @@ export class AppController {
 		private readonly appService: AppService,
 		private readonly projectsService: ProjectsService,
 		private readonly entitesService: EntitesService,
-		private readonly attributsService: AttributsService,
+			private readonly attributsService: AttributsService,
 		private readonly usersService: UsersService
 	) {}
 
