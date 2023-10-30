@@ -5,6 +5,7 @@ import { Project, Entite } from "types"
 import templateNestEntity from "./templateNestEntity"
 import templateNestModule from "./templateNestModule"
 import templateReactDisplayInfos from "./templateReactDisplayInfos"
+import templateReactApi from "./templateReactApi"
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
@@ -41,6 +42,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "CppHpp") setTemplate(templateCppHpp(data))
 		else if (templateName === "CppCpp") setTemplate(templateCppCpp(data))
 		else if (templateName === "ReactDisplayInfos") setTemplate(templateReactDisplayInfos(data))
+		else if (templateName === "ReactApi") setTemplate(templateReactApi(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

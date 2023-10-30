@@ -5,6 +5,7 @@ import { Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+
 export async function apiFetchMyProjects() {
 	return await zFetcher({
 		shortUrl: "/projects/my",
@@ -23,12 +24,14 @@ export async function apiCreateProject(project:Project) {
 	return zFetcher({
 		shortUrl: "/projects/new",
 		method: "POST",
-		body: {
+        // body: { project }
+        body: {
 			name: project.name,
 			description: project.description,
 			infos: project.infos,
 			isWip: project.isWip,
 		},
+
 	})
 }
 

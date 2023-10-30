@@ -17,7 +17,7 @@ export default function templateNestModule({
 	entiteCamelNamePluriel,
 }: Props) {
 	let code = `
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 import { Module } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
@@ -25,7 +25,7 @@ import { ${entiteCamelNamePluriel}Service } from "./${entiteCamelNamePluriel}.se
 import { ${entiteCamelNamePluriel}Controller } from "./${entiteCamelNamePluriel}.controller"
 import { ${entitePascalName} } from "./${entiteCamelName}.entity"
 
-// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Module({
     imports: [TypeOrmModule.forFeature([${entitePascalName}])],

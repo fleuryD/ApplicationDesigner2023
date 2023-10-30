@@ -1,5 +1,5 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-import { BadRequestException, Controller, Get, Request, UseGuards } from "@nestjs/common"
+import { BadRequestException, Controller, Get, Param, Request, UseGuards } from "@nestjs/common"
 import { AppService } from "./app.service"
 import { ProjectsService } from "./projects/projects.service"
 import { EntitesService } from "./entites/entites.service"
@@ -29,6 +29,131 @@ export class AppController {
 	async home() {
 		return "Hello"
 	}
+
+
+
+
+
+	@Get("/fixtures/project/:id/entite-user")
+	async fixtureEntiteUser(@UserFromToken() userFromToken,@Param() params,) {
+
+
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/project/:id/entite-user - For user:", user.username)
+
+		try {
+
+			const project = await this.projectsService.findOneById(params.id)
+
+
+            // TODO : ensure user is authorized to create entite in this project
+
+			// ************** ENTITES **************
+
+			const entiteUser = await this.entitesService.create({
+				project: project,
+				name: "User",
+				description: null,
+				infos: null,
+				isWip: false,
+			})
+
+			// ************** User's Attributes **************
+			const attUserId = await this.attributsService.create({
+				entite: entiteUser,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "email",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			const attUserName = await this.attributsService.create({
+				entite: entiteUser,
+				name: "username",
+				tipe: "string",
+				longueur: null,
+				description: null,
+				infos: null,
+				position: 1,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				//targetEntiteId,
+				//inverseAttributId,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "password",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "accessToken",
+				tipe: "string",
+				position: 1,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 1,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 1,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 1,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+
+
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
+
+
+
 
 	@Get("/fixtures/project-ad")
 	async fixtureProjetAD(@UserFromToken() userFromToken) {

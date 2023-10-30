@@ -83,7 +83,7 @@ export default function GenerateMenu({
 							<ButtonTemplate text="type" name="ReactType" disabled />
 							<ButtonTemplate text="Form" name="ReactForm" disabled />
 							<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
-							<ButtonTemplate text="Api" name="ReactApi" disabled />
+							<ButtonTemplate text="Api" name="ReactApi" />
 						</div>
 						<div className="d-inline-block border border-primary m-1 p-1">
 							<span className="text-primary" >Symfony</span>
