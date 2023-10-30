@@ -18,7 +18,7 @@ export class AppController {
 		private readonly appService: AppService,
 		private readonly projectsService: ProjectsService,
 		private readonly entitesService: EntitesService,
-			private readonly attributsService: AttributsService,
+		private readonly attributsService: AttributsService,
 		private readonly usersService: UsersService
 	) {}
 
@@ -34,8 +34,47 @@ export class AppController {
 
 
 
+	@Get("/fixtures/entite/:id/attribut-id")
+	async fixtureAttributId(@UserFromToken() userFromToken, @Param() params) {
+
+
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/entite/:id/attribut-id - For user:", user.username)
+
+		try {
+            await this.entitesService.ensureAuthorizedAccessEntite({
+                userId: userFromToken.id,
+                entiteId: params.id,
+            })
+
+
+			const entite = await this.entitesService.findOneById(params.id)
+
+
+			// ************** User's Attributes **************
+			const attUserId = await this.attributsService.create({
+				entite: entite,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+                isPrimaryKey: true,
+			})
+
+
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
+
+
+
+
+
 	@Get("/fixtures/project/:id/entite-user")
-	async fixtureEntiteUser(@UserFromToken() userFromToken,@Param() params,) {
+	async fixtureEntiteUser(@UserFromToken() userFromToken, @Param() params) {
 
 
 		const user = await this.usersService.findOneById(userFromToken.id)
@@ -43,10 +82,16 @@ export class AppController {
 
 		try {
 
+
+            await this.projectsService.ensureAuthorizedAccessProject({
+                userId: userFromToken.id,
+                projectId: params.id,
+            })
+
+
+
 			const project = await this.projectsService.findOneById(params.id)
 
-
-            // TODO : ensure user is authorized to create entite in this project
 
 			// ************** ENTITES **************
 
@@ -66,6 +111,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
+                isPrimaryKey: true,
 			})
 
 			await this.attributsService.create({
@@ -212,13 +258,14 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
+                isPrimaryKey: true,
 			})
 
 			await this.attributsService.create({
 				entite: entiteUser,
 				name: "email",
 				tipe: "string",
-				position: 1,
+				position: 2,
 				isNullable: false,
 				isUnique: true,
 			})
@@ -230,7 +277,7 @@ export class AppController {
 				longueur: null,
 				description: null,
 				infos: null,
-				position: 1,
+				position: 3,
 				isWip: false,
 				isFeminin: false,
 				isNullable: false,
@@ -242,7 +289,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "password",
 				tipe: "string",
-				position: 1,
+				position: 4,
 				isNullable: false,
 				isUnique: false,
 			})
@@ -251,7 +298,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "accessToken",
 				tipe: "string",
-				position: 1,
+				position: 5,
 				isNullable: true,
 				isUnique: true,
 			})
@@ -259,7 +306,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "emailValidationToken",
 				tipe: "string",
-				position: 1,
+				position: 6,
 				isNullable: true,
 				isUnique: true,
 			})
@@ -267,7 +314,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "passwordResetToken",
 				tipe: "string",
-				position: 1,
+				position: 7,
 				isNullable: true,
 				isUnique: true,
 			})
@@ -276,7 +323,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "passwordResetAt",
 				tipe: "DateTime",
-				position: 1,
+				position: 8,
 				isNullable: true,
 				isUnique: false,
 			})
@@ -285,7 +332,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "createdAt",
 				tipe: "DateTime",
-				position: 1,
+				position: 9,
 				isNullable: false,
 				isUnique: false,
 			})
@@ -294,7 +341,7 @@ export class AppController {
 				entite: entiteUser,
 				name: "projects",
 				tipe: "OneToMany",
-				position: 1,
+				position: 10,
 				targetEntiteId: entiteProject.id,
 				//inverseAttributId,
 			})
@@ -307,6 +354,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
+                isPrimaryKey: true,
 			})
 			await this.attributsService.create({
 				entite: entiteProject,
@@ -376,6 +424,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
+                isPrimaryKey: true,
 			})
 			const attrEntiteProject = await this.attributsService.create({
 				entite: entiteEntite,
@@ -446,7 +495,9 @@ export class AppController {
 				targetEntiteId: entiteAttribut.id,
 				//inverseAttributId,
 			})
+
 			// ************** Attribut's Attributes **************
+
 			await this.attributsService.create({
 				entite: entiteAttribut,
 				name: "id",
@@ -454,6 +505,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
+                isPrimaryKey: true,
 			})
 			const attrAttributEntite = await this.attributsService.create({
 				entite: entiteAttribut,

@@ -34,9 +34,12 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 			<div className="name">
 				<LinkEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
 			</div>
+
 			<div className="tipe">
+                {attribut.isPrimaryKey && <div className="badge-pk me-1 rounded">PK </div>}
 				{attribut.tipe} {attribut.longueur && <div className="longueur">({attribut.longueur})</div>}
 			</div>
+
 			{attribut.isNullable && <div className="nullable">Nullable</div>}
 			{attribut.isUnique && <div className="unique">unique</div>}
 

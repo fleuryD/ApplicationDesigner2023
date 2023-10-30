@@ -185,6 +185,7 @@ export default function FormAttributInner({
 					formData={formData}
 				/>
 				<ZFrmCheck type="switch" name="isUnique" label="isUnique" placeholder="isUnique" formData={formData} />
+				<ZFrmCheck type="switch" name="isPrimaryKey" label="isPrimaryKey" placeholder="isPrimaryKey" formData={formData} />
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 

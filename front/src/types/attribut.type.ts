@@ -18,6 +18,7 @@ type Attribut = {
 	isFeminin: boolean
 	isNullable: boolean
 	isUnique: boolean
+	isPrimaryKey: boolean
 	targetEntite: any // ! Attribut
 	inverseAttribut: any // ! Attribut
 	targetEntiteId: number // !

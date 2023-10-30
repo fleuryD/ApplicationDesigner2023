@@ -7,21 +7,29 @@ import { apiFixture } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-type Props = {
-	className?: string
-}
 
-export function ButtonFixtureProjectAd({ className }: Props) {
+
+export function ButtonFixtureProjectAd({ className }: {	className?: string}) {
 	return <ButtonFixtures className={className} fixtureName="project-ad" text="ApplicationDesigner" />
 }
 
-type Props2 = {
+export function ButtonFixtureEntiteUser({ projectId, className }: {projectId: number, className?: string}) {
+	return <ButtonFixtures className={className} fixtureName={"project/" + projectId + "/entite-user"} text="User" />
+}
+
+export function ButtonFixtureAttributId({ entiteId, className }: {entiteId: number, className?: string}) {
+	return <ButtonFixtures className={className} fixtureName={"entite/" + entiteId + "/attribut-id"} text="id (PK)" />
+}
+
+
+
+type Props = {
 	className?: string
 	fixtureName: string
 	text: string
 }
 
-function ButtonFixtures({ className, fixtureName, text }: Props2) {
+function ButtonFixtures({ className, fixtureName, text }: Props) {
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
 

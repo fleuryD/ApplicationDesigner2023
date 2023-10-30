@@ -42,6 +42,7 @@ export class AttributsController {
 		@Body("isFeminin") isFeminin: string,
 		@Body("isNullable") isNullable: string,
 		@Body("isUnique") isUnique: string,
+		@Body("isPrimaryKey") isPrimaryKey: string,
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number,
 		@UserFromToken() userFromToken
@@ -64,6 +65,7 @@ export class AttributsController {
 				isFeminin,
 				isNullable,
 				isUnique,
+                isPrimaryKey,
 				targetEntiteId,
 				inverseAttributId,
 			})
@@ -91,6 +93,7 @@ export class AttributsController {
 		@Body("isFeminin") isFeminin: boolean,
 		@Body("isNullable") isNullable: boolean,
 		@Body("isUnique") isUnique: boolean,
+		@Body("isPrimaryKey") isPrimaryKey: boolean,
 		@Body("targetEntiteId") targetEntiteId: number,
 		@Body("inverseAttributId") inverseAttributId: number,
 		@Param() params,
@@ -112,6 +115,7 @@ export class AttributsController {
 		attribut.isFeminin = isFeminin
 		attribut.isNullable = isNullable
 		attribut.isUnique = isUnique
+		attribut.isPrimaryKey = isPrimaryKey
 		attribut.targetEntiteId = targetEntiteId
 		attribut.inverseAttributId = inverseAttributId
 

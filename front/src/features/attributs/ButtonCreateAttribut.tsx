@@ -31,6 +31,7 @@ export default function ButtonCreateAttribut({ className, entite }: Props) {
 				isFeminin: false,
 				isNullable: false,
 				isUnique: false,
+				isPrimaryKey: false,
 			})
 		)
 	}

@@ -67,6 +67,9 @@ export class Attribut {
 	@Column({ default: false })
 	isUnique: boolean
 
+	@Column({ default: false })
+	isPrimaryKey: boolean
+
 	/*
 	// * Un Attribut a une seule targetEntite.
 	@ManyToOne(() => Entite, { lazy: true } /* { cascade: true } , * /)
