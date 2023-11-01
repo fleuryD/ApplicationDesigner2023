@@ -1,0 +1,52 @@
+// Application root	        home/zedimntm/zedixi_appdesigner/back/dist
+
+
+
+Node.js version   20.3.1
+
+Application mode  dev
+
+
+
+
+Application root	        zedixi_appdesigner/back/dist
+Application URL		        https://appdesigner.api.zedixi.com/
+Application startup file  main.js
+Passenger log file        .. zedixi_appdesigner/back/passenger.log
+
+
+
+You need to stop the application before running NPM install. That should fix it
+
+
+
+
+
+source /home/zedimntm/nodevenv/zedixi_appdesigner/back/dist/20/bin/activate && cd /home/zedimntm/zedixi_appdesigner/back/dist
+
+
+
+
+
+
+rm -rf node_modules
+rm -f package-lock.json
+rm -f yarn.lock
+
+# 👇️ clean npm cache
+npm cache clean --force
+
+
+npm config set strict-ssl false
+
+npm install
+
+
+npm config set strict-ssl true
+
+
+
+PassengerFriendlyErrorPages on
+PassengerAppEnv development
+
+

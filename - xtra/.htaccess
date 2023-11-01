@@ -1,0 +1,14 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/zedimntm/zedixi_appdesigner/back/dist"
+PassengerBaseURI "/"
+PassengerNodejs "/home/zedimntm/nodevenv/zedixi_appdesigner/back/dist/20/bin/node"
+PassengerAppType node
+PassengerStartupFile main.js
+PassengerAppLogFile "/home/zedimntm/zedixi_appdesigner/back/passenger.log"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
+PassengerFriendlyErrorPages on
+PassengerAppEnv development
