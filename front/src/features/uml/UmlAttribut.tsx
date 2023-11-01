@@ -36,7 +36,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 			</div>
 
 			<div className="tipe">
-                {attribut.isPrimaryKey && <div className="badge-pk me-1 rounded">PK </div>}
+				{attribut.isPrimaryKey && <div className="badge-pk me-1 rounded">PK </div>}
 				{attribut.tipe} {attribut.longueur && <div className="longueur">({attribut.longueur})</div>}
 			</div>
 
@@ -56,6 +56,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 							{targetEntite?.name}.{inversedAttribut.name}
 						</b>
 					</div>
+					{/*
 					{inversedAttribut.tipe === "ManyToOne" && (
 						<Xarrow
 							start={"uml-attr-" + attribut.id}
@@ -69,6 +70,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
                             color={"#"+Math.floor(Math.random()*16777215).toString(16)}
 						/>
 					)}
+					*/}
 				</>
 			)}
 
