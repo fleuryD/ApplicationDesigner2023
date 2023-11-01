@@ -9,6 +9,7 @@ export default function PageAuthLogin() {
 	useEffect(() => {
 		document.title = "AD: Connexion"
 	}, [])
+
 	return (
 		<div className="zPage page-auth">
 			<header id="page-header">

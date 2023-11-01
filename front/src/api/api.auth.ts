@@ -5,8 +5,15 @@ import zFetcher from "utils/zFetcher"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-
-export async function apiFetchRegister({ username, email, password }: { username: string, email: string, password: string }) {
+export async function apiFetchRegister({
+	username,
+	email,
+	password,
+}: {
+	username: string
+	email: string
+	password: string
+}) {
 	return zFetcher({
 		publicAccess: true,
 		shortUrl: "/auth/register",
@@ -15,7 +22,7 @@ export async function apiFetchRegister({ username, email, password }: { username
 	})
 }
 
-export async function apiFetchLogin({ emailOrUsername, password }: { emailOrUsername: string, password: string }) {
+export async function apiFetchLogin({ emailOrUsername, password }: { emailOrUsername: string; password: string }) {
 	return zFetcher({
 		publicAccess: true,
 		shortUrl: "/auth/login",
@@ -43,7 +50,15 @@ export async function apiFetchForgottenPassword({ email }: { email: string }) {
 	})
 }
 
-export async function apiFetchResetPassword({ email, password, tokenResetPassword }: { email: string, password: string, tokenResetPassword: string }) {
+export async function apiFetchResetPassword({
+	email,
+	password,
+	tokenResetPassword,
+}: {
+	email: string
+	password: string
+	tokenResetPassword: string
+}) {
 	return zFetcher({
 		publicAccess: true,
 		shortUrl: "/auth/reset-password",
@@ -51,5 +66,3 @@ export async function apiFetchResetPassword({ email, password, tokenResetPasswor
 		body: { email, password, tokenResetPassword },
 	})
 }
-
-

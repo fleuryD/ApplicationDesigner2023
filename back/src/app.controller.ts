@@ -1,5 +1,12 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-import { BadRequestException, Controller, Get, Param, Request, UseGuards } from "@nestjs/common"
+import {
+	BadRequestException,
+	Controller,
+	Get,
+	Param,
+	Request,
+	UseGuards,
+} from "@nestjs/common"
 import { AppService } from "./app.service"
 import { ProjectsService } from "./projects/projects.service"
 import { EntitesService } from "./entites/entites.service"
@@ -30,26 +37,19 @@ export class AppController {
 		return "Hello"
 	}
 
-
-
-
-
 	@Get("/fixtures/entite/:id/attribut-id")
 	async fixtureAttributId(@UserFromToken() userFromToken, @Param() params) {
-
-
 		const user = await this.usersService.findOneById(userFromToken.id)
+		this.appService.fixtureTest(user)
 		Logger.log("🟠 /fixtures/entite/:id/attribut-id - For user:", user.username)
 
 		try {
-            await this.entitesService.ensureAuthorizedAccessEntite({
-                userId: userFromToken.id,
-                entiteId: params.id,
-            })
-
+			await this.entitesService.ensureAuthorizedAccessEntite({
+				userId: userFromToken.id,
+				entiteId: params.id,
+			})
 
 			const entite = await this.entitesService.findOneById(params.id)
-
 
 			// ************** User's Attributes **************
 			const attUserId = await this.attributsService.create({
@@ -59,9 +59,8 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
-
 
 			return { success: 1 }
 		} catch (e) {
@@ -69,29 +68,18 @@ export class AppController {
 		}
 	}
 
-
-
-
-
 	@Get("/fixtures/project/:id/entite-user")
 	async fixtureEntiteUser(@UserFromToken() userFromToken, @Param() params) {
-
-
 		const user = await this.usersService.findOneById(userFromToken.id)
 		Logger.log("🟠 /fixtures/project/:id/entite-user - For user:", user.username)
 
 		try {
-
-
-            await this.projectsService.ensureAuthorizedAccessProject({
-                userId: userFromToken.id,
-                projectId: params.id,
-            })
-
-
+			await this.projectsService.ensureAuthorizedAccessProject({
+				userId: userFromToken.id,
+				projectId: params.id,
+			})
 
 			const project = await this.projectsService.findOneById(params.id)
-
 
 			// ************** ENTITES **************
 
@@ -111,7 +99,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
 
 			await this.attributsService.create({
@@ -190,16 +178,11 @@ export class AppController {
 				isUnique: false,
 			})
 
-
-
 			return { success: 1 }
 		} catch (e) {
 			throw new BadRequestException("errrrrrrrrrrrrror")
 		}
 	}
-
-
-
 
 	@Get("/fixtures/project-ad")
 	async fixtureProjetAD(@UserFromToken() userFromToken) {
@@ -258,7 +241,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
 
 			await this.attributsService.create({
@@ -354,7 +337,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
 			await this.attributsService.create({
 				entite: entiteProject,
@@ -424,7 +407,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
 			const attrEntiteProject = await this.attributsService.create({
 				entite: entiteEntite,
@@ -505,7 +488,7 @@ export class AppController {
 				position: 1,
 				isNullable: false,
 				isUnique: true,
-                isPrimaryKey: true,
+				isPrimaryKey: true,
 			})
 			const attrAttributEntite = await this.attributsService.create({
 				entite: entiteAttribut,

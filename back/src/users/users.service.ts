@@ -2,7 +2,7 @@
 
 import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Repository } from "typeorm"
+import { Repository, DataSource } from "typeorm"
 import { JwtService } from "@nestjs/jwt"
 import * as bcrypt from "bcrypt"
 
@@ -16,8 +16,18 @@ export class UsersService {
 	constructor(
 		private jwtService: JwtService,
 		@InjectRepository(User)
-		private usersRepository: Repository<User>
+		private usersRepository: Repository<User>,
+		private dataSource: DataSource
 	) {}
+
+	async test(user: any) {
+		// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		const users = await this.dataSource.query(
+			"SELECT * FROM attributs ORDER BY id DESC LIMIT 100"
+		)
+
+		console.log(users)
+	}
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
