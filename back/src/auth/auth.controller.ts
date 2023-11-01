@@ -106,7 +106,7 @@ export class AuthController {
 		let user = await this.usersService.findOneByEmailOrUsername(emailOrUsername)
 
 		if (!user) {
-			Logger.warn("[login] ⛔ INVALID_CREDENTIALS")
+			Logger.warn("[login] ⛔ INVALID_CREDENTIALS_USER_NOT_FOUND")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 		if (user.emailValidationToken) {
@@ -114,7 +114,7 @@ export class AuthController {
 			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
 		if (!(await bcrypt.compare(password, user.password))) {
-			Logger.warn("[login] ⛔ INVALID_CREDENTIALS")
+			Logger.warn("[login] ⛔ INVALID_CREDENTIALS_PASSWORD_INVALID")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
 

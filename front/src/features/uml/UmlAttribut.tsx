@@ -66,6 +66,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 							//strokeWidth={3}
 							//headSize={3}
 							tailSize={3}
+                            color={"#"+Math.floor(Math.random()*16777215).toString(16)}
 						/>
 					)}
 				</>
