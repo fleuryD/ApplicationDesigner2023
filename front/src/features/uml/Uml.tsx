@@ -12,6 +12,7 @@ import { ButtonFixtureEntiteUser } from "features/fixtures/ButtonsFixtures"
 import Draggable from "react-draggable"
 
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
+import { apiSetEntiteUmlPosition } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -24,13 +25,27 @@ type Props = {
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
 
-	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
 		console.log({ e, data })
 	}
-	*/
+
 	const updateXarrow = useXarrow()
+
+	const xxx: any = (e: any, data: any, entiteId: number) => {
+		console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa", data.x, data.y)
+		apiSetEntiteUmlPosition(entiteId, data.x, data.y).then((rep) => {
+			console.log("rep", rep)
+			/*
+			if (rep.project) {
+				setProject(rep.project)
+				document.title = "AD: Project " + rep.project.name
+			} else setFetchResponseError(rep)
+			setIsLoading(false)
+			*/
+		})
+	}
+
 	return (
 		<div>
 			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
@@ -44,13 +59,25 @@ export default function Uml({ project }: Props) {
 						<FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />
 					)}
 					<div className="umlContent row">
-						{project.entites.map((entite: any) => (
-							<Draggable key={"entite" + entite.id} onDrag={updateXarrow} onStop={updateXarrow}>
-								<div className="handle">
-									<UmlEntite entite={entite} project={project} />
-								</div>
-							</Draggable>
-						))}
+						{project.entites.map((entite: any) => {
+							return (
+								<Draggable
+									key={"entite" + entite.id}
+									onDrag={updateXarrow}
+									onStop={(e, data) => {
+										updateXarrow()
+										xxx(e, data, entite.id)
+									}}
+									//onStart={eventHandler}
+									//grid={[25, 25]}
+									defaultPosition={{ x: entite.umlPosX || 0, y: entite.umlPosY || 0 }}
+								>
+									<div className="handle">
+										<UmlEntite entite={entite} project={project} />
+									</div>
+								</Draggable>
+							)
+						})}
 					</div>
 
 					{project.entites.map((entite: any) => {
@@ -58,6 +85,7 @@ export default function Uml({ project }: Props) {
 							if (attribut.inverseAttributId && attribut.inverseAttributId > attribut.id) {
 								return (
 									<Xarrow
+										key={`arrow-${attribut.id}-${attribut.inverseAttributId}`}
 										start={"uml-attr-" + attribut.id}
 										end={"uml-attr-" + attribut.inverseAttributId}
 										showHead

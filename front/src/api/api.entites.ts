@@ -5,7 +5,7 @@ import { Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export async function apiCreateEntity(projectId:number, entity:Entite) {
+export async function apiCreateEntity(projectId: number, entity: Entite) {
 	return zFetcher({
 		shortUrl: "/entites/new/project/" + projectId,
 		method: "POST",
@@ -18,6 +18,7 @@ export async function apiCreateEntity(projectId:number, entity:Entite) {
 		},
 	})
 }
+
 export async function apiEditEntity(entity: Entite) {
 	return zFetcher({
 		shortUrl: "/entites/" + entity.id + "/edit",
@@ -31,9 +32,22 @@ export async function apiEditEntity(entity: Entite) {
 		},
 	})
 }
-export async function apiDeleteEntityById(entityId:number) {
+
+export async function apiDeleteEntityById(entityId: number) {
 	return zFetcher({
 		shortUrl: "/entites/" + entityId + "/delete",
 		method: "DELETE",
+	})
+}
+
+export async function apiSetEntiteUmlPosition(entityId: number, posX: number, posY: number) {
+	console.log("BBBBBBBBBBBBBBBBBBBBBBBb", posX, posY)
+	return zFetcher({
+		shortUrl: "/entites/set-uml-position/" + entityId,
+		method: "POST",
+		body: {
+			posX,
+			posY,
+		},
 	})
 }

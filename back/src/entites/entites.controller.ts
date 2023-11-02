@@ -31,6 +31,35 @@ export class EntitesController {
 	 * 	ADD ENTITE TO PROJECT TARGETED BY :id
 	 *
 	 */
+	@Post("/set-uml-position/:id")
+	async setEntiteUmlPosition(
+		@Param() params,
+		@Headers() headers,
+		@Body("posX") posX: number,
+		@Body("posY") posY: number,
+		@UserFromToken() userFromToken
+	) {
+		await this.entitesService.ensureAuthorizedAccessEntite({
+			userId: userFromToken.id,
+			entiteId: params.id,
+		})
+		let entite = await this.entitesService.findOneById(params.id)
+
+		try {
+			Logger.log(`set-uml-position ; ${entite.name} ;  ${posX}  ${posY} `)
+			entite = await this.entitesService.setUmlPosition(entite, posX, posY)
+			return { entite: entite }
+		} catch (e) {
+			throw new BadRequestException("INTERNAL_ERROR")
+		}
+	}
+
+	/*
+	 * *************************************************************************
+	 *
+	 * 	ADD ENTITE TO PROJECT TARGETED BY :id
+	 *
+	 */
 	@Post("/new/project/:id")
 	async newEntite(
 		@Param() params,

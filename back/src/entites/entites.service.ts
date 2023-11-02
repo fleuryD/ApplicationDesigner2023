@@ -43,6 +43,12 @@ export class EntitesService {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	async setUmlPosition(entite: Entite, x: number, y: number): Promise<Entite> {
+		entite.umlPosX = x
+		entite.umlPosY = y
+		return await this.entitesRepository.save(entite)
+	}
+
 	async ensureAuthorizedAccessEntite({
 		userId,
 		entiteId,

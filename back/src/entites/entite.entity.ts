@@ -48,6 +48,12 @@ export class Entite {
 	})
 	public attributs: Attribut[]
 
+	@Column({ nullable: true, default: 0 })
+	umlPosX: number
+
+	@Column({ nullable: true, default: 0 })
+	umlPosY: number
+
 	/*
 	private/public/static
 
