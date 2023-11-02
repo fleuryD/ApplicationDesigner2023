@@ -7,21 +7,21 @@ import { apiFixture } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+export function ButtonFixtureProjectSL({ className }: { className?: string }) {
+	return <ButtonFixtures className={className} fixtureName="project-sl" text="ShoppingList" />
+}
 
-
-export function ButtonFixtureProjectAd({ className }: {	className?: string}) {
+export function ButtonFixtureProjectAd({ className }: { className?: string }) {
 	return <ButtonFixtures className={className} fixtureName="project-ad" text="ApplicationDesigner" />
 }
 
-export function ButtonFixtureEntiteUser({ projectId, className }: {projectId: number, className?: string}) {
+export function ButtonFixtureEntiteUser({ projectId, className }: { projectId: number; className?: string }) {
 	return <ButtonFixtures className={className} fixtureName={"project/" + projectId + "/entite-user"} text="User" />
 }
 
-export function ButtonFixtureAttributId({ entiteId, className }: {entiteId: number, className?: string}) {
+export function ButtonFixtureAttributId({ entiteId, className }: { entiteId: number; className?: string }) {
 	return <ButtonFixtures className={className} fixtureName={"entite/" + entiteId + "/attribut-id"} text="id (PK)" />
 }
-
-
 
 type Props = {
 	className?: string

@@ -7,7 +7,7 @@ import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
-import { ButtonFixtureProjectAd } from "features/fixtures/ButtonsFixtures"
+import { ButtonFixtureProjectAd, ButtonFixtureProjectSL } from "features/fixtures/ButtonsFixtures"
 import ZLoadingSection from "ui/ZLoadingSection"
 import ZErrorSection from "ui/ZErrorSection"
 
@@ -58,7 +58,8 @@ export default function PageHome() {
 											</li>
 										))}
 								</ul>
-								<ButtonFixtureProjectAd />
+								<ButtonFixtureProjectAd className="m-1" />
+								<ButtonFixtureProjectSL className="m-1" />
 							</div>
 						</div>
 					</div>

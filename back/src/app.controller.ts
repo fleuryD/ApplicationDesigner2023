@@ -631,4 +631,320 @@ export class AppController {
 			throw new BadRequestException("errrrrrrrrrrrrror")
 		}
 	}
+
+	@Get("/fixtures/project-sl")
+	async fixtureProjetSL(@UserFromToken() userFromToken) {
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/projet/ad - For user:", user.username)
+
+		try {
+			// ************** PROJECT **************
+			const projectSl = await this.projectsService.create({
+				name: "SL",
+				description: null,
+				infos: null,
+				isWip: true,
+				createdBy: user,
+			})
+
+			// ************** ENTITES **************
+
+			const entiteUser = await this.entitesService.create({
+				project: projectSl,
+				name: "User",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 0,
+				umlPosY: 0,
+			})
+
+			const entiteListeUser = await this.entitesService.create({
+				project: projectSl,
+				name: "ListeUser",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 500,
+				umlPosY: 0,
+			})
+
+			const entiteListe = await this.entitesService.create({
+				project: projectSl,
+				name: "Liste",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 1000,
+				umlPosY: 0,
+			})
+
+			const entiteArticle = await this.entitesService.create({
+				project: projectSl,
+				name: "Article",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 400,
+				umlPosY: 300,
+			})
+
+			const entiteRecipe = await this.entitesService.create({
+				project: projectSl,
+				name: "Recipe",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 1000,
+				umlPosY: 300,
+			})
+
+			// ************** User's Attributes **************
+			const attUserId = await this.attributsService.create({
+				entite: entiteUser,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "email",
+				tipe: "string",
+				position: 2,
+				isNullable: false,
+				isUnique: true,
+			})
+			const attUserName = await this.attributsService.create({
+				entite: entiteUser,
+				name: "username",
+				tipe: "string",
+				longueur: null,
+				description: null,
+				infos: null,
+				position: 3,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				//targetEntiteId,
+				//inverseAttributId,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "password",
+				tipe: "string",
+				position: 4,
+				isNullable: false,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "accessToken",
+				tipe: "string",
+				position: 5,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 6,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 7,
+				isNullable: true,
+				isUnique: true,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 8,
+				isNullable: true,
+				isUnique: false,
+			})
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 9,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrUserListeUsers = await this.attributsService.create({
+				entite: entiteUser,
+				name: "listeUsers",
+				tipe: "OneToMany",
+				position: 10,
+				targetEntiteId: entiteListeUser.id,
+				//inverseAttributId,
+			})
+
+			// ************** Liste's Attributes **************
+			const attListeId = await this.attributsService.create({
+				entite: entiteListe,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			await this.attributsService.create({
+				entite: entiteListe,
+				name: "name",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrListeListeUsers = await this.attributsService.create({
+				entite: entiteListe,
+				name: "listeUsers",
+				tipe: "OneToMany",
+				position: 10,
+				targetEntiteId: entiteListeUser.id,
+				//inverseAttributId,
+			})
+
+			const attrListeArticles = await this.attributsService.create({
+				entite: entiteListe,
+				name: "articles",
+				tipe: "OneToMany",
+				position: 10,
+				targetEntiteId: entiteArticle.id,
+				//inverseAttributId: attrArticleListe.id,
+			})
+
+			const attrListeRecipes = await this.attributsService.create({
+				entite: entiteListe,
+				name: "recipes",
+				tipe: "OneToMany",
+				position: 10,
+				targetEntiteId: entiteRecipe.id,
+				//inverseAttributId: attrRecipeListe.id,
+			})
+
+			// ************** ListeUser's Attributes **************
+
+			await this.attributsService.create({
+				entite: entiteListeUser,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			const attrListeUserListe = await this.attributsService.create({
+				entite: entiteListeUser,
+				name: "liste",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteListe.id,
+				inverseAttributId: attrUserListeUsers.id,
+			})
+			const attrListeUserUser = await this.attributsService.create({
+				entite: entiteListeUser,
+				name: "user",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteUser.id,
+				inverseAttributId: attrListeListeUsers.id,
+			})
+
+			attrUserListeUsers.inverseAttributId = attrListeUserListe.id
+			attrListeListeUsers.inverseAttributId = attrListeUserUser.id
+			await this.attributsService.save(attrUserListeUsers)
+			await this.attributsService.save(attrListeListeUsers)
+
+			await this.attributsService.create({
+				entite: entiteListeUser,
+				name: "isOwner",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			// ************** Article's Attributes **************
+			const attArticleId = await this.attributsService.create({
+				entite: entiteArticle,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			await this.attributsService.create({
+				entite: entiteArticle,
+				name: "name",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrArticleListe = await this.attributsService.create({
+				entite: entiteArticle,
+				name: "liste",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteListe.id,
+				inverseAttributId: attrListeArticles.id,
+			})
+
+			attrListeArticles.inverseAttributId = attrArticleListe.id
+			await this.attributsService.save(attrListeArticles)
+
+			// ************** Recipe's Attributes **************
+
+			const attRecipeId = await this.attributsService.create({
+				entite: entiteRecipe,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			await this.attributsService.create({
+				entite: entiteRecipe,
+				name: "name",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrRecipeListe = await this.attributsService.create({
+				entite: entiteRecipe,
+				name: "liste",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteListe.id,
+				inverseAttributId: attrListeRecipes.id,
+			})
+
+			attrListeRecipes.inverseAttributId = attrRecipeListe.id
+			await this.attributsService.save(attrListeRecipes)
+
+			// ************** Xxxxxxxxxxxxxxx's Attributes **************
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
 }

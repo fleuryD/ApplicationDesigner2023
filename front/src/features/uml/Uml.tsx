@@ -25,15 +25,16 @@ type Props = {
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
 
+	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
 		console.log({ e, data })
 	}
+	*/
 
 	const updateXarrow = useXarrow()
 
 	const xxx: any = (e: any, data: any, entiteId: number) => {
-		console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaa", data.x, data.y)
 		apiSetEntiteUmlPosition(entiteId, data.x, data.y).then((rep) => {
 			console.log("rep", rep)
 			/*
