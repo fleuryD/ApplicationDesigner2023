@@ -7,6 +7,8 @@ import { apiCreateAttribut, apiEditAttribut, apiDeleteAttributById } from "api"
 import { Attribut, Project } from "types"
 import FormAttributInner from "./FormAttributInner"
 import ZModal from "ui/ZModal"
+import { getCase } from "utils/helpers-case"
+import { containsSpecialChars } from "utils/helpers-str"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -31,6 +33,12 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 		if (!formItem.name || formItem.name.length < 2) {
 			errorCount++
 			setFormErrors({ ...formErrors, name: "Le name doit faire au moins 2 characteres." })
+		} else if (containsSpecialChars(formItem.name)) {
+			errorCount++
+			setFormErrors({ ...formErrors, name: "Le nom contient des caracteres interdits" })
+		} else if (getCase(formItem.name) !== "CAMEL") {
+			errorCount++
+			setFormErrors({ ...formErrors, name: "Le nom doit etre en camelCase" })
 		}
 
 		return errorCount

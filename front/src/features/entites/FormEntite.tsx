@@ -7,6 +7,8 @@ import { apiCreateEntity, apiEditEntity, apiDeleteEntityById } from "api"
 import { Entite } from "types"
 import FormEntiteInner from "./FormEntiteInner"
 import ZModal from "ui/ZModal"
+import { getCase } from "utils/helpers-case"
+import { containsSpecialChars } from "utils/helpers-str"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -29,7 +31,13 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 		// ******************* Check: name
 		if (!formItem.name || formItem.name.length < 2) {
 			errorCount++
-			setFormErrors({ ...formErrors, name: "Le name doit faire au moins 2 characteres." })
+			setFormErrors({ ...formErrors, name: "Le nom doit faire au moins 2 characteres." })
+		} else if (containsSpecialChars(formItem.name)) {
+			errorCount++
+			setFormErrors({ ...formErrors, name: "Le nom contient des caracteres interdits" })
+		} else if (getCase(formItem.name) !== "PASCAL") {
+			errorCount++
+			setFormErrors({ ...formErrors, name: "Le nom doit etre en PascalCase" })
 		}
 
 		return errorCount

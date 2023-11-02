@@ -928,6 +928,15 @@ export class AppController {
 			attrListeArticles.inverseAttributId = attrArticleListe.id
 			await this.attributsService.save(attrListeArticles)
 
+			await this.attributsService.create({
+				entite: entiteArticleRecipe,
+				name: "inPanier",
+				tipe: "Boolean",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
+
 			// ************** Recipe's Attributes **************
 
 			const attRecipeId = await this.attributsService.create({
