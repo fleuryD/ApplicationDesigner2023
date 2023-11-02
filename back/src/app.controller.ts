@@ -40,7 +40,7 @@ export class AppController {
 	@Get("/fixtures/entite/:id/attribut-id")
 	async fixtureAttributId(@UserFromToken() userFromToken, @Param() params) {
 		const user = await this.usersService.findOneById(userFromToken.id)
-		this.appService.fixtureTest(user)
+		//this.appService.fixtureTest(user)
 		Logger.log("🟠 /fixtures/entite/:id/attribut-id - For user:", user.username)
 
 		try {
@@ -699,6 +699,16 @@ export class AppController {
 				umlPosY: 300,
 			})
 
+			const entiteArticleRecipe = await this.entitesService.create({
+				project: projectSl,
+				name: "ArticleRecipe",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 500,
+				umlPosY: 300,
+			})
+
 			// ************** User's Attributes **************
 			const attUserId = await this.attributsService.create({
 				entite: entiteUser,
@@ -906,6 +916,15 @@ export class AppController {
 				inverseAttributId: attrListeArticles.id,
 			})
 
+			const attrArticleArticleRecipes = await this.attributsService.create({
+				entite: entiteArticle,
+				name: "articleRecipes",
+				tipe: "OneToMany",
+				position: 1,
+				//targetEntiteId: entiteListe.id,
+				//inverseAttributId: attrListeArticles.id,
+			})
+
 			attrListeArticles.inverseAttributId = attrArticleListe.id
 			await this.attributsService.save(attrListeArticles)
 
@@ -941,6 +960,59 @@ export class AppController {
 			attrListeRecipes.inverseAttributId = attrRecipeListe.id
 			await this.attributsService.save(attrListeRecipes)
 
+			const attrRecipeArticleRecipes = await this.attributsService.create({
+				entite: entiteRecipe,
+				name: "articleRecipes",
+				tipe: "OneToMany",
+				position: 1,
+				//targetEntiteId: entiteListe.id,
+				//inverseAttributId: attrListeArticles.id,
+			})
+
+			// ************** ArticleRecipe's Attributes **************
+
+			await this.attributsService.create({
+				entite: entiteArticleRecipe,
+				name: "id",
+				tipe: "Int",
+				position: 1,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+			const attrArticleRecipeArticle = await this.attributsService.create({
+				entite: entiteArticleRecipe,
+				name: "article",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteArticle.id,
+				inverseAttributId: attrArticleArticleRecipes.id,
+			})
+			const attrArticleRecipeRecipe = await this.attributsService.create({
+				entite: entiteArticleRecipe,
+				name: "recipe",
+				tipe: "ManyToOne",
+				position: 1,
+				targetEntiteId: entiteRecipe.id,
+				inverseAttributId: attrRecipeArticleRecipes.id,
+			})
+
+			attrArticleArticleRecipes.targetEntiteId = entiteArticleRecipe.id
+			attrArticleArticleRecipes.inverseAttributId = attrArticleRecipeArticle.id
+			await this.attributsService.save(attrArticleArticleRecipes)
+
+			attrRecipeArticleRecipes.targetEntiteId = entiteArticleRecipe.id
+			attrRecipeArticleRecipes.inverseAttributId = attrArticleRecipeRecipe.id
+			await this.attributsService.save(attrRecipeArticleRecipes)
+
+			await this.attributsService.create({
+				entite: entiteArticleRecipe,
+				name: "quantity",
+				tipe: "string",
+				position: 1,
+				isNullable: false,
+				isUnique: false,
+			})
 			// ************** Xxxxxxxxxxxxxxx's Attributes **************
 			return { success: 1 }
 		} catch (e) {
