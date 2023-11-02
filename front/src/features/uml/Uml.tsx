@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useAppSelector } from "store/store"
-import { Project } from "types"
+import { Entite, Project } from "types"
 import UmlEntite from "features/uml/UmlEntite"
 import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
 import FormEntite from "features/entites/FormEntite"
@@ -34,8 +34,20 @@ export default function Uml({ project }: Props) {
 
 	const updateXarrow = useXarrow()
 
-	const xxx: any = (e: any, data: any, entiteId: number) => {
-		apiSetEntiteUmlPosition(entiteId, data.x, data.y).then((rep) => {
+	const xxx: any = (e: any, data: any, entite: Entite) => {
+		console.log("data:", data)
+		//let posX = entite.umlPosX //+ data.x // > 0 ? data.x : 0
+		//let posY = entite.umlPosY //+ data.y // > 0 ? data.y : 0
+		let posX = data.x // > 0 ? data.x : 0
+		let posY = data.y // > 0 ? data.y : 0
+
+		console.log("--------- posX:" + posX + "   posY:" + posY)
+		//if (posX < 0) posX = 0
+		//if (posY < 0) posY = 0
+
+		//console.log("data.x:" + data.x + "   data.y:" + data.y)
+		console.log("--------- posX:" + posX + "   posY:" + posY)
+		apiSetEntiteUmlPosition(entite.id, posX, posY).then((rep) => {
 			console.log("rep", rep)
 			/*
 			if (rep.project) {
@@ -59,7 +71,7 @@ export default function Uml({ project }: Props) {
 					{app.selectedFormEntite && (
 						<FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />
 					)}
-					<div className="umlContent row">
+					<div className="umlContent bg-info " style={{ /* position: "relative",*/ height: "3000px" }}>
 						{project.entites.map((entite: any) => {
 							return (
 								<Draggable
@@ -67,13 +79,18 @@ export default function Uml({ project }: Props) {
 									onDrag={updateXarrow}
 									onStop={(e, data) => {
 										updateXarrow()
-										xxx(e, data, entite.id)
+										xxx(e, data, entite)
 									}}
 									//onStart={eventHandler}
 									//grid={[25, 25]}
-									defaultPosition={{ x: entite.umlPosX || 0, y: entite.umlPosY || 0 }}
+									//positionOffset
+									defaultPosition={{
+										x: entite.umlPosX, //> 0 ? entite.umlPosX : 0,
+										y: entite.umlPosY, //> 0 ? entite.umlPosY : 0,
+									}}
+									bounds="parent"
 								>
-									<div className="handle">
+									<div className="handle d-inline-block">
 										<UmlEntite entite={entite} project={project} />
 									</div>
 								</Draggable>

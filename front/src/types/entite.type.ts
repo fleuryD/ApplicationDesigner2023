@@ -14,6 +14,8 @@ type Entite = {
 	isWip: boolean
 	isFeminin: boolean
 	attributs: Attribut[]
+	umlPosX: number
+	umlPosY: number
 
 	/*
 	prefix: string
