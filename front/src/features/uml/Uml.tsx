@@ -71,7 +71,7 @@ export default function Uml({ project }: Props) {
 					{app.selectedFormEntite && (
 						<FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />
 					)}
-					<div className="umlContent bg-info " style={{ /* position: "relative",*/ height: "3000px" }}>
+					<div className="umlContent " style={{ /* position: "relative",*/ height: "3000px" }}>
 						{project.entites.map((entite: any) => {
 							return (
 								<Draggable
@@ -88,7 +88,7 @@ export default function Uml({ project }: Props) {
 										x: entite.umlPosX, //> 0 ? entite.umlPosX : 0,
 										y: entite.umlPosY, //> 0 ? entite.umlPosY : 0,
 									}}
-									bounds="parent"
+									//bounds="parent"
 								>
 									<div className="handle d-inline-block">
 										<UmlEntite entite={entite} project={project} />
