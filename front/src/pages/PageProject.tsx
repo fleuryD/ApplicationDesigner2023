@@ -26,12 +26,10 @@ export default function PageProject() {
 			setIsLoading(true)
 			setFetchResponseError(null)
 			apiFetchProjectById(projectId).then((rep) => {
-				if (rep.project)
-                {
-                    setProject(rep.project)
-		            document.title = "AD: Project " + rep.project.name
-                }
-				else setFetchResponseError(rep)
+				if (rep.project) {
+					setProject(rep.project)
+					document.title = "AD: Project " + rep.project.name
+				} else setFetchResponseError(rep)
 				setIsLoading(false)
 			})
 		}
@@ -39,7 +37,7 @@ export default function PageProject() {
 
 	return (
 		<div className="zPage">
-			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
+			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} setProject={setProject} />}
 
 			<PageProjectHeader project={project} mode="UML" />
 

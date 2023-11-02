@@ -29,12 +29,10 @@ export default function PageProjectGenerate() {
 			setIsLoading(true)
 			setFetchResponseError(null)
 			apiFetchProjectById(projectId).then((rep) => {
-				if (rep.project)
-                {
-                    setProject(rep.project)
-		            document.title = "AD: Generate " + rep.project.name
-                }
-				else setFetchResponseError(rep)
+				if (rep.project) {
+					setProject(rep.project)
+					document.title = "AD: Generate " + rep.project.name
+				} else setFetchResponseError(rep)
 				setIsLoading(false)
 			})
 		}
@@ -42,7 +40,7 @@ export default function PageProjectGenerate() {
 
 	return (
 		<div className="zPage">
-			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
+			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} setProject={setProject} />}
 
 			<PageProjectHeader project={project} mode="GENERATE" />
 

@@ -17,7 +17,7 @@ export default function PageHome() {
 	const app = useAppSelector((state) => state.app)
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
-	const [projects, setProjects] = useState<Project[] | null>(null)
+	const [projects, setProjects] = useState<Project[]>([])
 
 	useEffect(() => {
 		document.title = "AD: Home"
@@ -33,7 +33,12 @@ export default function PageHome() {
 
 	return (
 		<div className="zPage">
-			{app.selectedFormProject && <FormProject projectItem={app.selectedFormProject} />}
+			{app.selectedFormProject && (
+				<FormProject
+					projectItem={app.selectedFormProject}
+					addProjects={(proj: Project) => setProjects([...projects, proj])}
+				/>
+			)}
 			<header className="zPageHeader row">
 				<h1>Application Designer</h1>
 				<h3>Lorem Ipsum</h3>

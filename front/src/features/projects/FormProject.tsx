@@ -11,7 +11,15 @@ import ZModal from "ui/ZModal"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormProject({ projectItem }: { projectItem: Project }) {
+export default function FormProject({
+	projectItem,
+	addProjects,
+	setProject,
+}: {
+	projectItem: Project
+	addProjects?: any | null
+	setProject?: any | null
+}) {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const [formItem, setFormItem] = useState<Project>(projectItem)
@@ -37,8 +45,8 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	const btCreateClick = async () => {
-		console.log("formItem: ", formItem)
-		console.log("formErrors: ", formErrors)
+		//console.log("formItem: ", formItem)
+		//console.log("formErrors: ", formErrors)
 		setFetchError(null)
 		setFormErrors({})
 
@@ -48,9 +56,8 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 			apiCreateProject(formItem).then((response) => {
 				if (response.project) {
 					console.log("SUCCESS: response.project", response.project)
-
+					addProjects(response.project)
 					dispatch(appSetSelectedFormProject(null))
-					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
 					else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
@@ -68,9 +75,8 @@ export default function FormProject({ projectItem }: { projectItem: Project }) {
 			apiEditProject(formItem).then((response) => {
 				if (response.project) {
 					console.log("SUCCESS: response.project", response.project)
-
+					setProject(response.project)
 					dispatch(appSetSelectedFormProject(null))
-					window.location.reload() // !!!!!!!!!!!!!!
 				} else if (response.error) {
 					if (response.error === "XXXXXX") setFetchError("xxxxx")
 					else if (response.error === "YYYYYYYYYY") setFetchError("yyyyyyyyy")

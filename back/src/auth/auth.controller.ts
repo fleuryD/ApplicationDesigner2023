@@ -1,6 +1,12 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-import { BadRequestException, UnauthorizedException, Body, Controller, Post } from "@nestjs/common"
+import {
+	BadRequestException,
+	UnauthorizedException,
+	Body,
+	Controller,
+	Post,
+} from "@nestjs/common"
 import { UsersService } from "../users/users.service"
 import * as bcrypt from "bcrypt"
 import { JwtService } from "@nestjs/jwt"

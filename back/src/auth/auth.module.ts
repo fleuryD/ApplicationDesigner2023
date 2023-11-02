@@ -16,13 +16,7 @@ import { User } from "../_entities"
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Module({
-	imports: [
-		MailModule,
-		UsersModule,
-		TypeOrmModule.forFeature([User]),
-		PassportModule,
-		,
-	],
+	imports: [MailModule, UsersModule, TypeOrmModule.forFeature([User]), PassportModule, ,],
 	//exports: [TypeOrmModule],
 	providers: [AuthService, LocalStrategy, UsersService, JwtService, JwtStrategy],
 	controllers: [AuthController],

@@ -65,7 +65,7 @@ export class AttributsController {
 				isFeminin,
 				isNullable,
 				isUnique,
-                isPrimaryKey,
+				isPrimaryKey,
 				targetEntiteId,
 				inverseAttributId,
 			})
