@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useState } from "react"
 import { Entite, Project } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
@@ -25,12 +25,16 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 	}
 	*/
 
+	const [pos, setPos] = useState({ x: entite.umlPosX, y: entite.umlPosY })
+
 	const xxx: any = (e: any, data: any, entite: Entite) => {
 		console.log("data:", data)
 		//let posX = entite.umlPosX //+ data.x // > 0 ? data.x : 0
 		//let posY = entite.umlPosY //+ data.y // > 0 ? data.y : 0
 		let posX = data.x // > 0 ? data.x : 0
 		let posY = data.y // > 0 ? data.y : 0
+
+		setPos({ x: posX, y: posY })
 
 		console.log("--------- posX:" + posX + "   posY:" + posY)
 		//if (posX < 0) posX = 0
@@ -61,23 +65,29 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 			}}
 			*/
 			position={{
-				x: entite.umlPosX, // > 0 ? entite.umlPosX : 0,
-				y: entite.umlPosY, // > 0 ? entite.umlPosY : 0,
+				x: pos.x, // > 0 ? entite.umlPosX : 0,
+				y: pos.y, // > 0 ? entite.umlPosY : 0,
 			}}
-			grid={[50, 50]}
+			grid={[10, 10]}
 			//bounds="parent"
 			bounds="#umlContent"
 			//bounds={{ left: 0, top: 0 }}
 		>
-			<div className="handle  d-inline-flex bg-info">
-				<div className="umlEntity col-12XXXXXX">
+			<div className="handle">
+				<div className="umlEntity">
 					<div className="umlEntityInner">
 						<h2>
 							{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
+							{/*
 							<small>
 								({entite.umlPosX}, {entite.umlPosY})
 							</small>
+							<small>
+								({pos.x}, {pos.y})
+							</small>
+							*/}
 						</h2>
+
 						{entite.attributs.map((attr: any) => (
 							<UmlAttribut key={"attr" + attr.id} attribut={attr} entite={entite} project={project} />
 						))}
