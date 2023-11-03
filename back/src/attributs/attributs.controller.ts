@@ -9,6 +9,7 @@ import {
 	Delete,
 	Param,
 	Headers,
+	Logger,
 } from "@nestjs/common"
 import { AttributsService } from "./attributs.service"
 import { EntitesService } from "../entites/entites.service"
@@ -51,6 +52,7 @@ export class AttributsController {
 			userId: userFromToken.id,
 			entiteId: params.id,
 		})
+
 		const entite = await this.entitesService.findOneById(params.id)
 		try {
 			const attribut = await this.attributsService.create({

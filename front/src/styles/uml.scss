@@ -3,77 +3,63 @@
 // >>>		XXXXXXXXXXXXXX											   <<<
 
 .umlContent {
-	//background-color: $colSuccess;
-	//background-color: $colSuccess;
+	background-color: #bbbbbb;
 	position: relative;
-	//display: inline-flexbox;
 	flex-direction: row;
 	height: 2000px;
 	width: 100%;
 	margin: 0;
-	/*
-	justify-content: space-between;
-	flex-wrap: wrap;
-	height: 100vh;
-	*/
-	//padding: 5px;
-	//margin: 5px;
-
-	.handle {
-		//background-color: yellow;
-		max-width: 400px !important;
-		//padding: 5px;
-		position: absolute;
-	}
+	padding: 5px;
 
 	.umlEntity {
 		margin: 0;
 		padding: 5px;
 		font-size: 0.8em;
+		background-color: white;
+		position: absolute;
+		//max-width: 400px !important;
+
 		.umlEntityInner {
-			//background-color: $colPrimary;
-			border: 1px solid $colPrimary;
 			padding: 5px;
 			margin: 0px;
+			border: 1px solid $colPrimary;
+
 			h2 {
 				color: $colSecondary;
+				margin-bottom: 20px;
 			}
 
 			.umlAttribut {
 				background-color: $colWhite;
 				padding: 1px;
-				//margin: 5px;
 
 				&.wip {
-					background-color: $colMuted;
+					background-color: #cccccc;
 				}
 
-				border-bottom: 1px solid $colSecondary;
-				div {
-					margin-right: 2px;
-					display: inline-block;
-					//border: 1px solid black;
+				td {
+					padding-right: 2px;
 				}
 				.name {
 					color: $colPrimary;
-					//font-weight: bold;
-					min-width: 100px;
+					font-size: 1em;
+					font-weight: bold;
+					//min-width: 100px;
 				}
 				.tipe {
 					color: $colSuccess;
-					min-width: 80px;
+					//	min-width: 80px;
 				}
 				.unique {
 					color: $colInfo;
+					padding-right: 2px;
 				}
 				.nullable {
 					color: $colDanger;
+					padding-right: 2px;
 				}
-				.infos {
-					background-color: $colInfo;
-				}
-				.description {
-					background-color: $colWarning;
+				.feminin {
+					color: fuchsia;
 				}
 				.badge-pk {
 					background-color: $colSecondary;
@@ -82,6 +68,23 @@
 					padding: 1px;
 					padding-left: 3px;
 					padding-right: 3px;
+				}
+			}
+			.umlAttributExtra {
+				&.wip {
+					background-color: #cccccc;
+				}
+				.infos {
+					color: $colInfo;
+				}
+				.description {
+					color: $colSecondary;
+				}
+				.targetEntite {
+					color: $colSuccess;
+				}
+				.inversedBy {
+					color: $colSuccess;
 				}
 			}
 		}

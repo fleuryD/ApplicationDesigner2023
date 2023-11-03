@@ -25,23 +25,22 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 	}
 	*/
 
-	const [pos, setPos] = useState({ x: entite.umlPosX, y: entite.umlPosY })
+	const [pos, setPos] = useState({
+		x: entite.umlPosX > 0 ? entite.umlPosX : 0,
+		y: entite.umlPosY > 0 ? entite.umlPosY : 0,
+	})
 
 	const xxx: any = (e: any, data: any, entite: Entite) => {
 		console.log("data:", data)
-		//let posX = entite.umlPosX //+ data.x // > 0 ? data.x : 0
-		//let posY = entite.umlPosY //+ data.y // > 0 ? data.y : 0
-		let posX = data.x // > 0 ? data.x : 0
-		let posY = data.y // > 0 ? data.y : 0
-
-		setPos({ x: posX, y: posY })
+		let posX = data.x
+		let posY = data.y
 
 		console.log("--------- posX:" + posX + "   posY:" + posY)
 		//if (posX < 0) posX = 0
 		//if (posY < 0) posY = 0
 
-		//console.log("data.x:" + data.x + "   data.y:" + data.y)
-		console.log("--------- posX:" + posX + "   posY:" + posY)
+		setPos({ x: posX, y: posY })
+
 		apiSetEntiteUmlPosition(entite.id, posX, posY).then((rep) => {
 			console.log("rep", rep)
 		})
@@ -55,49 +54,30 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 				updateXarrow()
 				xxx(e, data, entite)
 			}}
-			//onStart={eventHandler}
-			//grid={[25, 25]}
-			//positionOffset
-			/*
-			defaultPosition={{
-				x: entite.umlPosX, // > 0 ? entite.umlPosX : 0,
-				y: entite.umlPosY, // > 0 ? entite.umlPosY : 0,
-			}}
-			*/
 			position={{
 				x: pos.x, // > 0 ? entite.umlPosX : 0,
 				y: pos.y, // > 0 ? entite.umlPosY : 0,
 			}}
 			grid={[10, 10]}
-			//bounds="parent"
 			bounds="#umlContent"
-			//bounds={{ left: 0, top: 0 }}
 		>
-			<div className="handle">
-				<div className="umlEntity">
-					<div className="umlEntityInner">
-						<h2>
-							{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
-							{/*
-							<small>
-								({entite.umlPosX}, {entite.umlPosY})
-							</small>
-							<small>
-								({pos.x}, {pos.y})
-							</small>
-							*/}
-						</h2>
+			<div className="umlEntity handle">
+				<div className="umlEntityInner">
+					<h2 className="umlEntityHeader">
+						{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
+					</h2>
+					<table className="umlEntityAttributes">
+						<tbody>
+							{entite.attributs.map((attr: any) => (
+								<UmlAttribut key={"attr" + attr.id} attribut={attr} entite={entite} project={project} />
+							))}
+						</tbody>
+					</table>
+					<ButtonCreateAttribut className="col btn-sm mt-1" entite={entite} />
 
-						{entite.attributs.map((attr: any) => (
-							<UmlAttribut key={"attr" + attr.id} attribut={attr} entite={entite} project={project} />
-						))}
-
-						<ButtonCreateAttribut className="btn-sm m-2" entite={entite} />
-
-						{!entite.attributs.find((attr: any) => attr.isPrimaryKey) && (
-							<ButtonFixtureAttributId entiteId={entite.id} className="" />
-						)}
-					</div>
+					{!entite.attributs.find((attr: any) => attr.isPrimaryKey) && (
+						<ButtonFixtureAttributId entiteId={entite.id} className="" />
+					)}
 				</div>
 			</div>
 		</Draggable>

@@ -4,7 +4,7 @@ import React from "react"
 import { Attribut, Entite, Project } from "types"
 import LinkEditAttribut from "features/attributs/LinkEditAttribut"
 
-import Xarrow from "react-xarrows"
+import { FaVenus } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -30,61 +30,62 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 	}
 
 	return (
-		<div className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")} id={"uml-attr-" + attribut.id}>
-			<div className="name">
-				<LinkEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
-			</div>
+		<>
+			<tr className={"umlAttribut " + (attribut.isWip === true ? " wip " : "")} id={"uml-attr-" + attribut.id}>
+				<td className="name">
+					<LinkEditAttribut attribut={attribut} entite={entite} className="btn-sm" />
+				</td>
 
-			<div className="tipe">
-				{attribut.isPrimaryKey && <div className="badge-pk me-1 rounded">PK </div>}
-				{attribut.tipe} {attribut.longueur && <div className="longueur">({attribut.longueur})</div>}
-			</div>
+				<td className="tipe">
+					{attribut.isPrimaryKey && <span className="badge-pk me-1 rounded">PK </span>}
+					{attribut.tipe} {attribut.longueur && <span className="longueur">({attribut.longueur})</span>}
+				</td>
 
-			{attribut.isNullable && <div className="nullable">Nullable</div>}
-			{attribut.isUnique && <div className="unique">unique</div>}
-
+				<td>
+					{attribut.isNullable && <span className="nullable">Nullable</span>}
+					{attribut.isUnique && <span className="unique">Unique</span>}
+					{attribut.isFeminin && (
+						<span className="feminin" title="Feminin">
+							<FaVenus />
+						</span>
+					)}
+				</td>
+			</tr>
 			{targetEntite && !inversedAttribut && (
-				<div className="targetEntite">
-					targetEntite: <b>{targetEntite.name}</b>
-				</div>
+				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
+					<td colSpan={3} className="targetEntite">
+						targetEntite: <b>{targetEntite.name}</b>
+					</td>
+				</tr>
 			)}
 			{inversedAttribut && (
-				<>
-					<div className="inversedAttribut">
+				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
+					<td colSpan={3} className="inversedBy">
 						inversed by:{" "}
 						<b>
 							{targetEntite?.name}.{inversedAttribut.name}
 						</b>
-					</div>
-					{/*
-					{inversedAttribut.tipe === "ManyToOne" && (
-						<Xarrow
-							start={"uml-attr-" + attribut.id}
-							end={"uml-attr-" + inversedAttribut.id}
-							showHead
-							showTail
-							tailShape="circle"
-							//strokeWidth={3}
-							//headSize={3}
-							tailSize={3}
-                            color={"#"+Math.floor(Math.random()*16777215).toString(16)}
-						/>
-					)}
-					*/}
-				</>
+					</td>
+				</tr>
 			)}
 
 			{attribut.infos && (
-				<div className="infos">
-					<b>infos:</b> {attribut.infos}
-				</div>
+				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
+					<td colSpan={3} className="infos">
+						infos: <b>{attribut.infos}</b>
+					</td>
+				</tr>
 			)}
 
 			{attribut.description && (
-				<div className="description">
-					<b>description:</b> {attribut.description}
-				</div>
+				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
+					<td colSpan={3} className="description">
+						desc:<b>{attribut.description}</b>
+					</td>
+				</tr>
 			)}
-		</div>
+
+			<tr className="border-bottom border-secondary"></tr>
+		</>
 	)
 }

@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form"
 
 type Props = {
 	name: string
-	label: string
+	label: string | any
 	type: any
 	placeholder: string
 	formData: any

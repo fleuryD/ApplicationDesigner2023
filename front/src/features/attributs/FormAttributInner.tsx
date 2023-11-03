@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap"
 import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
 import ZFrmSelect from "ui/ZFrmSelect"
-import { FaPlus, FaEdit, FaTrash } from "react-icons/fa"
+import { FaPlus, FaEdit, FaTrash, FaVenus } from "react-icons/fa"
 import { Project, Attribut } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -176,7 +176,18 @@ export default function FormAttributInner({
 
 				<ZFrmCheck type="switch" name="isWip" label="WIP" placeholder="WIP" formData={formData} />
 
-				<ZFrmCheck type="switch" name="isFeminin" label="Feminin" placeholder="Feminin" formData={formData} />
+				<ZFrmCheck
+					type="switch"
+					name="isFeminin"
+					label={
+						<>
+							<FaVenus />
+							Feminin
+						</>
+					}
+					placeholder="Feminin"
+					formData={formData}
+				/>
 				<ZFrmCheck
 					type="switch"
 					name="isNullable"
@@ -185,7 +196,13 @@ export default function FormAttributInner({
 					formData={formData}
 				/>
 				<ZFrmCheck type="switch" name="isUnique" label="isUnique" placeholder="isUnique" formData={formData} />
-				<ZFrmCheck type="switch" name="isPrimaryKey" label="isPrimaryKey" placeholder="isPrimaryKey" formData={formData} />
+				<ZFrmCheck
+					type="switch"
+					name="isPrimaryKey"
+					label="isPrimaryKey"
+					placeholder="isPrimaryKey"
+					formData={formData}
+				/>
 
 				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
 
