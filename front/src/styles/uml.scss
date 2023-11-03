@@ -3,7 +3,18 @@
 // >>>		XXXXXXXXXXXXXX											   <<<
 
 .umlContent {
-	//background-color: $colSuccess;
+	background-color: $colSuccess;
+	position: relative;
+	height: 2000px;
+	width: 100%;
+	margin: 0;
+	/*
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	height: 100vh;
+	*/
 	//padding: 5px;
 	//margin: 5px;
 
@@ -54,14 +65,14 @@
 				.description {
 					background-color: $colWarning;
 				}
-                .badge-pk{
-                    background-color: $colSecondary;
-                    color:white;
-                    font-size: 0.8em;
-                    padding: 1px;
-                    padding-left: 3px;
-                    padding-right: 3px;
-                }
+				.badge-pk {
+					background-color: $colSecondary;
+					color: white;
+					font-size: 0.8em;
+					padding: 1px;
+					padding-left: 3px;
+					padding-right: 3px;
+				}
 			}
 		}
 	}
