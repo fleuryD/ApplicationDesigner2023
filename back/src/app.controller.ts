@@ -31,6 +31,352 @@ export class AppController {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	@Get("/fixtures/project-yz")
+	async fixtureProjetYz(@UserFromToken() userFromToken) {
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/projet/yz - For user:", user.username)
+
+		try {
+			// ************** PROJECT **************
+			const projectYz = await this.projectsService.create({
+				name: "YzFixture",
+				description: "",
+				infos: "",
+				isWip: "true",
+				createdBy: user,
+			})
+
+			// ************** ENTITES **************
+
+			const entitePartie = await this.entitesService.create({
+				project: projectYz,
+				name: "Partie",
+				description: "",
+				infos: "790",
+				isWip: 790,
+				umlPosX: 790,
+				umlPosY: 60,
+			})
+
+			const entiteGrille = await this.entitesService.create({
+				project: projectYz,
+				name: "Grille",
+				description: "",
+				infos: "470",
+				isWip: 470,
+				umlPosX: 470,
+				umlPosY: 470,
+			})
+
+			const entiteUser = await this.entitesService.create({
+				project: projectYz,
+				name: "User",
+				description: "null",
+				infos: "150",
+				isWip: 150,
+				umlPosX: 150,
+				umlPosY: 10,
+			})
+
+			const entiteCoup = await this.entitesService.create({
+				project: projectYz,
+				name: "Coup",
+				description: "",
+				infos: "130",
+				isWip: 130,
+				umlPosX: 130,
+				umlPosY: 620,
+			})
+
+			const entiteCombinaison = await this.entitesService.create({
+				project: projectYz,
+				name: "Combinaison",
+				description: "",
+				infos: "640",
+				isWip: 640,
+				umlPosX: 640,
+				umlPosY: 900,
+			})
+
+			const entiteOrdre = await this.entitesService.create({
+				project: projectYz,
+				name: "Ordre",
+				description: "",
+				infos: "230",
+				isWip: 230,
+				umlPosX: 230,
+				umlPosY: 810,
+			})
+
+			// ************** ATRRIBUTS for entite Partie **************
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "createdAt",
+				tipe: "datetime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "endedAt",
+				tipe: "datetime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "players",
+				tipe: "ManyToMany",
+				position: 0,
+				isWip: true,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				infos: "inutil si user est dans grille",
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite Grille **************
+
+			await this.attributsService.create({
+				entite: entiteGrille,
+				name: "player",
+				tipe: "ManyToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			const attrGrilleCoups = await this.attributsService.create({
+				entite: entiteGrille,
+				name: "coups",
+				tipe: "OneToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteCoup.id,
+			})
+
+			await this.attributsService.create({
+				entite: entiteGrille,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			const attrGrillePartie = await this.attributsService.create({
+				entite: entiteGrille,
+				name: "partie",
+				tipe: "ManyToOne",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entitePartie.id,
+			})
+
+			// ************** ATRRIBUTS for entite User **************
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "email",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "username",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "password",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "accessToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "parties",
+				tipe: "ManyToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entitePartie.id,
+			})
+
+			// ************** ATRRIBUTS for entite Coup **************
+
+			await this.attributsService.create({
+				entite: entiteCoup,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			// ************** ATRRIBUTS for entite Combinaison **************
+
+			await this.attributsService.create({
+				entite: entiteCombinaison,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			// ************** ATRRIBUTS for entite Ordre **************
+
+			await this.attributsService.create({
+				entite: entiteOrdre,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			// ************** INVERSED BY **************
+			/*
+			attrPartiePlayers.inverseAttributId = attrUserParties.id
+			await this.attributsService.save(attrPartiePlayers)
+
+			attrUserParties.inverseAttributId = attrPartiePlayers.id
+			await this.attributsService.save(attrUserParties)
+			*/
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
+
 	@Get("")
 	@Public()
 	async home() {
@@ -45,10 +391,10 @@ export class AppController {
 		try {
 			// ************** PROJECT **************
 			const projectTranscendance = await this.projectsService.create({
-				name: "TranscendanceFixture",
-				description: null,
+				name: "Transcendance",
+				description: "Dernier projet du tronc commun de l'ecole 42",
 				infos: null,
-				isWip: true,
+				isWip: false,
 				createdBy: user,
 			})
 

@@ -62,7 +62,7 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 			bounds="#umlContent"
 		>
 			<div className="umlEntity handle">
-				<div className="umlEntityInner">
+				<div className="umlEntityInner" id={"uml-entitex-" + entite.id}>
 					<h2 className="umlEntityHeader">
 						{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
 					</h2>

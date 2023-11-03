@@ -1,18 +1,9 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { useAppSelector } from "store/store"
-import { Entite, Project } from "types"
-import UmlEntite from "features/uml/UmlEntite"
-import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
-import FormEntite from "features/entites/FormEntite"
-import FormAttribut from "features/attributs/FormAttribut"
-import { ButtonFixtureEntiteUser } from "features/fixtures/ButtonsFixtures"
-
-import Draggable from "react-draggable"
+import { Entite, Project, Attribut } from "types"
 
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
-import { apiSetEntiteUmlPosition } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -25,24 +16,45 @@ type Props = {
 export default function UmlArrows({ project }: Props) {
 	return (
 		<>
-			{project.entites.map((entite: any) => {
-				return entite.attributs.map((attribut: any) => {
-					if (attribut.inverseAttributId && attribut.inverseAttributId > attribut.id) {
+			{project.entites.map((entite: Entite) => {
+				return entite.attributs.map((attribut: Attribut) => {
+					if (attribut.inverseAttributId) {
+						if (attribut.inverseAttributId && attribut.inverseAttributId > attribut.id) {
+							return (
+								<Xarrow
+									key={`arrow-${attribut.id}-${attribut.inverseAttributId}`}
+									start={"uml-attr-" + attribut.id}
+									end={"uml-attr-" + attribut.inverseAttributId}
+									showHead
+									showTail
+									tailShape="circle"
+									//strokeWidth={3}
+									//headSize={3}
+									tailSize={3}
+									color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+								/>
+							)
+						}
+						return null
+					}
+					if (attribut.targetEntiteId) {
 						return (
 							<Xarrow
-								key={`arrow-${attribut.id}-${attribut.inverseAttributId}`}
+								key={`arrow-${attribut.id}-entit-${attribut.targetEntiteId}`}
 								start={"uml-attr-" + attribut.id}
-								end={"uml-attr-" + attribut.inverseAttributId}
+								end={"uml-entitex-" + attribut.targetEntiteId}
 								showHead
+								//headShape="circle"
 								showTail
 								tailShape="circle"
 								//strokeWidth={3}
-								//headSize={3}
+								//headSize={2}
 								tailSize={3}
 								color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
 							/>
 						)
 					}
+
 					return null
 				})
 			})}

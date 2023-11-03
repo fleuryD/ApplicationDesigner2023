@@ -7,9 +7,14 @@ import { apiFixture } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+export function ButtonFixtureProjectYz({ className }: { className?: string }) {
+	return <ButtonFixtures className={className} fixtureName="project-yz" text="Yz" />
+}
+
 export function ButtonFixtureProjectTranscendance({ className }: { className?: string }) {
 	return <ButtonFixtures className={className} fixtureName="project-transcendance" text="Transcendance" />
 }
+
 export function ButtonFixtureProjectSL({ className }: { className?: string }) {
 	return <ButtonFixtures className={className} fixtureName="project-sl" text="ShoppingList" />
 }

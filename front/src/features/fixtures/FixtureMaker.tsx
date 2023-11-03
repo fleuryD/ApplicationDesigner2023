@@ -30,9 +30,9 @@ export default function FixtureMaker({ project }: Props) {
 			// ************** PROJECT **************
 			const projectXproject = await this.projectsService.create({
 				name: "XprojectFixture",
-				description: null,
-				infos: null,
-				isWip: true,
+				description:  "${project.description}",
+				infos:  "${project.infos}",
+				isWip:  "${project.isWip}",
 				createdBy: user,
 			})
 
@@ -46,9 +46,9 @@ export default function FixtureMaker({ project }: Props) {
 		code += `			const entite${entite.name} = await this.entitesService.create({
 				project: projectXproject,
 				name: "${entite.name}",
-				description: null,
-				infos: null,
-				isWip: false,
+				description: "${entite.description}",
+				infos: "${entite.umlPosX}",
+				isWip: ${entite.umlPosX},
 				umlPosX: ${entite.umlPosX},
 				umlPosY: ${entite.umlPosY},
 			})
@@ -71,9 +71,14 @@ export default function FixtureMaker({ project }: Props) {
 				name: "${attr.name}",
 				tipe: "${attr.tipe}",
 				position: 0,
+				isWip: ${attr.isWip},
+				isFeminin: ${attr.isFeminin},
 				isNullable: ${attr.isNullable},
 				isUnique: ${attr.isUnique},`
 
+			if (attr.infos) code += `\n				infos: "${attr.infos}",`
+			if (attr.longueur) code += `\n				longueur: ${attr.longueur},`
+			if (attr.description) code += `\n				description: "${attr.description}",`
 			if (attr.isPrimaryKey) code += `\n				isPrimaryKey: true,`
 
 			if (attr.targetEntiteId) {

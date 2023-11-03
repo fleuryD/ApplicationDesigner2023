@@ -124,9 +124,18 @@ export default function FormAttributInner({
 						{
 							value: "ManyToMany",
 							text:
-								"OneToMany (one " +
+								"ManyToMany (one " +
 								formItem.entite.name +
 								" has many " +
+								(formItem.name ? formItem.name : "xxx") +
+								" and vice versa)",
+						},
+						{
+							value: "OneToOne",
+							text:
+								"OneToOne (one " +
+								formItem.entite.name +
+								" has one " +
 								(formItem.name ? formItem.name : "xxx") +
 								" and vice versa)",
 						},

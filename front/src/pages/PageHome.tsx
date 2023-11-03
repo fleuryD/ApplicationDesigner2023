@@ -11,6 +11,7 @@ import {
 	ButtonFixtureProjectAd,
 	ButtonFixtureProjectSL,
 	ButtonFixtureProjectTranscendance,
+	ButtonFixtureProjectYz,
 } from "features/fixtures/ButtonsFixtures"
 import ZLoadingSection from "ui/ZLoadingSection"
 import ZErrorSection from "ui/ZErrorSection"
@@ -70,6 +71,7 @@ export default function PageHome() {
 								<ButtonFixtureProjectAd className="m-1" />
 								<ButtonFixtureProjectSL className="m-1" />
 								<ButtonFixtureProjectTranscendance className="m-1" />
+								<ButtonFixtureProjectYz className="m-1" />
 							</div>
 						</div>
 					</div>

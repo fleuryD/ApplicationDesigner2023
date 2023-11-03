@@ -58,3 +58,60 @@ export default function Uml({ project }: Props) {
 		</div>
 	)
 }
+
+/*
+
+clear
+make re
+
+
+echo
+echo
+echo
+echo "🔴🔴🔴 les tests suvants devraient afficher une erreur 🔴🔴🔴"
+echo
+echo
+echo
+
+./philo
+./philo 5
+./philo 5 800
+./philo 5 800 200
+./philo 5 800 200 200 6 100
+./philo 0 800 200 200
+./philo 5 -800 200 200
+./philo 5 800 20x0 200
+./philo 5 800 200 -200
+./philo 5 2147483648 200 200
+./philo 5 -2147483649 200 200
+./philo 5 200 2147483648 200
+./philo 5 200 -2147483649 200
+
+
+
+echo
+echo
+echo
+echo "🔴🔴🔴 la meme chose avec valgrind - AUCUN LEAK OU SEGFAULT  🔴🔴🔴"
+echo
+echo
+echo
+
+
+valgrind ./philo
+valgrind ./philo 5
+valgrind ./philo 5 800
+valgrind ./philo 5 800 200
+valgrind ./philo 5 800 200 200 6 100
+valgrind ./philo 0 800 200 200
+valgrind ./philo 5 -800 200 200
+valgrind ./philo 5 800 20x0 200
+valgrind ./philo 5 800 200 -200
+valgrind ./philo 5 2147483648 200 200
+valgrind ./philo 5 -2147483649 200 200
+valgrind ./philo 5 200 2147483648 200
+valgrind ./philo 5 200 -2147483649 200
+
+
+
+*/
