@@ -14,6 +14,7 @@ import Draggable from "react-draggable"
 import UmlArrows from "./UmlArrows"
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
 import { apiSetEntiteUmlPosition } from "api"
+import FixtureMaker from "features/fixtures/FixtureMaker"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -34,7 +35,6 @@ export default function Uml({ project }: Props) {
 			<h2>
 				UML <ButtonCreateEntite className="btn-sm float-end" project={project} />
 			</h2>
-
 			{app.selectedFormEntite && <FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />}
 
 			<div id="umlContent" className="umlContent">
@@ -49,12 +49,12 @@ export default function Uml({ project }: Props) {
 					)
 				})}
 			</div>
-
 			<UmlArrows project={project} />
-
 			{!project.entites.find((entite: any) => entite.name === "User") && (
 				<ButtonFixtureEntiteUser projectId={project.id} />
 			)}
+
+			<FixtureMaker project={project} />
 		</div>
 	)
 }

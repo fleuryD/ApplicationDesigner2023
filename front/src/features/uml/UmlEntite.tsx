@@ -66,6 +66,9 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 					<h2 className="umlEntityHeader">
 						{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
 					</h2>
+					<small>
+						({pos.x}, {pos.y})
+					</small>
 					<table className="umlEntityAttributes">
 						<tbody>
 							{entite.attributs.map((attr: any) => (

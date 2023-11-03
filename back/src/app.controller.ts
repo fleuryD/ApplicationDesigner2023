@@ -37,6 +37,599 @@ export class AppController {
 		return "Hello"
 	}
 
+	@Get("/fixtures/project-transcendance")
+	async fixtureProjetTranscendance(@UserFromToken() userFromToken) {
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/projet/transcendance - For user:", user.username)
+
+		try {
+			// ************** PROJECT **************
+			const projectTranscendance = await this.projectsService.create({
+				name: "TranscendanceFixture",
+				description: null,
+				infos: null,
+				isWip: true,
+				createdBy: user,
+			})
+
+			// ************** ENTITES **************
+
+			const entiteChannelUser = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "ChannelUser",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 650,
+				umlPosY: 40,
+			})
+
+			const entiteChannel = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "Channel",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 1100,
+				umlPosY: 60,
+			})
+
+			const entiteUserRelation = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "UserRelation",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 280,
+				umlPosY: 610,
+			})
+
+			const entiteMessage = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "Message",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 600,
+				umlPosY: 480,
+			})
+
+			const entitePartie = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "Partie",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 964,
+				umlPosY: 550,
+			})
+
+			const entiteQueue = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "Queue",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 10,
+				umlPosY: 530,
+			})
+
+			const entiteUser = await this.entitesService.create({
+				project: projectTranscendance,
+				name: "User",
+				description: null,
+				infos: null,
+				isWip: false,
+				umlPosX: 90,
+				umlPosY: 40,
+			})
+
+			// ************** ATRRIBUTS for entite ChannelUser **************
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "isOwner",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "isAdmin",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "isBanned",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "endMutedAt",
+				tipe: "datetime",
+				position: 0,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "accepted",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "createdAt",
+				tipe: "datetime",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrChannelUserChannel = await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "channel",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteChannel.id,
+			})
+
+			const attrChannelUserUser = await this.attributsService.create({
+				entite: entiteChannelUser,
+				name: "user",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite Channel **************
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "name",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "isPasswordProtected",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "isPrivateDiscussion",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "createdAt",
+				tipe: "datetime",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "isPrivate",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteChannel,
+				name: "password",
+				tipe: "string",
+				position: 0,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			const attrChannelChannelUsers = await this.attributsService.create({
+				entite: entiteChannel,
+				name: "channelUsers",
+				tipe: "OneToMany",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteChannelUser.id,
+			})
+
+			const attrChannelMessages = await this.attributsService.create({
+				entite: entiteChannel,
+				name: "messages",
+				tipe: "OneToMany",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteMessage.id,
+			})
+
+			// ************** ATRRIBUTS for entite UserRelation **************
+
+			await this.attributsService.create({
+				entite: entiteUserRelation,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			const attrUserRelationOtherUser = await this.attributsService.create({
+				entite: entiteUserRelation,
+				name: "otherUser",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUserRelation,
+				name: "type",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUserRelation,
+				name: "accepted",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrUserRelationUser = await this.attributsService.create({
+				entite: entiteUserRelation,
+				name: "user",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite Message **************
+
+			await this.attributsService.create({
+				entite: entiteMessage,
+				name: "content",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteMessage,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteMessage,
+				name: "createdAt",
+				tipe: "datetime",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrMessageChannel = await this.attributsService.create({
+				entite: entiteMessage,
+				name: "channel",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteChannel.id,
+			})
+
+			const attrMessageUser = await this.attributsService.create({
+				entite: entiteMessage,
+				name: "user",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite Partie **************
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "ended",
+				tipe: "boolean",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "score1",
+				tipe: "Integer",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entitePartie,
+				name: "score2",
+				tipe: "Integer",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrPartieUser2 = await this.attributsService.create({
+				entite: entitePartie,
+				name: "user2",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			const attrPartieUser1 = await this.attributsService.create({
+				entite: entitePartie,
+				name: "user1",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite Queue **************
+
+			await this.attributsService.create({
+				entite: entiteQueue,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteQueue,
+				name: "createdAt",
+				tipe: "datetime",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrQueueUser = await this.attributsService.create({
+				entite: entiteQueue,
+				name: "user",
+				tipe: "ManyToOne",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			// ************** ATRRIBUTS for entite User **************
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "status",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "password",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "accessToken",
+				tipe: "string",
+				position: 0,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 0,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 0,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 0,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "email",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "username",
+				tipe: "string",
+				position: 0,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			const attrUserMessages = await this.attributsService.create({
+				entite: entiteUser,
+				name: "messages",
+				tipe: "OneToMany",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteMessage.id,
+			})
+
+			const attrUserChannelUsers = await this.attributsService.create({
+				entite: entiteUser,
+				name: "channelUsers",
+				tipe: "OneToMany",
+				position: 0,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteChannelUser.id,
+			})
+
+			// ************** INVERSED BY **************
+
+			attrChannelUserChannel.inverseAttributId = attrChannelChannelUsers.id
+			await this.attributsService.save(attrChannelUserChannel)
+
+			attrChannelUserUser.inverseAttributId = attrUserChannelUsers.id
+			await this.attributsService.save(attrChannelUserUser)
+
+			attrChannelChannelUsers.inverseAttributId = attrChannelUserChannel.id
+			await this.attributsService.save(attrChannelChannelUsers)
+
+			attrChannelMessages.inverseAttributId = attrMessageChannel.id
+			await this.attributsService.save(attrChannelMessages)
+
+			attrMessageChannel.inverseAttributId = attrChannelMessages.id
+			await this.attributsService.save(attrMessageChannel)
+
+			attrMessageUser.inverseAttributId = attrUserMessages.id
+			await this.attributsService.save(attrMessageUser)
+
+			attrUserMessages.inverseAttributId = attrMessageUser.id
+			await this.attributsService.save(attrUserMessages)
+
+			attrUserChannelUsers.inverseAttributId = attrChannelUserUser.id
+			await this.attributsService.save(attrUserChannelUsers)
+
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
+
 	@Get("/fixtures/entite/:id/attribut-id")
 	async fixtureAttributId(@UserFromToken() userFromToken, @Param() params) {
 		const user = await this.usersService.findOneById(userFromToken.id)
@@ -89,6 +682,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
+				umlPosX: 10,
+				umlPosY: 20,
 			})
 
 			// ************** User's Attributes **************
@@ -207,6 +802,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
+				umlPosX: 20,
+				umlPosY: 20,
 			})
 
 			const entiteProject = await this.entitesService.create({
@@ -215,6 +812,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
+				umlPosX: 440,
+				umlPosY: 90,
 			})
 
 			const entiteEntite = await this.entitesService.create({
@@ -223,6 +822,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
+				umlPosX: 790,
+				umlPosY: 140,
 			})
 
 			const entiteAttribut = await this.entitesService.create({
@@ -231,6 +832,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
+				umlPosX: 1120,
+				umlPosY: 240,
 			})
 
 			// ************** User's Attributes **************
@@ -635,7 +1238,7 @@ export class AppController {
 	@Get("/fixtures/project-sl")
 	async fixtureProjetSL(@UserFromToken() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
-		Logger.log("🟠 /fixtures/projet/ad - For user:", user.username)
+		Logger.log("🟠 /fixtures/projet/sl - For user:", user.username)
 
 		try {
 			// ************** PROJECT **************
@@ -655,8 +1258,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 0,
-				umlPosY: 0,
+				umlPosX: 30,
+				umlPosY: 30,
 			})
 
 			const entiteListeUser = await this.entitesService.create({
@@ -665,8 +1268,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 500,
-				umlPosY: 0,
+				umlPosX: 440,
+				umlPosY: 50,
 			})
 
 			const entiteListe = await this.entitesService.create({
@@ -675,8 +1278,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 1000,
-				umlPosY: 0,
+				umlPosX: 760,
+				umlPosY: 40,
 			})
 
 			const entiteArticle = await this.entitesService.create({
@@ -685,8 +1288,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 400,
-				umlPosY: 300,
+				umlPosX: 340,
+				umlPosY: 480,
 			})
 
 			const entiteRecipe = await this.entitesService.create({
@@ -695,8 +1298,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 1000,
-				umlPosY: 300,
+				umlPosX: 1140,
+				umlPosY: 220,
 			})
 
 			const entiteArticleRecipe = await this.entitesService.create({
@@ -705,8 +1308,8 @@ export class AppController {
 				description: null,
 				infos: null,
 				isWip: false,
-				umlPosX: 500,
-				umlPosY: 300,
+				umlPosX: 780,
+				umlPosY: 430,
 			})
 
 			// ************** User's Attributes **************
