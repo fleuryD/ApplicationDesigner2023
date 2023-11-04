@@ -5,6 +5,8 @@ import { PassportStrategy } from "@nestjs/passport"
 import { Injectable } from "@nestjs/common"
 import { Logger } from "@nestjs/common"
 
+import { CONST_JWT_SECRET } from "../constants"
+
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Injectable()
@@ -18,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			This means that if our route is supplied with an expired JWT, the request will be denied and a 401
 			*/
 			ignoreExpiration: false, // !!!!!!!!
-			secretOrKey: process.env.JWT_SECRET,
+			secretOrKey: CONST_JWT_SECRET,
 		})
 	}
 

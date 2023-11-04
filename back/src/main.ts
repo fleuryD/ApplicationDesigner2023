@@ -3,6 +3,7 @@
 import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./app.module"
 import { CustomLogger } from "./custom-logger.service"
+import { CONST_BACK_PORT } from "./constants"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -18,6 +19,6 @@ async function bootstrap() {
 		credentials: false,
 	})
 	app.useLogger(app.get(CustomLogger))
-	await app.listen(parseInt(process.env.BACK_PORT, 10) || 3000)
+	await app.listen(CONST_BACK_PORT)
 }
 bootstrap()

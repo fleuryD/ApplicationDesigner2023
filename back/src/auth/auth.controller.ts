@@ -8,7 +8,7 @@ import {
 	Post,
 } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
-import * as bcrypt from "bcrypt"
+//import * as bcrypt from "bcrypt"	////!!!!!!!!!!!!!! BCRYPT !!!!!
 import { JwtService } from "@nestjs/jwt"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
@@ -60,7 +60,8 @@ export class AuthController {
 		existingUser = await this.usersService.findOneByEmail(email)
 		if (existingUser) throw new BadRequestException("EMAIL_ALREADY_EXISTS")
 
-		const hashedPassword = await bcrypt.hash(password, 12)
+		//	const hashedPassword = await bcrypt.hash(password, 12)		////!!!!!!!!!!!!!! BCRYPT !!!!!
+		const hashedPassword = password ////!!!!!!!!!!!!!! BCRYPT !!!!!
 
 		// TODO : set : tokenEmail expire date
 
@@ -119,10 +120,14 @@ export class AuthController {
 			Logger.warn("[login] ⛔ EMAIL_NOT_CONFIRMED")
 			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
+
+		////!!!!!!!!!!!!!! BCRYPT !!!!!
+		/*
 		if (!(await bcrypt.compare(password, user.password))) {
 			Logger.warn("[login] ⛔ INVALID_CREDENTIALS_PASSWORD_INVALID")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
+		*/
 
 		Logger.log(`[login] 🟢 "${user.username}"`)
 

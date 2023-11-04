@@ -3,6 +3,10 @@
 import { MailerService } from "@nestjs-modules/mailer"
 import { Injectable } from "@nestjs/common"
 import { User } from "../_entities"
+import {
+	CONST_FRONT_EMAIL_VALIDATION_URL,
+	CONST_FRONT_RESET_PASSWORD_URL,
+} from "src/constants"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -13,7 +17,7 @@ export class MailService {
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	async sendEmailValidation(user: User) {
-		const url = process.env.FRONT_EMAIL_VALIDATION_URL + user.emailValidationToken
+		const url = CONST_FRONT_EMAIL_VALIDATION_URL + user.emailValidationToken
 		await this.mailerService.sendMail({
 			to: user.email,
 			// from: '"Support Team" <support@example.com>', // override default from
@@ -27,7 +31,7 @@ export class MailService {
 	}
 
 	async sendPasswordReset(user: User) {
-		const url = process.env.FRONT_RESET_PASSWORD_URL + user.passwordResetToken
+		const url = CONST_FRONT_RESET_PASSWORD_URL + user.passwordResetToken
 		await this.mailerService.sendMail({
 			to: user.email,
 			// from: '"Support Team" <support@example.com>', // override default from

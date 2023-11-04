@@ -25,6 +25,18 @@ import { AppController } from "./app.controller"
 import { AuthController } from "./auth/auth.controller"
 import { CustomLogger } from "./custom-logger.service"
 
+import {
+	CONST_DB_HOST,
+	CONST_DB_NAME,
+	CONST_DB_PASSWORD,
+	CONST_DB_PORT,
+	CONST_DB_SYNCHRONIZE_WITH_ENTITIES,
+	CONST_DB_TYPE,
+	CONST_DB_USERNAME,
+	CONST_JWT_SECRET,
+	CONST_JWT_EXPIRES_IN,
+} from "./constants"
+
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Module({
@@ -33,18 +45,18 @@ import { CustomLogger } from "./custom-logger.service"
 			isGlobal: true, // no need to import into other modules
 		}),
 		TypeOrmModule.forRoot({
-			type: process.env.DB_TYPE === "postgres" ? "postgres" : "mysql",
-			host: process.env.DB_HOST,
-			port: parseInt(process.env.DB_PORT, 10) || 5432,
-			database: process.env.DB_NAME,
-			username: process.env.DB_USERNAME,
-			password: process.env.DB_PASSWORD,
-			synchronize: process.env.DB_SYNCHRONIZE_WITH_ENTITIES === "true",
+			type: CONST_DB_TYPE,
+			host: CONST_DB_HOST,
+			port: CONST_DB_PORT,
+			database: CONST_DB_NAME,
+			username: CONST_DB_USERNAME,
+			password: CONST_DB_PASSWORD,
+			synchronize: CONST_DB_SYNCHRONIZE_WITH_ENTITIES,
 			entities: [User, Project, Entite, Attribut],
 		}),
 		JwtModule.register({
-			secret: process.env.JWT_SECRET,
-			signOptions: { expiresIn: process.env.JWT_EXPIRES_IN },
+			secret: CONST_JWT_SECRET,
+			signOptions: { expiresIn: CONST_JWT_EXPIRES_IN },
 		}),
 		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
 		MailModule,
