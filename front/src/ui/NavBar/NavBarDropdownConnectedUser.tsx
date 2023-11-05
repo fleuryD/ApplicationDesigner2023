@@ -31,11 +31,13 @@ export default function NavBarDropdownConnectedUser() {
 			className="ms-auto"
 			align="end"
 		>
+			{/*
 			<NavDropdown.Item as={Link} to="/users/me">
 				<FaAddressCard /> Mon profil
 			</NavDropdown.Item>
 
 			<NavDropdown.Divider />
+			*/}
 
 			<NavDropdown.Item onClick={() => btLogoutClick()}>
 				<FaSignOutAlt /> Déconnexion

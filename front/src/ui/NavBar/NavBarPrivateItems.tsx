@@ -19,9 +19,11 @@ export default function NavBarPrivateItems() {
 				}
 				id="basic-nav-dropdown-dev"
 			>
+				{/*
 				<NavDropdown.Item as={Link} to="/admin/users">
 					<FaUsers /> Admin: Users
 				</NavDropdown.Item>
+				*/}
 				<NavDropdown.Item as={Link} to="/dev">
 					<FaBan /> Dev
 				</NavDropdown.Item>
@@ -31,10 +33,10 @@ export default function NavBarPrivateItems() {
 
 	return (
 		<>
-			<Nav.Link as={Link} to="/xxx1">
-				<FaQuestion /> Xxx1
+			<Nav.Link as={Link} to="/">
+				<FaQuestion /> Mes projets
 			</Nav.Link>
-
+			{/*
 			<Nav.Link as={Link} to="/xxx2">
 				<FaQuestion /> Xxx2
 			</Nav.Link>
@@ -42,9 +44,11 @@ export default function NavBarPrivateItems() {
 			<Nav.Link as={Link} to="/xxx3">
 				<FaQuestion /> Xxx3
 			</Nav.Link>
+			*/}
 
+			{/*
 			<NavBarDropdownAdmin />
-
+			*/}
 			<NavBarDropdownConnectedUser />
 		</>
 	)

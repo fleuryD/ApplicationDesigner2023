@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Navbar, Container, Nav } from "react-bootstrap"
+import { NavLink } from "react-router-dom"
 import { useAppSelector } from "store/store"
 import { FaHome } from "react-icons/fa"
 import NavBarPrivateItems from "./NavBarPrivateItems"
@@ -17,9 +18,9 @@ export default function NavBar() {
 			<Container fluid>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="me-0 container">
-						<Navbar.Brand href="/">
-							<FaHome /> ApplicationDesigner
+					<Nav className="container">
+						<Navbar.Brand as={NavLink} to="/">
+							<FaHome /> ApplicationDesigner{" "}
 						</Navbar.Brand>
 						{auth.isConnected ? <NavBarPrivateItems /> : <NavBarPublicItems />}
 					</Nav>

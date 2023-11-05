@@ -4,6 +4,7 @@ import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./app.module"
 import { CustomLogger } from "./custom-logger.service"
 import { CONST_BACK_PORT } from "./constants"
+import * as dotenv from "dotenv"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 

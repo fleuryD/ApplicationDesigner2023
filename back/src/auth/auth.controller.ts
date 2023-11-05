@@ -75,7 +75,10 @@ export class AuthController {
 
 			await this.mailService.sendEmailValidation(user)
 
-			return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
+			return {
+				success: 1,
+				// debugEmailValidationToken: user.emailValidationToken, // !!!  emailValidationToken ::  debug only
+			}
 		} catch (e) {
 			console.debug("-------error", error)
 			throw new BadRequestException("INTERNAL_ERROR")
@@ -134,7 +137,11 @@ export class AuthController {
 		}
 
 		return {
-			user: user,
+			user: {
+				accessToken: user.accessToken,
+				email: user.email,
+				username: user.username,
+			},
 		}
 	}
 
@@ -199,7 +206,10 @@ export class AuthController {
 
 		await this.mailService.sendPasswordReset(user)
 
-		return { success: 1, debugPasswordResetToken: user.passwordResetToken } // !!!  debugPasswordResetToken ::  debug only
+		return {
+			success: 1,
+			//debugPasswordResetToken: user.passwordResetToken, // !!!  debugPasswordResetToken ::  debug only
+		}
 	}
 
 	/*

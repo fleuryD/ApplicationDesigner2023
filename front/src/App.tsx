@@ -16,8 +16,8 @@ import PageAuthResetPassword from "pages/auth/PageAuthResetPassword"
 import Page404 from "pages/Page404"
 import PageHome from "pages/PageHome"
 import PageDev from "pages/PageDev"
-import PageAdminUser from "pages/PageAdminUser"
-import PageAdminUsers from "pages/PageAdminUsers"
+//import PageAdminUser from "pages/PageAdminUser"
+//import PageAdminUsers from "pages/PageAdminUsers"
 import PageProject from "pages/PageProject"
 import PageProjectGenerate from "pages/PageProjectGenerate"
 
@@ -39,9 +39,9 @@ export default function App() {
 						<Routes>
 							<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
 							<Route path="/projects/:id" element={<PageProject />} />
-							<Route path="/admin/users" element={<PageAdminUsers />} />
-							<Route path="/admin/users/:id" element={<PageAdminUser />} />
-							<Route path="/dev" element={<PageDev />} />
+							{/* <Route path="/admin/users" element={<PageAdminUsers />} /> */}
+							{/* <Route path="/admin/users/:id" element={<PageAdminUser />} /> */}
+							{/* <Route path="/dev" element={<PageDev />} /> */}
 							{/* <Route path="/me" element={<PageUserMe />} /> */}
 							<Route path="/" element={<PageHome />} />
 							<Route path="*" element={<Page404 />} />
