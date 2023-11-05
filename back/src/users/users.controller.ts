@@ -16,6 +16,7 @@ export class UsersController {
 	 * 	GET ALL USERS
 	 *
 	 */
+	/*
 	@Get("/")
 	async users(@Headers() headers) {
 		const users = await this.usersService.findAll()
@@ -23,13 +24,14 @@ export class UsersController {
 			users: users,
 		}
 	}
-
+	*/
 	/*
 	 * *************************************************************************
 	 *
 	 * 	GET USER TARGETED BY :id
 	 *
 	 */
+	/*
 	@Get("/:id")
 	async userShow(@Param() params, @Headers() headers) {
 		const user = await this.usersService.findOneById(params.id)
@@ -38,4 +40,5 @@ export class UsersController {
 			user: user,
 		}
 	}
+	*/
 }

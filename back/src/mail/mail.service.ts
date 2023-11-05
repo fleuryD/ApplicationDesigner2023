@@ -17,7 +17,6 @@ export class MailService {
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
 	async sendEmailValidation(user: User) {
-		//try {
 		const url = CONST_FRONT_EMAIL_VALIDATION_URL + user.emailValidationToken
 		await this.mailerService.sendMail({
 			to: user.email,
@@ -29,10 +28,6 @@ export class MailService {
 				url,
 			},
 		})
-		//	} catch (e) {
-		//		console.debug("-------error", e)
-		//		throw new InternalServerErrorException("sendmailllllll", e)
-		//	}
 	}
 
 	async sendPasswordReset(user: User) {

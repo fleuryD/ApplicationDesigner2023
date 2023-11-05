@@ -134,8 +134,7 @@ export class UsersService {
 		user: User
 		plainPassword: string
 	}): Promise<User> {
-		user.password = await bcrypt.hash(plainPassword, 12) ////!!!!!!!!!!!!!! BCRYPT !!!!!
-		//user.password = plainPassword ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		user.password = await bcrypt.hash(plainPassword, 12)
 		user.passwordResetToken = null
 		user.passwordResetAt = null
 

@@ -12,6 +12,7 @@ import { CONST_JWT_SECRET } from "../constants"
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 	constructor() {
+		console.log("*****************CONST_JWT_SECRET :", CONST_JWT_SECRET)
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			/*

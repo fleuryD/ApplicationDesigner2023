@@ -14,19 +14,10 @@ npm install @nestjs/typeorm typeorm
 npm install pg
 npm install mysql2
 npm install @nestjs/jwt
-npm install -D @types/bcrypt
-
-
-npm install bcrypt
-   OU
-npm install bcryptjs
-
-
+npm install @types/bcryptjs bcryptjs
 npm install @nestjs/config
 npm install --save @nestjs/passport @nestjs/jwt passport passport-local passport-jwt
 npm install --save-dev @types/passport-local @types/passport-jwt
-
-
 npm install --save @nestjs-modules/mailer nodemailer
 npm install --save-dev @types/nodemailer
 npm install --save handlebars

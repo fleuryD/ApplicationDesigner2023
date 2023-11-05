@@ -8,8 +8,7 @@ import {
 	Post,
 } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
-//import * as bcrypt from "bcrypt"	////!!!!!!!!!!!!!! BCRYPT !!!!!
-import * as bcrypt from "bcryptjs" ////!!!!!!!!!!!!!! BCRYPT !!!!!
+import * as bcrypt from "bcryptjs"
 import { JwtService } from "@nestjs/jwt"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
@@ -61,33 +60,26 @@ export class AuthController {
 		existingUser = await this.usersService.findOneByEmail(email)
 		if (existingUser) throw new BadRequestException("EMAIL_ALREADY_EXISTS")
 
-		const hashedPassword = await bcrypt.hash(password, 12) ////!!!!!!!!!!!!!! BCRYPT !!!!!
-		//const hashedPassword = password ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		const hashedPassword = await bcrypt.hash(password, 12)
 
 		// TODO : set : tokenEmail expire date
 
-		//	try {
-		let user = await this.usersService.create({
-			username: username, //.toLowerCase(),
-			email: email.toLowerCase(),
-			password: hashedPassword,
-		})
+		try {
+			let user = await this.usersService.create({
+				username: username, //.toLowerCase(),
+				email: email.toLowerCase(),
+				password: hashedPassword,
+			})
 
-		user = await this.usersService.setNewEmailValidationToken(user)
+			user = await this.usersService.setNewEmailValidationToken(user)
 
-		//	try {
-		await this.mailService.sendEmailValidation(user)
-		//		} catch (e) {
-		//		console.debug("-------error", error)
-		//		throw new BadRequestException("INTERNAL_ERROR_AAAA")
-		//	}
+			await this.mailService.sendEmailValidation(user)
 
-		//delete user.password ////!!!!!!!!!!!!!! BCRYPT !!!!!
-		return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
-		//	} catch (e) {
-		//	console.debug("-------error", error)
-		//	throw new BadRequestException("INTERNAL_ERROR_XXX")
-		//	}
+			return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
+		} catch (e) {
+			console.debug("-------error", error)
+			throw new BadRequestException("INTERNAL_ERROR")
+		}
 	}
 
 	/*
@@ -127,8 +119,6 @@ export class AuthController {
 			Logger.warn("[login] ⛔ EMAIL_NOT_CONFIRMED")
 			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
-
-		////!!!!!!!!!!!!!! BCRYPT !!!!!
 
 		if (!(await bcrypt.compare(password, user.password))) {
 			Logger.warn("[login] ⛔ INVALID_CREDENTIALS_PASSWORD_INVALID")

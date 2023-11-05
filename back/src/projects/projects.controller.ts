@@ -54,14 +54,13 @@ export class ProjectsController {
 		@Body("infos") infos: string,
 		@Body("isWip") isWip: boolean
 	) {
-		// const user = await this.usersService.findOneById(userFromToken.id) // !!!!!!!!!!!!!
 		try {
 			const project = await this.projectsService.create({
 				name,
 				description,
 				infos,
 				isWip,
-				createdBy: userFromToken, // user // !!!!!!!!!!!!!
+				createdBy: userFromToken,
 			})
 
 			return { project: project }

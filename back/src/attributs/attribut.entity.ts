@@ -4,12 +4,18 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } f
 import { Entite } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
 /*
+ *	Entite (parceque 'Entity' est un mot reservé)
+ *
+ *	Entité = Model / table de la bdd
+ *
  *	Une Entite peut avoir plusieurs Attributs (ou proprietes, ou champs)
  *
  *
  *
  */
+
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity("attributs")
