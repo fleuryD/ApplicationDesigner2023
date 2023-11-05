@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common"
 import { UsersService } from "../users/users.service"
 //import * as bcrypt from "bcrypt"	////!!!!!!!!!!!!!! BCRYPT !!!!!
+import * as bcrypt from "bcryptjs" ////!!!!!!!!!!!!!! BCRYPT !!!!!
 import { JwtService } from "@nestjs/jwt"
 import { AuthService } from "./auth.service"
 import { Logger } from "@nestjs/common"
@@ -60,28 +61,33 @@ export class AuthController {
 		existingUser = await this.usersService.findOneByEmail(email)
 		if (existingUser) throw new BadRequestException("EMAIL_ALREADY_EXISTS")
 
-		//	const hashedPassword = await bcrypt.hash(password, 12)		////!!!!!!!!!!!!!! BCRYPT !!!!!
-		const hashedPassword = password ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		const hashedPassword = await bcrypt.hash(password, 12) ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		//const hashedPassword = password ////!!!!!!!!!!!!!! BCRYPT !!!!!
 
 		// TODO : set : tokenEmail expire date
 
-		try {
-			let user = await this.usersService.create({
-				username: username, //.toLowerCase(),
-				email: email.toLowerCase(),
-				password: hashedPassword,
-			})
+		//	try {
+		let user = await this.usersService.create({
+			username: username, //.toLowerCase(),
+			email: email.toLowerCase(),
+			password: hashedPassword,
+		})
 
-			user = await this.usersService.setNewEmailValidationToken(user)
+		user = await this.usersService.setNewEmailValidationToken(user)
 
-			await this.mailService.sendEmailValidation(user)
+		//	try {
+		await this.mailService.sendEmailValidation(user)
+		//		} catch (e) {
+		//		console.debug("-------error", error)
+		//		throw new BadRequestException("INTERNAL_ERROR_AAAA")
+		//	}
 
-			delete user.password
-			return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
-		} catch (e) {
-			console.debug("-------error", error)
-			throw new BadRequestException("INTERNAL_ERROR")
-		}
+		//delete user.password ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		return { success: 1, debugEmailValidationToken: user.emailValidationToken } // !!!  emailValidationToken ::  debug only
+		//	} catch (e) {
+		//	console.debug("-------error", error)
+		//	throw new BadRequestException("INTERNAL_ERROR_XXX")
+		//	}
 	}
 
 	/*
@@ -103,6 +109,7 @@ export class AuthController {
 		@Body("emailOrUsername") emailOrUsername: string,
 		@Body("password") password: string
 	) {
+		Logger.log("[login] 🔵[login] 🔵[login] 🔵[login] 🔵[login] 🔵")
 		if (!emailOrUsername || !password) {
 			Logger.error("[login] ❌ MISSING_FIELDS")
 			throw new BadRequestException("MISSING_FIELDS")
@@ -122,12 +129,11 @@ export class AuthController {
 		}
 
 		////!!!!!!!!!!!!!! BCRYPT !!!!!
-		/*
+
 		if (!(await bcrypt.compare(password, user.password))) {
 			Logger.warn("[login] ⛔ INVALID_CREDENTIALS_PASSWORD_INVALID")
 			throw new BadRequestException("INVALID_CREDENTIALS")
 		}
-		*/
 
 		Logger.log(`[login] 🟢 "${user.username}"`)
 

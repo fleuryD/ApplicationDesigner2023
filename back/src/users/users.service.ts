@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { Repository, DataSource } from "typeorm"
 import { JwtService } from "@nestjs/jwt"
 // import * as bcrypt from "bcrypt" 		////!!!!!!!!!!!!!! BCRYPT !!!!!
+import * as bcrypt from "bcryptjs" ////!!!!!!!!!!!!!! BCRYPT !!!!!
 
 import { User } from "./user.entity"
 //import { User } from "./"	// !! NON
@@ -133,8 +134,8 @@ export class UsersService {
 		user: User
 		plainPassword: string
 	}): Promise<User> {
-		//user.password = await bcrypt.hash(plainPassword, 12) ////!!!!!!!!!!!!!! BCRYPT !!!!!
-		user.password = plainPassword ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		user.password = await bcrypt.hash(plainPassword, 12) ////!!!!!!!!!!!!!! BCRYPT !!!!!
+		//user.password = plainPassword ////!!!!!!!!!!!!!! BCRYPT !!!!!
 		user.passwordResetToken = null
 		user.passwordResetAt = null
 

@@ -1,0 +1,7 @@
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+RewriteCond %{HTTP_HOST} ^appdesigner\.zedixi\.com$
+RewriteRule ^/?$ "https\:\/\/appdesigner\.zedixi\.com\/\^\/\$" [R=301,L]
+
