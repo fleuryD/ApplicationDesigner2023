@@ -5,7 +5,7 @@ import { toPascalCase /* toCamelCase, toSnakeCase,  toKebabCase, getCase */ } fr
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
-	entite: Entite
+	entite: Entite | null
 	entitePascalName: string
 	entiteCamelName: string
 	entiteCamelNamePluriel: string
@@ -17,6 +17,7 @@ export default function templateReactDisplayInfos({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
+	if (!entite) return null
 	let constructorArgs = ""
 
 	entite.attributs.map((attr: Attribut) => {

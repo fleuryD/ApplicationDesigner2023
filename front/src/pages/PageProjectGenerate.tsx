@@ -20,8 +20,8 @@ export default function PageProjectGenerate() {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
 	const [project, setProject] = useState<Project | null>(null)
-	const [selectedFormEntite, setSelectedFormEntite] = useState<Entite | null>(null)
-	const [selectedFormTemplateName, setSelectedFormTemplateName] = useState<string | null>("")
+	const [selectedEntite, setSelectedEntite] = useState<Entite | null>(null)
+	const [selectedTemplateName, setSelectedTemplateName] = useState<string | null>("")
 
 	useEffect(() => {
 		document.title = "AD: Generate"
@@ -51,18 +51,14 @@ export default function PageProjectGenerate() {
 					<>
 						<GenerateMenu
 							project={project}
-							selectedFormEntite={selectedFormEntite}
-							setSelectedFormEntite={setSelectedFormEntite}
-							selectedFormTemplateName={selectedFormTemplateName}
-							setSelectedFormTemplateName={setSelectedFormTemplateName}
+							selectedEntite={selectedEntite}
+							setSelectedEntite={setSelectedEntite}
+							selectedTemplateName={selectedTemplateName}
+							setSelectedTemplateName={setSelectedTemplateName}
 						/>
 
-						{selectedFormEntite && selectedFormTemplateName && (
-							<Generate
-								project={project}
-								entite={selectedFormEntite}
-								templateName={selectedFormTemplateName}
-							/>
+						{selectedTemplateName && (
+							<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
 						)}
 					</>
 				)}

@@ -9,6 +9,8 @@ import templateReactApi from "./templateReactApi"
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
 import templateReactType from "./templateReactType"
+import templateGlobalReactTypesIndex from "./templateGlobalReactTypesIndex"
+import templateGlobalReactApiIndex from "./templateGlobalReactApiIndex"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
@@ -16,13 +18,13 @@ import { Button } from "react-bootstrap"
 
 type Props = {
 	project: Project
-	entite: Entite
+	entite: Entite | null
 	templateName: string
 }
 
 export default function Generate({ entite, templateName, project }: Props) {
-	const entitePascalName = toPascalCase(entite.name)
-	const entiteCamelName = toCamelCase(entite.name)
+	const entitePascalName = toPascalCase(entite?.name || "???")
+	const entiteCamelName = toCamelCase(entite?.name || "???")
 	const entiteCamelNamePluriel = entiteCamelName + "s"
 
 	const [template, setTemplate] = useState<any>(null)
@@ -45,6 +47,8 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "ReactDisplayInfos") setTemplate(templateReactDisplayInfos(data))
 		else if (templateName === "ReactApi") setTemplate(templateReactApi(data))
 		else if (templateName === "ReactType") setTemplate(templateReactType(data))
+		else if (templateName === "GlobalReactTypesIndex") setTemplate(templateGlobalReactTypesIndex(data))
+		else if (templateName === "GlobalReactApiIndex") setTemplate(templateGlobalReactApiIndex(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

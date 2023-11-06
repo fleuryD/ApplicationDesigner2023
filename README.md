@@ -51,3 +51,69 @@ Lien vers le site : [appDesigner](https://appdesigner.zedixi.com)
 -   Configure the DB server
 -   Run `npm run start:dev` in ./back folder.
 -   Run `npm start` in ./front folder.
+
+## What I've done
+
+### Front-end <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" title="React" alt="react" width="40" height="40"/>
+
+```
+
+npx create-react-app front --template typescript
+
+cd front
+
+npm install @types/node @types/react @types/react-dom @types/jest
+npm install react-router-dom  @types/react-router-dom
+npm install bootstrap react-bootstrap react-router-bootstrap @types/react-bootstrap @types/react-router-bootstrap
+npm install sass
+npm install react-icons
+npm install react-redux @reduxjs/toolkit react-redux
+npm install date-fns
+npm install styled-system styled-components @types/styled-components
+npm install -D eslint prettier eslint-config-prettier
+npm install eslint --init
+npm install react-xarrows
+npm install react-dotenv
+npm install react-draggable
+
+### npm install --save-dev dotenv
+
+
+mkdir src/api
+mkdir src/features
+mkdir src/pages
+mkdir src/store
+mkdir src/styles
+mkdir src/types
+mkdir src/ui
+mkdir src/utils
+
+
+```
+
+### Back-end <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nestjs/nestjs-plain.svg" title="nestJs" alt="nestjs" width="40" height="40"/>
+
+```
+
+npm i -g @nestjs/cli
+nest new back
+
+cd back
+
+npm install -D eslint prettier eslint-config-prettier
+npm install eslint --init
+npm install @nestjs/typeorm typeorm
+npm install pg
+npm install mysql2
+npm install @nestjs/jwt
+npm install @types/bcryptjs bcryptjs
+npm install @nestjs/config
+npm install --save @nestjs/passport @nestjs/jwt passport passport-local passport-jwt
+npm install --save-dev @types/passport-local @types/passport-jwt
+npm install --save @nestjs-modules/mailer nodemailer
+npm install --save-dev @types/nodemailer
+npm install --save handlebars
+npm install date-fns
+
+
+```

@@ -4,7 +4,7 @@ import { Attribut, Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
-	entite: Entite
+	entite: Entite | null
 	entitePascalName: string
 	entiteCamelName: string
 	entiteCamelNamePluriel: string
@@ -16,6 +16,8 @@ export default function templateReactDisplayInfos({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
+	if (!entite) return null
+
 	let str = `// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"

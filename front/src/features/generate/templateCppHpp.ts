@@ -5,13 +5,15 @@ import { toPascalCase /* , toCamelCase, toSnakeCase, toKebabCase, getCase */ } f
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
-	entite: Entite
+	entite: Entite | null
 	entitePascalName: string
 	entiteCamelName: string
 	entiteCamelNamePluriel: string
 }
 
 export default function templateCppHpp({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }: Props) {
+	if (!entite) return null
+
 	let code = `
 #pragma once
 

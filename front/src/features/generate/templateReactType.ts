@@ -6,7 +6,7 @@ import { getEntiteByIdInProject } from "./generate.helpers"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
 	project: Project
-	entite: Entite
+	entite: Entite | null
 	entitePascalName: string
 	entiteCamelName: string
 	entiteCamelNamePluriel: string
@@ -19,6 +19,8 @@ export default function templateReactType({
 	entiteCamelName,
 	entiteCamelNamePluriel,
 }: Props) {
+	if (!entite) return null
+
 	let strAttrs = ""
 	entite.attributs.map((attr: Attribut) => {
 		if (attr.name === "id") return null
