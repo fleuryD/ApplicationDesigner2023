@@ -16,26 +16,26 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 ## Demo
 
-Lien vers le site : <a href="https://appdesigner.zedixi.com" target="_blank">appDesigner</a>
+Lien vers le site : [appDesigner](https://appdesigner.zedixi.com)
 
 ## Project status
 
-| Status |           | Features                                                               |
-| :----- | :-------- | :--------------------------------------------------------------------- |
-| ✅     | Auth      | Registration + eMail validation + Password forgotten                   |
-| ✅     |           | Login + access_token                                                   |
-| ❌     |           | Login with google...                                                   |
-| ❌     |           | Refresh_access_token                                                   |
-| ❌     |           | A user can edit his profil                                             |
-| ✅     | UML       | A user can create, update and delete projects, entities and properties |
-| ✅     | Generator | A user can generate files from entities                                |
-| ❌     |           | Create template engine (twig-style) instead of hard-coded template     |
+| Status |           | Features                                                                   |
+| :----- | :-------- | :------------------------------------------------------------------------- |
+| ✅     | Auth      | Registration + eMail validation + Login + AccessToken + Password forgotten |
+| ❌     | Auth      | Login with google...                                                       |
+| ❌     | Auth      | Refresh_access_token                                                       |
+| ❌     | Auth      | A user can edit his profil                                                 |
+| ✅     | UML       | A user can create, update and delete projects, entities and properties     |
+| ✅     | Generator | A user can generate files from entities                                    |
+| ❌     | Generator | Create template engine (twig-style) instead of hard-coded template         |
 
 ## Built With
 
--   [React](https://reactjs.org)
--   [nestJs](https://nestjs.com/)
--   [TypeScript](http://typescriptlang.org)
+<a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" title="React" alt="react" width="40" height="40"/></a>&nbsp;&nbsp;&nbsp;
+<a href="https://nestjs.com/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nestjs/nestjs-plain.svg" title="nestJs" alt="nestjs" width="40" height="40"/></a>&nbsp;&nbsp;&nbsp;
+<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" title="TypeScript" alt="typescript" width="40" height="40"/></a>&nbsp;&nbsp;&nbsp;
+<a href="https://getbootstrap.com" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" title="bootstrap" alt="bootstrap" width="40" height="40"/></a>
 
 ## Running it locally
 
