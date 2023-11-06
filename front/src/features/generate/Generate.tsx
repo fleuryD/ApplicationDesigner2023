@@ -8,6 +8,7 @@ import templateReactDisplayInfos from "./templateReactDisplayInfos"
 import templateReactApi from "./templateReactApi"
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
+import templateReactType from "./templateReactType"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
@@ -43,6 +44,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "CppCpp") setTemplate(templateCppCpp(data))
 		else if (templateName === "ReactDisplayInfos") setTemplate(templateReactDisplayInfos(data))
 		else if (templateName === "ReactApi") setTemplate(templateReactApi(data))
+		else if (templateName === "ReactType") setTemplate(templateReactType(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

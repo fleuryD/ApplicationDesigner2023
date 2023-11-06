@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite } from "types"
-import {toPascalCase /* toCamelCase, toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
+import { Attribut, Entite } from "types"
+import { toPascalCase /* toCamelCase, toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -19,27 +19,27 @@ export default function templateReactDisplayInfos({
 }: Props) {
 	let constructorArgs = ""
 
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		if (constructorArgs.length > 0) constructorArgs += ", "
 		constructorArgs += ` ${attr.tipe}: ${attr.name}`
 		return constructorArgs
 	})
 
 	let constructorArgsInit = ""
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		if (constructorArgsInit.length > 0) constructorArgsInit += ", "
 		constructorArgsInit += ` _${attr.name}(${attr.name})`
 		return constructorArgsInit
 	})
 
 	let constructorCopyVals = "\n"
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		constructorCopyVals += `        this->_${attr.name} = other.get${toPascalCase(attr.name)}();\n`
 		return constructorCopyVals
 	})
 
 	let getterSetters = ""
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		getterSetters += `
 std::string	Xentite::get${toPascalCase(attr.name)}( void ) const			{	return (this->_${attr.name});	}
 void		Xentite::set${toPascalCase(attr.name)}( std::string ${attr.name} )	{	this->_${attr.name} = ${attr.name};	}\n`

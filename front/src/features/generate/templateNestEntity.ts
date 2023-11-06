@@ -1,6 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite, Project } from "types"
+import { Attribut, Entite, Project } from "types"
+import { getEntiteByIdInProject } from "./generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -9,10 +10,6 @@ type Props = {
 	entitePascalName: string
 	entiteCamelName: string
 	entiteCamelNamePluriel: string
-}
-
-function getEntiteByIdInProject(project: Project, entiteId: number) {
-	return project.entites.find((e) => e.id === entiteId)
 }
 
 export default function templateNestEntity({
@@ -36,7 +33,7 @@ export class ${entitePascalName}{
     id: number
 `
 
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		str += `\n`
 
 		if (attr.tipe === "OneToMany") {
@@ -47,7 +44,6 @@ export class ${entitePascalName}{
 			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
 
 			console.log("*******************targetEntite?.attributs", targetEntite?.attributs)
-			console.log("*******************attr.targetAttrId", attr.targetAttrId)
 
 			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
 			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"

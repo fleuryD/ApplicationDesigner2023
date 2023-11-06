@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite } from "types"
+import { Attribut, Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -34,7 +34,7 @@ export default function XentiteDisplayInfos({ xentite, className }: Props) {
 			<h2>About Xentite <b>{xentite.name}</b></h2>
 			<div className="xentite-display-infos">`
 
-	entite.attributs.map((attr: any) => {
+	entite.attributs.map((attr: Attribut) => {
 		let strValue
 		if (attr.tipe === "Boolean") strValue = `{ xentite.${attr.name} ? "Yes" : "No" }`
 		else if (attr.tipe === "ManyToOne") strValue = `#{ xentite.${attr.name}?.id }`

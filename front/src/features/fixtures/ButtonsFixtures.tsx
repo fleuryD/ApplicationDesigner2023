@@ -43,6 +43,7 @@ function ButtonFixtures({ className, fixtureName, text }: Props) {
 
 	function btClick() {
 		if (!window.confirm("Do you really want to add the fixture " + text + " ?")) return
+		setIsLoading(true)
 
 		setFetchError(null)
 

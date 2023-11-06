@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite } from "types"
+import { Attribut, Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -10,25 +10,21 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
-export default function templateReactApi({
-	entite,
-	entitePascalName,
-	entiteCamelName,
-	entiteCamelNamePluriel,
-}: Props) {
-
-
-    let strAttrs = ""
-    entite.attributs.map((attr: any) => {
-        if (attr.name === "id")
-            return null
-        strAttrs += `			`
-        if (attr.tipe === "OneToMany" || attr.tipe === "ManyToOne" || attr.tipe === "ManyToMany" || attr.name === "createdAt")
-            strAttrs += `// `
-        strAttrs += `${attr.name}: xentite.${attr.name},\n`
+export default function templateReactApi({ entite, entitePascalName, entiteCamelName, entiteCamelNamePluriel }: Props) {
+	let strAttrs = ""
+	entite.attributs.map((attr: Attribut) => {
+		if (attr.name === "id") return null
+		strAttrs += `			`
+		if (
+			attr.tipe === "OneToMany" ||
+			attr.tipe === "ManyToOne" ||
+			attr.tipe === "ManyToMany" ||
+			attr.name === "createdAt"
+		)
+			strAttrs += `// `
+		strAttrs += `${attr.name}: xentite.${attr.name},\n`
 		return strAttrs
 	})
-
 
 	let str = `// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

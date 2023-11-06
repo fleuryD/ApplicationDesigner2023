@@ -13,9 +13,6 @@ type Props = {
 	setSelectedFormTemplateName: any
 }
 
-
-
-
 export default function GenerateMenu({
 	project,
 	selectedFormEntite,
@@ -23,22 +20,18 @@ export default function GenerateMenu({
 	selectedFormTemplateName,
 	setSelectedFormTemplateName,
 }: Props) {
-
-
-    function ButtonTemplate({ text, name, disabled }: { text: string; name: string; disabled?: boolean }) {
-        return (
-            <Button
-                className="m-1 btn-xs"
-                variant={selectedFormTemplateName === name ? "primary" : "secondary"}
-                onClick={() => setSelectedFormTemplateName(name)}
-                disabled={disabled}
-            >
-                {text}
-            </Button>
-        )
-    }
-
-
+	function ButtonTemplate({ text, name, disabled }: { text: string; name: string; disabled?: boolean }) {
+		return (
+			<Button
+				className="m-1 btn-xs"
+				variant={selectedFormTemplateName === name ? "primary" : "secondary"}
+				onClick={() => setSelectedFormTemplateName(name)}
+				disabled={disabled}
+			>
+				{text}
+			</Button>
+		)
+	}
 
 	if (!project) return null
 
@@ -50,7 +43,7 @@ export default function GenerateMenu({
 
 					{project && (
 						<div className="m-1 p-1">
-							{project.entites.map((entite: any) => (
+							{project.entites.map((entite: Entite) => (
 								<Button
 									key={"bt-entite" + entite.id}
 									className="m-1 btn-sm"
@@ -71,35 +64,35 @@ export default function GenerateMenu({
 						<h2>Templates:</h2>
 
 						<div className="d-inline-block border border-primary m-1 p-1">
-							<span className="text-primary" >NestJs</span>
+							<span className="text-primary">NestJs</span>
 							<ButtonTemplate text="Entity" name="NestEntity" />
 							<ButtonTemplate text="Controller" name="NestController" disabled />
 							<ButtonTemplate text="Module" name="NestModule" />
 							<ButtonTemplate text="Service" name="NestService" disabled />
 						</div>
 						<div className="d-inline-block border border-primary m-1 p-1">
-							<span className="text-primary" >React (ts)</span>
+							<span className="text-primary">React (ts)</span>
 							<ButtonTemplate text="DisplayInfos" name="ReactDisplayInfos" />
-							<ButtonTemplate text="type" name="ReactType" disabled />
+							<ButtonTemplate text="type" name="ReactType" />
 							<ButtonTemplate text="Form" name="ReactForm" disabled />
 							<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
 							<ButtonTemplate text="Api" name="ReactApi" />
 						</div>
 						<div className="d-inline-block border border-primary m-1 p-1">
-							<span className="text-primary" >Symfony</span>
+							<span className="text-primary">Symfony</span>
 							<ButtonTemplate text="entity" name="SfyEntity" disabled />
 							<ButtonTemplate text="controller" name="SfyController" disabled />
 							<ButtonTemplate text="form" name="SfyForm" disabled />
 							<ButtonTemplate text="repository" name="SfyRepository" disabled />
 						</div>
 						<div className="d-inline-block border border-primary m-1 p-1">
-							<span className="text-primary" >Twig (Sfy)</span>
+							<span className="text-primary">Twig (Sfy)</span>
 							<ButtonTemplate text="Show" name="TwigShow" disabled />
 							<ButtonTemplate text="index" name="TwigIndex" disabled />
 							<ButtonTemplate text="form" name="TwigForm" disabled />
 						</div>
 						<div className="d-inline-block  border border-primary m-1 p-1">
-							<span className="text-primary" >C++</span>
+							<span className="text-primary">C++</span>
 							<ButtonTemplate text=".hpp" name="CppHpp" />
 							<ButtonTemplate text=".cpp" name="CppCpp" />
 						</div>

@@ -14,6 +14,10 @@ type Props = {
 //.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
 
 export default function UmlArrows({ project }: Props) {
+	const colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "rgb(25, 89, 153)", "#FFA500"]
+
+	let i = 0
+
 	return (
 		<>
 			{project.entites.map((entite: Entite) => {
@@ -28,10 +32,11 @@ export default function UmlArrows({ project }: Props) {
 									showHead
 									showTail
 									tailShape="circle"
-									//strokeWidth={3}
+									strokeWidth={2}
 									//headSize={3}
 									tailSize={3}
-									color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+									color={colors[i++ % colors.length]}
+									//color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
 								/>
 							)
 						}
@@ -47,10 +52,11 @@ export default function UmlArrows({ project }: Props) {
 								//headShape="circle"
 								showTail
 								tailShape="circle"
-								//strokeWidth={3}
+								strokeWidth={2}
 								//headSize={2}
 								tailSize={3}
-								color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+								color={colors[i++ % colors.length]}
+								//color={"#" + Math.floor(Math.random() * 16777215).toString(16)}
 							/>
 						)
 					}
