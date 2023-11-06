@@ -21,8 +21,6 @@ export default function FormAttribut({ attributItem, project }: { attributItem: 
 	const [isLoading, setIsLoading] = useState(false)
 
 	console.log("attributItem", attributItem)
-	// const dispatch = useAppDispatch()
-	//	const navigate = useNavigate()
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 

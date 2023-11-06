@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import zFetcher from "utils/zFetcher"
-import { Entite } from "types"
+// import { Entite } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -12,7 +12,7 @@ export async function apiFetchUsers() {
 	})
 }
 
-export async function apiFetchUser(userId:number) {
+export async function apiFetchUser(userId: number) {
 	return zFetcher({
 		shortUrl: "/users/" + userId,
 		method: "GET",
@@ -25,4 +25,3 @@ export async function apiFetchUserMe() {
 		method: "GET",
 	})
 }
-

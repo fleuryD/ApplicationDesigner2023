@@ -14,15 +14,18 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 -   **Multi-Language Template Generation**: Generate code templates in various programming languages, saving you time and effort.
 
+## Demo
+
+Lien vers le site : [appDesigner](https://appdesigner.zedixi.com)
+
 ## Project status
 
 | Status |           | Features                                                               | Notes |
 | :----- | :-------- | :--------------------------------------------------------------------- | ----- |
-| ✅     | Auth      | Registration + email validation                                        |       |
+| ✅     | Auth      | Registration + eMail validation + Password forgotten                   |       |
 | ✅     |           | Login + access_token                                                   |       |
 | ❌     |           | Login with google...                                                   |       |
 | ❌     |           | Refresh_access_token                                                   |       |
-| ❌     |           | Password forgotten                                                     |       |
 | ❌     |           | A user can edit his profil                                             |       |
 | ✅     | UML       | A user can create, update and delete projects, entities and properties |       |
 | ✅     | Generator | A user can generate files from entities                                |       |
@@ -48,5 +51,3 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 -   Configure the DB server
 -   Run `npm run start:dev` in ./back folder.
 -   Run `npm start` in ./front folder.
-
-## Demo

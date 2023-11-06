@@ -6,7 +6,7 @@ import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
 import ButtonCreateAttribut from "features/attributs/ButtonCreateAttribut"
 import { ButtonFixtureAttributId } from "features/fixtures/ButtonsFixtures"
-import Draggable, { DraggableCore } from "react-draggable"
+import Draggable from "react-draggable"
 import { apiSetEntiteUmlPosition } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

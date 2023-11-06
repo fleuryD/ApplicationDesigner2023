@@ -2,18 +2,14 @@
 
 import React from "react"
 import { useAppSelector } from "store/store"
-import { Entite, Project } from "types"
+import { Project } from "types"
 import UmlEntite from "features/uml/UmlEntite"
 import ButtonCreateEntite from "features/entites/ButtonCreateEntite"
 import FormEntite from "features/entites/FormEntite"
 import FormAttribut from "features/attributs/FormAttribut"
 import { ButtonFixtureEntiteUser } from "features/fixtures/ButtonsFixtures"
-
-import Draggable from "react-draggable"
-
 import UmlArrows from "./UmlArrows"
-import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
-import { apiSetEntiteUmlPosition } from "api"
+import { useXarrow } from "react-xarrows"
 import FixtureMaker from "features/fixtures/FixtureMaker"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■

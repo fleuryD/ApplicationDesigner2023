@@ -15,7 +15,7 @@ import PageAuthResetPassword from "pages/auth/PageAuthResetPassword"
 // * private routes
 import Page404 from "pages/Page404"
 import PageHome from "pages/PageHome"
-import PageDev from "pages/PageDev"
+//import PageDev from "pages/PageDev"
 //import PageAdminUser from "pages/PageAdminUser"
 //import PageAdminUsers from "pages/PageAdminUsers"
 import PageProject from "pages/PageProject"

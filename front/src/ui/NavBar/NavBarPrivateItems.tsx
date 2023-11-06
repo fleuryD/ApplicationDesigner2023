@@ -2,13 +2,14 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
-import { Nav, NavDropdown } from "react-bootstrap"
+import { Nav /*, NavDropdown */ } from "react-bootstrap"
 import NavBarDropdownConnectedUser from "./NavBarDropdownConnectedUser"
-import { FaBan, FaUsers, FaQuestion } from "react-icons/fa"
+import { /* FaBan, FaUsers, */ FaQuestion } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function NavBarPrivateItems() {
+	/*
 	function NavBarDropdownAdmin() {
 		return (
 			<NavDropdown
@@ -23,13 +24,14 @@ export default function NavBarPrivateItems() {
 				<NavDropdown.Item as={Link} to="/admin/users">
 					<FaUsers /> Admin: Users
 				</NavDropdown.Item>
-				*/}
+				* /}
 				<NavDropdown.Item as={Link} to="/dev">
 					<FaBan /> Dev
 				</NavDropdown.Item>
 			</NavDropdown>
 		)
 	}
+	*/
 
 	return (
 		<>

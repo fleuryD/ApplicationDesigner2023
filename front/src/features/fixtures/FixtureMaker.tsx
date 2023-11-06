@@ -1,9 +1,9 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { useAppSelector } from "store/store"
+// import { useAppSelector } from "store/store"
 import { Attribut, Entite, Project } from "types"
-import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
+import { toCamelCase, toPascalCase /*, toSnakeCase, toKebabCase, getCase */ } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 

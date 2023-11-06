@@ -2,16 +2,13 @@
 
 import React from "react"
 import { Entite, Project, Attribut } from "types"
-
-import Xarrow, { useXarrow, Xwrapper } from "react-xarrows"
+import Xarrow from "react-xarrows"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
 	project: Project
 }
-
-//.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
 
 export default function UmlArrows({ project }: Props) {
 	const colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "rgb(25, 89, 153)", "#FFA500"]

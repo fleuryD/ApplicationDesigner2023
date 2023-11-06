@@ -9,6 +9,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 export function containsSpecialChars(str: string) {
-	const specialChars = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+	const specialChars = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
 	return specialChars.test(str)
 }
