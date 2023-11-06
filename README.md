@@ -16,20 +16,20 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 ## Demo
 
-Lien vers le site : [appDesigner](https://appdesigner.zedixi.com)
+Lien vers le site : <a href="https://appdesigner.zedixi.com" target="_blank">appDesigner</a>
 
 ## Project status
 
-| Status |           | Features                                                               | Notes |
-| :----- | :-------- | :--------------------------------------------------------------------- | ----- |
-| ✅     | Auth      | Registration + eMail validation + Password forgotten                   |       |
-| ✅     |           | Login + access_token                                                   |       |
-| ❌     |           | Login with google...                                                   |       |
-| ❌     |           | Refresh_access_token                                                   |       |
-| ❌     |           | A user can edit his profil                                             |       |
-| ✅     | UML       | A user can create, update and delete projects, entities and properties |       |
-| ✅     | Generator | A user can generate files from entities                                |       |
-| ❌     |           | Create template engine (twig-style) instead of hard-coded template     |       |
+| Status |           | Features                                                               |
+| :----- | :-------- | :--------------------------------------------------------------------- |
+| ✅     | Auth      | Registration + eMail validation + Password forgotten                   |
+| ✅     |           | Login + access_token                                                   |
+| ❌     |           | Login with google...                                                   |
+| ❌     |           | Refresh_access_token                                                   |
+| ❌     |           | A user can edit his profil                                             |
+| ✅     | UML       | A user can create, update and delete projects, entities and properties |
+| ✅     | Generator | A user can generate files from entities                                |
+| ❌     |           | Create template engine (twig-style) instead of hard-coded template     |
 
 ## Built With
 
