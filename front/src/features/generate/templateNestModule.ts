@@ -23,8 +23,8 @@ export default function templateNestModule({
 
 import { Module } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { ${entiteCamelNamePluriel}Service } from "./${entiteCamelNamePluriel}.service"
-import { ${entiteCamelNamePluriel}Controller } from "./${entiteCamelNamePluriel}.controller"
+import { ${entitePascalName}sService } from "./${entiteCamelNamePluriel}.service"
+import { ${entitePascalName}sController } from "./${entiteCamelNamePluriel}.controller"
 import { ${entitePascalName} } from "./${entiteCamelName}.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
@@ -32,11 +32,11 @@ import { ${entitePascalName} } from "./${entiteCamelName}.entity"
 @Module({
     imports: [TypeOrmModule.forFeature([${entitePascalName}])],
     exports: [TypeOrmModule],
-    providers: [${entiteCamelNamePluriel}Service],
-    controllers: [${entiteCamelNamePluriel}Controller],
+    providers: [${entitePascalName}sService],
+    controllers: [${entitePascalName}sController],
 })
 
-export class ${entiteCamelNamePluriel}Module {}`
+export class ${entitePascalName}sModule {}`
 
 	return {
 		code,

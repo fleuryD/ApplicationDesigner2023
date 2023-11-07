@@ -1,15 +1,10 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-/*
- *	usage :
- *
- *	import { User, Project, Entite, Attribut } from "../_entities"
- *
- */
+
+import { Logger } from "@nestjs/common"
+import { User } from "../users"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-export { User } from "./users/user.entity"
-export { Project } from "./projects/project.entity"
-export { Entite } from "./entites/entite.entity"
-export { Attribut } from "./attributs/attribut.entity"
-export { Adresse } from "./adresses/adresse.entity"
+export async function fixtureProjetSL(user: User) {
+	Logger.log("Fixtures:: projet: 42 Matcha - For user:", user.username)
+}

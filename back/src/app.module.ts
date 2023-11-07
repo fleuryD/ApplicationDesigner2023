@@ -19,6 +19,7 @@ import { UsersService } from "./users/users.service"
 import { Project, ProjectsController, ProjectsService } from "./projects"
 import { Entite, EntitesController, EntitesService } from "./entites"
 import { Attribut, AttributsController, AttributsService } from "./attributs"
+import { Adresse, AdressesController, AdressesService } from "./adresses"
 
 import { AuthService } from "./_services"
 import { AppController } from "./app.controller"
@@ -52,13 +53,13 @@ import {
 			username: CONST_DB_USERNAME,
 			password: CONST_DB_PASSWORD,
 			synchronize: CONST_DB_SYNCHRONIZE_WITH_ENTITIES,
-			entities: [User, Project, Entite, Attribut],
+			entities: [User, Project, Entite, Attribut, Adresse],
 		}),
 		JwtModule.register({
 			secret: CONST_JWT_SECRET,
 			signOptions: { expiresIn: CONST_JWT_EXPIRES_IN },
 		}),
-		TypeOrmModule.forFeature([User, Project, Entite, Attribut]),
+		TypeOrmModule.forFeature([User, Project, Entite, Attribut, Adresse]),
 		MailModule,
 		CustomLogger,
 	],
@@ -77,6 +78,7 @@ import {
 		EntitesService,
 		AttributsService,
 		UsersService,
+		AdressesService,
 	],
 
 	controllers: [
@@ -86,6 +88,7 @@ import {
 		ProjectsController,
 		EntitesController,
 		AttributsController,
+		AdressesController,
 	],
 })
 export class AppModule {}

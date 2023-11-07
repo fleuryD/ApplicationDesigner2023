@@ -7,7 +7,7 @@ import {
 	ManyToOne,
 	OneToMany,
 } from "typeorm"
-import { User, Entite } from "../_entities"
+import { User, Entite, Adresse } from "../_entities"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -43,6 +43,9 @@ export class Project {
 		eager: true,
 	})
 	public entites: Entite[]
+
+	@OneToMany(() => Adresse, (adresse: Adresse) => adresse.projet, { eager: true })
+	public adresses: Adresse[]
 
 	/*
 	urlLocal: string // OU Relation Url

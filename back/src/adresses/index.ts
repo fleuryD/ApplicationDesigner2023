@@ -2,14 +2,13 @@
 /*
  *	usage :
  *
- *	import { User, Project, Entite, Attribut } from "../_entities"
+ *	import { Adresse, AdressesController, AdressesModule, AdressesService } from "../adresses"
  *
  */
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-export { User } from "./users/user.entity"
-export { Project } from "./projects/project.entity"
-export { Entite } from "./entites/entite.entity"
-export { Attribut } from "./attributs/attribut.entity"
-export { Adresse } from "./adresses/adresse.entity"
+export { Adresse } from "./adresse.entity"
+export { AdressesService } from "./adresses.service"
+export { AdressesController } from "./adresses.controller"
+export { AdressesModule } from "./adresses.module"

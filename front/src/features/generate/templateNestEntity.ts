@@ -51,7 +51,7 @@ export class ${entitePascalName}{
 			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"
 
 			str += `    @OneToMany(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName}, { eager: true, } )  \n`
-			str += `    public ${attr.name}s: ${targetEntiteName}[]  \n`
+			str += `    public ${attr.name}: ${targetEntiteName}[]  \n`
 		} else if (attr.tipe === "ManyToOne") {
 			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
 			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)

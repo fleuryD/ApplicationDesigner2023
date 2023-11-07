@@ -1,15 +1,17 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-/*
- *	usage :
- *
- *	import { User, Project, Entite, Attribut } from "../_entities"
- *
- */
+
+import { Module } from "@nestjs/common"
+import { TypeOrmModule } from "@nestjs/typeorm"
+import { AdressesService } from "./adresses.service"
+import { AdressesController } from "./adresses.controller"
+import { Adresse } from "./adresse.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-export { User } from "./users/user.entity"
-export { Project } from "./projects/project.entity"
-export { Entite } from "./entites/entite.entity"
-export { Attribut } from "./attributs/attribut.entity"
-export { Adresse } from "./adresses/adresse.entity"
+@Module({
+	imports: [TypeOrmModule.forFeature([Adresse])],
+	exports: [TypeOrmModule],
+	providers: [AdressesService],
+	controllers: [AdressesController],
+})
+export class AdressesModule {}

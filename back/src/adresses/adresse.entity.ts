@@ -1,15 +1,29 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
-/*
- *	usage :
- *
- *	import { User, Project, Entite, Attribut } from "../_entities"
- *
- */
+
+import {
+	Entity,
+	Column,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	ManyToOne,
+	OneToMany,
+	ManyToMany,
+} from "typeorm"
+import { Project } from "../projects/project.entity"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
-export { User } from "./users/user.entity"
-export { Project } from "./projects/project.entity"
-export { Entite } from "./entites/entite.entity"
-export { Attribut } from "./attributs/attribut.entity"
-export { Adresse } from "./adresses/adresse.entity"
+@Entity("adresses")
+export class Adresse {
+	@PrimaryGeneratedColumn()
+	id: number
+
+	@Column()
+	url: string
+
+	@Column({ nullable: true })
+	name: string
+
+	@ManyToOne(() => Project, (project: Project) => project.adresses)
+	public projet: Project
+}
