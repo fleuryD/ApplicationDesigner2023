@@ -33,7 +33,6 @@ export class AdressesController {
 	async newAdresse(
 		@Param() params,
 		@UserFromToken() userFromToken,
-		@Body("id") id: number,
 		@Body("url") url: string,
 		@Body("name") name: string
 	) {
@@ -45,7 +44,6 @@ export class AdressesController {
 
 		try {
 			const adresse = await this.adressesService.create({
-				id,
 				url,
 				name,
 				projet,
@@ -76,7 +74,6 @@ export class AdressesController {
 		let adresse = await this.adressesService.findOneById(params.id)
 
 		Logger.log(adresse.name)
-		adresse.id = id
 		adresse.url = url
 		adresse.name = name
 		//// adresse.projet = projet

@@ -62,7 +62,7 @@ export default function FormAdresse({ project, adresseItem }: { project: Project
 			apiCreateAdresse(project.id, formItem).then((response) => {
 				if (response.adresse) {
 					dispatch(appSetSelectedFormAdresse(null))
-					//window.location.reload() // !!!!!!!!!!!!!!
+					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
 				}
@@ -73,7 +73,7 @@ export default function FormAdresse({ project, adresseItem }: { project: Project
 			apiEditAdresse(formItem).then((response) => {
 				if (response.adresse) {
 					dispatch(appSetSelectedFormAdresse(null))
-					//window.location.reload() // !!!!!!!!!!!!!!
+					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
 				}

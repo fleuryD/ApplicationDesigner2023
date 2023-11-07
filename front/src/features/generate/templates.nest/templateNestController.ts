@@ -25,6 +25,14 @@ export default function templateNestController({
 	let codeEditAttributes = ``
 
 	entite.attributs.map((attr: Attribut) => {
+		if (
+			attr.name === "id" ||
+			attr.name === "createdAt" ||
+			attr.tipe === "OneToMany" ||
+			attr.tipe === "ManyToOne" ||
+			attr.tipe === "ManyToMany"
+		)
+			return null
 		codeNewAttributes += `				${attr.name}, \n`
 		codeEditAttributes += `		xentite.${attr.name} = ${attr.name}\n`
 		codeBodyParams += `		@Body("${attr.name}") ${attr.name}: ${attr.tipe},\n`

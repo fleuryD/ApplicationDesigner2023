@@ -103,7 +103,8 @@ $sectionGap: 5px;
 }
 
 .btn-xs {
-	padding: 0.1em !important;
+	//padding: 0.1em !important;
+	padding: 0.1em 0.2em 0.1em 0.2em !important;
 	font-size: 0.8em !important;
 }
 .row {
@@ -114,6 +115,14 @@ $sectionGap: 5px;
 .table-xs {
 	td {
 		padding: 0px !important;
+	}
+}
+
+.clickText {
+	color: $primary;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
 	}
 }
 

@@ -61,8 +61,9 @@ export default function PageProjectHeader({ project, mode }: Props) {
 							<li key={"proj-addr-" + addr.id}>
 								<a href={addr.url} target="_blank" rel="noreferrer">
 									{addr.name || addr.url}
-								</a>
-								<ButtonEditAdresse adresse={addr} />
+								</a>{" "}
+								&nbsp;&nbsp;
+								<ButtonEditAdresse adresse={addr} className="btn-xs" />
 							</li>
 						))}
 					</ul>
