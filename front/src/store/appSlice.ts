@@ -3,7 +3,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import { createSlice } from "@reduxjs/toolkit"
-import { Project, Entite, Attribut } from "types"
+import { Project, Entite, Attribut, Adresse } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -12,6 +12,7 @@ interface AppState {
 	selectedFormProject: Project | null
 	selectedFormEntite: Entite | null
 	selectedFormAttribut: Attribut | null
+	selectedFormAdresse: Adresse | null
 }
 
 // Initial state
@@ -19,6 +20,7 @@ const initialState: AppState = {
 	selectedFormProject: null,
 	selectedFormEntite: null,
 	selectedFormAttribut: null,
+	selectedFormAdresse: null,
 }
 
 // Actual Slice
@@ -35,10 +37,18 @@ export const appSlice = createSlice({
 		appSetSelectedFormAttribut(state, action) {
 			state.selectedFormAttribut = action.payload
 		},
+		appSetSelectedFormAdresse(state, action) {
+			state.selectedFormAdresse = action.payload
+		},
 	},
 })
 
-export const { appSetSelectedFormProject, appSetSelectedFormEntite, appSetSelectedFormAttribut } = appSlice.actions
+export const {
+	appSetSelectedFormProject,
+	appSetSelectedFormEntite,
+	appSetSelectedFormAttribut,
+	appSetSelectedFormAdresse,
+} = appSlice.actions
 
 export default appSlice.reducer
 /*

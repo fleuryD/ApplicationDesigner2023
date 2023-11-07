@@ -2,17 +2,22 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import { Project, Entite } from "types"
-import templateNestEntity from "./templateNestEntity"
-import templateNestModule from "./templateNestModule"
-import templateReactDisplayInfos from "./templateReactDisplayInfos"
-import templateReactApi from "./templateReactApi"
+
+import templateNestEntity from "./templates.nest/templateNestEntity"
+import templateNestModule from "./templates.nest/templateNestModule"
+import templateNestService from "./templates.nest/templateNestService"
+
+import templateReactDisplayInfos from "./templates.react/templateReactDisplayInfos"
+import templateReactApi from "./templates.react/templateReactApi"
+import templateReactType from "./templates.react/templateReactType"
+import templateReactButtonCreate from "./templates.react/templateReactButtonCreate"
+import templateGlobalReactTypesIndex from "./templates.react/templateGlobalReactTypesIndex"
+import templateGlobalReactApiIndex from "./templates.react/templateGlobalReactApiIndex"
+import templateReactForm from "./templates.react/templateReactForm"
+
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
-import templateReactType from "./templateReactType"
-import templateGlobalReactTypesIndex from "./templateGlobalReactTypesIndex"
-import templateGlobalReactApiIndex from "./templateGlobalReactApiIndex"
-import templateNestService from "./templateNestService"
-import templateNestController from "./templateNestController"
+import templateNestController from "./templates.nest/templateNestController"
 import templateGlobalCreateFiles from "./templateGlobalCreateFiles"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
@@ -55,6 +60,8 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "NestService") setTemplate(templateNestService(data))
 		else if (templateName === "NestController") setTemplate(templateNestController(data))
 		else if (templateName === "GlobalCreateFiles") setTemplate(templateGlobalCreateFiles(data))
+		else if (templateName === "ReactButtonCreate") setTemplate(templateReactButtonCreate(data))
+		else if (templateName === "ReactForm") setTemplate(templateReactForm(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 
@@ -79,7 +86,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 			<div className="zSectionInner ">
 				<div id="templateHeader" className="row col-12">
 					<h5>
-						file: &nbsp;&nbsp;&nbsp;
+						touch: &nbsp;&nbsp;
 						<span className="text-primary">{template?.filePath}</span>
 						<span className="text-success">{template?.fileName}</span>
 						<Button onClick={handleCopyToClipboard} className="float-end">

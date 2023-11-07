@@ -2,19 +2,19 @@
 
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedFormEntite } from "store/appSlice"
-import { apiCreateEntity, apiEditEntity, apiDeleteEntityById } from "api"
+import { appSetSelectedFormAdresse } from "store/appSlice"
+import { apiCreateAdresse, apiEditAdresse, apiDeleteAdresseById } from "api"
 import ZModal from "ui/ZModal"
-import FormEntiteInner from "./FormEntiteInner"
-import { getCase } from "utils/helpers-case"
-import { containsSpecialChars } from "utils/helpers-str"
-import { Entite } from "types"
+import FormAdresseInner from "./FormAdresseInner"
+//import { getCase } from "utils/helpers-case"
+//import { containsSpecialChars } from "utils/helpers-str"
+import { Adresse } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormEntite({ projectId, EntiteItem }: { projectId: number; EntiteItem: Entite }) {
+export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 	const dispatch = useAppDispatch()
-	const [formItem, setFormItem] = useState<Entite>(EntiteItem)
+	const [formItem, setFormItem] = useState<Adresse>(adresseItem)
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
 	const [isLoading, setIsLoading] = useState(false)
@@ -25,6 +25,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 		let errorCount = 0
 
 		// ******************* Check: name
+		/*
 		if (!formItem.name || formItem.name.length < 2) {
 			errorCount++
 			setFormErrors({ ...formErrors, name: "Le nom doit faire au moins 2 characteres." })
@@ -35,6 +36,7 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 			errorCount++
 			setFormErrors({ ...formErrors, name: "Le nom doit etre en PascalCase" })
 		}
+		*/
 
 		return errorCount
 	}
@@ -63,10 +65,10 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 
 		if (checkErrors() > 0) return
 
-		if (EntiteItem.id === 0) {
-			apiCreateEntity(projectId, formItem).then((response) => {
-				if (response.entite) {
-					dispatch(appSetSelectedFormEntite(null))
+		if (adresseItem.id === 0) {
+			apiCreateAdresse(formItem).then((response) => {
+				if (response.adresse) {
+					dispatch(appSetSelectedFormAdresse(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
@@ -75,9 +77,9 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 				setIsLoading(false)
 			})
 		} else {
-			apiEditEntity(formItem).then((response) => {
-				if (response.entite) {
-					dispatch(appSetSelectedFormEntite(null))
+			apiEditAdresse(formItem).then((response) => {
+				if (response.adresse) {
+					dispatch(appSetSelectedFormAdresse(null))
 					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
@@ -89,11 +91,11 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 	}
 
 	const btDeleteClick = async () => {
-		if (!window.confirm("Do you really want to delete entity " + EntiteItem.name + " ?")) return
+		if (!window.confirm("Do you really want to delete entity " + adresseItem.name + " ?")) return
 
-		apiDeleteEntityById(EntiteItem.id).then((response) => {
+		apiDeleteAdresseById(adresseItem.id).then((response) => {
 			if (response.success) {
-				dispatch(appSetSelectedFormEntite(null))
+				dispatch(appSetSelectedFormAdresse(null))
 				window.location.reload() // !!!!!!!!!!!!!!
 			} else {
 				handleFetchErrorResponse(response)
@@ -105,9 +107,11 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
+	return <>FormAdresseInner</>
+	/*
 	return (
-		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormEntite(null))}>
-			<FormEntiteInner
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormAdresse(null))}>
+			<FormAdresseInner
 				formItem={formItem}
 				formErrors={formErrors}
 				setFormItem={setFormItem}
@@ -119,4 +123,5 @@ export default function FormEntite({ projectId, EntiteItem }: { projectId: numbe
 			/>
 		</ZModal>
 	)
+	*/
 }

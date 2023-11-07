@@ -93,9 +93,10 @@ export default function GenerateMenu({
 								<span className="text-primary">React (ts)</span>
 								<ButtonTemplate text="DisplayInfos" name="ReactDisplayInfos" />
 								<ButtonTemplate text="type" name="ReactType" />
-								<ButtonTemplate text="Form" name="ReactForm" disabled />
+								<ButtonTemplate text="Form" name="ReactForm" />
 								<ButtonTemplate text="FormInner" name="ReactFormInner" disabled />
 								<ButtonTemplate text="Api" name="ReactApi" />
+								<ButtonTemplate text="Button Create" name="ReactButtonCreate" />
 							</div>
 							<div className="d-inline-block border border-primary m-1 p-1">
 								<span className="text-primary">Symfony</span>

@@ -112,7 +112,7 @@ export default function FixtureMaker({ project }: Props) {
 		entite.attributs.map((attr: Attribut) => {
 			if (attr.inverseAttributId) {
 				const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
-				console.log("targetEntite", targetEntite)
+				//console.log("targetEntite", targetEntite)
 				const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
 
 				const inverseAttribut = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
