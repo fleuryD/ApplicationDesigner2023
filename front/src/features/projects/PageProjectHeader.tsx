@@ -72,9 +72,9 @@ export default function PageProjectHeader({ project, mode }: Props) {
 			)}
 
 			{mode === "UML" ? (
-				<ProjectGenerateLink project={project} text="Generate project" />
+				<ProjectGenerateLink project={project} text="Generate code" />
 			) : (
-				<ProjectLink project={project} text="back to UML" />
+				<ProjectLink project={project} text="UML" />
 			)}
 		</header>
 	)

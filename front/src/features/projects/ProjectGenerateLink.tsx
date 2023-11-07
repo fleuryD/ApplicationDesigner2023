@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
+import { /* FaProjectDiagram, */ FaCode } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -14,8 +15,8 @@ export default function ProjectGenerateLink({ project, text }: Props) {
 	if (!project) return null
 
 	return (
-		<Link to={"/projects/" + project.id + "/generate"} title="Click to generate project.">
-			{text ? text : <>{project.name + " "}</>}
+		<Link to={"/projects/" + project.id + "/generate"} title="Click to generate code.">
+			{text ? text : <>{project.name + " "}</>} <FaCode />
 		</Link>
 	)
 }

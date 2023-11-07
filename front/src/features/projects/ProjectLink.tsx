@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Link } from "react-router-dom"
+import { FaProjectDiagram /*,  FaCode */ } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -15,7 +16,7 @@ export default function ProjectLink({ project, text }: Props) {
 
 	return (
 		<Link to={"/projects/" + project.id} title="Click to see project.">
-			{text ? text : <>{project.name + " "}</>}
+			{text ? text : <>{project.name + " "}</>} <FaProjectDiagram />
 		</Link>
 	)
 }

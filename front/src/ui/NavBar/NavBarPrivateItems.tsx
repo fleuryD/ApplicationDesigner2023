@@ -4,7 +4,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { Nav /*, NavDropdown */ } from "react-bootstrap"
 import NavBarDropdownConnectedUser from "./NavBarDropdownConnectedUser"
-import { /* FaBan, FaUsers, */ FaQuestion } from "react-icons/fa"
+import { /* FaBan, FaUsers,  FaQuestion, FaProjectDiagram, */ FaFolder } from "react-icons/fa"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -36,7 +36,7 @@ export default function NavBarPrivateItems() {
 	return (
 		<>
 			<Nav.Link as={Link} to="/">
-				<FaQuestion /> Mes projets
+				<FaFolder /> Mes projets
 			</Nav.Link>
 			{/*
 			<Nav.Link as={Link} to="/xxx2">
