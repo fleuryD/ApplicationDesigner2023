@@ -96,13 +96,19 @@ export default function FormAttributInner({
 					formData={formData}
 					selectOptions={[
 						{ value: "", text: "" },
-						{ value: "string", text: "String" },
+						{ value: "char", text: "Character (SQL: CHAR)" },
+						{ value: "string", text: "String (SQL: VARCHAR)" },
+						{ value: "Text", text: "String (SQL: TEXT)" },
+						{ value: "", text: "------------------------------------", disabled: true },
 						{ value: "boolean", text: "Boolean" },
+						{ value: "", text: "------------------------------------", disabled: true },
 						{ value: "date", text: "Date" },
 						{ value: "datetime", text: "DateTime" },
-						{ value: "Decimal", text: "Decimal" },
-						{ value: "Float", text: "Float" },
-						{ value: "Integer", text: "Integer" },
+						{ value: "", text: "------------------------------------", disabled: true },
+						{ value: "Integer", text: "Integer (SQL: INT)" },
+						{ value: "Decimal", text: "Decimal (SQL: DECIMAL)" },
+						{ value: "Float", text: "Float (SQL: REAL)" },
+						{ value: "", text: "------------------------------------", disabled: true },
 						{
 							value: "OneToMany",
 							text:

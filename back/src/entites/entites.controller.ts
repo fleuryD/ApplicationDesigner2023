@@ -2,14 +2,13 @@
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
-	BadRequestException,
+	InternalServerErrorException,
 	Body,
 	Controller,
 	Get,
 	Post,
 	Delete,
 	Param,
-	Headers,
 } from "@nestjs/common"
 import { EntitesService } from "./entites.service"
 import { ProjectsService } from "../projects/projects.service"
@@ -28,13 +27,12 @@ export class EntitesController {
 	/*
 	 * *************************************************************************
 	 *
-	 * 	ADD ENTITE TO PROJECT TARGETED BY :id
+	 * 	SET ENTITE'S POSITION IN THE UML
 	 *
 	 */
 	@Post("/set-uml-position/:id")
 	async setEntiteUmlPosition(
 		@Param() params,
-		@Headers() headers,
 		@Body("posX") posX: number,
 		@Body("posY") posY: number,
 		@UserFromToken() userFromToken
@@ -50,7 +48,7 @@ export class EntitesController {
 			entite = await this.entitesService.setUmlPosition(entite, posX, posY)
 			return { entite: entite }
 		} catch (e) {
-			throw new BadRequestException("INTERNAL_ERROR")
+			throw new InternalServerErrorException("INTERNAL_ERROR")
 		}
 	}
 
@@ -63,7 +61,6 @@ export class EntitesController {
 	@Post("/new/project/:id")
 	async newEntite(
 		@Param() params,
-		@Headers() headers,
 		@Body("name") name: string,
 		@Body("description") description: string,
 		@Body("infos") infos: string,
@@ -87,7 +84,7 @@ export class EntitesController {
 
 			return { entite: entite }
 		} catch (e) {
-			throw new BadRequestException("INTERNAL_ERROR")
+			throw new InternalServerErrorException("INTERNAL_ERROR")
 		}
 	}
 
@@ -160,9 +157,6 @@ export class EntitesController {
 		})
 		const entite = await this.entitesService.findOneById(params.id)
 
-		return {
-			entite: entite,
-		}
 		return {
 			entite: entite,
 		}

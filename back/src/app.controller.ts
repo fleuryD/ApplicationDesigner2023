@@ -1126,7 +1126,682 @@ export class AppController {
 	}
 
 	@Get("/fixtures/project-ad")
-	async fixtureProjetAD(@UserFromToken() userFromToken) {
+	async fixtureProjetApplicationDesigner(@UserFromToken() userFromToken) {
+		const user = await this.usersService.findOneById(userFromToken.id)
+		Logger.log("🟠 /fixtures/projet/applicationDesigner - For user:", user.username)
+
+		try {
+			// ************** PROJECT **************
+			const projectApplicationDesigner = await this.projectsService.create({
+				name: "ApplicationDesignerFixture",
+				description: "null",
+				infos: "null",
+				isWip: "false",
+				createdBy: user,
+			})
+
+			// ************** ENTITES **************
+
+			const entiteUser = await this.entitesService.create({
+				project: projectApplicationDesigner,
+				name: "User",
+				description: "null",
+				infos: "10",
+				isWip: 10,
+				umlPosX: 10,
+				umlPosY: 20,
+			})
+
+			const entiteProject = await this.entitesService.create({
+				project: projectApplicationDesigner,
+				name: "Project",
+				description: "null",
+				infos: "399",
+				isWip: 399,
+				umlPosX: 399,
+				umlPosY: 270,
+			})
+
+			const entiteEntite = await this.entitesService.create({
+				project: projectApplicationDesigner,
+				name: "Entite",
+				description: "null",
+				infos: "690",
+				isWip: 690,
+				umlPosX: 690,
+				umlPosY: 20,
+			})
+
+			const entiteAttribut = await this.entitesService.create({
+				project: projectApplicationDesigner,
+				name: "Attribut",
+				description: "null",
+				infos: "1040",
+				isWip: 1040,
+				umlPosX: 1040,
+				umlPosY: 10,
+			})
+
+			const entiteAdresse = await this.entitesService.create({
+				project: projectApplicationDesigner,
+				name: "Adresse",
+				description: "",
+				infos: "770",
+				isWip: 770,
+				umlPosX: 770,
+				umlPosY: 610,
+			})
+
+			// ************** ATRRIBUTS for entite User **************
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "email",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "username",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "password",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "accessToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "emailValidationToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetToken",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "passwordResetAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteUser,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrUserProjects = await this.attributsService.create({
+				entite: entiteUser,
+				name: "projects",
+				tipe: "OneToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteProject.id,
+			})
+
+			// ************** ATRRIBUTS for entite Project **************
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "name",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrProjectCreatedBy = await this.attributsService.create({
+				entite: entiteProject,
+				name: "createdBy",
+				tipe: "ManyToOne",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteUser.id,
+			})
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "description",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "infos",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteProject,
+				name: "isWip",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrProjectEntites = await this.attributsService.create({
+				entite: entiteProject,
+				name: "entites",
+				tipe: "OneToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteEntite.id,
+			})
+
+			const attrProjectAdresses = await this.attributsService.create({
+				entite: entiteProject,
+				name: "adresses",
+				tipe: "OneToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteAdresse.id,
+			})
+
+			// ************** ATRRIBUTS for entite Entite **************
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			const attrEntiteProject = await this.attributsService.create({
+				entite: entiteEntite,
+				name: "project",
+				tipe: "ManyToOne",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteProject.id,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "name",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "description",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "infos",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "isWip",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteEntite,
+				name: "isFeminin",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			const attrEntiteAttributs = await this.attributsService.create({
+				entite: entiteEntite,
+				name: "attributs",
+				tipe: "OneToMany",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteAttribut.id,
+			})
+
+			// ************** ATRRIBUTS for entite Attribut **************
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			const attrAttributEntite = await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "entite",
+				tipe: "ManyToOne",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteEntite.id,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "name",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "createdAt",
+				tipe: "DateTime",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "tipe",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "longueur",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "description",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "infos",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "position",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isWip",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isFeminin",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isNullable",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isUnique",
+				tipe: "Boolean",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "targetEntiteId",
+				tipe: "number",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "inverseAttributId",
+				tipe: "number",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "defaut",
+				tipe: "string",
+				position: 0,
+				isWip: true,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isPrivate",
+				tipe: "boolean",
+				position: 0,
+				isWip: true,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				infos: "default ???",
+			})
+
+			await this.attributsService.create({
+				entite: entiteAttribut,
+				name: "isStatic",
+				tipe: "boolean",
+				position: 0,
+				isWip: true,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+			})
+
+			// ************** ATRRIBUTS for entite Adresse **************
+
+			await this.attributsService.create({
+				entite: entiteAdresse,
+				name: "id",
+				tipe: "Int",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: true,
+				isPrimaryKey: true,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAdresse,
+				name: "url",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				longueur: 512,
+			})
+
+			await this.attributsService.create({
+				entite: entiteAdresse,
+				name: "name",
+				tipe: "string",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: true,
+				isUnique: false,
+				infos: "FRONT_WEB | FRONT_LOCAL | BACK_WEB | BACK_LOCAL",
+			})
+
+			const attrAdresseProjet = await this.attributsService.create({
+				entite: entiteAdresse,
+				name: "projet",
+				tipe: "ManyToOne",
+				position: 0,
+				isWip: false,
+				isFeminin: false,
+				isNullable: false,
+				isUnique: false,
+				targetEntiteId: entiteProject.id,
+			})
+
+			// ************** INVERSED BY **************
+
+			attrUserProjects.inverseAttributId = attrProjectCreatedBy.id
+			await this.attributsService.save(attrUserProjects)
+
+			attrProjectCreatedBy.inverseAttributId = attrUserProjects.id
+			await this.attributsService.save(attrProjectCreatedBy)
+
+			attrProjectEntites.inverseAttributId = attrEntiteProject.id
+			await this.attributsService.save(attrProjectEntites)
+
+			attrProjectAdresses.inverseAttributId = attrAdresseProjet.id
+			await this.attributsService.save(attrProjectAdresses)
+
+			attrEntiteProject.inverseAttributId = attrProjectEntites.id
+			await this.attributsService.save(attrEntiteProject)
+
+			attrEntiteAttributs.inverseAttributId = attrAttributEntite.id
+			await this.attributsService.save(attrEntiteAttributs)
+
+			attrAttributEntite.inverseAttributId = attrEntiteAttributs.id
+			await this.attributsService.save(attrAttributEntite)
+
+			attrAdresseProjet.inverseAttributId = attrProjectAdresses.id
+			await this.attributsService.save(attrAdresseProjet)
+
+			return { success: 1 }
+		} catch (e) {
+			throw new BadRequestException("errrrrrrrrrrrrror")
+		}
+	}
+
+	@Get("/fixtures/project-ad-back")
+	async fixtureProjetADBack(@UserFromToken() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
 		Logger.log("🟠 /fixtures/projet/ad - For user:", user.username)
 

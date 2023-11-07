@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form"
 interface ISelectOption {
 	value: any
 	text: string
+	disabled?: boolean
 }
 type Props = {
 	name: string
@@ -37,7 +38,7 @@ export default function ZFrmSelect({ formData, name, label, placeholder, selectO
 					{...otherProps}
 				>
 					{selectOptions.map((op: ISelectOption) => (
-						<option key={"option-" + name + "-" + op.text} value={op.value}>
+						<option key={"option-" + name + "-" + op.text} value={op.value} disabled={op.disabled}>
 							{op.text}
 						</option>
 					))}

@@ -83,8 +83,8 @@ export default function GenerateMenu({
 						<>
 							<div className="d-inline-block border border-primary m-1 p-1">
 								<span className="text-primary">NestJs</span>
-								<ButtonTemplate text="Entity" name="NestEntity" />
-								<ButtonTemplate text="Controller" name="NestController" disabled />
+								<ButtonTemplate text="Entity (typeORM)" name="NestEntity" />
+								<ButtonTemplate text="Controller" name="NestController" />
 								<ButtonTemplate text="Module" name="NestModule" />
 								<ButtonTemplate text="Service" name="NestService" />
 							</div>
