@@ -87,11 +87,7 @@ export class Attribut {
 	inverseAttributId: number
 
 	/*
-	defaut: string
-	targetEntite: any
-	inversedBy / inversedAttribut: any
 	removeOrphan: boolean
-
 	nomPascal: string //  ArticleTag   // normalement, cest le meme que le nom
 	nomCamel: string //  articleTag
 	nomSnake: string //  article_tag

@@ -11,6 +11,7 @@ import templateCppCpp from "./templateCppCpp"
 import templateReactType from "./templateReactType"
 import templateGlobalReactTypesIndex from "./templateGlobalReactTypesIndex"
 import templateGlobalReactApiIndex from "./templateGlobalReactApiIndex"
+import templateNestService from "./templateNestService"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
@@ -49,6 +50,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "ReactType") setTemplate(templateReactType(data))
 		else if (templateName === "GlobalReactTypesIndex") setTemplate(templateGlobalReactTypesIndex(data))
 		else if (templateName === "GlobalReactApiIndex") setTemplate(templateGlobalReactApiIndex(data))
+		else if (templateName === "NestService") setTemplate(templateNestService(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

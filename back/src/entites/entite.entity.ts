@@ -55,8 +55,6 @@ export class Entite {
 	umlPosY: number
 
 	/*
-	private/public/static
-
 
 	namespace: string
 	prefix: string

@@ -86,7 +86,7 @@ export default function GenerateMenu({
 								<ButtonTemplate text="Entity" name="NestEntity" />
 								<ButtonTemplate text="Controller" name="NestController" disabled />
 								<ButtonTemplate text="Module" name="NestModule" />
-								<ButtonTemplate text="Service" name="NestService" disabled />
+								<ButtonTemplate text="Service" name="NestService" />
 							</div>
 							<div className="d-inline-block border border-primary m-1 p-1">
 								<span className="text-primary">React (ts)</span>
