@@ -78,10 +78,10 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 							))}
 						</tbody>
 					</table>
-					<ButtonCreateAttribut className="col btn-sm mt-1" entite={entite} />
+					<ButtonCreateAttribut className="col btn-sm m-1" entite={entite} />
 
 					{!entite.attributs.find((attr: any) => attr.isPrimaryKey) && (
-						<ButtonFixtureAttributId entiteId={entite.id} className="" />
+						<ButtonFixtureAttributId entiteId={entite.id} className="col btn-sm m-1 " />
 					)}
 				</div>
 			</div>

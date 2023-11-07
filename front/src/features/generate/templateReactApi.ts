@@ -37,7 +37,7 @@ import { Xentite } from "types"
 
 export async function apiFetchXentites() {
 	return await zFetcher({
-		shortUrl: "/xentites/my",
+		shortUrl: "/xentites",
 		method: "GET",
 	})
 }
