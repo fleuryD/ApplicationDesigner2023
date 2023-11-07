@@ -11,9 +11,11 @@ import templateReactDisplayInfos from "./templates.react/templateReactDisplayInf
 import templateReactApi from "./templates.react/templateReactApi"
 import templateReactType from "./templates.react/templateReactType"
 import templateReactButtonCreate from "./templates.react/templateReactButtonCreate"
+import templateReactButtonEdit from "./templates.react/templateReactButtonEdit"
 import templateGlobalReactTypesIndex from "./templates.react/templateGlobalReactTypesIndex"
 import templateGlobalReactApiIndex from "./templates.react/templateGlobalReactApiIndex"
 import templateReactForm from "./templates.react/templateReactForm"
+import templateReactFormInner from "./templates.react/templateReactFormInner"
 
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
@@ -61,7 +63,9 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "NestController") setTemplate(templateNestController(data))
 		else if (templateName === "GlobalCreateFiles") setTemplate(templateGlobalCreateFiles(data))
 		else if (templateName === "ReactButtonCreate") setTemplate(templateReactButtonCreate(data))
+		else if (templateName === "ReactButtonEdit") setTemplate(templateReactButtonEdit(data))
 		else if (templateName === "ReactForm") setTemplate(templateReactForm(data))
+		else if (templateName === "ReactFormInner") setTemplate(templateReactFormInner(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

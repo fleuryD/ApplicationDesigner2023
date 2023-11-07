@@ -60,6 +60,7 @@ export default function FormProjectInner({
 					placeholder="Description"
 					formData={formData}
 				/>
+
 				<ZFrmInput type="text" name="infos" label="Infos" placeholder="Infos" formData={formData} />
 
 				<ZFrmCheck type="switch" name="isWip" label="WIP" placeholder="WIP" formData={formData} />

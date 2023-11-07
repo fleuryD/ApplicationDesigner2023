@@ -19,9 +19,9 @@ export async function apiFetchAdresseById(adresseId: number) {
 	})
 }
 
-export async function apiCreateAdresse(adresse: Adresse) {
+export async function apiCreateAdresse(projetId: number, adresse: Adresse) {
 	return zFetcher({
-		shortUrl: "/adresses/new",
+		shortUrl: "/adresses/new/project/" + projetId,
 		method: "POST",
 		// body: { adresse }
 		body: {

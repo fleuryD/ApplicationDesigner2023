@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { User, Entite } from "."
+import { User, Entite, Adresse } from "."
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -13,7 +13,7 @@ type Project = {
 	infos: string | null
 	isWip: boolean
 	entites: Entite[]
-
+	adresses: Adresse[]
 	/*
 	urlLocal: string // TODO : OU Relation Url
 	urlWeb: string

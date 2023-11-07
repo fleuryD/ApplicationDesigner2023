@@ -12,7 +12,7 @@ type Props = {
 	entiteCamelNamePluriel: string
 }
 
-export default function templateReactButtonCreate({
+export default function templateReactButtonEdit({
 	project,
 	entite,
 	entitePascalName,
@@ -21,55 +21,37 @@ export default function templateReactButtonCreate({
 }: Props) {
 	if (!entite) return null
 
-	let strAttrs = ""
-	entite.attributs.map((attr: Attribut) => {
-		if (attr.name === "id") return null
-		strAttrs += `				`
-		if (
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany" ||
-			attr.name === "createdAt"
-		)
-			strAttrs += `// `
-		strAttrs += `${attr.name}: `
-		if (attr.tipe === "string") strAttrs += `""`
-		else if (attr.tipe === "boolean" || attr.tipe === "Boolean") strAttrs += `false`
-		else strAttrs += `null`
-		strAttrs += `,\n`
-		return strAttrs
-	})
-
 	let code = `// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
 import { Button } from "react-bootstrap"
-import { FaPlus } from "react-icons/fa"
+import { FaEdit } from "react-icons/fa"
+import { Xentite } from "types"
 import { useAppDispatch } from "store/store"
 import { appSetSelectedFormXentite } from "store/appSlice"
-// import { ... } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
 	className?: string
+	xentite: Xentite
 }
 
-export default function ButtonCreateXentite({ className }: Props) {
+export default function ButtonEditXentite({ className, xentite }: Props) {
 	const dispatch = useAppDispatch()
 	function btClick() {
-		dispatch(
-			appSetSelectedFormXentite({
-				id: 0,
-${strAttrs}			})
-		)
+		dispatch(appSetSelectedFormXentite(xentite))
 	}
 	return (
-		<Button className={className} title="Create a new xentite" onClick={() => btClick()}>
-			<FaPlus /> ${entitePascalName}
+		<Button variant="warning" className={className} title={"Edit xentite: " + xentite.name} onClick={() => btClick()}>
+			<FaEdit />
 		</Button>
 	)
 }
+
+
+
+
 
 
 
@@ -83,7 +65,7 @@ ${strAttrs}			})
 	return {
 		code: code,
 		filePath: `./front/src/features/${entiteCamelNamePluriel}/`,
-		fileName: `ButtonCreate${entitePascalName}.tsx`,
+		fileName: `ButtonEdit${entitePascalName}.tsx`,
 		description: null,
 	}
 }

@@ -8,11 +8,11 @@ import ZModal from "ui/ZModal"
 import FormAdresseInner from "./FormAdresseInner"
 //import { getCase } from "utils/helpers-case"
 //import { containsSpecialChars } from "utils/helpers-str"
-import { Adresse } from "types"
+import { Adresse, Project } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
+export default function FormAdresse({ project, adresseItem }: { project: Project; adresseItem: Adresse }) {
 	const dispatch = useAppDispatch()
 	const [formItem, setFormItem] = useState<Adresse>(adresseItem)
 	const [formErrors, setFormErrors] = useState<any>({})
@@ -24,19 +24,12 @@ export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 	const checkErrors = () => {
 		let errorCount = 0
 
-		// ******************* Check: name
-		/*
-		if (!formItem.name || formItem.name.length < 2) {
+		// ******************* Check: url
+
+		if (!formItem.url || formItem.url.length < 5) {
 			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom doit faire au moins 2 characteres." })
-		} else if (containsSpecialChars(formItem.name)) {
-			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom contient des caracteres interdits" })
-		} else if (getCase(formItem.name) !== "PASCAL") {
-			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom doit etre en PascalCase" })
+			setFormErrors({ ...formErrors, url: "L'URL doit faire au moins 5 characteres." })
 		}
-		*/
 
 		return errorCount
 	}
@@ -66,10 +59,10 @@ export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 		if (checkErrors() > 0) return
 
 		if (adresseItem.id === 0) {
-			apiCreateAdresse(formItem).then((response) => {
+			apiCreateAdresse(project.id, formItem).then((response) => {
 				if (response.adresse) {
 					dispatch(appSetSelectedFormAdresse(null))
-					window.location.reload() // !!!!!!!!!!!!!!
+					//window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
 				}
@@ -80,7 +73,7 @@ export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 			apiEditAdresse(formItem).then((response) => {
 				if (response.adresse) {
 					dispatch(appSetSelectedFormAdresse(null))
-					window.location.reload() // !!!!!!!!!!!!!!
+					//window.location.reload() // !!!!!!!!!!!!!!
 				} else {
 					handleFetchErrorResponse(response)
 				}
@@ -107,8 +100,6 @@ export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
-	return <>FormAdresseInner</>
-	/*
 	return (
 		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormAdresse(null))}>
 			<FormAdresseInner
@@ -123,5 +114,4 @@ export default function FormAdresse({ adresseItem }: { adresseItem: Adresse }) {
 			/>
 		</ZModal>
 	)
-	*/
 }

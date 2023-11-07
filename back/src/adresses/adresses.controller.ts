@@ -10,6 +10,7 @@ import {
 	Param,
 } from "@nestjs/common"
 import { AdressesService } from "./adresses.service"
+import { ProjectsService } from "../projects/projects.service"
 import { UserFromToken } from "../auth/user-from-token.decorator"
 import { Logger } from "@nestjs/common"
 
@@ -17,29 +18,37 @@ import { Logger } from "@nestjs/common"
 
 @Controller("adresses")
 export class AdressesController {
-	constructor(private readonly adressesService: AdressesService) {}
+	constructor(
+		private readonly adressesService: AdressesService,
+		private readonly projectsService: ProjectsService
+	) {}
 
 	/*
 	 * *************************************************************************
 	 *
-	 * 	CREATE NEW ADRESSE
+	 * 	ADD NEWADRESSE TO PROJECT TARGETED BY :id
 	 *
 	 */
-	@Post("/new")
+	@Post("/new/project/:id")
 	async newAdresse(
 		@Param() params,
 		@UserFromToken() userFromToken,
 		@Body("id") id: number,
 		@Body("url") url: string,
 		@Body("name") name: string
-		///// @Body("projet") projet: ManyToOne
 	) {
+		await this.projectsService.ensureAuthorizedAccessProject({
+			userId: userFromToken.id,
+			projectId: params.id,
+		})
+		const projet = await this.projectsService.findOneById(params.id)
+
 		try {
 			const adresse = await this.adressesService.create({
 				id,
 				url,
 				name,
-				////projet,
+				projet,
 			})
 
 			return { adresse: adresse }
@@ -65,12 +74,17 @@ export class AdressesController {
 	) {
 		// await this.adressesService.ensureAuthorizedAccessAdresse({userId: userFromToken.id, adresseId: params.id })
 		let adresse = await this.adressesService.findOneById(params.id)
+
+		Logger.log(adresse.name)
 		adresse.id = id
 		adresse.url = url
 		adresse.name = name
 		//// adresse.projet = projet
+		Logger.log(adresse.name)
 
 		adresse = await this.adressesService.save(adresse)
+
+		Logger.log(adresse.name)
 
 		return {
 			adresse: adresse,

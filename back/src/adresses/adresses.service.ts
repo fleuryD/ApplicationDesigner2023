@@ -38,6 +38,7 @@ export class AdressesService {
 	}
 
 	async save(adresse: Adresse): Promise<Adresse> {
+		Logger.log("save: ", adresse.name)
 		return await this.adressesRepository.save(adresse)
 	}
 
