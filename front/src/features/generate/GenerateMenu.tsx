@@ -73,6 +73,7 @@ export default function GenerateMenu({
 						<>
 							<div className="d-inline-block border border-primary m-1 p-1">
 								<span className="text-primary">React</span>
+								<ButtonTemplate text="create files" name="GlobalCreateFiles" />
 								<ButtonTemplate text="types/index" name="GlobalReactTypesIndex" />
 								<ButtonTemplate text="api/index" name="GlobalReactApiIndex" />
 							</div>

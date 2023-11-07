@@ -13,6 +13,7 @@ import templateGlobalReactTypesIndex from "./templateGlobalReactTypesIndex"
 import templateGlobalReactApiIndex from "./templateGlobalReactApiIndex"
 import templateNestService from "./templateNestService"
 import templateNestController from "./templateNestController"
+import templateGlobalCreateFiles from "./templateGlobalCreateFiles"
 import { toCamelCase, toPascalCase /* ,toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
 import { Button } from "react-bootstrap"
 
@@ -53,6 +54,7 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "GlobalReactApiIndex") setTemplate(templateGlobalReactApiIndex(data))
 		else if (templateName === "NestService") setTemplate(templateNestService(data))
 		else if (templateName === "NestController") setTemplate(templateNestController(data))
+		else if (templateName === "GlobalCreateFiles") setTemplate(templateGlobalCreateFiles(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 
