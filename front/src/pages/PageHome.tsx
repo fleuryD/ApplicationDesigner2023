@@ -1,8 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useAppSelector } from "store/store"
-import { apiFetchMyProjects } from "api"
 import { Project } from "types"
 import ProjectLink from "features/projects/ProjectLink"
 import ButtonCreateProject from "features/projects/ButtonCreateProject"
@@ -15,26 +14,13 @@ import {
 } from "features/fixtures/ButtonsFixtures"
 import ZLoadingSection from "ui/ZLoadingSection"
 import ZErrorSection from "ui/ZErrorSection"
+import { useZFetchHome } from "libs/useZFetch"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
 	const app = useAppSelector((state) => state.app)
-	const [isLoading, setIsLoading] = useState<boolean>(true)
-	const [fetchResponseError, setFetchResponseError] = useState<any | null>(null)
-	const [projects, setProjects] = useState<Project[]>([])
-
-	useEffect(() => {
-		document.title = "AD: Home"
-		setIsLoading(true)
-		setFetchResponseError(null)
-
-		apiFetchMyProjects().then((rep) => {
-			if (rep.projects) setProjects(rep.projects)
-			else setFetchResponseError(rep)
-			setIsLoading(false)
-		})
-	}, [])
+	const { projects, setProjects, isLoading, fetchResponseError } = useZFetchHome()
 
 	return (
 		<div className="zPage">
@@ -62,7 +48,7 @@ export default function PageHome() {
 							<div className="zSectionContent">
 								<ul>
 									{projects &&
-										projects.map((project) => (
+										projects.map((project: Project) => (
 											<li key={project.id}>
 												<ProjectLink project={project} />
 											</li>
