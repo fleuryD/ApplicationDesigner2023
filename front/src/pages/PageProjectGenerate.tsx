@@ -11,6 +11,7 @@ import ZErrorSection from "ui/ZErrorSection"
 import GenerateMenu from "features/generate/GenerateMenu"
 import PageProjectHeader from "features/projects/PageProjectHeader"
 import FormProject from "features/projects/FormProject"
+import ProjectTabsHeader from "features/projects/ProjectTabsHeader"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -31,18 +32,21 @@ export default function PageProjectGenerate() {
 				<ZLoadingSection isLoading={isLoading} className="col-12" />
 				<ZErrorSection fetchResponseError={fetchError} className="col-12" />
 				{project && (
-					<>
-						<GenerateMenu
-							project={project}
-							selectedEntite={selectedEntite}
-							setSelectedEntite={setSelectedEntite}
-							selectedTemplateName={selectedTemplateName}
-							setSelectedTemplateName={setSelectedTemplateName}
-						/>
-						{selectedTemplateName && (
-							<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
-						)}
-					</>
+					<div className="zSection col-12 ">
+						<div className="zSectionInner">
+							<ProjectTabsHeader activeKey="generate" projectId={project.id} />
+							<GenerateMenu
+								project={project}
+								selectedEntite={selectedEntite}
+								setSelectedEntite={setSelectedEntite}
+								selectedTemplateName={selectedTemplateName}
+								setSelectedTemplateName={setSelectedTemplateName}
+							/>
+						</div>
+					</div>
+				)}
+				{project && selectedTemplateName && (
+					<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
 				)}
 			</div>
 		</div>

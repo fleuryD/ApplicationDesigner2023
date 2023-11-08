@@ -19,14 +19,22 @@ function getEntiteByIdInProject(project: Project, entiteId: number) {
 
 export default function FixtureMaker({ project }: Props) {
 	let code = `
+	// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
+	import { Logger } from "@nestjs/common"
+	import { User } from "../users"
+
+	// ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
+
+	export async function fixtureProjetXproject(
+		user: User,
+		projectsService,
+		entitesService,
+		attributsService
+	) {
+		Logger.log("Fixtures:: projet: Xproject - For user:", user.username)
 
 
-	@Get("/fixtures/project-xproject")
-	async fixtureProjetXproject(@UserFromToken() userFromToken) {
-		const user = await this.usersService.findOneById(userFromToken.id)
-		Logger.log("🟠 /fixtures/projet/xproject - For user:", user.username)
-
-		try {
 			// ************** PROJECT **************
 			const projectXproject = await this.projectsService.create({
 				name: "XprojectFixture",
@@ -46,9 +54,9 @@ export default function FixtureMaker({ project }: Props) {
 		code += `			const entite${entite.name} = await this.entitesService.create({
 				project: projectXproject,
 				name: "${entite.name}",
-				description: "${entite.description}",
-				infos: "${entite.umlPosX}",
-				isWip: ${entite.umlPosX},
+				description : ${entite.description ? '"' + entite.description + '"' : "null"},
+				infos: : ${entite.infos ? '"' + entite.infos + '"' : "null"},
+				isWip: ${entite.isWip},
 				umlPosX: ${entite.umlPosX},
 				umlPosY: ${entite.umlPosY},
 			})
@@ -133,11 +141,6 @@ export default function FixtureMaker({ project }: Props) {
 	})
 
 	code += `
-				return { success: 1 }
-
-				} catch (e) {
-					throw new BadRequestException("errrrrrrrrrrrrror")
-				}
 	}
 `
 

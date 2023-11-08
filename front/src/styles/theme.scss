@@ -48,7 +48,7 @@ body {
 
 #container-global {
 	background-color: $colSecondary;
-	padding: 3px;
+	padding: 0px;
 	min-height: 100vh;
 }
 
@@ -57,7 +57,7 @@ body {
 $sectionGap: 5px;
 
 .zPage {
-	background-color: $colLight;
+	//background-color: $colLight;
 	padding: 10px;
 	min-height: 100%;
 	color: $colDark;
@@ -66,8 +66,20 @@ $sectionGap: 5px;
 		background-color: $colWhite;
 		padding: 10px;
 		margin: $sectionGap;
+		.appLogo {
+			//width: 50px;
+		}
 		h1 {
 			color: $colPrimary;
+			font-size: 1.6em;
+		}
+		h2 {
+			color: $colSecondary;
+			font-size: 1.4em;
+		}
+		h3 {
+			color: $colSecondary;
+			font-size: 1.2em;
 		}
 	}
 	.zPageContent {
@@ -83,13 +95,15 @@ $sectionGap: 5px;
 			.zSectionInner {
 				background-color: $colWhite;
 				margin: $sectionGap;
-				padding: 5px;
+				padding: 10px;
+
 				//padding: -5px;
 
 				h2 {
 					color: $colPrimary;
-					font-size: 1.5em;
+					font-size: 1.3em;
 					font-weight: bold;
+					margin-bottom: 10px;
 				}
 			}
 		}

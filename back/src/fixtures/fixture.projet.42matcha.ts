@@ -27,7 +27,7 @@ export async function fixtureProjetMatcha(
 	const entiteUser = await entitesService.create({
 		project: projectMatcha,
 		name: "User",
-		description: "null",
+		description: null,
 		infos: "10",
 		isWip: 10,
 		umlPosX: 10,

@@ -27,9 +27,17 @@ export default function PageHome() {
 					addProjects={(proj: Project) => setProjects([...projects, proj])}
 				/>
 			)}
-			<header className="zPageHeader row">
-				<h1>AppDesigner</h1>
-				<h3>Lorem Ipsum</h3>
+			<header className="zPageHeader border border-primary ">
+				<img
+					src="/img/app-logo/app-logo-96.png"
+					alt="AppDesigner"
+					className="appLogo d-inline-block border border-secondary d-inline-block p-1 m-0"
+					style={{ width: "96px" }}
+				/>
+				<div className="d-inline-block ms-2 ">
+					<h1>AppDesigner</h1>
+					<h2>Lorem Ipsum</h2>
+				</div>
 			</header>
 
 			<div className="zPageContent row">

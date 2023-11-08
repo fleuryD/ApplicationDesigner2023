@@ -11,6 +11,7 @@ import { ButtonFixtureEntiteUser } from "features/fixtures/ButtonsFixtures"
 import UmlArrows from "./UmlArrows"
 import { useXarrow } from "react-xarrows"
 import FixtureMaker from "features/fixtures/FixtureMaker"
+import ProjectTabsHeader from "features/projects/ProjectTabsHeader"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -27,9 +28,10 @@ export default function Uml({ project }: Props) {
 
 	return (
 		<div>
+			<ProjectTabsHeader activeKey="uml" projectId={project.id} />
 			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
 			<h2>
-				UML <ButtonCreateEntite className="btn-sm float-end" project={project} />
+				{/* UML */} <ButtonCreateEntite className="btn-sm float-end" project={project} />
 			</h2>
 			{app.selectedFormEntite && <FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />}
 

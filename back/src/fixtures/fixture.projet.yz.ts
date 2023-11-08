@@ -47,7 +47,7 @@ export async function fixtureProjetYZ(
 	const entiteUser = await entitesService.create({
 		project: projectYz,
 		name: "User",
-		description: "null",
+		description: null,
 		infos: "150",
 		isWip: 150,
 		umlPosX: 150,

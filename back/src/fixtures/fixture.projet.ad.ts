@@ -16,8 +16,8 @@ export async function fixtureProjetAD(
 	// ************** PROJECT **************
 	const projectApplicationDesigner = await projectsService.create({
 		name: "ApplicationDesignerFixture",
-		description: "null",
-		infos: "null",
+		description: null,
+		infos: null,
 		isWip: "false",
 		createdBy: user,
 	})
@@ -27,7 +27,7 @@ export async function fixtureProjetAD(
 	const entiteUser = await entitesService.create({
 		project: projectApplicationDesigner,
 		name: "User",
-		description: "null",
+		description: null,
 		infos: "10",
 		isWip: 10,
 		umlPosX: 10,
@@ -37,7 +37,7 @@ export async function fixtureProjetAD(
 	const entiteProject = await entitesService.create({
 		project: projectApplicationDesigner,
 		name: "Project",
-		description: "null",
+		description: null,
 		infos: "399",
 		isWip: 399,
 		umlPosX: 399,
@@ -47,7 +47,7 @@ export async function fixtureProjetAD(
 	const entiteEntite = await entitesService.create({
 		project: projectApplicationDesigner,
 		name: "Entite",
-		description: "null",
+		description: null,
 		infos: "690",
 		isWip: 690,
 		umlPosX: 690,
@@ -57,7 +57,7 @@ export async function fixtureProjetAD(
 	const entiteAttribut = await entitesService.create({
 		project: projectApplicationDesigner,
 		name: "Attribut",
-		description: "null",
+		description: null,
 		infos: "1040",
 		isWip: 1040,
 		umlPosX: 1040,

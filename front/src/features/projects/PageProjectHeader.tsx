@@ -67,15 +67,16 @@ export default function PageProjectHeader({ project, mode }: Props) {
 							</li>
 						))}
 					</ul>
-					<ButtonCreateAdresse project={project} className="" />
+					<ButtonCreateAdresse project={project} className="btn-xs" />
 				</div>
 			)}
-
+			{/*
 			{mode === "UML" ? (
 				<ProjectGenerateLink project={project} text="Generate code" />
 			) : (
 				<ProjectLink project={project} text="UML" />
 			)}
+			*/}
 		</header>
 	)
 }
