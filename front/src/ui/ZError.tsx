@@ -21,7 +21,7 @@ export default function ZError({ response, className }: Props) {
 		navigate("/")
 	}
 
-	if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED")
+	if (response.message === "ERROR_ACCESS_TOKEN_EXPIRED" || response.message === "Unauthorized")
 		return (
 			<div className={"text-danger " + className}>
 				❌ Votre session a expiré.

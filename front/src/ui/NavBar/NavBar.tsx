@@ -20,7 +20,7 @@ export default function NavBar() {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="container">
 						<Navbar.Brand as={NavLink} to="/">
-							<FaHome /> ApplicationDesigner{" "}
+							<FaHome /> AppDesigner{" "}
 						</Navbar.Brand>
 						{auth.isConnected ? <NavBarPrivateItems /> : <NavBarPublicItems />}
 					</Nav>

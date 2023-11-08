@@ -1,67 +1,42 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useEffect } from "react"
 import { useAppSelector } from "store/store"
 import { Project } from "types"
-import ProjectLink from "features/projects/ProjectLink"
-import ButtonCreateProject from "features/projects/ButtonCreateProject"
 import FormProject from "features/projects/FormProject"
-import {
-	ButtonFixtureProjectAd,
-	ButtonFixtureProjectSL,
-	ButtonFixtureProjectTranscendance,
-	ButtonFixtureProjectYz,
-} from "features/fixtures/ButtonsFixtures"
 import ZLoadingSection from "ui/ZLoadingSection"
 import ZErrorSection from "ui/ZErrorSection"
-import { useZFetchHome } from "libs/useZFetch"
+import { useZFetchMyProjects } from "api/api.projects"
+import MyProjects from "features/projects/MyProjects"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 export default function PageHome() {
-	const app = useAppSelector((state) => state.app)
-	const { projects, setProjects, isLoading, fetchResponseError } = useZFetchHome()
+	const { selectedFormProject } = useAppSelector((state) => state.app)
+	const { projects, setProjects, isLoading, fetchError } = useZFetchMyProjects()
+
+	useEffect(() => {
+		document.title = "AD"
+	}, [])
 
 	return (
 		<div className="zPage">
-			{app.selectedFormProject && (
+			{projects && selectedFormProject && (
 				<FormProject
-					projectItem={app.selectedFormProject}
+					projectItem={selectedFormProject}
 					addProjects={(proj: Project) => setProjects([...projects, proj])}
 				/>
 			)}
 			<header className="zPageHeader row">
-				<h1>Application Designer</h1>
+				<h1>AppDesigner</h1>
 				<h3>Lorem Ipsum</h3>
 			</header>
 
 			<div className="zPageContent row">
 				<ZLoadingSection isLoading={isLoading} className="col-12 col-md-6" />
-				<ZErrorSection fetchResponseError={fetchResponseError} className="col-12 col-md-6" />
+				<ZErrorSection fetchResponseError={fetchError} className="col-12 col-md-6" />
 
-				{projects && (
-					<div className="zSection col-12 col-md-6">
-						<div className="zSectionInner">
-							<h2>
-								Mes projets <ButtonCreateProject className="btn-sm float-end" />
-							</h2>
-							<div className="zSectionContent">
-								<ul>
-									{projects &&
-										projects.map((project: Project) => (
-											<li key={project.id}>
-												<ProjectLink project={project} />
-											</li>
-										))}
-								</ul>
-								<ButtonFixtureProjectAd className="m-1" />
-								<ButtonFixtureProjectSL className="m-1" />
-								<ButtonFixtureProjectTranscendance className="m-1" />
-								<ButtonFixtureProjectYz className="m-1" />
-							</div>
-						</div>
-					</div>
-				)}
+				{projects && !fetchError && <MyProjects projects={projects} />}
 
 				<div className="zSection col-12 col-md-6">
 					<div className="zSectionInner">

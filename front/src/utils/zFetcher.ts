@@ -20,7 +20,7 @@ export default async function zFetcher({ shortUrl, method, body, publicAccess }:
 		body: body ? JSON.stringify(body) : null,
 	}
 
-	console.log("🟨 [zFetcher] ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
+	console.debug("🟨 [zFetcher] ➤➤ url:" + url + " ➤➤ requestOptions:", requestOptions)
 
 	try {
 		const response = await fetch(url, requestOptions)
@@ -29,7 +29,7 @@ export default async function zFetcher({ shortUrl, method, body, publicAccess }:
 			console.error("❌ [zFetcher] ➤➤ rep", rep)
 			return { ...rep, error: 1 }
 		}
-		console.log("🟩 [zFetcher] ➤➤ rep:", rep)
+		console.debug("🟩 [zFetcher] ➤➤ rep:", rep)
 		return rep
 	} catch (err) {
 		return { error: err }
