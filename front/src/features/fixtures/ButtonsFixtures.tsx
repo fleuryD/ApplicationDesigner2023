@@ -7,12 +7,16 @@ import { apiFixture } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
+export function ButtonFixtureMatcha({ className }: { className?: string }) {
+	return <ButtonFixtures className={className} fixtureName="project-matcha" text="42 Matcha" />
+}
+
 export function ButtonFixtureProjectYz({ className }: { className?: string }) {
 	return <ButtonFixtures className={className} fixtureName="project-yz" text="Yz" />
 }
 
 export function ButtonFixtureProjectTranscendance({ className }: { className?: string }) {
-	return <ButtonFixtures className={className} fixtureName="project-transcendance" text="Transcendance" />
+	return <ButtonFixtures className={className} fixtureName="project-transcendance" text="42 Transcendance" />
 }
 
 export function ButtonFixtureProjectSL({ className }: { className?: string }) {

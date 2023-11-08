@@ -1,6 +1,6 @@
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 import {
-	BadRequestException,
+	InternalServerErrorException,
 	Controller,
 	Get,
 	Param,
@@ -17,6 +17,7 @@ import { UserFromToken } from "./auth/user-from-token.decorator"
 import { UsersService } from "./users/users.service"
 import { Public } from "./auth/jwt-auth.guard"
 import { User } from "./users"
+import { fixtureProjetMatcha } from "./fixtures/fixture.projet.42matcha"
 import { fixtureProjetTranscendance } from "./fixtures/fixture.projet.42transcendance"
 import { fixtureProjetYZ } from "./fixtures/fixture.projet.yz"
 import { fixtureProjetAD } from "./fixtures/fixture.projet.ad"
@@ -45,6 +46,22 @@ export class AppController {
 
 	// ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘ ◘
 
+	@Get("/fixtures/project-matcha")
+	async routeFixtureProjetMatcha(@UserFromToken() userFromToken) {
+		const user = await this.usersService.findOneById(userFromToken.id)
+		try {
+			fixtureProjetMatcha(
+				user,
+				this.projectsService,
+				this.entitesService,
+				this.attributsService
+			)
+			return { success: 1 }
+		} catch (e) {
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
+		}
+	}
+
 	@Get("/fixtures/project-transcendance")
 	async routeFixtureProjetTranscendance(@UserFromToken() userFromToken) {
 		const user = await this.usersService.findOneById(userFromToken.id)
@@ -57,7 +74,7 @@ export class AppController {
 			)
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 
@@ -74,7 +91,7 @@ export class AppController {
 			)
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 
@@ -91,7 +108,7 @@ export class AppController {
 			)
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 
@@ -107,7 +124,7 @@ export class AppController {
 			)
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 
@@ -126,7 +143,7 @@ export class AppController {
 			fixtureEntiteUser(user, project, this.entitesService, this.attributsService)
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 
@@ -157,7 +174,7 @@ export class AppController {
 
 			return { success: 1 }
 		} catch (e) {
-			throw new BadRequestException("errrrrrrrrrrrrror")
+			throw new InternalServerErrorException("errrrrrrrrrrrrror")
 		}
 	}
 

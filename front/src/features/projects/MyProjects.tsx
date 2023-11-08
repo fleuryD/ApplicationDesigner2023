@@ -9,6 +9,7 @@ import {
 	ButtonFixtureProjectAd,
 	ButtonFixtureProjectSL,
 	ButtonFixtureProjectTranscendance,
+	ButtonFixtureMatcha,
 	ButtonFixtureProjectYz,
 } from "features/fixtures/ButtonsFixtures"
 
@@ -33,6 +34,7 @@ export default function MyProjects({ projects }: { projects: Project[] }) {
 					<ButtonFixtureProjectAd className="m-1" />
 					<ButtonFixtureProjectSL className="m-1" />
 					<ButtonFixtureProjectTranscendance className="m-1" />
+					<ButtonFixtureMatcha className="m-1" />
 					<ButtonFixtureProjectYz className="m-1" />
 				</div>
 			</div>

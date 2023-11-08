@@ -39,7 +39,6 @@ export default function PageProjectGenerate() {
 							selectedTemplateName={selectedTemplateName}
 							setSelectedTemplateName={setSelectedTemplateName}
 						/>
-
 						{selectedTemplateName && (
 							<Generate project={project} entite={selectedEntite} templateName={selectedTemplateName} />
 						)}

@@ -10,16 +10,17 @@ import { Button } from "react-bootstrap"
 type Props = {
 	styles: any
 	children: React.ReactNode
+	className?: string
 	closeForm: () => any
 }
 
-export default function ZModal({ children, styles, closeForm }: Props) {
+export default function ZModal({ children, styles, closeForm, className }: Props) {
 	const rootElement = document.getElementById("root")
 
 	if (!rootElement) return <></>
 
 	return createPortal(
-		<div className="zxModalContainer">
+		<div className={"zxModalContainer " + className}>
 			<StyledOpaqueBackground />
 			<StyledModal>
 				{children}

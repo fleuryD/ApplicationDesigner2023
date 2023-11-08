@@ -8,13 +8,15 @@ import { authLogoutSuccess } from "store/authSlice"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	response: any // la reponse du fetch
+	response: any | null // la reponse du fetch
 	className?: string
 }
 
 export default function ZError({ response, className }: Props) {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
+
+	if (!response) return null
 
 	function btLogoutClick() {
 		dispatch(authLogoutSuccess())

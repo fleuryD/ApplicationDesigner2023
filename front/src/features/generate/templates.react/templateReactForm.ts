@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite, Project } from "types"
+import { Entite, Project } from "types"
 // import { getEntiteByIdInProject } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -21,41 +21,30 @@ export default function templateReactForm({
 }: Props) {
 	if (!entite) return null
 
-	let strAttrs = ""
-	entite.attributs.map((attr: Attribut) => {
-		if (attr.name === "id") return null
-		strAttrs += `				`
-		if (
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany" ||
-			attr.name === "createdAt"
-		)
-			strAttrs += `// `
-		strAttrs += `${attr.name}: `
-		if (attr.tipe === "string") strAttrs += `""`
-		else if (attr.tipe === "boolean" || attr.tipe === "Boolean") strAttrs += `false`
-		else strAttrs += `null`
-		strAttrs += `,\n`
-		return strAttrs
-	})
-
 	let code = `// ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React, { useState } from "react"
 import { useAppDispatch } from "store/store"
-import { appSetSelectedFormXentite } from "store/appSlice"
-import { apiCreateXentite, apiEditXentite, apiDeleteXentiteById } from "api"
+import { useNavigate } from "react-router-dom"
 import ZModal from "ui/ZModal"
 import FormXentiteInner from "./FormXentiteInner"
-//import { getCase } from "utils/helpers-case"
-//import { containsSpecialChars } from "utils/helpers-str"
 import { Xentite } from "types"
+import { appSetSelectedFormXentite } from "store/appSlice"
+import { apiCreateXentite, apiEditXentite, apiDeleteXentiteById } from "api"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export default function FormXentite({ xentiteItem }: { xentiteItem: Xentite }) {
+export default function FormXentite({
+	xentiteItem,
+	addXentites,
+	setXentite,
+}: {
+	xentiteItem: Xentite
+	addXentites?: any | null
+	setXentite?: any | null
+}) {
 	const dispatch = useAppDispatch()
+	const navigate = useNavigate()
 	const [formItem, setFormItem] = useState<Xentite>(xentiteItem)
 	const [formErrors, setFormErrors] = useState<any>({})
 	const [fetchError, setFetchError] = useState<any | null>(null)
@@ -70,13 +59,7 @@ export default function FormXentite({ xentiteItem }: { xentiteItem: Xentite }) {
 		/*
 		if (!formItem.name || formItem.name.length < 2) {
 			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom doit faire au moins 2 characteres." })
-		} else if (containsSpecialChars(formItem.name)) {
-			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom contient des caracteres interdits" })
-		} else if (getCase(formItem.name) !== "PASCAL") {
-			errorCount++
-			setFormErrors({ ...formErrors, name: "Le nom doit etre en PascalCase" })
+			setFormErrors({ ...formErrors, name: "Le name doit faire au moins 2 characteres." })
 		}
 		*/
 
@@ -85,64 +68,45 @@ export default function FormXentite({ xentiteItem }: { xentiteItem: Xentite }) {
 
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
-	function handleFetchErrorResponse(response: any) {
-		if (response.error) {
-			if (response.error === "XXXXXXX") setFetchError("Xxxxxx")
-			else if (response.error === "YYYYYYY") setFetchError("yyyyyyyyy")
-			else {
-				console.log("response: ", response)
-				setFetchError("Erreur Inconnue")
-			}
-		} else {
-			console.log("response: ", response)
-			setFetchError("Erreur Inconnue")
-		}
-	}
-
 	const btValidateClick = async () => {
-		//console.log("formItem: ", formItem)
-		//console.log("formErrors: ", formErrors)
 		setFetchError(null)
 		setFormErrors({})
-
 		if (checkErrors() > 0) return
-
 		if (xentiteItem.id === 0) {
+			// *** CREATE Xentite :
 			apiCreateXentite(formItem).then((response) => {
 				if (response.xentite) {
+					addXentites(response.xentite)
 					dispatch(appSetSelectedFormXentite(null))
-					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
-					handleFetchErrorResponse(response)
+					setFetchError(response)
 				}
-
 				setIsLoading(false)
 			})
 		} else {
+			// *** EDIT Xentite :
 			apiEditXentite(formItem).then((response) => {
 				if (response.xentite) {
+					setXentite(response.xentite)
 					dispatch(appSetSelectedFormXentite(null))
-					window.location.reload() // !!!!!!!!!!!!!!
 				} else {
-					handleFetchErrorResponse(response)
+					setFetchError(response)
 				}
-
 				setIsLoading(false)
 			})
 		}
 	}
 
 	const btDeleteClick = async () => {
-		if (!window.confirm("Do you really want to delete entity " + xentiteItem.name + " ?")) return
-
+		// *** DELETE Xentite :
+		if (!window.confirm("Do you really want to delete xentite " + xentiteItem.name + " ?")) return
 		apiDeleteXentiteById(xentiteItem.id).then((response) => {
 			if (response.success) {
 				dispatch(appSetSelectedFormXentite(null))
-				window.location.reload() // !!!!!!!!!!!!!!
+				navigate("/")
 			} else {
-				handleFetchErrorResponse(response)
+				setFetchError(response)
 			}
-
 			setIsLoading(false)
 		})
 	}
@@ -150,7 +114,7 @@ export default function FormXentite({ xentiteItem }: { xentiteItem: Xentite }) {
 	// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
 
 	return (
-		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormXentite(null))}>
+		<ZModal styles={null} closeForm={() => dispatch(appSetSelectedFormXentite(null))} className="zFormInner">
 			<FormXentiteInner
 				formItem={formItem}
 				formErrors={formErrors}

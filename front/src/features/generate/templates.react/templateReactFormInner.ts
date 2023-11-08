@@ -36,6 +36,7 @@ import { Button } from "react-bootstrap"
 import ZFrmInput from "ui/ZFrmInput"
 import ZFrmCheck from "ui/ZFrmCheck"
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa"
+import ZError from "ui/ZError"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -63,13 +64,14 @@ export default function FormXentiteInner({
 	const formData = { formItem, formErrors, setFormItem, setFormErrors, isLoading }
 
 	return (
-		<div className="border border-primary">
+		<div className="zFormInner">
 			<h2>
 				{formItem.id === 0 ? "Create new xentite" : "Edit xentite: " + formItem.name}
+				&nbsp;&nbsp;&nbsp;&nbsp;
 				{formItem.id !== 0 && (
 					<Button
 						variant="danger"
-						className="float-end"
+						className="float-end btn-xs"
 						title={"Delete xentite " + formItem.name}
 						onClick={() => btDeleteClick()}
 						disabled={isLoading}
@@ -79,7 +81,7 @@ export default function FormXentiteInner({
 				)}
 			</h2>
 
-			<Form className="">
+			<Form className="mt-3 mb-3 pt-3 pb-3 border border-primary">
 
 `
 
@@ -109,29 +111,30 @@ export default function FormXentiteInner({
 	})
 
 	code += `
-				{fetchError && <div className="text-danger mb-3">{fetchError}</div>}
-
-				{formItem.id === 0 ? (
-					<Button
-						variant="primary"
-						className="float-end"
-						onClick={() => btValidateClick()}
-						disabled={isLoading}
-					>
-						<FaPlus /> Create Xentite
-					</Button>
-				) : (
-					<Button
-						variant="primary"
-						className="float-end"
-						onClick={() => btValidateClick()}
-						disabled={isLoading}
-					>
-						<FaEdit /> Update Xentite
-					</Button>
-				)}
+				<ZError response={fetchError} className="m-2 p-2 border border-primary" />
 
 			</Form>
+
+			{formItem.id === 0 ? (
+				<Button
+					variant="primary"
+					className="float-end"
+					onClick={() => btValidateClick()}
+					disabled={isLoading}
+				>
+					<FaPlus /> Create Xentite
+				</Button>
+			) : (
+				<Button
+					variant="primary"
+					className="float-end"
+					onClick={() => btValidateClick()}
+					disabled={isLoading}
+				>
+					<FaEdit /> Update Xentite
+				</Button>
+			)}
+
 		</div>
 	)
 }
@@ -148,7 +151,7 @@ export default function FormXentiteInner({
 	return {
 		code: code,
 		filePath: `./front/src/features/${entiteCamelNamePluriel}/`,
-		fileName: `Form${entitePascalName}.tsx`,
+		fileName: `Form${entitePascalName}Inner.tsx`,
 		description: null,
 	}
 }
