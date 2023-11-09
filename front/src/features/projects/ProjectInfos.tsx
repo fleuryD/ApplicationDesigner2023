@@ -14,11 +14,9 @@ type Props = {
 
 export default function ProjectInfos({ project, className }: Props) {
 	return (
-		<div className={"zSectionInner " + className}>
-			<h2>
-				About Project <b>{project.name}</b>
-			</h2>
-			<div className="project-infos">
+		<div className="row col-12">
+			<div className="col-12 col-md-6 mb-4">
+				<h2>About Project</h2>
 				<div>
 					id: <b>{project.id}</b>
 				</div>
@@ -46,7 +44,8 @@ export default function ProjectInfos({ project, className }: Props) {
 				</div>
 			</div>
 
-			<div className=" col-12 col-md-6 ">
+			<div className=" col-12 col-md-6 mb-4">
+				<h2>Adresses</h2>
 				<ul>
 					{project.adresses.map((addr: Adresse) => (
 						<li key={"proj-addr-" + addr.id}>

@@ -28,7 +28,7 @@ export default function ButtonEditProject({ className, project }: Props) {
 			title={"Edit project " + project.name}
 			onClick={() => btClick()}
 		>
-			<FaEdit />
+			<FaEdit /> Editer le projet
 		</Button>
 	)
 }

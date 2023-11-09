@@ -15,7 +15,7 @@ export default function ProjectLink({ project, text }: Props) {
 	if (!project) return null
 
 	return (
-		<Link to={"/projects/" + project.id} title="Click to see project.">
+		<Link to={"/projects/" + project.id + "/uml"} title="Click to see project.">
 			{text ? text : <>{project.name + " "}</>} <FaProjectDiagram />
 		</Link>
 	)

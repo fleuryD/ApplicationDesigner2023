@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useZFetchMyProjectById } from "api"
 import { useAppSelector } from "store/store"
@@ -21,11 +21,24 @@ import FixtureMaker from "features/fixtures/FixtureMaker"
 
 export default function PageProject() {
 	const projectId = Number(useParams().id) || 0
+	let tab = useParams().tab || "uml"
+
 	const { selectedFormProject } = useAppSelector((state) => state.app)
 	const { project, setProject, isLoading, fetchError } = useZFetchMyProjectById(projectId)
-	const [activeTabKey, setActiveTabKey] = useState<"uml" | "generate" | "infos" | "fixtureMaker">("uml")
+	const [activeTabKey, setActiveTabKey] = useState<"uml" | "generate" | "infos" | "fixture-maker" | null>(null)
 	const [selectedEntite, setSelectedEntite] = useState<Entite | null>(null)
 	const [selectedTemplateName, setSelectedTemplateName] = useState<string | null>("")
+
+	useEffect(() => {
+		if (tab === "uml") setActiveTabKey("uml")
+		else if (tab === "generate") setActiveTabKey("generate")
+		else if (tab === "infos") setActiveTabKey("infos")
+		else if (tab === "fixture-maker") setActiveTabKey("fixture-maker")
+		else {
+			setActiveTabKey("uml")
+			window.history.replaceState(null, "", `/projects/${projectId}/uml`)
+		}
+	}, [tab, projectId])
 
 	return (
 		<div className="zPage">
@@ -40,7 +53,11 @@ export default function PageProject() {
 					<>
 						<div className="zSection col-12">
 							<div className="zSectionInner">
-								<ProjectTabsHeader activeKey={activeTabKey} setActiveTabKey={setActiveTabKey} />
+								<ProjectTabsHeader
+									activeKey={activeTabKey || "uml"}
+									setActiveTabKey={setActiveTabKey}
+									projectId={project.id}
+								/>
 								{activeTabKey === "uml" && <Uml project={project} />}
 								{activeTabKey === "generate" && (
 									<>
@@ -60,7 +77,7 @@ export default function PageProject() {
 										)}
 									</>
 								)}
-								{activeTabKey === "fixtureMaker" && <FixtureMaker project={project} />}
+								{activeTabKey === "fixture-maker" && <FixtureMaker project={project} />}
 								{activeTabKey === "infos" && <ProjectInfos project={project} />}
 							</div>
 						</div>

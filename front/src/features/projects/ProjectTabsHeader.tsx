@@ -8,11 +8,12 @@ import { FaProjectDiagram, FaCode, FaInfo } from "react-icons/fa"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	activeKey: "uml" | "generate" | "infos" | "fixtureMaker"
+	activeKey: "uml" | "generate" | "infos" | "fixture-maker"
 	setActiveTabKey: any
+	projectId: number
 }
 
-export default function ProjectTabsHeader({ activeKey, setActiveTabKey }: Props) {
+export default function ProjectTabsHeader({ activeKey, setActiveTabKey, projectId }: Props) {
 	return (
 		<Tabs
 			activeKey={activeKey}
@@ -20,6 +21,7 @@ export default function ProjectTabsHeader({ activeKey, setActiveTabKey }: Props)
 			className="mb-3"
 			onSelect={(k: any) => {
 				setActiveTabKey(k)
+				window.history.replaceState(null, "", `/projects/${projectId}/${k}`)
 			}}
 		>
 			<Tab
@@ -47,7 +49,7 @@ export default function ProjectTabsHeader({ activeKey, setActiveTabKey }: Props)
 				}
 			/>
 			<Tab
-				eventKey="fixtureMaker"
+				eventKey="fixture-maker"
 				title={
 					<>
 						<FaCode /> Fixture Maker (dev)
