@@ -1,13 +1,9 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { Adresse, Project } from "types"
+import { Project } from "types"
 import ButtonEditProject from "features/projects/ButtonEditProject"
-import ProjectGenerateLink from "features/projects/ProjectGenerateLink"
-import ProjectLink from "features/projects/ProjectLink"
 import { FaPersonDigging } from "react-icons/fa6"
-import ButtonCreateAdresse from "features/adresses/ButtonCreateAdresse"
-import ButtonEditAdresse from "features/adresses/ButtonEditAdresse"
 import { useAppSelector } from "store/store"
 import FormAdresse from "features/adresses/FormAdresse"
 
@@ -24,11 +20,7 @@ export default function PageProjectHeader({ project, mode }: Props) {
 	return (
 		<header className="zPageHeader row">
 			{project && app.selectedFormAdresse && (
-				<FormAdresse
-					adresseItem={app.selectedFormAdresse}
-					project={project}
-					//addProjects={(proj: Project) => setProjects([...projects, proj])}
-				/>
+				<FormAdresse adresseItem={app.selectedFormAdresse} project={project} />
 			)}
 			<h1>
 				<small>Project:</small> <b>{project && project.name}</b>
@@ -53,30 +45,6 @@ export default function PageProjectHeader({ project, mode }: Props) {
 					</div>
 				)}
 			</div>
-
-			{project && (
-				<div className=" col-12 col-md-6 ">
-					<ul>
-						{project.adresses.map((addr: Adresse) => (
-							<li key={"proj-addr-" + addr.id}>
-								<a href={addr.url} target="_blank" rel="noreferrer">
-									{addr.name || addr.url}
-								</a>{" "}
-								&nbsp;&nbsp;
-								<ButtonEditAdresse adresse={addr} className="btn-xs" />
-							</li>
-						))}
-					</ul>
-					<ButtonCreateAdresse project={project} className="btn-xs" />
-				</div>
-			)}
-			{/*
-			{mode === "UML" ? (
-				<ProjectGenerateLink project={project} text="Generate code" />
-			) : (
-				<ProjectLink project={project} text="UML" />
-			)}
-			*/}
 		</header>
 	)
 }

@@ -1,8 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-
+import React from "react"
 import Tab from "react-bootstrap/Tab"
 import Tabs from "react-bootstrap/Tabs"
 import { FaProjectDiagram, FaCode, FaInfo } from "react-icons/fa"
@@ -10,21 +8,18 @@ import { FaProjectDiagram, FaCode, FaInfo } from "react-icons/fa"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 type Props = {
-	activeKey: "uml" | "generate" | "infos"
-	projectId: number
+	activeKey: "uml" | "generate" | "infos" | "fixtureMaker"
+	setActiveTabKey: any
 }
 
-export default function ProjectTabsHeader({ activeKey, projectId }: Props) {
-	const navigate = useNavigate()
+export default function ProjectTabsHeader({ activeKey, setActiveTabKey }: Props) {
 	return (
 		<Tabs
 			activeKey={activeKey}
 			id="uncontrolled-tab-example"
 			className="mb-3"
 			onSelect={(k: any) => {
-				if (k === "uml") navigate("/projects/" + projectId)
-				else if (k === "generate") navigate("/projects/" + projectId + "/generate")
-				else if (k === "infos") navigate("/projects/" + projectId + "/infos")
+				setActiveTabKey(k)
 			}}
 		>
 			<Tab
@@ -34,9 +29,6 @@ export default function ProjectTabsHeader({ activeKey, projectId }: Props) {
 						<FaProjectDiagram /> UML
 					</>
 				}
-				//as={Link}
-				//to={"/projects/" + projectId + "/generate"}
-				//onClick={() => alert("dddddd")}
 			/>
 			<Tab
 				eventKey="generate"
@@ -53,7 +45,14 @@ export default function ProjectTabsHeader({ activeKey, projectId }: Props) {
 						<FaInfo /> Infos
 					</>
 				}
-				disabled
+			/>
+			<Tab
+				eventKey="fixtureMaker"
+				title={
+					<>
+						<FaCode /> Fixture Maker (dev)
+					</>
+				}
 			/>
 		</Tabs>
 	)

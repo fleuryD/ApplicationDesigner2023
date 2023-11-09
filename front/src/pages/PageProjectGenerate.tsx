@@ -11,7 +11,6 @@ import ZErrorSection from "ui/ZErrorSection"
 import GenerateMenu from "features/generate/GenerateMenu"
 import PageProjectHeader from "features/projects/PageProjectHeader"
 import FormProject from "features/projects/FormProject"
-import ProjectTabsHeader from "features/projects/ProjectTabsHeader"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -34,7 +33,6 @@ export default function PageProjectGenerate() {
 				{project && (
 					<div className="zSection col-12 ">
 						<div className="zSectionInner">
-							<ProjectTabsHeader activeKey="generate" projectId={project.id} />
 							<GenerateMenu
 								project={project}
 								selectedEntite={selectedEntite}

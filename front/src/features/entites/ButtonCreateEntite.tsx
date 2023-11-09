@@ -32,7 +32,7 @@ export default function ButtonCreateEntite({ className, project }: Props) {
 	}
 	return (
 		<Button className={className} title="Add a new entity for this project" onClick={() => btClick()}>
-			<FaPlus />
+			<FaPlus /> Ajouter une entite
 		</Button>
 	)
 }

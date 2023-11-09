@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useState } from "react"
+import React, { useRef, useLayoutEffect, useState } from "react"
 import { Entite, Project } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
@@ -15,20 +15,35 @@ type Props = {
 	entite: Entite
 	project: Project
 	updateXarrow: any
+	umlContainerHeight: number
+	setUmlContainerHeight: any
 }
 
-export default function UmlEntite({ entite, project, updateXarrow }: Props) {
+export default function UmlEntite({ entite, project, updateXarrow, umlContainerHeight, setUmlContainerHeight }: Props) {
 	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
 		console.log({ e, data })
 	}
 	*/
-
 	const [pos, setPos] = useState({
 		x: entite.umlPosX > 0 ? entite.umlPosX : 0,
 		y: entite.umlPosY > 0 ? entite.umlPosY : 0,
 	})
+
+	const [height, setHeight] = useState(0)
+	const elementRef = useRef<HTMLInputElement>(null)
+
+	useLayoutEffect(() => {
+		let heightPx = 0
+		if (elementRef.current) {
+			heightPx = elementRef.current.offsetHeight
+			setHeight(heightPx)
+		}
+		if (heightPx + pos.y > umlContainerHeight) {
+			//	setUmlContainerHeight(heightPx + pos.y + 100)
+		}
+	}, [height, pos.y, setUmlContainerHeight, umlContainerHeight])
 
 	const xxx: any = (e: any, data: any, entite: Entite) => {
 		console.log("data:", data)
@@ -51,8 +66,9 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 			key={"entite" + entite.id}
 			onDrag={updateXarrow}
 			onStop={(e, data) => {
-				updateXarrow()
 				xxx(e, data, entite)
+				setUmlContainerHeight(height + pos.y + 100)
+				updateXarrow()
 			}}
 			position={{
 				x: pos.x, // > 0 ? entite.umlPosX : 0,
@@ -61,16 +77,16 @@ export default function UmlEntite({ entite, project, updateXarrow }: Props) {
 			grid={[10, 10]}
 			bounds="#umlContent"
 		>
-			<div className="umlEntity handle">
+			<div className="umlEntity handle" ref={elementRef}>
 				<div className="umlEntityInner" id={"uml-entitex-" + entite.id}>
 					<h2 className="umlEntityHeader">
 						{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
 					</h2>
-					{/*
+
 					<small>
-						({pos.x}, {pos.y})
+						pos({pos.x}, {pos.y} ); H:{height}; yMin({height + pos.y})
 					</small>
-					*/}
+
 					<table className="umlEntityAttributes">
 						<tbody>
 							{entite.attributs.map((attr: any) => (
