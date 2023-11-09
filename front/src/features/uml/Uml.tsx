@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React from "react"
+import React, { useEffect } from "react"
 import { useAppSelector } from "store/store"
 import { Project } from "types"
 import UmlEntite from "features/uml/UmlEntite"
@@ -10,6 +10,7 @@ import FormAttribut from "features/attributs/FormAttribut"
 import { ButtonFixtureEntiteUser } from "features/fixtures/ButtonsFixtures"
 import UmlArrows from "./UmlArrows"
 import { useXarrow } from "react-xarrows"
+import { Button } from "react-bootstrap"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -21,10 +22,15 @@ type Props = {
 
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
-	const [umlContainerHeight, setUmlContainerHeight] = React.useState(900)
-
+	const [umlContainerHeight, setUmlContainerHeight] = React.useState(1000)
 	const updateXarrow = useXarrow()
 
+	/*
+	useEffect(() => {
+		console.log("updateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrow")
+		updateXarrow()
+	}, [umlContainerHeight])
+*/
 	return (
 		<div>
 			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
@@ -51,7 +57,17 @@ export default function Uml({ project }: Props) {
 					)
 				})}
 			</div>
-			<UmlArrows project={project} />
+
+			<Button
+				onClick={() => {
+					setUmlContainerHeight(umlContainerHeight + 100)
+					updateXarrow()
+				}}
+			>
+				+
+			</Button>
+
+			<UmlArrows project={project} umlContainerHeight={umlContainerHeight} />
 		</div>
 	)
 }

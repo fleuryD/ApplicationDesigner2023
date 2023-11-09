@@ -39,26 +39,33 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 		if (elementRef.current) {
 			heightPx = elementRef.current.offsetHeight
 			setHeight(heightPx)
+			if (umlContainerHeight < height + pos.y + 100) {
+				setUmlContainerHeight(height + pos.y + 100)
+				//updateXarrow()
+			}
 		}
-		if (heightPx + pos.y > umlContainerHeight) {
-			//	setUmlContainerHeight(heightPx + pos.y + 100)
-		}
-	}, [height, pos.y, setUmlContainerHeight, umlContainerHeight])
+	}, [pos.y])
 
-	const xxx: any = (e: any, data: any, entite: Entite) => {
-		console.log("data:", data)
+	const onDraggStop: any = (e: any, data: any, entite: Entite) => {
+		console.log("onStop e", e)
+		console.log("onStop data", data)
 		let posX = data.x
 		let posY = data.y
 
 		console.log("--------- posX:" + posX + "   posY:" + posY)
-		//if (posX < 0) posX = 0
-		//if (posY < 0) posY = 0
 
 		setPos({ x: posX, y: posY })
+
+		if (umlContainerHeight < height + posY + 100) {
+			setUmlContainerHeight(height + posY + 100)
+			//updateXarrow()
+		}
 
 		apiSetEntiteUmlPosition(entite.id, posX, posY).then((rep) => {
 			console.log("rep", rep)
 		})
+
+		updateXarrow()
 	}
 
 	return (
@@ -66,14 +73,9 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 			key={"entite" + entite.id}
 			onDrag={updateXarrow}
 			onStop={(e, data) => {
-				xxx(e, data, entite)
-				setUmlContainerHeight(height + pos.y + 100)
-				updateXarrow()
+				onDraggStop(e, data, entite)
 			}}
-			position={{
-				x: pos.x, // > 0 ? entite.umlPosX : 0,
-				y: pos.y, // > 0 ? entite.umlPosY : 0,
-			}}
+			position={{ x: pos.x, y: pos.y }}
 			grid={[10, 10]}
 			bounds="#umlContent"
 		>
