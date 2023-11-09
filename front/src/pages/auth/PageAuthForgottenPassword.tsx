@@ -10,8 +10,8 @@ export default function PageAuthForgottenPassword() {
 		document.title = "AD: Mot de passe oublié"
 	}, [])
 	return (
-		<div className="zPage page-auth">
-			<header id="page-header">
+		<div className="pageAuth">
+			<header id="pageAuthHeader">
 				<h2>Application Designer</h2>
 				<img src="/img/app-logo/app-logo-192.png" alt="ApplicationDesigner" id="page-auth-app-logo" />
 				<h1>Mot de passe oublié</h1>

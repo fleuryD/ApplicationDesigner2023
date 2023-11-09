@@ -31,35 +31,33 @@ import "styles/uml.scss"
 export default function App() {
 	const auth = useAppSelector((state) => state.auth)
 	return (
-		<div className="App  appStyled container-fluid" id="container-global">
-			<Router>
-				{auth.isConnected ? (
-					<>
-						<NavBar />
-						<Routes>
-							<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
-							<Route path="/projects/:id" element={<PageProject />} />
-							{/* <Route path="/admin/users" element={<PageAdminUsers />} /> */}
-							{/* <Route path="/admin/users/:id" element={<PageAdminUser />} /> */}
-							{/* <Route path="/dev" element={<PageDev />} /> */}
-							{/* <Route path="/me" element={<PageUserMe />} /> */}
-							<Route path="/" element={<PageHome />} />
-							<Route path="*" element={<Page404 />} />
-						</Routes>
-					</>
-				) : (
+		<Router>
+			{auth.isConnected ? (
+				<div className="App  appStyled container-fluid" id="container-global">
+					<NavBar />
 					<Routes>
-						<Route path="/auth/register" element={<PageAuthRegister />} />
-						<Route path="/auth/emailconfirm/:token" element={<PageAuthConfirmEmail />} />
-						<Route path="/auth/forgotten-password" element={<PageAuthForgottenPassword />} />
-						<Route path="/auth/reset-password/:token" element={<PageAuthResetPassword />} />
-						<Route path="*" element={<PageAuthLogin />} />
+						<Route path="/projects/:id/generate" element={<PageProjectGenerate />} />
+						<Route path="/projects/:id" element={<PageProject />} />
+						{/* <Route path="/admin/users" element={<PageAdminUsers />} /> */}
+						{/* <Route path="/admin/users/:id" element={<PageAdminUser />} /> */}
+						{/* <Route path="/dev" element={<PageDev />} /> */}
+						{/* <Route path="/me" element={<PageUserMe />} /> */}
+						<Route path="/" element={<PageHome />} />
+						<Route path="*" element={<Page404 />} />
 					</Routes>
-				)}
-				{/*
+				</div>
+			) : (
+				<Routes>
+					<Route path="/auth/register" element={<PageAuthRegister />} />
+					<Route path="/auth/emailconfirm/:token" element={<PageAuthConfirmEmail />} />
+					<Route path="/auth/forgotten-password" element={<PageAuthForgottenPassword />} />
+					<Route path="/auth/reset-password/:token" element={<PageAuthResetPassword />} />
+					<Route path="*" element={<PageAuthLogin />} />
+				</Routes>
+			)}
+			{/*
 				<DebugAuthInfos />
 				*/}
-			</Router>
-		</div>
+		</Router>
 	)
 }

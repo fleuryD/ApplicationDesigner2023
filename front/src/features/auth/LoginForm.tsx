@@ -5,6 +5,7 @@ import { authLoginSuccess } from "store/authSlice"
 import { useAppDispatch } from "store/store"
 import { apiFetchLogin } from "api"
 import LoginFormInner from "./LoginFormInner"
+import { Link } from "react-router-dom"
 // import FormAutoFill from "./FormAutoFill"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -78,7 +79,7 @@ export default function LoginForm() {
 		}).then((response) => {
 			if (response.user) {
 				console.debug("response: ", response)
-                setSuccess(true)
+				setSuccess(true)
 				dispatch(authLoginSuccess(response.user))
 			} else if (response.message === "INVALID_CREDENTIALS")
 				setFetchError("Identifiant ou mot de passe incorrect")
@@ -114,6 +115,13 @@ export default function LoginForm() {
 				setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
 			/>
 			*/}
+
+				<div className="mt-4">
+					<Link to="/auth/register">Inscription</Link>
+				</div>
+				<div className="pt-2">
+					<Link to="/auth/forgotten-password">Mot de passe oublié ?</Link>
+				</div>
 			</div>
 		)
 

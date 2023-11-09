@@ -60,9 +60,6 @@ export default function RegisterFormInner({
 				<Button variant="primary" onClick={() => btValidateClick()} disabled={isLoading} className="mt-2">
 					<FaPlus /> Inscription
 				</Button>
-				<div className="pt-2">
-					<Link to="/auth">Connexion</Link>
-				</div>
 			</Form>
 		</div>
 	)

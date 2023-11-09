@@ -31,11 +31,16 @@ export default function MyProjects({ projects }: { projects: Project[] }) {
 								</li>
 							))}
 					</ul>
-					<ButtonFixtureProjectAd className="m-1" />
-					<ButtonFixtureProjectSL className="m-1" />
-					<ButtonFixtureProjectTranscendance className="m-1" />
-					<ButtonFixtureMatcha className="m-1" />
-					<ButtonFixtureProjectYz className="m-1" />
+					<div className="mt-5">
+						<div>
+							<b>Fixtures:</b>
+						</div>
+						<ButtonFixtureProjectAd className="m-1" />
+						<ButtonFixtureProjectSL className="m-1" />
+						<ButtonFixtureProjectTranscendance className="m-1" />
+						<ButtonFixtureMatcha className="m-1" />
+						<ButtonFixtureProjectYz className="m-1" />
+					</div>
 				</div>
 			</div>
 		</div>

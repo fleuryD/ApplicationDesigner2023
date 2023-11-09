@@ -2,22 +2,22 @@ version: "3"
 services:
     postgres:
         build: pgsql
-        container_name: postgres
+        container_name: ad_postgres
         env_file:
             - ./back/.env
         restart: always
         networks:
-            - best_network
+            - ad_network
         ports:
             - 5432:5432
     front:
         build: front
-        container_name: front
+        container_name: ad_front
         restart: always
         ports:
             - 3001:3001
         networks:
-            - best_network
+            - ad_network
         depends_on:
             - back
         volumes:
@@ -25,23 +25,23 @@ services:
             - /app/node_modules
     back:
         build: back
-        container_name: back
+        container_name: ad_back
         ports:
             - 3000:3000
         restart: always
         networks:
-            - best_network
+            - ad_network
         depends_on:
             - postgres
         links:
-            - postgres
+            - ad_postgres
         volumes:
             - ./back:/app
             - /app/node_modules
     #pgadmin:
     #    image: dpage/pgadmin4
     #    restart: always
-    #    container_name: nest-pgadmin4
+    #    container_name: ad_pgadmin4
     #    environment:
     #        - PGADMIN_DEFAULT_EMAIL=admin@admin.com
     #        - PGADMIN_DEFAULT_PASSWORD=pgadmin4
@@ -50,7 +50,7 @@ services:
     #    depends_on:
     #        - db
 networks:
-    best_network:
+    ad_network:
         driver: bridge
 # done :
 #export DOCKER_BUILDKIT=0

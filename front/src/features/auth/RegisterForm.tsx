@@ -153,6 +153,9 @@ export default function RegisterForm() {
 					setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
 				/>
 				*/}
+				<div className="mt-4">
+					<Link to="/auth">Connexion</Link>
+				</div>
 			</div>
 		)
 

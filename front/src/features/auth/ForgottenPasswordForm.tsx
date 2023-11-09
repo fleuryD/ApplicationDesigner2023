@@ -97,6 +97,11 @@ export default function ForgottenPasswordForm() {
 					setPassword2={(val: string) => setFormItem((formItem: any) => ({ ...formItem, password2: val }))}
 				/>
 				*/}
+				<div className="mt-4">
+					<Link to="/" title="Connexion.">
+						Retour
+					</Link>
+				</div>
 			</div>
 		)
 

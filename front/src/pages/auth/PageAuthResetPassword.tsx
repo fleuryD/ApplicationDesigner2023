@@ -12,8 +12,8 @@ export default function PageAuthResetPassword() {
 	}, [])
 	const tokenResetPassword = useParams().token
 	return (
-		<div className="zPage page-auth">
-			<header id="page-header">
+		<div className="pageAuth">
+			<header id="pageAuthHeader">
 				<h2>Application Designer</h2>
 				<img src="/img/app-logo/app-logo-192.png" alt="ApplicationDesigner" id="page-auth-app-logo" />
 				<h1>Modifiez votre mot de passe</h1>

@@ -27,7 +27,7 @@ export default function PageHome() {
 					addProjects={(proj: Project) => setProjects([...projects, proj])}
 				/>
 			)}
-			<header className="zPageHeader border border-primary ">
+			<header className="zPageHeader">
 				<img
 					src="/img/app-logo/app-logo-96.png"
 					alt="AppDesigner"
