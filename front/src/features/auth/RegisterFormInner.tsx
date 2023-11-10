@@ -3,7 +3,7 @@
 import React from "react"
 import Form from "react-bootstrap/Form"
 import { Button } from "react-bootstrap"
-import ZFrmInput from "ui/ZFrmInput"
+import ZFrmInput from "libs/zFrm/ZFrmInput"
 import { FaPlus } from "react-icons/fa"
 import { Link } from "react-router-dom"
 

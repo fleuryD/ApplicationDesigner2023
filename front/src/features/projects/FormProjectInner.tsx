@@ -3,8 +3,8 @@
 import React from "react"
 import Form from "react-bootstrap/Form"
 import { Button } from "react-bootstrap"
-import ZFrmInput from "ui/ZFrmInput"
-import ZFrmCheck from "ui/ZFrmCheck"
+import ZFrmInput from "libs/zFrm/ZFrmInput"
+import ZFrmCheck from "libs/zFrm/ZFrmCheck"
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa"
 import ZError from "ui/ZError"
 

@@ -1,11 +1,11 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import zFetcher from "utils/zFetcher"
+import zFetcher from "libs/zFetcher"
 import { Attribut } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-export async function apiCreateAttribut(entiyId:number, attribut:Attribut) {
+export async function apiCreateAttribut(entiyId: number, attribut: Attribut) {
 	return zFetcher({
 		shortUrl: "/attributs/new/entite/" + entiyId,
 		method: "POST",
@@ -48,7 +48,7 @@ export async function apiEditAttribut(attribut: Attribut) {
 		},
 	})
 }
-export async function apiDeleteAttributById(attrId:number) {
+export async function apiDeleteAttributById(attrId: number) {
 	return zFetcher({
 		shortUrl: "/attributs/" + attrId + "/delete",
 		method: "DELETE",

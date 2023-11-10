@@ -2,7 +2,7 @@
 import React from "react"
 import { useAppSelector } from "store/store"
 import { User } from "types"
-import ZTable from "ui/zTable/ZTable"
+import ZTable from "libs/zTable/ZTable"
 import UserLink from "features/users/UserLink"
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
