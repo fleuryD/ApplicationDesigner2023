@@ -30,7 +30,6 @@ export default function UmlEntite({
 	umlContainerWidth,
 	setUmlContainerWidth,
 }: Props) {
-	//console.log("--------- render entite A" + entite.name + " ---------")
 	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
@@ -47,7 +46,6 @@ export default function UmlEntite({
 	const elementRef = useRef<HTMLInputElement>(null)
 
 	useLayoutEffect(() => {
-		//console.log("--------- render entite B " + entite.name + "---------")
 		let heightPx = 0
 		let widthPx = 0
 		if (elementRef.current) {
@@ -63,7 +61,6 @@ export default function UmlEntite({
 				setUmlContainerWidth(width + pos.x + 200)
 				updateXarrow()
 			}
-			//console.log("--------- render entite " + entite.name + " heightPx: " + heightPx + "---------")
 		}
 	}, [
 		pos.y,
@@ -82,8 +79,6 @@ export default function UmlEntite({
 		//console.log("onStop data", data)
 		let posX = data.x
 		let posY = data.y
-
-		//console.log("--------- posX:" + posX + "   posY:" + posY)
 
 		setPos({ x: posX, y: posY })
 
@@ -125,9 +120,16 @@ export default function UmlEntite({
 
 					<table className="umlEntityAttributes">
 						<tbody>
-							{entite.attributs.map((attr: any) => (
-								<UmlAttribut key={"attr" + attr.id} attribut={attr} entite={entite} project={project} />
-							))}
+							{entite.attributs
+								.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0))
+								.map((attr: any) => (
+									<UmlAttribut
+										key={"attr" + attr.id}
+										attribut={attr}
+										entite={entite}
+										project={project}
+									/>
+								))}
 						</tbody>
 					</table>
 					<ButtonCreateAttribut className="col btn-sm m-1" entite={entite} />

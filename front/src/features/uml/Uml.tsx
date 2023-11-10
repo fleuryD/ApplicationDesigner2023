@@ -18,6 +18,8 @@ type Props = {
 	project: Project
 }
 
+//.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
 	const [umlContainerHeight, setUmlContainerHeight] = React.useState(200)

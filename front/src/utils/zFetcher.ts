@@ -36,6 +36,8 @@ export default async function zFetcher({ shortUrl, method, body, publicAccess }:
 	}
 }
 
+// ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■
+
 function requestOptionsHeaders() {
 	return {
 		"Content-Type": "application/json",

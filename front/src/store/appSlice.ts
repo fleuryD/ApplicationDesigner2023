@@ -55,7 +55,7 @@ export default appSlice.reducer
 const { appLogoutSuccessX } = appSlice.actions
 
 export const appLogoutSuccess = () => (dispatch: any) => {
-	//console.log("'aaaaaaaaaaaaaa")
+
 	dispatch(appLogoutSuccessX())
 }
 */

@@ -41,11 +41,8 @@ export class ${entitePascalName}{
 		if (attr.tipe === "OneToMany") {
 			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
 			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
-			console.log("targetEntite", targetEntite)
 			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
 			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
-
-			console.log("*******************targetEntite?.attributs", targetEntite?.attributs)
 
 			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
 			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"

@@ -17,10 +17,8 @@ export default function PageUser() {
 		if (userId > 0) {
 			apiFetchUser(userId).then((response) => {
 				if (response.error) {
-					console.log("response: ", response)
 					setError("Error Inconnue: Voir la console")
 				} else {
-					console.log("response: ", response)
 					setUser(response.user)
 				}
 				setIsLoading(false)

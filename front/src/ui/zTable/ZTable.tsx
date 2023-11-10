@@ -16,12 +16,11 @@ interface Props {
 		sortValue?: any
 	}[]
 	data: any[] | null
-	// eslint-disable-next-line react/require-default-props
 	funcRowClassName?: any
 }
 
 ZTable.defaultProps = {
-	className: null, // "bg-secondary",
+	className: null,
 }
 
 export default function ZTable({ columns, data, funcRowClassName, className }: Props) {
@@ -57,40 +56,27 @@ export default function ZTable({ columns, data, funcRowClassName, className }: P
 
 		const columnAssociatedToSortBy = columns.filter((col) => col.name === sortBy)[0]
 		const sortValue = columnAssociatedToSortBy?.sortValue || null
-		//  //console.log("sortValue")
-		//  //console.log(sortValue)
+
 		/*
-        // //console.log()
-        if (columnAssociatedToSortBy) {
-            if (columnAssociatedToSortBy.cellHtml) {
-                // alert("with CellHtml")
-                return data?.slice().sort((a, b) => {
-                    //console.log(a, b)
-                    return sortPair(
-                        sortFactor,
-                        columnAssociatedToSortBy.cellHtml(a),
-                        columnAssociatedToSortBy.cellHtml(b)
-                    )
-                })
-            }
-        }
-*/
+		if (columnAssociatedToSortBy) {
+			if (columnAssociatedToSortBy.cellHtml) {
+				return data?.slice().sort((a, b) => {
+					return sortPair(
+						sortFactor,
+						columnAssociatedToSortBy.cellHtml(a),
+						columnAssociatedToSortBy.cellHtml(b)
+					)
+				})
+			}
+		}
+		*/
 		return data?.slice().sort((a, b) => sortPair(sortFactor, a, b, sortValue))
 	}
 
 	function sortPair(sortFactor: number, a: any, b: any, sortValue: (_r: any) => any | null) {
 		const aaaa = sortValue !== null ? sortValue(a) : a[sortBy]
 		const bbbb = sortValue !== null ? sortValue(b) : b[sortBy]
-		/*
-        //console.log(
-            "compare: " +
-                aaaa +
-                " / " +
-                bbbb +
-                " ... " +
-                (sortValue !== null ? "WITH" : "WITHOUT")
-        )
-*/
+
 		let aa = typeof aaaa === "string" ? aaaa.toLowerCase() : aaaa
 		let bb = typeof bbbb === "string" ? bbbb.toLowerCase() : bbbb
 		// let bb =            typeof b[sortBy] === "string" ? b[sortBy].toLowerCase() : b[sortBy]
@@ -107,8 +93,6 @@ export default function ZTable({ columns, data, funcRowClassName, className }: P
 	}
 
 	function handleSortByClick(colName: string) {
-		// //console.log("handleSortByClick " + colName)
-
 		if (colName === sortBy) {
 			setSortOrderAsc(!sortOrderAsc)
 		} else {

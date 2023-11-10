@@ -38,7 +38,11 @@ export default function ZFrmSelect({ formData, name, label, placeholder, selectO
 					{...otherProps}
 				>
 					{selectOptions.map((op: ISelectOption) => (
-						<option key={"option-" + name + "-" + op.text} value={op.value} disabled={op.disabled}>
+						<option
+							key={"option-" + name + "-" + op.value + "-" + op.text}
+							value={op.value}
+							disabled={op.disabled}
+						>
 							{op.text}
 						</option>
 					))}

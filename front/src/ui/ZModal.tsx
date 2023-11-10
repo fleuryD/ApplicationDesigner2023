@@ -24,7 +24,7 @@ export default function ZModal({ children, styles, closeForm, className }: Props
 			<StyledOpaqueBackground />
 			<StyledModal>
 				{children}
-				<Button variant="danger" className="formChannelApply" onClick={() => closeForm()}>
+				<Button variant="danger" className="" onClick={() => closeForm()}>
 					Annuler
 				</Button>
 			</StyledModal>
