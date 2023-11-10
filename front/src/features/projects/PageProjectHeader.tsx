@@ -25,7 +25,6 @@ export default function PageProjectHeader({ project, mode }: Props) {
 			<h1>
 				<small>Project:</small> <b>{project && project.name}</b>
 				{project && <ButtonEditProject className="btn-sm float-end" project={project} />}
-				{mode === "UML" ? <small> [UML]</small> : <small> [Generate]</small>}
 			</h1>
 
 			<div className=" col-12 col-md-6">

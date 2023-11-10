@@ -15,11 +15,10 @@ import PageAuthResetPassword from "pages/auth/PageAuthResetPassword"
 // * private routes
 import Page404 from "pages/Page404"
 import PageHome from "pages/PageHome"
+import PageProject from "pages/PageProject"
 //import PageDev from "pages/PageDev"
 //import PageAdminUser from "pages/PageAdminUser"
 //import PageAdminUsers from "pages/PageAdminUsers"
-import PageProject from "pages/PageProject"
-import PageProjectGenerate from "pages/PageProjectGenerate"
 
 // * styles
 import "bootstrap/dist/css/bootstrap.min.css"
