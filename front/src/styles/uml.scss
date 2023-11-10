@@ -4,12 +4,13 @@
 
 .umlContent {
 	background-color: #bbbbbb;
-	position: relative;
+	position: absolute;
 	flex-direction: row;
 	min-height: 200px;
 	width: 100%;
 	margin: 0;
 	padding: 5px;
+	//overflow-y: scroll;
 
 	.umlEntity {
 		margin: 0;

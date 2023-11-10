@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import React, { useRef, useLayoutEffect, useState } from "react"
+import React, { useRef, useEffect, useLayoutEffect, useState } from "react"
 import { Entite, Project } from "types"
 import UmlAttribut from "features/uml/UmlAttribut"
 import ButtonEditEntite from "features/entites/ButtonEditEntite"
@@ -20,6 +20,7 @@ type Props = {
 }
 
 export default function UmlEntite({ entite, project, updateXarrow, umlContainerHeight, setUmlContainerHeight }: Props) {
+	console.log("--------- render entite " + entite.name + " ---------")
 	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
@@ -34,15 +35,16 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 	const [height, setHeight] = useState(0)
 	const elementRef = useRef<HTMLInputElement>(null)
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		let heightPx = 0
 		if (elementRef.current) {
 			heightPx = elementRef.current.offsetHeight
 			setHeight(heightPx)
-			if (umlContainerHeight < height + pos.y + 100) {
-				setUmlContainerHeight(height + pos.y + 100)
-				//updateXarrow()
+			if (umlContainerHeight < height + pos.y + 200) {
+				setUmlContainerHeight(height + pos.y + 200)
+				updateXarrow()
 			}
+			console.log("--------- render entite " + entite.name + " heightPx: " + heightPx + "---------")
 		}
 	}, [pos.y])
 
@@ -56,8 +58,8 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 
 		setPos({ x: posX, y: posY })
 
-		if (umlContainerHeight < height + posY + 100) {
-			setUmlContainerHeight(height + posY + 100)
+		if (umlContainerHeight < height + posY + 200) {
+			setUmlContainerHeight(height + posY + 200)
 			//updateXarrow()
 		}
 

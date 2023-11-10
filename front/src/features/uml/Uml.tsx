@@ -32,7 +32,7 @@ export default function Uml({ project }: Props) {
 	}, [umlContainerHeight])
 */
 	return (
-		<div>
+		<div className="bg-info" style={{ overflowY: "scroll", position: "relative", minHeight: "80vh" }}>
 			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
 			<div className="">
 				<ButtonCreateEntite className="btn-sm m-2" project={project} />
