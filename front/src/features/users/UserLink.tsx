@@ -18,5 +18,3 @@ export default function UserLink({ user }: Props) {
 		</Link>
 	)
 }
-
-// 〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓〓	STYLED_COMPONENTS
