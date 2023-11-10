@@ -18,21 +18,14 @@ type Props = {
 	project: Project
 }
 
-//.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
-
 export default function Uml({ project }: Props) {
 	const app = useAppSelector((state) => state.app)
-	const [umlContainerHeight, setUmlContainerHeight] = React.useState(1000)
+	const [umlContainerHeight, setUmlContainerHeight] = React.useState(200)
+	const [umlContainerWidth, setUmlContainerWidth] = React.useState(200)
 	const updateXarrow = useXarrow()
 
-	/*
-	useEffect(() => {
-		console.log("updateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrowupdateXarrow")
-		updateXarrow()
-	}, [umlContainerHeight])
-*/
 	return (
-		<div className="bg-info" style={{ overflowY: "scroll", position: "relative", minHeight: "80vh" }}>
+		<div>
 			{app.selectedFormAttribut && <FormAttribut attributItem={app.selectedFormAttribut} project={project} />}
 			<div className="">
 				<ButtonCreateEntite className="btn-sm m-2" project={project} />
@@ -43,31 +36,29 @@ export default function Uml({ project }: Props) {
 			</div>
 			{app.selectedFormEntite && <FormEntite projectId={project.id} EntiteItem={app.selectedFormEntite} />}
 
-			<div id="umlContent" className="umlContent" style={{ height: umlContainerHeight + "px" }}>
-				{project.entites.map((entite: any) => {
-					return (
-						<UmlEntite
-							entite={entite}
-							project={project}
-							updateXarrow={updateXarrow}
-							key={"uml-entite-" + entite.id}
-							umlContainerHeight={umlContainerHeight}
-							setUmlContainerHeight={setUmlContainerHeight}
-						/>
-					)
-				})}
+			<div style={{ overflowY: "scroll", position: "relative", minHeight: "80vh" }}>
+				<div
+					id="umlContent"
+					className="umlContent"
+					style={{ height: umlContainerHeight + "px", width: umlContainerWidth + "px" }}
+				>
+					{project.entites.map((entite: any) => {
+						return (
+							<UmlEntite
+								entite={entite}
+								project={project}
+								updateXarrow={updateXarrow}
+								key={"uml-entite-" + entite.id}
+								umlContainerHeight={umlContainerHeight}
+								setUmlContainerHeight={setUmlContainerHeight}
+								umlContainerWidth={umlContainerWidth}
+								setUmlContainerWidth={setUmlContainerWidth}
+							/>
+						)
+					})}
+				</div>
+				<UmlArrows project={project} />
 			</div>
-
-			<Button
-				onClick={() => {
-					setUmlContainerHeight(umlContainerHeight + 100)
-					updateXarrow()
-				}}
-			>
-				+
-			</Button>
-
-			<UmlArrows project={project} umlContainerHeight={umlContainerHeight} />
 		</div>
 	)
 }

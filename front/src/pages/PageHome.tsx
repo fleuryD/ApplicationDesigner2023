@@ -28,13 +28,8 @@ export default function PageHome() {
 				/>
 			)}
 			<header className="zPageHeader">
-				<img
-					src="/img/app-logo/app-logo-96.png"
-					alt="AppDesigner"
-					className="appLogo d-inline-block border border-secondary d-inline-block p-1 m-0"
-					style={{ width: "96px" }}
-				/>
-				<div className="d-inline-block ms-2 ">
+				<img src="/img/app-logo/app-logo-96.png" alt="AppDesigner" className="appLogo d-inline-block  m-0" />
+				<div className="d-inline-block ms-4 ">
 					<h1>AppDesigner</h1>
 					<h2>Lorem Ipsum</h2>
 				</div>

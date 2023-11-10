@@ -15,12 +15,13 @@ export default function NavBar() {
 
 	return (
 		<Navbar expand="sm" bg="dark" data-bs-theme="dark">
-			<Container fluid>
+			<Container fluid className="">
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
-					<Nav className="container">
+					<Nav className="container-fluide">
 						<Navbar.Brand as={NavLink} to="/">
-							<FaHome /> AppDesigner{" "}
+							<img src="/img/app-logo/app-logo-32.png" alt="AppDesigner" className="appLogo me-2" />{" "}
+							AppDesigner
 						</Navbar.Brand>
 						{auth.isConnected ? <NavBarPrivateItems /> : <NavBarPublicItems />}
 					</Nav>

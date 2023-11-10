@@ -67,7 +67,8 @@ $sectionGap: 5px;
 		padding: 10px;
 		margin: $sectionGap;
 		.appLogo {
-			//width: 50px;
+			width: 96px;
+			box-shadow: 5px 5px 10px $colSecondary;
 		}
 		h1 {
 			color: $colPrimary;

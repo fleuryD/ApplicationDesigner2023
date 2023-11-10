@@ -8,19 +8,13 @@ import Xarrow from "react-xarrows"
 
 type Props = {
 	project: Project
-	umlContainerHeight: number
 }
 
-export default function UmlArrows({ project, umlContainerHeight }: Props) {
+export default function UmlArrows({ project }: Props) {
 	const colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF", "rgb(25, 89, 153)", "#FFA500"]
-
 	let i = 0
-
-	console.log("UmlArrowsxxxxxxxxxxxxxxxxxxxxxxxxxx")
-
 	return (
 		<>
-			{umlContainerHeight}
 			{project.entites.map((entite: Entite) => {
 				return entite.attributs.map((attribut: Attribut) => {
 					if (attribut.inverseAttributId) {

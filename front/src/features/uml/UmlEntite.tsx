@@ -17,10 +17,20 @@ type Props = {
 	updateXarrow: any
 	umlContainerHeight: number
 	setUmlContainerHeight: any
+	umlContainerWidth: number
+	setUmlContainerWidth: any
 }
 
-export default function UmlEntite({ entite, project, updateXarrow, umlContainerHeight, setUmlContainerHeight }: Props) {
-	console.log("--------- render entite " + entite.name + " ---------")
+export default function UmlEntite({
+	entite,
+	project,
+	updateXarrow,
+	umlContainerHeight,
+	setUmlContainerHeight,
+	umlContainerWidth,
+	setUmlContainerWidth,
+}: Props) {
+	//console.log("--------- render entite A" + entite.name + " ---------")
 	/*
 	const eventHandler: any = (e: any, data: any) => {
 		console.log("Event Type", e.type)
@@ -33,28 +43,47 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 	})
 
 	const [height, setHeight] = useState(0)
+	const [width, setWidth] = useState(0)
 	const elementRef = useRef<HTMLInputElement>(null)
 
-	useEffect(() => {
+	useLayoutEffect(() => {
+		//console.log("--------- render entite B " + entite.name + "---------")
 		let heightPx = 0
+		let widthPx = 0
 		if (elementRef.current) {
 			heightPx = elementRef.current.offsetHeight
+			widthPx = elementRef.current.offsetWidth
 			setHeight(heightPx)
+			setWidth(widthPx)
 			if (umlContainerHeight < height + pos.y + 200) {
 				setUmlContainerHeight(height + pos.y + 200)
 				updateXarrow()
 			}
-			console.log("--------- render entite " + entite.name + " heightPx: " + heightPx + "---------")
+			if (umlContainerWidth < width + pos.x + 200) {
+				setUmlContainerWidth(width + pos.x + 200)
+				updateXarrow()
+			}
+			//console.log("--------- render entite " + entite.name + " heightPx: " + heightPx + "---------")
 		}
-	}, [pos.y])
+	}, [
+		pos.y,
+		height,
+		width,
+		umlContainerHeight,
+		pos.x,
+		umlContainerWidth,
+		setUmlContainerHeight,
+		updateXarrow,
+		setUmlContainerWidth,
+	])
 
 	const onDraggStop: any = (e: any, data: any, entite: Entite) => {
-		console.log("onStop e", e)
-		console.log("onStop data", data)
+		//console.log("onStop e", e)
+		//console.log("onStop data", data)
 		let posX = data.x
 		let posY = data.y
 
-		console.log("--------- posX:" + posX + "   posY:" + posY)
+		//console.log("--------- posX:" + posX + "   posY:" + posY)
 
 		setPos({ x: posX, y: posY })
 
@@ -88,7 +117,10 @@ export default function UmlEntite({ entite, project, updateXarrow, umlContainerH
 					</h2>
 
 					<small>
-						pos({pos.x}, {pos.y} ); H:{height}; yMin({height + pos.y})
+						pos({pos.x}, {pos.y} )<br />
+						H:{height}
+						<br />
+						bottom({height + pos.y})
 					</small>
 
 					<table className="umlEntityAttributes">
