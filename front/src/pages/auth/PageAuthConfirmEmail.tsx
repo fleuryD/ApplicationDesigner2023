@@ -59,7 +59,11 @@ export default function PageAuthConfirmEmail() {
 					{status === "ERROR" && (
 						<div className="zSectionInner">
 							<h2>Une erreur est survenue...</h2>
-							<div className="zSectionContent"></div>
+							<div className="zSectionContent">
+								<Link to="/" title="Connexion.">
+									Retour
+								</Link>
+							</div>
 						</div>
 					)}
 				</div>

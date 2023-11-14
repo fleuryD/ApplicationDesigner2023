@@ -15,6 +15,7 @@ export const CONST_DB_NAME = process.env.DB_NAME
 export const CONST_DB_USERNAME = process.env.DB_USERNAME
 export const CONST_DB_PASSWORD = process.env.DB_PASSWORD
 
+// !!!!!!!!!!!!   "true" ne fonctionne pas sur le serveur distant
 export const CONST_DB_SYNCHRONIZE_WITH_ENTITIES =
 	process.env.DB_SYNCHRONIZE_WITH_ENTITIES === "true"
 
