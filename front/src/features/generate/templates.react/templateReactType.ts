@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 import { getEntiteByIdInProject } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -26,9 +26,9 @@ export default function templateReactType({
 		if (attr.name === "id") return null
 		strAttrs += `			`
 		if (
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany" ||
+			attr.tipe === AttrTipes.OneToMany ||
+			attr.tipe === AttrTipes.ManyToOne ||
+			attr.tipe === AttrTipes.ManyToMany ||
 			attr.name === "createdAt"
 		)
 			strAttrs += `// `
@@ -47,11 +47,11 @@ type Xentite = {\n`
 	entite.attributs.map((attr: Attribut) => {
 		code += `	${attr.name}: `
 
-		if (attr.tipe === "OneToMany" || attr.tipe === "ManyToMany") {
+		if (attr.tipe === AttrTipes.OneToMany || attr.tipe === AttrTipes.ManyToMany) {
 			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
 			code += `${targetEntite?.name || "??????"}`
 		} else code += `${attr.tipe}`
-		if (attr.tipe === "OneToMany" || attr.tipe === "ManyToMany") code += `[]`
+		if (attr.tipe === AttrTipes.OneToMany || attr.tipe === AttrTipes.ManyToMany) code += `[]`
 		if (attr.isNullable) code += ` | null`
 		code += `\n`
 		return code

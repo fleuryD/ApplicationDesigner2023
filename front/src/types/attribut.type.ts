@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite } from "types"
+import { Entite, AttrTipes } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -9,7 +9,7 @@ type Attribut = {
 	entite: Entite // NONNNNNNNNNNNN   nullable pour le form ????
 	name: string
 	createdAt?: string // nullable pour le form
-	tipe: string
+	tipe: AttrTipes
 	longueur: string | null
 	description: string | null
 	infos: string | null

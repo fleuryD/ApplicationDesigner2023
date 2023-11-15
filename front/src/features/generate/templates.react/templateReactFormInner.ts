@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 // import { getEntiteByIdInProject } from "features/generate/generate.helpers"
 import { toCamelCase, toPascalCase } from "utils/helpers-case"
 
@@ -90,14 +90,14 @@ export default function FormXentiteInner({
 		if (
 			attr.name === "id" ||
 			attr.name === "createdAt" ||
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany"
+			attr.tipe === AttrTipes.OneToMany ||
+			attr.tipe === AttrTipes.ManyToOne ||
+			attr.tipe === AttrTipes.ManyToMany
 		)
 			commented = true
 
 		if (commented) code += `				{/*\n`
-		if (attr.tipe === "Boolean" || attr.tipe === "boolean")
+		if (attr.tipe === AttrTipes.Boolean)
 			code += `				<ZFrmCheck type="switch" name="${attr.name}" label="${toPascalCase(
 				attr.name
 			)}" placeholder="${toPascalCase(attr.name)}" formData={formData} />`

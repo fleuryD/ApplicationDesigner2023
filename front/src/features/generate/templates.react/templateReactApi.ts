@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite } from "types"
+import { Attribut, Entite, AttrTipes } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -18,9 +18,9 @@ export default function templateReactApi({ entite, entitePascalName, entiteCamel
 		if (attr.name === "id") return null
 		strAttrs += `			`
 		if (
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany" ||
+			attr.tipe === AttrTipes.OneToMany ||
+			attr.tipe === AttrTipes.ManyToOne ||
+			attr.tipe === AttrTipes.ManyToMany ||
 			attr.name === "createdAt"
 		)
 			strAttrs += `// `

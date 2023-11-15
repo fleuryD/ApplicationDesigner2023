@@ -40,6 +40,7 @@ export class Attribut {
 	// * "string" | "boolean" | ...
 	@Column()
 	tipe: string
+	//tipe: string
 
 	// * la "size" pour les varchar
 	@Column({ nullable: true })

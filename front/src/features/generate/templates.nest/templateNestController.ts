@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Entite, Project, Attribut } from "types"
+import { Entite, Project, Attribut, AttrTipes } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -28,9 +28,9 @@ export default function templateNestController({
 		if (
 			attr.name === "id" ||
 			attr.name === "createdAt" ||
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany"
+			attr.tipe === AttrTipes.OneToMany ||
+			attr.tipe === AttrTipes.ManyToOne ||
+			attr.tipe === AttrTipes.ManyToMany
 		)
 			return null
 		codeNewAttributes += `				${attr.name}, \n`

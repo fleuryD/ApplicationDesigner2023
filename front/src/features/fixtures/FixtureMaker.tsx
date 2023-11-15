@@ -2,7 +2,7 @@
 
 import React from "react"
 // import { useAppSelector } from "store/store"
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 import { toCamelCase, toPascalCase /*, toSnakeCase, toKebabCase, getCase */ } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -72,7 +72,7 @@ export default function FixtureMaker({ project }: Props) {
 		entite.attributs.map((attr: Attribut) => {
 			code += `
 			`
-			if (attr.tipe === "OneToMany" || attr.tipe === "ManyToOne")
+			if (attr.tipe === AttrTipes.OneToMany || attr.tipe === AttrTipes.ManyToOne)
 				code += `const attr${entite.name}${toPascalCase(attr.name)} = `
 			code += `await this.attributsService.create({
 				entite: entite${entite.name} ,

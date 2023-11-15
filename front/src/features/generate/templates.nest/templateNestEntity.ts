@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 import { getEntiteByIdInProject } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -38,7 +38,7 @@ export class ${entitePascalName}{
 	entite.attributs.map((attr: Attribut) => {
 		str += `\n`
 
-		if (attr.tipe === "OneToMany") {
+		if (attr.tipe === AttrTipes.OneToMany) {
 			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
 			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
 			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
@@ -49,7 +49,7 @@ export class ${entitePascalName}{
 
 			str += `    @OneToMany(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName}, { eager: true, } )  \n`
 			str += `    public ${attr.name}: ${targetEntiteName}[]  \n`
-		} else if (attr.tipe === "ManyToOne") {
+		} else if (attr.tipe === AttrTipes.ManyToOne) {
 			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
 			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
 			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"

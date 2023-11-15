@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite } from "types"
+import { Attribut, Entite, AttrTipes } from "types"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -38,11 +38,11 @@ export default function XentiteDisplayInfos({ xentite, className }: Props) {
 
 	entite.attributs.map((attr: Attribut) => {
 		let strValue
-		if (attr.tipe === "Boolean") strValue = `{ xentite.${attr.name} ? "Yes" : "No" }`
-		else if (attr.tipe === "ManyToOne") strValue = `#{ xentite.${attr.name}?.id }`
-		else if (attr.tipe === "OneToMany") strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
-		else if (attr.tipe === "ManyToMany") strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
-		else if (attr.tipe === "Date" || attr.tipe === "DateTime")
+		if (attr.tipe === AttrTipes.Boolean) strValue = `{ xentite.${attr.name} ? "Yes" : "No" }`
+		else if (attr.tipe === AttrTipes.ManyToOne) strValue = `#{ xentite.${attr.name}?.id }`
+		else if (attr.tipe === AttrTipes.OneToMany) strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
+		else if (attr.tipe === AttrTipes.ManyToMany) strValue = `{ xentite.${attr.name}.length } ${attr.name}(s)`
+		else if (attr.tipe === AttrTipes.Date || attr.tipe === AttrTipes.DateTime)
 			strValue = `{new Date(xentite.${attr.name} || "").toLocaleString("fr-FR", { timeZone: "Europe/Paris" })}`
 		else strValue = `{ xentite.${attr.name} }`
 

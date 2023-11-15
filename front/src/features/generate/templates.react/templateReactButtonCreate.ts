@@ -1,6 +1,6 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 import { getEntiteByIdInProject } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
@@ -26,15 +26,15 @@ export default function templateReactButtonCreate({
 		if (attr.name === "id") return null
 		strAttrs += `				`
 		if (
-			attr.tipe === "OneToMany" ||
-			attr.tipe === "ManyToOne" ||
-			attr.tipe === "ManyToMany" ||
+			attr.tipe === AttrTipes.OneToMany ||
+			attr.tipe === AttrTipes.ManyToOne ||
+			attr.tipe === AttrTipes.ManyToMany ||
 			attr.name === "createdAt"
 		)
 			strAttrs += `// `
 		strAttrs += `${attr.name}: `
-		if (attr.tipe === "string") strAttrs += `""`
-		else if (attr.tipe === "boolean" || attr.tipe === "Boolean") strAttrs += `false`
+		if (attr.tipe === AttrTipes.VarChar) strAttrs += `""`
+		else if (attr.tipe === AttrTipes.Boolean) strAttrs += `false`
 		else strAttrs += `null`
 		strAttrs += `,\n`
 		return strAttrs

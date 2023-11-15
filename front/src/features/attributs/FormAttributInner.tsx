@@ -8,7 +8,8 @@ import ZFrmInput from "libs/zFrm/ZFrmInput"
 import ZFrmCheck from "libs/zFrm/ZFrmCheck"
 import ZFrmSelect from "libs/zFrm/ZFrmSelect"
 import { FaPlus, FaEdit, FaTrash, FaVenus } from "react-icons/fa"
-import { Project, Attribut } from "types"
+import { Project, Attribut, AttrTipes } from "types"
+//import { AttrTipes } from "types/attrTipes.enum"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
@@ -96,21 +97,21 @@ export default function FormAttributInner({
 					formData={formData}
 					selectOptions={[
 						{ value: "", text: "" },
-						{ value: "char", text: "Character (SQL: CHAR)" },
-						{ value: "string", text: "String (SQL: VARCHAR)" },
-						{ value: "Text", text: "String (SQL: TEXT)" },
+						{ value: AttrTipes.Char, text: "Character (SQL: CHAR)" },
+						{ value: AttrTipes.VarChar, text: "String (SQL: VARCHAR)" },
+						{ value: AttrTipes.Text, text: "String (SQL: TEXT)" },
 						{ value: "x0", text: "------------------------------------", disabled: true },
-						{ value: "boolean", text: "Boolean" },
+						{ value: AttrTipes.Boolean, text: "Boolean" },
 						{ value: "x1", text: "------------------------------------", disabled: true },
-						{ value: "date", text: "Date" },
-						{ value: "datetime", text: "DateTime" },
+						{ value: AttrTipes.Date, text: "Date" },
+						{ value: AttrTipes.DateTime, text: "DateTime" },
 						{ value: "x2", text: "------------------------------------", disabled: true },
-						{ value: "Integer", text: "Integer (SQL: INT)" },
-						{ value: "Decimal", text: "Decimal (SQL: DECIMAL)" },
-						{ value: "Float", text: "Float (SQL: REAL)" },
+						{ value: AttrTipes.Integer, text: "Integer (SQL: INT)" },
+						{ value: AttrTipes.Decimal, text: "Decimal (SQL: DECIMAL)" },
+						{ value: AttrTipes.Float, text: "Float (SQL: REAL)" },
 						{ value: "x3", text: "------------------------------------", disabled: true },
 						{
-							value: "OneToMany",
+							value: AttrTipes.OneToMany,
 							text:
 								"OneToMany (one " +
 								formItem.entite.name +
@@ -119,7 +120,7 @@ export default function FormAttributInner({
 								")",
 						},
 						{
-							value: "ManyToOne",
+							value: AttrTipes.ManyToOne,
 							text:
 								"ManyToOne (one " +
 								formItem.entite.name +
@@ -128,7 +129,7 @@ export default function FormAttributInner({
 								")",
 						},
 						{
-							value: "ManyToMany",
+							value: AttrTipes.ManyToMany,
 							text:
 								"ManyToMany (one " +
 								formItem.entite.name +
@@ -137,7 +138,7 @@ export default function FormAttributInner({
 								" and vice versa)",
 						},
 						{
-							value: "OneToOne",
+							value: AttrTipes.OneToOne,
 							text:
 								"OneToOne (one " +
 								formItem.entite.name +
@@ -148,7 +149,9 @@ export default function FormAttributInner({
 					]}
 				/>
 
-				{(formItem.tipe === "OneToMany" || formItem.tipe === "ManyToOne" || formItem.tipe === "ManyToMany") && (
+				{(formItem.tipe === AttrTipes.OneToMany ||
+					formItem.tipe === AttrTipes.ManyToOne ||
+					formItem.tipe === AttrTipes.ManyToMany) && (
 					<div className="bg-info p-2">
 						<h5>Relation</h5>
 						<ZFrmSelect
