@@ -56,7 +56,7 @@ export default function ForgottenPasswordForm() {
 				if (response.debugPasswordResetToken) {
 					setDebugMsg(
 						<a
-							href={"http://localhost:3001/auth/reset-password/" + response.debugPasswordResetToken}
+							href={"http://localhost:3003/auth/reset-password/" + response.debugPasswordResetToken}
 							target="_blank"
 							rel="noreferrer"
 						>

@@ -120,6 +120,10 @@ export class AuthController {
 		}
 		if (user.emailValidationToken) {
 			Logger.warn("[login] ⛔ EMAIL_NOT_CONFIRMED")
+			Logger.warn(
+				"[login] ⛔ http://localhost:3003/auth/emailconfirm/" +
+					user.emailValidationToken
+			)
 			throw new BadRequestException("EMAIL_NOT_CONFIRMED")
 		}
 

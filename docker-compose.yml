@@ -1,56 +1,48 @@
 version: "3"
 services:
-    postgres:
+    ad-postgres:
         build: pgsql
-        container_name: postgres
+        container_name: ad-postgres
         env_file:
             - ./back/.env
         restart: always
         networks:
-            - network
+            - ad-network
         ports:
             - 5432:5432
-    front:
+
+    ad-front:
         build: front
-        container_name: front
+        container_name: ad-front
         restart: always
         ports:
-            - 3001:3001
+            - 3003:3003
         networks:
-            - network
+            - ad-network
         depends_on:
-            - back
+            - ad-back
         volumes:
             - ./front:/app
             - /app/node_modules
-    back:
+
+    ad-back:
         build: back
-        container_name: back
+        container_name: ad-back
         ports:
-            - 3000:3000
+            - 3002:3002
         restart: always
         networks:
-            - network
+            - ad-network
         depends_on:
-            - postgres
+            - ad-postgres
         links:
-            - postgres
+            - ad-postgres
         volumes:
             - ./back:/app
             - /app/node_modules
-    #pgadmin:
-    #    image: dpage/pgadmin4
-    #    restart: always
-    #    container_name: pgadmin4
-    #    environment:
-    #        - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-    #        - PGADMIN_DEFAULT_PASSWORD=pgadmin4
-    #    ports:
-    #        - "5050:80"
-    #    depends_on:
-    #        - db
+
 networks:
-    network:
+    ad-network:
         driver: bridge
 # done :
 #export DOCKER_BUILDKIT=0

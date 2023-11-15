@@ -111,7 +111,7 @@ export default function RegisterForm() {
 				if (response.debugEmailValidationToken) {
 					setDebugMsg(
 						<a
-							href={"http://localhost:3001/auth/emailconfirm/" + response.debugEmailValidationToken}
+							href={"http://localhost:3003/auth/emailconfirm/" + response.debugEmailValidationToken}
 							target="_blank"
 							rel="noreferrer"
 						>

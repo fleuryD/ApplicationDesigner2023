@@ -35,14 +35,14 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "react-dotenv && set PORT=3001 && PORT=3001 react-scripts start --max-http-header-size=64555",
-		"start-win": "react-dotenv && set PORT=3001 && react-scripts start --max-http-header-size=64555",
+		"start": "react-dotenv && set PORT=3003 && PORT=3003 react-scripts start --max-http-header-size=64555",
+		"start-win": "react-dotenv && set PORT=3003 && react-scripts start --max-http-header-size=64555",
 		"startback": "react-scripts start",
 		"build": "react-dotenv && react-scripts build",
 		"test": "react-dotenv && react-scripts test",
 		"eject": "react-scripts eject"
 	},
-	"proxy": "http://localhost:3001",
+	"proxy": "http://localhost:3003",
 	"eslintConfig": {
 		"extends": [
 			"react-app",
