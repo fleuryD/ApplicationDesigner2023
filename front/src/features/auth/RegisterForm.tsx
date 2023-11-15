@@ -83,7 +83,7 @@ export default function RegisterForm() {
 			errorCount++
 			setFormErrors((formErrors: any) => ({
 				...formErrors,
-				password2: "Les 2 mots de passes sont differentse.",
+				password2: "Les 2 mots de passes sont differents.",
 			}))
 		}
 

@@ -121,7 +121,7 @@ export default function UmlEntite({
 					<table className="umlEntityAttributes">
 						<tbody>
 							{entite.attributs
-								.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0))
+								//.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0))
 								.map((attr: any) => (
 									<UmlAttribut
 										key={"attr" + attr.id}
