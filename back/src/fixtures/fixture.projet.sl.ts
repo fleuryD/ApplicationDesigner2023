@@ -2,6 +2,7 @@
 
 import { Logger } from "@nestjs/common"
 import { User } from "../users"
+import { AttrTipes } from "../attributs"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -88,7 +89,7 @@ export async function fixtureProjetSL(
 	const attUserId = await attributsService.create({
 		entite: entiteUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -97,7 +98,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "email",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 2,
 		isNullable: false,
 		isUnique: true,
@@ -105,7 +106,7 @@ export async function fixtureProjetSL(
 	const attUserName = await attributsService.create({
 		entite: entiteUser,
 		name: "username",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		longueur: null,
 		description: null,
 		infos: null,
@@ -120,7 +121,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 4,
 		isNullable: false,
 		isUnique: false,
@@ -128,7 +129,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "accessToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 5,
 		isNullable: true,
 		isUnique: true,
@@ -136,7 +137,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "emailValidationToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 6,
 		isNullable: true,
 		isUnique: true,
@@ -144,7 +145,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 7,
 		isNullable: true,
 		isUnique: true,
@@ -152,7 +153,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 8,
 		isNullable: true,
 		isUnique: false,
@@ -160,7 +161,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "createdAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 9,
 		isNullable: false,
 		isUnique: false,
@@ -169,7 +170,7 @@ export async function fixtureProjetSL(
 	const attrUserListeUsers = await attributsService.create({
 		entite: entiteUser,
 		name: "listeUsers",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteListeUser.id,
 		//inverseAttributId,
@@ -179,7 +180,7 @@ export async function fixtureProjetSL(
 	const attListeId = await attributsService.create({
 		entite: entiteListe,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -188,7 +189,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteListe,
 		name: "name",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -197,7 +198,7 @@ export async function fixtureProjetSL(
 	const attrListeListeUsers = await attributsService.create({
 		entite: entiteListe,
 		name: "listeUsers",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteListeUser.id,
 		//inverseAttributId,
@@ -206,7 +207,7 @@ export async function fixtureProjetSL(
 	const attrListeArticles = await attributsService.create({
 		entite: entiteListe,
 		name: "articles",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteArticle.id,
 		//inverseAttributId: attrArticleListe.id,
@@ -215,7 +216,7 @@ export async function fixtureProjetSL(
 	const attrListeRecipes = await attributsService.create({
 		entite: entiteListe,
 		name: "recipes",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteRecipe.id,
 		//inverseAttributId: attrRecipeListe.id,
@@ -226,7 +227,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteListeUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -235,7 +236,7 @@ export async function fixtureProjetSL(
 	const attrListeUserListe = await attributsService.create({
 		entite: entiteListeUser,
 		name: "liste",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteListe.id,
 		inverseAttributId: attrUserListeUsers.id,
@@ -243,7 +244,7 @@ export async function fixtureProjetSL(
 	const attrListeUserUser = await attributsService.create({
 		entite: entiteListeUser,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteUser.id,
 		inverseAttributId: attrListeListeUsers.id,
@@ -257,7 +258,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteListeUser,
 		name: "isOwner",
-		tipe: "Boolean",
+		tipe: AttrTipes.Boolean,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -267,7 +268,7 @@ export async function fixtureProjetSL(
 	const attArticleId = await attributsService.create({
 		entite: entiteArticle,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -276,7 +277,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteArticle,
 		name: "name",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -285,7 +286,7 @@ export async function fixtureProjetSL(
 	const attrArticleListe = await attributsService.create({
 		entite: entiteArticle,
 		name: "liste",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteListe.id,
 		inverseAttributId: attrListeArticles.id,
@@ -294,7 +295,7 @@ export async function fixtureProjetSL(
 	const attrArticleArticleRecipes = await attributsService.create({
 		entite: entiteArticle,
 		name: "articleRecipes",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 1,
 		//targetEntiteId: entiteListe.id,
 		//inverseAttributId: attrListeArticles.id,
@@ -306,7 +307,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteArticleRecipe,
 		name: "inPanier",
-		tipe: "Boolean",
+		tipe: AttrTipes.Boolean,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -317,7 +318,7 @@ export async function fixtureProjetSL(
 	const attRecipeId = await attributsService.create({
 		entite: entiteRecipe,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -326,7 +327,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteRecipe,
 		name: "name",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -335,7 +336,7 @@ export async function fixtureProjetSL(
 	const attrRecipeListe = await attributsService.create({
 		entite: entiteRecipe,
 		name: "liste",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteListe.id,
 		inverseAttributId: attrListeRecipes.id,
@@ -347,7 +348,7 @@ export async function fixtureProjetSL(
 	const attrRecipeArticleRecipes = await attributsService.create({
 		entite: entiteRecipe,
 		name: "articleRecipes",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 1,
 		//targetEntiteId: entiteListe.id,
 		//inverseAttributId: attrListeArticles.id,
@@ -358,7 +359,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteArticleRecipe,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -367,7 +368,7 @@ export async function fixtureProjetSL(
 	const attrArticleRecipeArticle = await attributsService.create({
 		entite: entiteArticleRecipe,
 		name: "article",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteArticle.id,
 		inverseAttributId: attrArticleArticleRecipes.id,
@@ -375,7 +376,7 @@ export async function fixtureProjetSL(
 	const attrArticleRecipeRecipe = await attributsService.create({
 		entite: entiteArticleRecipe,
 		name: "recipe",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteRecipe.id,
 		inverseAttributId: attrRecipeArticleRecipes.id,
@@ -392,7 +393,7 @@ export async function fixtureProjetSL(
 	await attributsService.create({
 		entite: entiteArticleRecipe,
 		name: "quantity",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: false,

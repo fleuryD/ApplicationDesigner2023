@@ -2,6 +2,7 @@
 
 import { Logger } from "@nestjs/common"
 import { User } from "../users"
+import { AttrTipes } from "../attributs"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -89,7 +90,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -100,7 +101,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "endedAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -111,7 +112,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -123,7 +124,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "players",
-		tipe: "ManyToMany",
+		tipe: AttrTipes.ManyToMany,
 		position: 0,
 		isWip: true,
 		isFeminin: false,
@@ -138,7 +139,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteGrille,
 		name: "player",
-		tipe: "ManyToMany",
+		tipe: AttrTipes.ManyToMany,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -150,7 +151,7 @@ export async function fixtureProjetYZ(
 	const attrGrilleCoups = await attributsService.create({
 		entite: entiteGrille,
 		name: "coups",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -162,7 +163,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteGrille,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -174,7 +175,7 @@ export async function fixtureProjetYZ(
 	const attrGrillePartie = await attributsService.create({
 		entite: entiteGrille,
 		name: "partie",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -188,7 +189,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -200,7 +201,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "email",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -211,7 +212,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "username",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -222,7 +223,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -233,7 +234,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "accessToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -244,7 +245,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "emailValidationToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -255,7 +256,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -266,7 +267,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -277,7 +278,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "createdAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -288,7 +289,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "parties",
-		tipe: "ManyToMany",
+		tipe: AttrTipes.ManyToMany,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -302,7 +303,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteCoup,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -316,7 +317,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteCombinaison,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -330,7 +331,7 @@ export async function fixtureProjetYZ(
 	await attributsService.create({
 		entite: entiteOrdre,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,

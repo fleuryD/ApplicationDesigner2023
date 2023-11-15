@@ -2,6 +2,7 @@
 
 import { Logger } from "@nestjs/common"
 import { User } from "../users"
+import { AttrTipes } from "../attributs"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -99,7 +100,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -109,7 +110,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "isOwner",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -118,7 +119,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "isAdmin",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -127,7 +128,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "isBanned",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -136,7 +137,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "endMutedAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: true,
 		isUnique: false,
@@ -145,7 +146,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "accepted",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -154,7 +155,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannelUser,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -163,7 +164,7 @@ export async function fixtureProjetTranscendance(
 	const attrChannelUserChannel = await attributsService.create({
 		entite: entiteChannelUser,
 		name: "channel",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -173,7 +174,7 @@ export async function fixtureProjetTranscendance(
 	const attrChannelUserUser = await attributsService.create({
 		entite: entiteChannelUser,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -185,7 +186,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -195,7 +196,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "name",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -204,7 +205,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "isPasswordProtected",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -213,7 +214,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "isPrivateDiscussion",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -222,7 +223,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -231,7 +232,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "isPrivate",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -240,7 +241,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteChannel,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: true,
 		isUnique: false,
@@ -249,7 +250,7 @@ export async function fixtureProjetTranscendance(
 	const attrChannelChannelUsers = await attributsService.create({
 		entite: entiteChannel,
 		name: "channelUsers",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -259,7 +260,7 @@ export async function fixtureProjetTranscendance(
 	const attrChannelMessages = await attributsService.create({
 		entite: entiteChannel,
 		name: "messages",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -271,7 +272,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUserRelation,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -281,7 +282,7 @@ export async function fixtureProjetTranscendance(
 	const attrUserRelationOtherUser = await attributsService.create({
 		entite: entiteUserRelation,
 		name: "otherUser",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -290,7 +291,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUserRelation,
 		name: "type",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -299,7 +300,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUserRelation,
 		name: "accepted",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -308,7 +309,7 @@ export async function fixtureProjetTranscendance(
 	const attrUserRelationUser = await attributsService.create({
 		entite: entiteUserRelation,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -320,7 +321,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "content",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -329,7 +330,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -339,7 +340,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -348,7 +349,7 @@ export async function fixtureProjetTranscendance(
 	const attrMessageChannel = await attributsService.create({
 		entite: entiteMessage,
 		name: "channel",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -358,7 +359,7 @@ export async function fixtureProjetTranscendance(
 	const attrMessageUser = await attributsService.create({
 		entite: entiteMessage,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -370,7 +371,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -380,7 +381,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "ended",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -389,7 +390,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "score1",
-		tipe: "Integer",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -398,7 +399,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entitePartie,
 		name: "score2",
-		tipe: "Integer",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -407,7 +408,7 @@ export async function fixtureProjetTranscendance(
 	const attrPartieUser2 = await attributsService.create({
 		entite: entitePartie,
 		name: "user2",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -417,7 +418,7 @@ export async function fixtureProjetTranscendance(
 	const attrPartieUser1 = await attributsService.create({
 		entite: entitePartie,
 		name: "user1",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -429,7 +430,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteQueue,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -439,7 +440,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteQueue,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -448,7 +449,7 @@ export async function fixtureProjetTranscendance(
 	const attrQueueUser = await attributsService.create({
 		entite: entiteQueue,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -460,7 +461,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "status",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -469,7 +470,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -478,7 +479,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "accessToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: true,
 		isUnique: true,
@@ -487,7 +488,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "emailValidationToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: true,
 		isUnique: true,
@@ -496,7 +497,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: true,
 		isUnique: false,
@@ -505,7 +506,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "createdAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -514,7 +515,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: true,
 		isUnique: true,
@@ -523,7 +524,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -533,7 +534,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "email",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -542,7 +543,7 @@ export async function fixtureProjetTranscendance(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "username",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isNullable: false,
 		isUnique: true,
@@ -551,7 +552,7 @@ export async function fixtureProjetTranscendance(
 	const attrUserMessages = await attributsService.create({
 		entite: entiteUser,
 		name: "messages",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 0,
 		isNullable: false,
 		isUnique: false,
@@ -561,7 +562,7 @@ export async function fixtureProjetTranscendance(
 	const attrUserChannelUsers = await attributsService.create({
 		entite: entiteUser,
 		name: "channelUsers",
-		tipe: "OneToMany",
+		tipe: AttrTipes.OneToMany,
 		position: 0,
 		isNullable: false,
 		isUnique: false,

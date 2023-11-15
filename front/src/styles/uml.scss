@@ -71,6 +71,14 @@
 					padding-left: 3px;
 					padding-right: 3px;
 				}
+				.badge-error-tipe {
+					background-color: $colDanger;
+					color: white;
+					font-size: 0.8em;
+					padding: 1px;
+					padding-left: 3px;
+					padding-right: 3px;
+				}
 			}
 			.umlAttributExtra {
 				&.wip {

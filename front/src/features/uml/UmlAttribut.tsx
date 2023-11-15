@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import React from "react"
-import { Attribut, Entite, Project } from "types"
+import { Attribut, Entite, Project, AttrTipes } from "types"
 import LinkEditAttribut from "features/attributs/LinkEditAttribut"
 
 import { FaVenus } from "react-icons/fa"
@@ -37,7 +37,10 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 				</td>
 
 				<td className="tipe">
-					{attribut.isPrimaryKey && <span className="badge-pk me-1 rounded">PK </span>}
+					{attribut.isPrimaryKey && <span className="badge-pk me-1 rounded">PK</span>}
+					{!Object.values(AttrTipes).includes(attribut.tipe) && (
+						<span className="badge-error-tipe me-1 rounded">?</span>
+					)}
 					{attribut.tipe} {attribut.longueur && <span className="longueur">({attribut.longueur})</span>}
 				</td>
 

@@ -3,6 +3,7 @@
 import { Logger } from "@nestjs/common"
 import { User } from "../users"
 import { Project } from "../projects"
+import { AttrTipes } from "../attributs"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -30,7 +31,7 @@ export async function fixtureEntiteUser(
 	const attUserId = await attributsService.create({
 		entite: entiteUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -40,7 +41,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "email",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: true,
@@ -49,7 +50,7 @@ export async function fixtureEntiteUser(
 	const attUserName = await attributsService.create({
 		entite: entiteUser,
 		name: "username",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		longueur: null,
 		description: null,
 		infos: null,
@@ -64,7 +65,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: false,
 		isUnique: false,
@@ -73,7 +74,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "accessToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: true,
 		isUnique: true,
@@ -81,7 +82,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "emailValidationToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: true,
 		isUnique: true,
@@ -89,7 +90,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 1,
 		isNullable: true,
 		isUnique: true,
@@ -98,7 +99,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 1,
 		isNullable: true,
 		isUnique: false,
@@ -107,7 +108,7 @@ export async function fixtureEntiteUser(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "createdAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 1,
 		isNullable: false,
 		isUnique: false,

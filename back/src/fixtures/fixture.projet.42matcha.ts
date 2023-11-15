@@ -2,6 +2,7 @@
 
 import { Logger } from "@nestjs/common"
 import { User } from "../users"
+import { AttrTipes } from "../attributs"
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
@@ -79,7 +80,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -91,7 +92,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "email",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -102,7 +103,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "username",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -113,7 +114,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "password",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -124,7 +125,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "accessToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -135,7 +136,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "emailValidationToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -146,7 +147,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetToken",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -157,7 +158,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "passwordResetAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -168,7 +169,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "createdAt",
-		tipe: "DateTime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -179,7 +180,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "isAdmin",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -190,7 +191,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "birthday",
-		tipe: "date",
+		tipe: AttrTipes.Date,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -201,7 +202,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "gender",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -214,7 +215,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "loveM",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -225,7 +226,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "loveF",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -236,7 +237,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "loveNb",
-		tipe: "boolean",
+		tipe: AttrTipes.Boolean,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -247,7 +248,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "lastname",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -258,7 +259,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "firstname",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -269,7 +270,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "biography",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -280,7 +281,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "height",
-		tipe: "Integer",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -292,7 +293,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteUser,
 		name: "weight",
-		tipe: "Integer",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -306,7 +307,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -318,7 +319,7 @@ export async function fixtureProjetMatcha(
 	const attrMessageSender = await attributsService.create({
 		entite: entiteMessage,
 		name: "sender",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -330,7 +331,7 @@ export async function fixtureProjetMatcha(
 	const attrMessageReceiver = await attributsService.create({
 		entite: entiteMessage,
 		name: "receiver",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -342,7 +343,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -353,7 +354,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteMessage,
 		name: "content",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -366,7 +367,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteTag,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -378,7 +379,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteTag,
 		name: "name",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -389,7 +390,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteTag,
 		name: "category",
-		tipe: "string",
+		tipe: AttrTipes.VarChar,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -402,7 +403,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteTagUser,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -414,7 +415,7 @@ export async function fixtureProjetMatcha(
 	const attrTagUserTag = await attributsService.create({
 		entite: entiteTagUser,
 		name: "tag",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -426,7 +427,7 @@ export async function fixtureProjetMatcha(
 	const attrTagUserUser = await attributsService.create({
 		entite: entiteTagUser,
 		name: "user",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -440,7 +441,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteLike,
 		name: "id",
-		tipe: "Int",
+		tipe: AttrTipes.Integer,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -452,7 +453,7 @@ export async function fixtureProjetMatcha(
 	const attrLikeLiker = await attributsService.create({
 		entite: entiteLike,
 		name: "liker",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -464,7 +465,7 @@ export async function fixtureProjetMatcha(
 	const attrLikeLiked = await attributsService.create({
 		entite: entiteLike,
 		name: "liked",
-		tipe: "ManyToOne",
+		tipe: AttrTipes.ManyToOne,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
@@ -476,7 +477,7 @@ export async function fixtureProjetMatcha(
 	await attributsService.create({
 		entite: entiteLike,
 		name: "createdAt",
-		tipe: "datetime",
+		tipe: AttrTipes.DateTime,
 		position: 0,
 		isWip: false,
 		isFeminin: false,
