@@ -2,6 +2,7 @@
 
 import { Attribut, Entite } from "types"
 import { toPascalCase /* toCamelCase, toSnakeCase,  toKebabCase, getCase */ } from "utils/helpers-case"
+import { sqlToTsType } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -22,7 +23,7 @@ export default function templateReactDisplayInfos({
 
 	entite.attributs.map((attr: Attribut) => {
 		if (constructorArgs.length > 0) constructorArgs += ", "
-		constructorArgs += ` ${attr.tipe}: ${attr.name}`
+		constructorArgs += ` ${sqlToTsType(attr.tipe)}: ${attr.name}`
 		return constructorArgs
 	})
 

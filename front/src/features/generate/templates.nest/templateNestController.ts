@@ -1,6 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import { Entite, Project, Attribut, AttrTipes } from "types"
+import { sqlToTsType } from "features/generate/generate.helpers"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -35,7 +36,7 @@ export default function templateNestController({
 			return null
 		codeNewAttributes += `				${attr.name}, \n`
 		codeEditAttributes += `		xentite.${attr.name} = ${attr.name}\n`
-		codeBodyParams += `		@Body("${attr.name}") ${attr.name}: ${attr.tipe},\n`
+		codeBodyParams += `		@Body("${attr.name}") ${attr.name}: ${sqlToTsType(attr.tipe)},\n`
 
 		return null
 	})

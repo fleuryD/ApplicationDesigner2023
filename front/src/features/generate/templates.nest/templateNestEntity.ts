@@ -1,7 +1,8 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import { Attribut, Entite, Project, AttrTipes } from "types"
-import { getEntiteByIdInProject } from "features/generate/generate.helpers"
+import { getTargets, sqlToTsType } from "features/generate/generate.helpers"
+import { toCamelCase, toSnakeCase, toPascalCase, toKebabCase, getCase } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -21,76 +22,78 @@ export default function templateNestEntity({
 }: Props) {
 	if (!entite) return null
 
-	let str = `
+	let code = `
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 import {Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne, OneToMany,ManyToMany} from "typeorm"
-// TODO : relation import { xxxxxx } from "../xxxxxs/xxxxx.entity"
+// relation import { xxxxxx } from "types" // TODO
 
 // ◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘◘
 
 @Entity("${entiteCamelNamePluriel}")
 export class ${entitePascalName}{
-    @PrimaryGeneratedColumn()
-    id: number
+
 `
 
 	entite.attributs.map((attr: Attribut) => {
-		str += `\n`
+		code += `\n`
 
 		if (attr.tipe === AttrTipes.OneToMany) {
-			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
-			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
-			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
-			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
+			const { targetEntiteName, targetAttrName } = getTargets(project, attr)
 
-			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
-			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"
-
-			str += `    @OneToMany(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName}, { eager: true, } )  \n`
-			str += `    public ${attr.name}: ${targetEntiteName}[]  \n`
+			code += `    @OneToMany(() => ${targetEntiteName}, (${toCamelCase(
+				targetEntiteName
+			)}: ${targetEntiteName}) => ${toCamelCase(targetEntiteName)}.${targetAttrName}, { eager: true, } )  \n`
+			code += `    public ${attr.name}: ${targetEntiteName}[]  \n`
 		} else if (attr.tipe === AttrTipes.ManyToOne) {
-			//const targetEntite = project.entites.find((e) => e.id === attr.targetEntiteId)
-			const targetEntite = getEntiteByIdInProject(project, attr.targetEntiteId)
-			const targetEntiteName = targetEntite?.name || "<?targetEntity?>"
-			const targetEntiteNameCamel = targetEntiteName.charAt(0).toLowerCase() + targetEntiteName.slice(1)
+			const { targetEntiteName, targetAttrName } = getTargets(project, attr)
 
-			const targetAttr = targetEntite?.attributs.find((a) => a.id === attr.inverseAttributId)
-			const targetAttrName = targetAttr?.name || "<?inverseAttribut?>"
-
-			str += `    @ManyToOne(() => ${targetEntiteName}, (${targetEntiteNameCamel}: ${targetEntiteName}) => ${targetEntiteNameCamel}.${targetAttrName})  \n`
-			str += `    public ${attr.name}: ${targetEntiteName}  \n`
+			code += `    @ManyToOne(() => ${targetEntiteName}, (${toCamelCase(
+				targetEntiteName
+			)}: ${targetEntiteName}) => ${toCamelCase(targetEntiteName)}.${targetAttrName})  \n`
+			code += `    public ${attr.name}: ${targetEntiteName}  \n`
 		} else {
-			str += `    @Column(`
+			if (attr.isPrimaryKey) {
+				code += `    @PrimaryGeneratedColumn(`
+			} else if (attr.tipe === AttrTipes.Date || attr.tipe === AttrTipes.DateTime) {
+				code += `    @CreateDateColumn(`
+			} else {
+				code += `    @Column(`
+			}
+
 			// todo : default
-			if (attr.isNullable || attr.isUnique) {
-				str += `{ `
+
+			if (!attr.isPrimaryKey && (attr.isNullable || attr.isUnique)) {
+				code += `{ `
 			}
-			if (attr.isNullable) {
-				str += ` nullable: true, `
+			if (!attr.isPrimaryKey && attr.isNullable) {
+				code += ` nullable: true, `
 			}
-			if (attr.isUnique) {
-				str += ` unique: true, `
+			if (!attr.isPrimaryKey && attr.isUnique) {
+				code += ` unique: true, `
 			}
 
-			if (attr.isNullable || attr.isUnique) {
-				str += ` }`
+			if (!attr.isPrimaryKey && (attr.isNullable || attr.isUnique)) {
+				code += ` }`
 			}
-			str += `)  \n`
-			//str += `    {\n`
-			str += `    ${attr.name}: ${attr.tipe}  \n`
+			code += `)  \n`
+			//code += `    {\n`
+			code += `    ${attr.name}: `
 
-			//str += `    }  \n`
+			code += ` ${sqlToTsType(attr.tipe)}`
+			code += `  \n`
+
+			//code += `    }  \n`
 		}
-		//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
-		//str += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
-		return str
+		//code += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
+		//code += `    xxxxxxxxxxxxxxxxxxxxxxxx  \n`
+		return code
 	})
 
-	str += `}  \n`
+	code += `}  \n`
 
 	return {
-		code: str,
+		code: code,
 		filePath: `./back/src/${entiteCamelNamePluriel}/`,
 		fileName: `${entiteCamelName}.entity.ts`,
 		description: ``,

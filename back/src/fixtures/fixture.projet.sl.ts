@@ -35,9 +35,9 @@ export async function fixtureProjetSL(
 		umlPosY: 30,
 	})
 
-	const entiteListeUser = await entitesService.create({
+	const entiteCollectionUser = await entitesService.create({
 		project: projectSl,
-		name: "ListeUser",
+		name: "CollectionUser",
 		description: null,
 		infos: null,
 		isWip: false,
@@ -45,9 +45,9 @@ export async function fixtureProjetSL(
 		umlPosY: 50,
 	})
 
-	const entiteListe = await entitesService.create({
+	const entiteCollection = await entitesService.create({
 		project: projectSl,
-		name: "Liste",
+		name: "Collection",
 		description: null,
 		infos: null,
 		isWip: false,
@@ -167,18 +167,18 @@ export async function fixtureProjetSL(
 		isUnique: false,
 	})
 
-	const attrUserListeUsers = await attributsService.create({
+	const attrUserCollectionUsers = await attributsService.create({
 		entite: entiteUser,
-		name: "listeUsers",
+		name: "collectionUsers",
 		tipe: AttrTipes.OneToMany,
 		position: 10,
-		targetEntiteId: entiteListeUser.id,
+		targetEntiteId: entiteCollectionUser.id,
 		//inverseAttributId,
 	})
 
-	// ************** Liste's Attributes **************
-	const attListeId = await attributsService.create({
-		entite: entiteListe,
+	// ************** Collection's Attributes **************
+	const attCollectionId = await attributsService.create({
+		entite: entiteCollection,
 		name: "id",
 		tipe: AttrTipes.Integer,
 		position: 1,
@@ -187,7 +187,7 @@ export async function fixtureProjetSL(
 		isPrimaryKey: true,
 	})
 	await attributsService.create({
-		entite: entiteListe,
+		entite: entiteCollection,
 		name: "name",
 		tipe: AttrTipes.VarChar,
 		position: 1,
@@ -195,37 +195,37 @@ export async function fixtureProjetSL(
 		isUnique: false,
 	})
 
-	const attrListeListeUsers = await attributsService.create({
-		entite: entiteListe,
-		name: "listeUsers",
+	const attrCollectionCollectionUsers = await attributsService.create({
+		entite: entiteCollection,
+		name: "collectionUsers",
 		tipe: AttrTipes.OneToMany,
 		position: 10,
-		targetEntiteId: entiteListeUser.id,
+		targetEntiteId: entiteCollectionUser.id,
 		//inverseAttributId,
 	})
 
-	const attrListeArticles = await attributsService.create({
-		entite: entiteListe,
+	const attrCollectionArticles = await attributsService.create({
+		entite: entiteCollection,
 		name: "articles",
 		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteArticle.id,
-		//inverseAttributId: attrArticleListe.id,
+		//inverseAttributId: attrArticleCollection.id,
 	})
 
-	const attrListeRecipes = await attributsService.create({
-		entite: entiteListe,
+	const attrCollectionRecipes = await attributsService.create({
+		entite: entiteCollection,
 		name: "recipes",
 		tipe: AttrTipes.OneToMany,
 		position: 10,
 		targetEntiteId: entiteRecipe.id,
-		//inverseAttributId: attrRecipeListe.id,
+		//inverseAttributId: attrRecipeCollection.id,
 	})
 
-	// ************** ListeUser's Attributes **************
+	// ************** CollectionUser's Attributes **************
 
 	await attributsService.create({
-		entite: entiteListeUser,
+		entite: entiteCollectionUser,
 		name: "id",
 		tipe: AttrTipes.Integer,
 		position: 1,
@@ -233,30 +233,30 @@ export async function fixtureProjetSL(
 		isUnique: true,
 		isPrimaryKey: true,
 	})
-	const attrListeUserListe = await attributsService.create({
-		entite: entiteListeUser,
-		name: "liste",
+	const attrCollectionUserCollection = await attributsService.create({
+		entite: entiteCollectionUser,
+		name: "collection",
 		tipe: AttrTipes.ManyToOne,
 		position: 1,
-		targetEntiteId: entiteListe.id,
-		inverseAttributId: attrUserListeUsers.id,
+		targetEntiteId: entiteCollection.id,
+		inverseAttributId: attrUserCollectionUsers.id,
 	})
-	const attrListeUserUser = await attributsService.create({
-		entite: entiteListeUser,
+	const attrCollectionUserUser = await attributsService.create({
+		entite: entiteCollectionUser,
 		name: "user",
 		tipe: AttrTipes.ManyToOne,
 		position: 1,
 		targetEntiteId: entiteUser.id,
-		inverseAttributId: attrListeListeUsers.id,
+		inverseAttributId: attrCollectionCollectionUsers.id,
 	})
 
-	attrUserListeUsers.inverseAttributId = attrListeUserListe.id
-	attrListeListeUsers.inverseAttributId = attrListeUserUser.id
-	await attributsService.save(attrUserListeUsers)
-	await attributsService.save(attrListeListeUsers)
+	attrUserCollectionUsers.inverseAttributId = attrCollectionUserCollection.id
+	attrCollectionCollectionUsers.inverseAttributId = attrCollectionUserUser.id
+	await attributsService.save(attrUserCollectionUsers)
+	await attributsService.save(attrCollectionCollectionUsers)
 
 	await attributsService.create({
-		entite: entiteListeUser,
+		entite: entiteCollectionUser,
 		name: "isOwner",
 		tipe: AttrTipes.Boolean,
 		position: 1,
@@ -283,13 +283,13 @@ export async function fixtureProjetSL(
 		isUnique: false,
 	})
 
-	const attrArticleListe = await attributsService.create({
+	const attrArticleCollection = await attributsService.create({
 		entite: entiteArticle,
-		name: "liste",
+		name: "collection",
 		tipe: AttrTipes.ManyToOne,
 		position: 1,
-		targetEntiteId: entiteListe.id,
-		inverseAttributId: attrListeArticles.id,
+		targetEntiteId: entiteCollection.id,
+		inverseAttributId: attrCollectionArticles.id,
 	})
 
 	const attrArticleArticleRecipes = await attributsService.create({
@@ -297,12 +297,12 @@ export async function fixtureProjetSL(
 		name: "articleRecipes",
 		tipe: AttrTipes.OneToMany,
 		position: 1,
-		//targetEntiteId: entiteListe.id,
-		//inverseAttributId: attrListeArticles.id,
+		//targetEntiteId: entiteCollection.id,
+		//inverseAttributId: attrCollectionArticles.id,
 	})
 
-	attrListeArticles.inverseAttributId = attrArticleListe.id
-	await attributsService.save(attrListeArticles)
+	attrCollectionArticles.inverseAttributId = attrArticleCollection.id
+	await attributsService.save(attrCollectionArticles)
 
 	await attributsService.create({
 		entite: entiteArticleRecipe,
@@ -333,25 +333,25 @@ export async function fixtureProjetSL(
 		isUnique: false,
 	})
 
-	const attrRecipeListe = await attributsService.create({
+	const attrRecipeCollection = await attributsService.create({
 		entite: entiteRecipe,
-		name: "liste",
+		name: "collection",
 		tipe: AttrTipes.ManyToOne,
 		position: 1,
-		targetEntiteId: entiteListe.id,
-		inverseAttributId: attrListeRecipes.id,
+		targetEntiteId: entiteCollection.id,
+		inverseAttributId: attrCollectionRecipes.id,
 	})
 
-	attrListeRecipes.inverseAttributId = attrRecipeListe.id
-	await attributsService.save(attrListeRecipes)
+	attrCollectionRecipes.inverseAttributId = attrRecipeCollection.id
+	await attributsService.save(attrCollectionRecipes)
 
 	const attrRecipeArticleRecipes = await attributsService.create({
 		entite: entiteRecipe,
 		name: "articleRecipes",
 		tipe: AttrTipes.OneToMany,
 		position: 1,
-		//targetEntiteId: entiteListe.id,
-		//inverseAttributId: attrListeArticles.id,
+		//targetEntiteId: entiteCollection.id,
+		//inverseAttributId: attrCollectionArticles.id,
 	})
 
 	// ************** ArticleRecipe's Attributes **************
