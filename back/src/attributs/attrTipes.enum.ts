@@ -9,7 +9,7 @@ export enum AttrTipes {
 	Char = "Char",
 	VarChar = "VarChar",
 	Text = "Text",
-	Boolean = "Text",
+	Boolean = "Boolean",
 	Date = "Date",
 	DateTime = "Datetime",
 	Integer = "Integer",

@@ -1,7 +1,7 @@
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 import { Entite, Project } from "types"
-import { toCamelCase } from "utils/helpers-case"
+import { toCamelCase, toPascalCase } from "utils/helpers-case"
 
 // ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 type Props = {
@@ -45,7 +45,12 @@ mkdir src/utils
 
 	project.entites.map((entite: Entite) => {
 		code += `mkdir src/features/${toCamelCase(entite.name)}s \n`
+		code += `touch src/features/${toCamelCase(entite.name)}s/Form${toPascalCase(entite.name)}.tsx \n`
+		code += `touch src/features/${toCamelCase(entite.name)}s/Form${toPascalCase(entite.name)}Inner.tsx \n`
+		code += `touch src/features/${toCamelCase(entite.name)}s/ButtonCreate${toPascalCase(entite.name)}.tsx \n`
+		code += `touch src/features/${toCamelCase(entite.name)}s/ButtonEdit${toPascalCase(entite.name)}.tsx \n`
 		code += `touch src/api/api.${toCamelCase(entite.name)}s.ts \n`
+		code += `touch src/types/${toCamelCase(entite.name)}.type.ts \n`
 		code += `touch src/types/${toCamelCase(entite.name)}.type.ts \n`
 		code += `\n`
 
