@@ -304,15 +304,6 @@ export async function fixtureProjetSL(
 	attrCollectionArticles.inverseAttributId = attrArticleCollection.id
 	await attributsService.save(attrCollectionArticles)
 
-	await attributsService.create({
-		entite: entiteArticleRecipe,
-		name: "inPanier",
-		tipe: AttrTipes.Boolean,
-		position: 1,
-		isNullable: false,
-		isUnique: false,
-	})
-
 	// ************** Recipe's Attributes **************
 
 	const attRecipeId = await attributsService.create({
