@@ -105,19 +105,22 @@ export default function UmlEntite({
 			grid={[10, 10]}
 			bounds="#umlContent"
 		>
-			<div className="umlEntity handle" ref={elementRef}>
-				<div className="umlEntityInner" id={"uml-entitex-" + entite.id}>
+			<div className="umlEntity handle " ref={elementRef}>
+				<div className={" umlEntityInner " + (entite.isWip ? "isWip" : "")} id={"uml-entitex-" + entite.id}>
 					<h2 className="umlEntityHeader">
-						{entite.name} <ButtonEditEntite entite={entite} className="btn-sm float-end" />
+						{entite.isWip && "🚧 "} {entite.name}{" "}
+						<ButtonEditEntite entite={entite} className="btn-sm float-end" />
 					</h2>
-
+					{entite.description && <p className="umlEntityDescription">{entite.description}</p>}
+					{entite.infos && <p className="umlEntityInfos">{entite.infos}</p>}
+					{/*
 					<small>
 						pos({pos.x}, {pos.y} )<br />
 						H:{height}
 						<br />
 						bottom({height + pos.y})
 					</small>
-
+					*/}
 					<table className="umlEntityAttributes">
 						<tbody>
 							{entite.attributs

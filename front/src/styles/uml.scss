@@ -26,9 +26,24 @@
 			margin: 0px;
 			border: 1px solid $colPrimary;
 
+			&.isWip {
+				border: 1px solid #cccccc;
+			}
+
 			h2 {
 				color: $colSecondary;
 				margin-bottom: 20px;
+			}
+
+			.umlEntityDescription {
+				color: $colInfo;
+				font-size: 0.8em;
+				margin-bottom: 10px;
+			}
+			.umlEntityInfos {
+				color: $colDanger;
+				font-size: 0.8em;
+				margin-bottom: 10px;
 			}
 
 			.umlAttribut {

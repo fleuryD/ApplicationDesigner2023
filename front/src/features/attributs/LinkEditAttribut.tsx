@@ -24,6 +24,7 @@ export default function LinkEditAttribut({ className, attribut, entite }: Props)
 			<span className="toggledIcon">
 				<FaEdit />
 			</span>{" "}
+			{attribut.isWip && "🚧 "}
 			{attribut.name}
 		</StyledEditAttr>
 	)
