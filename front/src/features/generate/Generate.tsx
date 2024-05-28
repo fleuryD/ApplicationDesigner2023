@@ -7,15 +7,19 @@ import templateNestEntity from "./templates.nest/templateNestEntity"
 import templateNestModule from "./templates.nest/templateNestModule"
 import templateNestService from "./templates.nest/templateNestService"
 
+import templateGlobalReactTypesIndex from "./templates.react/templateGlobalReactTypesIndex"
+import templateGlobalReactApiIndex from "./templates.react/templateGlobalReactApiIndex"
 import templateReactDisplayInfos from "./templates.react/templateReactDisplayInfos"
 import templateReactApi from "./templates.react/templateReactApi"
 import templateReactType from "./templates.react/templateReactType"
 import templateReactButtonCreate from "./templates.react/templateReactButtonCreate"
 import templateReactButtonEdit from "./templates.react/templateReactButtonEdit"
-import templateGlobalReactTypesIndex from "./templates.react/templateGlobalReactTypesIndex"
-import templateGlobalReactApiIndex from "./templates.react/templateGlobalReactApiIndex"
 import templateReactForm from "./templates.react/templateReactForm"
 import templateReactFormInner from "./templates.react/templateReactFormInner"
+
+import templateGlobalSfyFilesStructure from "./templates.sfy/templateGlobalSfyFilesStructure"
+import templateTwigPageIndex from "./templates.sfy/templateTwigPageIndex"
+import templateTwigZTable from "./templates.sfy/templateTwigZTable"
 
 import templateCppHpp from "./templateCppHpp"
 import templateCppCpp from "./templateCppCpp"
@@ -54,18 +58,24 @@ export default function Generate({ entite, templateName, project }: Props) {
 		else if (templateName === "CppHpp") setTemplate(templateCppHpp(data))
 		else if (templateName === "CppHpp") setTemplate(templateCppHpp(data))
 		else if (templateName === "CppCpp") setTemplate(templateCppCpp(data))
+		else if (templateName === "GlobalCreateFiles") setTemplate(templateGlobalCreateFiles(data))
+		// * REACT
+		else if (templateName === "GlobalReactTypesIndex") setTemplate(templateGlobalReactTypesIndex(data))
+		else if (templateName === "GlobalReactApiIndex") setTemplate(templateGlobalReactApiIndex(data))
 		else if (templateName === "ReactDisplayInfos") setTemplate(templateReactDisplayInfos(data))
 		else if (templateName === "ReactApi") setTemplate(templateReactApi(data))
 		else if (templateName === "ReactType") setTemplate(templateReactType(data))
-		else if (templateName === "GlobalReactTypesIndex") setTemplate(templateGlobalReactTypesIndex(data))
-		else if (templateName === "GlobalReactApiIndex") setTemplate(templateGlobalReactApiIndex(data))
-		else if (templateName === "NestService") setTemplate(templateNestService(data))
-		else if (templateName === "NestController") setTemplate(templateNestController(data))
-		else if (templateName === "GlobalCreateFiles") setTemplate(templateGlobalCreateFiles(data))
 		else if (templateName === "ReactButtonCreate") setTemplate(templateReactButtonCreate(data))
 		else if (templateName === "ReactButtonEdit") setTemplate(templateReactButtonEdit(data))
 		else if (templateName === "ReactForm") setTemplate(templateReactForm(data))
 		else if (templateName === "ReactFormInner") setTemplate(templateReactFormInner(data))
+		// * NEST
+		else if (templateName === "NestService") setTemplate(templateNestService(data))
+		else if (templateName === "NestController") setTemplate(templateNestController(data))
+		// * SFY
+		else if (templateName === "GlobalSfyFilesStructure") setTemplate(templateGlobalSfyFilesStructure(data))
+		else if (templateName === "TwigIndex") setTemplate(templateTwigPageIndex(data))
+		else if (templateName === "TwigZTable") setTemplate(templateTwigZTable(data))
 		else setTemplate(null)
 	}, [project, entite, templateName, entitePascalName, entiteCamelName, entiteCamelNamePluriel])
 

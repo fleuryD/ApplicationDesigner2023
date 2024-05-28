@@ -75,7 +75,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 			{attribut.infos && (
 				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
 					<td colSpan={3} className="infos">
-						infos: <b>{attribut.infos}</b>
+						<b>!!</b> : {attribut.infos}
 					</td>
 				</tr>
 			)}
@@ -83,7 +83,7 @@ export default function UmlAttribut({ attribut, entite, project }: Props) {
 			{attribut.description && (
 				<tr className={"umlAttributExtra " + (attribut.isWip === true ? " wip " : "")}>
 					<td colSpan={3} className="description">
-						desc:<b>{attribut.description}</b>
+						<b>??</b> : {attribut.description}
 					</td>
 				</tr>
 			)}

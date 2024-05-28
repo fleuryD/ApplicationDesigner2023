@@ -77,6 +77,10 @@ export default function GenerateMenu({
 								<ButtonTemplate text="types/index" name="GlobalReactTypesIndex" />
 								<ButtonTemplate text="api/index" name="GlobalReactApiIndex" />
 							</div>
+							<div className="d-inline-block border border-primary m-1 p-1">
+								<span className="text-primary">SFY</span>
+								<ButtonTemplate text="Files Structure" name="GlobalSfyFilesStructure" />
+							</div>
 						</>
 					)}
 
@@ -109,7 +113,8 @@ export default function GenerateMenu({
 							<div className="d-inline-block border border-primary m-1 p-1">
 								<span className="text-primary">Twig (Sfy)</span>
 								<ButtonTemplate text="Show" name="TwigShow" disabled />
-								<ButtonTemplate text="index" name="TwigIndex" disabled />
+								<ButtonTemplate text="index" name="TwigIndex" />
+								<ButtonTemplate text="zTable" name="TwigZTable" />
 								<ButtonTemplate text="form" name="TwigForm" disabled />
 							</div>
 							<div className="d-inline-block  border border-primary m-1 p-1">

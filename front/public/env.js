@@ -1,3 +1,3 @@
 window.env = {
-  "BACk_BASE_URL": "https://appdesigner.api.zedixi.com"
+  "BACk_BASE_URL": "http://appdesigner.zedixi.com"
 };
