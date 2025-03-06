@@ -6,6 +6,8 @@
 
 Application Designer is a powerful tool that allows you to quickly create, customize, and generate code templates for your software projects. Built with NestJS and React, this application simplifies the process of setting up a project, defining entities and properties for a database, and generating code templates in multiple programming languages.
 
+![Screenshot](./assets/ad-screen.png)
+
 ## Features
 
 - **Project Creation**: Easily create new software projects with the necessary folder structure and configurations.
@@ -14,9 +16,9 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 - **Multi-Language Template Generation**: Generate code templates in various programming languages, saving you time and effort.
 
-## Demo
+![Screenshot](./assets/ad-screen-phone-1.jpg)
 
-Lien vers le site : [appDesigner](https://appdesigner.zedixi.com)
+## Demo
 
 ## Built With
 
