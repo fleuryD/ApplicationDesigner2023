@@ -16,8 +16,6 @@ Application Designer is a powerful tool that allows you to quickly create, custo
 
 - **Multi-Language Template Generation**: Generate code templates in various programming languages, saving you time and effort.
 
-![Screenshot](./assets/ad-screen-phone-1.jpg)
-
 ## Demo
 
 ## Built With
